@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>Aprende+ | Unidades</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f5f7f9;
+
+    color: #202124;
+}
+
+
+/* =========================
+   TOPO
+========================= */
+
+.topo {
+
+    background: white;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    padding: 15px 20px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 20;
+}
+
+.topo-conteudo {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.logo {
+
+    color: #16a34a;
+
+    font-size: 24px;
+
+    font-weight: 900;
+}
+
+.logo span {
+
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 11px;
+
+    font-weight: normal;
+
+    margin-top: 2px;
+}
+
+.btn-voltar {
+
+    border: none;
+
+    background: #f3f4f6;
+
+    color: #374151;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.layout {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 25px 18px 60px;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+.cabecalho h1 {
+
+    font-size: 27px;
+
+    margin-bottom: 5px;
+}
+
+.cabecalho p {
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+.btn-novo {
+
+    border: none;
+
+    background: #22c55e;
+
+    color: white;
+
+    padding: 13px 18px;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 0 #15803d;
+}
+
+.btn-novo:active {
+
+    transform: translateY(3px);
+
+    box-shadow:
+        0 1px 0 #15803d;
+}
+
+
+/* =========================
+   CURSO
+========================= */
+
+.info-curso {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    margin-bottom: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.04);
+}
+
+.icone-curso {
+
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 15px;
+
+    background: #dcfce7;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 29px;
+}
+
+.info-curso h2 {
+
+    font-size: 19px;
+
+    margin-bottom: 4px;
+}
+
+.info-curso p {
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+.lista {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =========================
+   UNIDADE
+========================= */
+
+.unidade {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.05);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.numero {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 15px;
+
+    background: #dcfce7;
+
+    color: #15803d;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+
+    font-weight: 900;
+
+    flex-shrink: 0;
+}
+
+.info {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.info h2 {
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+}
+
+.info p {
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+
+    line-height: 1.4;
+}
+
+.tags {
+
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+.tag {
+
+    background: #f3f4f6;
+
+    color: #4b5563;
+
+    border-radius: 20px;
+
+    padding: 5px 9px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.tag.ativo {
+
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+.tag.inativo {
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+}
+
+
+/* =========================
+   AÇÕES
+========================= */
+
+.acoes {
+
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+}
+
+.btn {
+
+    border: none;
+
+    padding: 9px 11px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 12px;
+}
+
+.btn-licoes {
+
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+.btn-editar {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+.btn-status {
+
+    background: #fef3c7;
+
+    color: #92400e;
+}
+
+.btn-subir,
+.btn-descer {
+
+    background: #f3f4f6;
+
+    color: #374151;
+
+    font-size: 16px;
+
+    padding: 7px 10px;
+}
+
+.btn-excluir {
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+}
+
+
+/* =========================
+   VAZIO
+========================= */
+
+.vazio {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #6b7280;
+}
+
+.vazio .icone {
+
+    font-size: 55px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-fundo {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.45);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 100;
+}
+
+.modal-fundo.aberto {
+
+    display: flex;
+}
+
+.modal {
+
+    width: 100%;
+
+    max-width: 520px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 22px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+}
+
+.modal h2 {
+
+    margin-bottom: 20px;
+}
+
+.campo {
+
+    margin-bottom: 15px;
+}
+
+.campo label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+.campo input,
+.campo textarea {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    font-family: inherit;
+}
+
+.campo textarea {
+
+    min-height: 90px;
+
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+
+    border-color: #22c55e;
+}
+
+.modal-acoes {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.btn-cancelar {
+
+    border: none;
+
+    background: #e5e7eb;
+
+    color: #374151;
+
+    padding: 12px 17px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.btn-salvar {
+
+    border: none;
+
+    background: #22c55e;
+
+    color: white;
+
+    padding: 12px 17px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.mensagem {
+
+    position: fixed;
+
+    top: 80px;
+
+    right: 20px;
+
+    background: #166534;
+
+    color: white;
+
+    padding: 14px 18px;
+
+    border-radius: 11px;
+
+    display: none;
+
+    z-index: 200;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.15);
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.mensagem.erro {
+
+    background: #b91c1c;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:700px) {
+
+    .cabecalho {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .btn-novo {
+
+        width: 100%;
+    }
+
+    .unidade {
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+    .info {
+
+        width:
+            calc(100% - 70px);
+    }
+
+    .acoes {
+
+        width: 100%;
+
+        justify-content: stretch;
+    }
+
+    .acoes .btn {
+
+        flex: 1;
+
+        min-width: 70px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOPO
+========================= -->
+
+<header class="topo">
+
+    <div class="topo-conteudo">
+
+        <div class="logo">
+
+            Aprende+
+
+            <span>
+                Painel Administrativo
+            </span>
+
+        </div>
+
+
+        <button
+            class="btn-voltar"
+            onclick="voltarCursos()">
+
+            ← Cursos
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     CONTEÚDO
+========================= -->
+
+<main class="layout">
+
+
+    <div class="cabecalho">
+
+        <div>
+
+            <h1>
+                📖 Unidades
+            </h1>
+
+            <p>
+                Organize o conteúdo deste curso
+                em unidades de aprendizado.
+            </p>
+
+        </div>
+
+
+        <button
+            class="btn-novo"
+            onclick="novaUnidade()">
+
+            + NOVA UNIDADE
+
+        </button>
+
+    </div>
+
+
+
+    <!-- INFORMAÇÕES DO CURSO -->
+
+    <section
+        class="info-curso"
+        id="infoCurso">
+
+    </section>
+
+
+
+    <!-- LISTA -->
+
+    <section
+        class="lista"
+        id="listaUnidades">
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="modal-fundo"
+    id="modalFundo">
+
+
+    <div class="modal">
+
+
+        <h2 id="tituloModal">
+
+            Nova unidade
+
+        </h2>
+
+
+        <form id="formUnidade">
+
+
+            <div class="campo">
+
+                <label>
+                    Nome da unidade
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    placeholder="Ex.: Fundamentos"
+                    required>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    Descrição
+                </label>
+
+                <textarea
+                    id="descricao"
+                    placeholder="Descreva o conteúdo desta unidade..."></textarea>
+
+            </div>
+
+
+            <div class="modal-acoes">
+
+                <button
+                    type="button"
+                    class="btn-cancelar"
+                    onclick="fecharModal()">
+
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-salvar">
+
+                    💾 Salvar unidade
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- MENSAGEM -->
+
+<div
+    class="mensagem"
+    id="mensagem">
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   PEGAR CURSO DA URL
+===================================================== */
+
+const parametros =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const cursoId =
+    parametros.get("id");
+
+
+/* =====================================================
+   VERIFICAR ID
+===================================================== */
+
+if (!cursoId) {
+
+    alert(
+        "Curso não informado."
+    );
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+/* =====================================================
+   BANCO
+===================================================== */
+
+let cursos =
+    JSON.parse(
+        localStorage.getItem(
+            "aprendeCursos"
+        )
+    ) || [];
+
+
+let curso =
+    cursos.find(
+        item =>
+            item.id === cursoId
+    );
+
+
+/* =====================================================
+   CURSO NÃO ENCONTRADO
+===================================================== */
+
+if (!curso) {
+
+    alert(
+        "Curso não encontrado."
+    );
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+let unidadeEditando = null;
+
+
+const modalFundo =
+    document.getElementById(
+        "modalFundo"
+    );
+
+
+const formUnidade =
+    document.getElementById(
+        "formUnidade"
+    );
+
+
+/* =====================================================
+   SALVAR
+===================================================== */
+
+function salvarBanco() {
+
+    localStorage.setItem(
+        "aprendeCursos",
+        JSON.stringify(cursos)
+    );
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+    texto,
+    erro = false
+) {
+
+    const elemento =
+        document.getElementById(
+            "mensagem"
+        );
+
+
+    elemento.textContent =
+        texto;
+
+
+    elemento.className =
+        "mensagem";
+
+
+    if (erro) {
+
+        elemento.classList.add(
+            "erro"
+        );
+
+    }
+
+
+    elemento.style.display =
+        "block";
+
+
+    setTimeout(() => {
+
+        elemento.style.display =
+            "none";
+
+    }, 2500);
+
+}
+
+
+/* =====================================================
+   GARANTIR UNIDADES
+===================================================== */
+
+if (!Array.isArray(curso.unidades)) {
+
+    curso.unidades = [];
+
+}
+
+
+/* =====================================================
+   NOVA UNIDADE
+===================================================== */
+
+function novaUnidade() {
+
+    unidadeEditando = null;
+
+
+    formUnidade.reset();
+
+
+    document.getElementById(
+        "tituloModal"
+    ).textContent =
+        "Nova unidade";
+
+
+    modalFundo.classList.add(
+        "aberto"
+    );
+
+}
+
+
+/* =====================================================
+   EDITAR UNIDADE
+===================================================== */
+
+function editarUnidade(id) {
+
+    const unidade =
+        curso.unidades.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!unidade) return;
+
+
+    unidadeEditando =
+        id;
+
+
+    document.getElementById(
+        "nome"
+    ).value =
+        unidade.nome;
+
+
+    document.getElementById(
+        "descricao"
+    ).value =
+        unidade.descricao || "";
+
+
+    document.getElementById(
+        "tituloModal"
+    ).textContent =
+        "Editar unidade";
+
+
+    modalFundo.classList.add(
+        "aberto"
+    );
+
+}
+
+
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
+
+formUnidade.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const nome =
+            document.getElementById(
+                "nome"
+            ).value.trim();
+
+
+        const descricao =
+            document.getElementById(
+                "descricao"
+            ).value.trim();
+
+
+        if (!nome) {
+
+            mostrarMensagem(
+                "Digite o nome da unidade.",
+                true
+            );
+
+            return;
+
+        }
+
+
+        /* EDITAR */
+
+        if (unidadeEditando) {
+
+            const unidade =
+                curso.unidades.find(
+                    item =>
+                        item.id ===
+                        unidadeEditando
+                );
+
+
+            if (unidade) {
+
+                unidade.nome =
+                    nome;
+
+                unidade.descricao =
+                    descricao;
+
+            }
+
+
+            mostrarMensagem(
+                "Unidade atualizada!"
+            );
+
+        }
+
+
+        /* NOVA */
+
+        else {
+
+            const nova = {
+
+                id:
+                    gerarId(),
+
+                nome:
+                    nome,
+
+                descricao:
+                    descricao,
+
+                ativo:
+                    true,
+
+                ordem:
+                    curso.unidades.length,
+
+                licoes:
+                    [],
+
+                criadoEm:
+                    new Date().toISOString()
+
+            };
+
+
+            curso.unidades.push(
+                nova
+            );
+
+
+            mostrarMensagem(
+                "Unidade criada!"
+            );
+
+        }
+
+
+        salvarBanco();
+
+        fecharModal();
+
+        renderizar();
+
+    }
+);
+
+
+/* =====================================================
+   GERAR ID
+===================================================== */
+
+function gerarId() {
+
+    return (
+
+        Date.now().toString(36) +
+
+        Math.random()
+            .toString(36)
+            .substring(2, 8)
+
+    );
+
+}
+
+
+/* =====================================================
+   EXCLUIR
+===================================================== */
+
+function excluirUnidade(id) {
+
+    const unidade =
+        curso.unidades.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!unidade) return;
+
+
+    const confirmou =
+        confirm(
+            `Deseja excluir "${unidade.nome}"?`
+        );
+
+
+    if (!confirmou) return;
+
+
+    curso.unidades =
+        curso.unidades.filter(
+            item =>
+                item.id !== id
+        );
+
+
+    reorganizarOrdem();
+
+    salvarBanco();
+
+    renderizar();
+
+    mostrarMensagem(
+        "Unidade excluída."
+    );
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function alterarStatus(id) {
+
+    const unidade =
+        curso.unidades.find(
+            item =>
+                item.id === id
+        );
+
+
+    if (!unidade) return;
+
+
+    unidade.ativo =
+        !unidade.ativo;
+
+
+    salvarBanco();
+
+    renderizar();
+
+
+    mostrarMensagem(
+
+        unidade.ativo
+            ? "Unidade ativada."
+            : "Unidade desativada."
+
+    );
+
+}
+
+
+/* =====================================================
+   SUBIR
+===================================================== */
+
+function subirUnidade(id) {
+
+    const indice =
+        curso.unidades.findIndex(
+            item =>
+                item.id === id
+        );
+
+
+    if (indice <= 0) return;
+
+
+    [
+        curso.unidades[indice - 1],
+        curso.unidades[indice]
+    ] =
+    [
+        curso.unidades[indice],
+        curso.unidades[indice - 1]
+    ];
+
+
+    reorganizarOrdem();
+
+    salvarBanco();
+
+    renderizar();
+
+}
+
+
+/* =====================================================
+   DESCER
+===================================================== */
+
+function descerUnidade(id) {
+
+    const indice =
+        curso.unidades.findIndex(
+            item =>
+                item.id === id
+        );
+
+
+    if (
+        indice < 0 ||
+        indice >=
+            curso.unidades.length - 1
+    ) {
+
+        return;
+
+    }
+
+
+    [
+        curso.unidades[indice],
+        curso.unidades[indice + 1]
+    ] =
+    [
+        curso.unidades[indice + 1],
+        curso.unidades[indice]
+    ];
+
+
+    reorganizarOrdem();
+
+    salvarBanco();
+
+    renderizar();
+
+}
+
+
+/* =====================================================
+   REORGANIZAR ORDEM
+===================================================== */
+
+function reorganizarOrdem() {
+
+    curso.unidades.forEach(
+        (unidade, indice) => {
+
+            unidade.ordem =
+                indice;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LIÇÕES
+===================================================== */
+
+function gerenciarLicoes(id) {
+
+    window.location.href =
+        "licoes.html?cursoId=" +
+        encodeURIComponent(cursoId) +
+        "&unidadeId=" +
+        encodeURIComponent(id);
+
+}
+
+
+/* =====================================================
+   FECHAR
+===================================================== */
+
+function fecharModal() {
+
+    modalFundo.classList.remove(
+        "aberto"
+    );
+
+    unidadeEditando = null;
+
+}
+
+
+/* =====================================================
+   RENDERIZAR CURSO
+===================================================== */
+
+function renderizarCurso() {
+
+    const elemento =
+        document.getElementById(
+            "infoCurso"
+        );
+
+
+    elemento.innerHTML = `
+
+        <div class="icone-curso">
+
+            ${
+                escapar(
+                    curso.icone ||
+                    "📚"
+                )
+            }
+
+        </div>
+
+
+        <div>
+
+            <h2>
+
+                ${
+                    escapar(
+                        curso.nome
+                    )
+                }
+
+            </h2>
+
+
+            <p>
+
+                ${
+                    escapar(
+                        curso.descricao ||
+                        "Sem descrição."
+                    )
+                }
+
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   RENDERIZAR
+===================================================== */
+
+function renderizar() {
+
+    renderizarCurso();
+
+
+    const lista =
+        document.getElementById(
+            "listaUnidades"
+        );
+
+
+    if (
+        curso.unidades.length === 0
+    ) {
+
+        lista.innerHTML = `
+
+            <div class="vazio">
+
+                <div class="icone">
+                    📖
+                </div>
+
+                <h2>
+                    Nenhuma unidade
+                </h2>
+
+                <p style="margin-top:8px">
+
+                    Crie a primeira unidade
+                    deste curso.
+
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    lista.innerHTML =
+        curso.unidades.map(
+            (unidade, indice) => {
+
+
+                const totalLicoes =
+                    (
+                        unidade.licoes
+                        || []
+                    ).length;
+
+
+                return `
+
+                    <article
+                        class="unidade">
+
+
+                        <div
+                            class="numero">
+
+                            ${indice + 1}
+
+                        </div>
+
+
+                        <div
+                            class="info">
+
+
+                            <h2>
+
+                                ${
+                                    escapar(
+                                        unidade.nome
+                                    )
+                                }
+
+                            </h2>
+
+
+                            <p>
+
+                                ${
+                                    escapar(
+                                        unidade.descricao ||
+                                        "Sem descrição."
+                                    )
+                                }
+
+                            </p>
+
+
+                            <div
+                                class="tags">
+
+
+                                <span
+                                    class="tag">
+
+                                    📝
+                                    ${totalLicoes}
+                                    lições
+
+                                </span>
+
+
+                                <span
+                                    class="tag ${
+                                        unidade.ativo
+                                        ? "ativo"
+                                        : "inativo"
+                                    }">
+
+                                    ${
+                                        unidade.ativo
+                                        ? "● Ativa"
+                                        : "● Inativa"
+                                    }
+
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div
+                            class="acoes">
+
+
+                            <button
+                                class="btn btn-subir"
+                                onclick="subirUnidade(
+                                    '${unidade.id}'
+                                )"
+                                title="Subir">
+
+                                ↑
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-subir"
+                                onclick="descerUnidade(
+                                    '${unidade.id}'
+                                )"
+                                title="Descer">
+
+                                ↓
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-licoes"
+                                onclick="gerenciarLicoes(
+                                    '${unidade.id}'
+                                )">
+
+                                📝 Lições
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-editar"
+                                onclick="editarUnidade(
+                                    '${unidade.id}'
+                                )">
+
+                                ✏️ Editar
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-status"
+                                onclick="alterarStatus(
+                                    '${unidade.id}'
+                                )">
+
+                                ${
+                                    unidade.ativo
+                                    ? "⏸️"
+                                    : "▶️"
+                                }
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-excluir"
+                                onclick="excluirUnidade(
+                                    '${unidade.id}'
+                                )">
+
+                                🗑️
+
+                            </button>
+
+
+                        </div>
+
+
+                    </article>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   ESCAPAR
+===================================================== */
+
+function escapar(valor) {
+
+    return String(valor)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+function voltarCursos() {
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+/* =====================================================
+   FECHAR CLICANDO FORA
+===================================================== */
+
+modalFundo.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            modalFundo
+        ) {
+
+            fecharModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+renderizar();
+
+</script>
+
+</body>
+
+</html>

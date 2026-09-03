@@ -1,0 +1,2208 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Aprende+ | Cursos</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#f5f7fb;
+
+    color:#222;
+
+    min-height:100vh;
+
+    padding-bottom:90px;
+}
+
+
+/* ==========================================================
+   TOPO
+========================================================== */
+
+.topo{
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color:white;
+
+    padding:
+        25px 20px 30px;
+
+    border-radius:
+        0 0 28px 28px;
+}
+
+.topo-conteudo{
+
+    max-width:1100px;
+
+    margin:auto;
+}
+
+.topo h1{
+
+    font-size:28px;
+
+    margin-bottom:6px;
+}
+
+.topo p{
+
+    opacity:.9;
+
+    font-size:14px;
+}
+
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.container{
+
+    width:100%;
+
+    max-width:1100px;
+
+    margin:
+        0 auto;
+
+    padding:
+        20px;
+}
+
+
+/* ==========================================================
+   BUSCA
+========================================================== */
+
+.pesquisa{
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:15px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.06);
+
+    margin-bottom:22px;
+}
+
+.pesquisa input{
+
+    width:100%;
+
+    height:48px;
+
+    border:
+        1px solid #ddd;
+
+    border-radius:12px;
+
+    padding:
+        0 15px;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.pesquisa input:focus{
+
+    border-color:#6366f1;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(99,102,241,.1);
+}
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.mensagem{
+
+    display:none;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    margin-bottom:18px;
+
+    font-size:14px;
+
+    line-height:1.5;
+}
+
+.mensagem.erro{
+
+    display:block;
+
+    background:#fef2f2;
+
+    color:#b91c1c;
+
+    border:
+        1px solid #fecaca;
+}
+
+.mensagem.sucesso{
+
+    display:block;
+
+    background:#f0fdf4;
+
+    color:#15803d;
+
+    border:
+        1px solid #bbf7d0;
+}
+
+.carregando{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    color:#737373;
+}
+
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(260px,1fr)
+        );
+
+    gap:18px;
+}
+
+
+/* ==========================================================
+   CARD CURSO
+========================================================== */
+
+.card{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 6px 20px
+        rgba(0,0,0,.07);
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+}
+
+.card:hover{
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.10);
+}
+
+.card-topo{
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff
+        );
+
+    padding:25px;
+
+    text-align:center;
+}
+
+.icone{
+
+    width:75px;
+
+    height:75px;
+
+    margin:auto;
+
+    border-radius:22px;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:42px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.08);
+}
+
+.card-corpo{
+
+    padding:20px;
+}
+
+.card h2{
+
+    font-size:19px;
+
+    margin-bottom:8px;
+
+    color:#262626;
+}
+
+.descricao{
+
+    color:#737373;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    min-height:42px;
+
+    margin-bottom:16px;
+}
+
+
+/* ==========================================================
+   PROGRESSO
+========================================================== */
+
+.progresso-area{
+
+    margin-bottom:16px;
+}
+
+.progresso-info{
+
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    font-size:12px;
+
+    color:#737373;
+
+    margin-bottom:6px;
+}
+
+.progresso{
+
+    height:8px;
+
+    background:#e5e7eb;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.progresso-barra{
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    border-radius:20px;
+
+    transition:
+        width .3s;
+}
+
+
+/* ==========================================================
+   BOTÃO
+========================================================== */
+
+.btn{
+
+    width:100%;
+
+    height:45px;
+
+    border:0;
+
+    border-radius:11px;
+
+    background:#4f46e5;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.btn:hover{
+
+    background:#4338ca;
+}
+
+.btn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+}
+
+.btn.matriculado{
+
+    background:#16a34a;
+}
+
+
+/* ==========================================================
+   VAZIO
+========================================================== */
+
+.vazio{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    color:#737373;
+
+    grid-column:
+        1 / -1;
+}
+
+.vazio-icon{
+
+    font-size:45px;
+
+    margin-bottom:12px;
+}
+
+
+/* ==========================================================
+   MODAL
+========================================================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.55);
+
+    z-index:1000;
+
+    padding:20px;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.modal.ativo{
+
+    display:flex;
+}
+
+.modal-caixa{
+
+    width:100%;
+
+    max-width:480px;
+
+    max-height:
+        90vh;
+
+    overflow:auto;
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:25px;
+}
+
+.modal-cabecalho{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:18px;
+}
+
+.modal-cabecalho h2{
+
+    font-size:22px;
+}
+
+.fechar{
+
+    border:0;
+
+    background:#f1f1f1;
+
+    width:36px;
+
+    height:36px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:20px;
+}
+
+.modal p{
+
+    color:#666;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    margin-bottom:20px;
+}
+
+.lista-unidades{
+
+    margin-bottom:20px;
+}
+
+.unidade{
+
+    background:#f8f8ff;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+}
+
+
+/* ==========================================================
+   NAVEGAÇÃO
+========================================================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:72px;
+
+    background:white;
+
+    border-top:
+        1px solid #e5e7eb;
+
+    display:flex;
+
+    justify-content:center;
+
+    z-index:900;
+
+    box-shadow:
+        0 -4px 15px
+        rgba(0,0,0,.06);
+}
+
+.nav-inner{
+
+    width:100%;
+
+    max-width:600px;
+
+    display:flex;
+
+    justify-content:
+        space-around;
+
+    align-items:center;
+}
+
+.nav-item{
+
+    text-decoration:none;
+
+    color:#737373;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:4px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    padding:7px 15px;
+}
+
+.nav-item span{
+
+    font-size:22px;
+}
+
+.nav-item.ativo{
+
+    color:#4f46e5;
+}
+
+
+/* ==========================================================
+   RESPONSIVO
+========================================================== */
+
+@media(max-width:600px){
+
+    .topo h1{
+
+        font-size:24px;
+    }
+
+    .grid{
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================================
+     TOPO
+========================================================== -->
+
+<header class="topo">
+
+    <div class="topo-conteudo">
+
+        <h1>
+            📚 Cursos
+        </h1>
+
+        <p>
+            Escolha um curso e comece sua jornada.
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- ==========================================================
+     CONTEÚDO
+========================================================== -->
+
+<main class="container">
+
+
+    <div
+        id="mensagem"
+        class="mensagem"
+    ></div>
+
+
+    <div class="pesquisa">
+
+        <input
+            type="search"
+            id="pesquisa"
+            placeholder="🔎 Pesquisar cursos..."
+        >
+
+    </div>
+
+
+    <div
+        id="carregando"
+        class="carregando"
+    >
+        Carregando cursos...
+    </div>
+
+
+    <div
+        id="gridCursos"
+        class="grid"
+    ></div>
+
+
+</main>
+
+
+<!-- ==========================================================
+     MODAL
+========================================================== -->
+
+<div
+    id="modal"
+    class="modal"
+>
+
+    <div class="modal-caixa">
+
+        <div class="modal-cabecalho">
+
+            <h2 id="modalTitulo">
+                Curso
+            </h2>
+
+            <button
+                class="fechar"
+                id="fecharModal"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <p id="modalDescricao"></p>
+
+
+        <div
+            id="modalUnidades"
+            class="lista-unidades"
+        ></div>
+
+
+        <button
+            id="modalBotao"
+            class="btn"
+            type="button"
+        >
+            Matricular-se
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================================
+     NAVEGAÇÃO
+========================================================== -->
+
+<nav class="bottom-nav">
+
+    <div class="nav-inner">
+
+        <a
+            href="index.html"
+            class="nav-item"
+        >
+            <span>🏠</span>
+            Início
+        </a>
+
+        <a
+            href="cursos.html"
+            class="nav-item ativo"
+        >
+            <span>📚</span>
+            Cursos
+        </a>
+
+        <a
+            href="missoes.html"
+            class="nav-item"
+        >
+            <span>🎯</span>
+            Missões
+        </a>
+
+        <a
+            href="perfil.html"
+            class="nav-item"
+        >
+            <span>👤</span>
+            Perfil
+        </a>
+
+    </div>
+
+</nav>
+
+
+<script type="module">
+
+
+// ============================================================
+// FIREBASE
+// ============================================================
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+// ============================================================
+// CONFIGURAÇÃO
+// ============================================================
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyC4AAbC8vCFAmlPlur12Nm7YBKPjaSjumM",
+
+    authDomain:
+        "meuappweb-65522.firebaseapp.com",
+
+    projectId:
+        "meuappweb-65522",
+
+    storageBucket:
+        "meuappweb-65522.firebasestorage.app",
+
+    messagingSenderId:
+        "305368794616",
+
+    appId:
+        "1:305368794616:web:3199c6836a986d896ac20d",
+
+    measurementId:
+        "G-QN7GFD99N0"
+
+};
+
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+// ============================================================
+// ELEMENTOS
+// ============================================================
+
+const gridCursos =
+    document.getElementById(
+        "gridCursos"
+    );
+
+const carregando =
+    document.getElementById(
+        "carregando"
+    );
+
+const pesquisa =
+    document.getElementById(
+        "pesquisa"
+    );
+
+const mensagem =
+    document.getElementById(
+        "mensagem"
+    );
+
+const modal =
+    document.getElementById(
+        "modal"
+    );
+
+const modalTitulo =
+    document.getElementById(
+        "modalTitulo"
+    );
+
+const modalDescricao =
+    document.getElementById(
+        "modalDescricao"
+    );
+
+const modalUnidades =
+    document.getElementById(
+        "modalUnidades"
+    );
+
+const modalBotao =
+    document.getElementById(
+        "modalBotao"
+    );
+
+const fecharModal =
+    document.getElementById(
+        "fecharModal"
+    );
+
+
+// ============================================================
+// VARIÁVEIS
+// ============================================================
+
+let aluno = null;
+
+let cursos = [];
+
+let matriculas = [];
+
+let cursoSelecionado = null;
+
+
+// ============================================================
+// MENSAGEM
+// ============================================================
+
+function mostrarMensagem(
+    texto,
+    tipo = "erro"
+){
+
+    mensagem.textContent =
+        texto;
+
+    mensagem.className =
+        "mensagem " + tipo;
+
+
+    setTimeout(
+        function(){
+
+            mensagem.className =
+                "mensagem";
+
+        },
+        4000
+    );
+
+}
+
+
+// ============================================================
+// ESCAPAR HTML
+// ============================================================
+
+function escapar(valor){
+
+    return String(
+        valor ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+// ============================================================
+// ID
+// ============================================================
+
+function gerarId(){
+
+    return Date.now().toString(36)
+        +
+        Math.random()
+            .toString(36)
+            .substring(2,8);
+
+}
+
+
+// ============================================================
+// CARREGAR DADOS DO ALUNO
+// ============================================================
+
+async function carregarAluno(
+    usuario
+){
+
+    const alunoRef =
+        doc(
+            db,
+            "alunos",
+            usuario.uid
+        );
+
+
+    const alunoSnap =
+        await getDoc(
+            alunoRef
+        );
+
+
+    if(
+        !alunoSnap.exists()
+    ){
+
+        aluno = {
+
+            id:
+                usuario.uid,
+
+            nome:
+                usuario.displayName ||
+                "Estudante",
+
+            email:
+                usuario.email ||
+                "",
+
+            xp:0,
+
+            moedas:0,
+
+            energia:5,
+
+            sequencia:0,
+
+            nivel:1,
+
+            ativo:true
+
+        };
+
+    }else{
+
+        const dados =
+            alunoSnap.data();
+
+
+        if(
+            dados.ativo === false
+        ){
+
+            mostrarMensagem(
+                "Sua conta está desativada."
+            );
+
+            return false;
+
+        }
+
+
+        aluno = {
+
+            id:
+                usuario.uid,
+
+            ...dados
+
+        };
+
+    }
+
+
+    localStorage.setItem(
+        "aprendeAluno",
+        JSON.stringify(aluno)
+    );
+
+
+    return true;
+
+}
+
+
+// ============================================================
+// CARREGAR CURSOS
+// ============================================================
+
+async function carregarCursos(){
+
+    const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "cursos"
+            )
+        );
+
+
+    cursos = [];
+
+
+    snapshot.forEach(
+        function(documento){
+
+            const dados =
+                documento.data();
+
+
+            cursos.push({
+
+                id:
+                    documento.id,
+
+                ...dados
+
+            });
+
+        }
+    );
+
+
+    cursos =
+        cursos.filter(
+            function(curso){
+
+                return curso.ativo !== false;
+
+            }
+        );
+
+
+    cursos.sort(
+        function(a,b){
+
+            return String(
+                a.nome || ""
+            ).localeCompare(
+                String(
+                    b.nome || ""
+                )
+            );
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// CARREGAR MATRÍCULAS
+// ============================================================
+
+async function carregarMatriculas(){
+
+    if(!aluno){
+
+        return;
+
+    }
+
+
+    const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "matriculas"
+            )
+        );
+
+
+    matriculas = [];
+
+
+    snapshot.forEach(
+        function(documento){
+
+            const dados =
+                documento.data();
+
+
+            if(
+                dados.alunoId ===
+                aluno.id
+            ){
+
+                matriculas.push({
+
+                    id:
+                        documento.id,
+
+                    ...dados
+
+                });
+
+            }
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// MATRÍCULA DO CURSO
+// ============================================================
+
+function encontrarMatricula(
+    cursoId
+){
+
+    return matriculas.find(
+        function(matricula){
+
+            return (
+                matricula.cursoId ===
+                cursoId
+            )
+            &&
+            matricula.ativa !== false;
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// TOTAL DE LIÇÕES
+// ============================================================
+
+function contarLicoes(
+    curso
+){
+
+    let total = 0;
+
+
+    if(
+        Array.isArray(
+            curso.unidades
+        )
+    ){
+
+        curso.unidades.forEach(
+            function(unidade){
+
+                if(
+                    unidade.ativo === false
+                ){
+
+                    return;
+
+                }
+
+
+                if(
+                    Array.isArray(
+                        unidade.licoes
+                    )
+                ){
+
+                    total +=
+                        unidade.licoes
+                            .filter(
+                                function(licao){
+
+                                    return (
+                                        licao.ativo !== false
+                                    );
+
+                                }
+                            )
+                            .length;
+
+                }
+
+            }
+        );
+
+    }
+
+
+    return total;
+
+}
+
+
+// ============================================================
+// RENDERIZAR CURSOS
+// ============================================================
+
+function renderizar(){
+
+    const termo =
+        pesquisa.value
+            .trim()
+            .toLowerCase();
+
+
+    const lista =
+        cursos.filter(
+            function(curso){
+
+                const nome =
+                    String(
+                        curso.nome || ""
+                    ).toLowerCase();
+
+
+                const descricao =
+                    String(
+                        curso.descricao || ""
+                    ).toLowerCase();
+
+
+                return (
+                    nome.includes(termo)
+                    ||
+                    descricao.includes(termo)
+                );
+
+            }
+        );
+
+
+    gridCursos.innerHTML = "";
+
+
+    if(
+        lista.length === 0
+    ){
+
+        gridCursos.innerHTML = `
+
+            <div class="vazio">
+
+                <div class="vazio-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    Nenhum curso encontrado
+                </h3>
+
+                <p>
+                    Tente pesquisar por outro termo.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    lista.forEach(
+        function(curso){
+
+            const matricula =
+                encontrarMatricula(
+                    curso.id
+                );
+
+
+            const totalLicoes =
+                contarLicoes(
+                    curso
+                );
+
+
+            let concluidas = 0;
+
+
+            if(matricula){
+
+                concluidas =
+                    Array.isArray(
+                        matricula.licoesConcluidas
+                    )
+                    ?
+                    matricula
+                        .licoesConcluidas
+                        .length
+                    :
+                    0;
+
+            }
+
+
+            let progresso = 0;
+
+
+            if(
+                totalLicoes > 0
+            ){
+
+                progresso =
+                    Math.round(
+                        (
+                            concluidas /
+                            totalLicoes
+                        )
+                        * 100
+                    );
+
+            }
+
+
+            progresso =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        progresso
+                    )
+                );
+
+
+            const icone =
+                curso.icone ||
+                "📚";
+
+
+            const nome =
+                escapar(
+                    curso.nome ||
+                    "Curso"
+                );
+
+
+            const descricao =
+                escapar(
+                    curso.descricao ||
+                    "Comece a aprender."
+                );
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "card";
+
+
+            card.innerHTML = `
+
+                <div class="card-topo">
+
+                    <div class="icone">
+                        ${icone}
+                    </div>
+
+                </div>
+
+
+                <div class="card-corpo">
+
+                    <h2>
+                        ${nome}
+                    </h2>
+
+                    <div class="descricao">
+                        ${descricao}
+                    </div>
+
+
+                    ${
+                        matricula
+                        ?
+                        `
+                        <div class="progresso-area">
+
+                            <div class="progresso-info">
+
+                                <span>
+                                    Progresso
+                                </span>
+
+                                <strong>
+                                    ${progresso}%
+                                </strong>
+
+                            </div>
+
+                            <div class="progresso">
+
+                                <div
+                                    class="progresso-barra"
+                                    style="width:${progresso}%"
+                                ></div>
+
+                            </div>
+
+                        </div>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    <button
+                        class="btn ${matricula ? "matriculado" : ""}"
+                        data-curso="${escapar(curso.id)}"
+                    >
+
+                        ${
+                            matricula
+                            ?
+                            "▶ Continuar curso"
+                            :
+                            "Ver curso"
+                        }
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            const botao =
+                card.querySelector(
+                    ".btn"
+                );
+
+
+            botao.addEventListener(
+                "click",
+                function(){
+
+                    abrirModal(
+                        curso
+                    );
+
+                }
+            );
+
+
+            gridCursos.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// ABRIR MODAL
+// ============================================================
+
+function abrirModal(
+    curso
+){
+
+    cursoSelecionado =
+        curso;
+
+
+    modalTitulo.textContent =
+        curso.nome ||
+        "Curso";
+
+
+    modalDescricao.textContent =
+        curso.descricao ||
+        "Comece sua jornada de aprendizado.";
+
+
+    modalUnidades.innerHTML =
+        "";
+
+
+    const unidades =
+        Array.isArray(
+            curso.unidades
+        )
+        ?
+        curso.unidades
+            .filter(
+                function(unidade){
+
+                    return unidade.ativo !== false;
+
+                }
+            )
+            .sort(
+                function(a,b){
+
+                    return (
+                        Number(a.ordem || 0)
+                        -
+                        Number(b.ordem || 0)
+                    );
+
+                }
+            )
+        :
+        [];
+
+
+    if(
+        unidades.length === 0
+    ){
+
+        modalUnidades.innerHTML = `
+
+            <div class="unidade">
+                📚 Conteúdo em preparação.
+            </div>
+
+        `;
+
+    }else{
+
+        unidades.forEach(
+            function(unidade,index){
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                div.className =
+                    "unidade";
+
+
+                div.textContent =
+                    `${index + 1}. ${
+                        unidade.nome ||
+                        "Unidade"
+                    }`;
+
+
+                modalUnidades.appendChild(
+                    div
+                );
+
+            }
+        );
+
+    }
+
+
+    const matricula =
+        encontrarMatricula(
+            curso.id
+        );
+
+
+    modalBotao.textContent =
+        matricula
+        ?
+        "▶ Continuar curso"
+        :
+        "🎓 Matricular-se";
+
+
+    modal.classList.add(
+        "ativo"
+    );
+
+}
+
+
+// ============================================================
+// FECHAR MODAL
+// ============================================================
+
+function fechar(){
+
+    modal.classList.remove(
+        "ativo"
+    );
+
+    cursoSelecionado =
+        null;
+
+}
+
+
+fecharModal.addEventListener(
+    "click",
+    fechar
+);
+
+
+modal.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === modal
+        ){
+
+            fechar();
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// MATRICULAR / CONTINUAR
+// ============================================================
+
+modalBotao.addEventListener(
+    "click",
+    async function(){
+
+        if(
+            !cursoSelecionado ||
+            !aluno
+        ){
+
+            return;
+
+        }
+
+
+        const curso =
+            cursoSelecionado;
+
+
+        const matriculaExistente =
+            encontrarMatricula(
+                curso.id
+            );
+
+
+        // =====================================================
+        // JÁ MATRICULADO
+        // =====================================================
+
+        if(
+            matriculaExistente
+        ){
+
+            abrirPrimeiraLicao(
+                curso,
+                matriculaExistente
+            );
+
+            return;
+
+        }
+
+
+        modalBotao.disabled =
+            true;
+
+        modalBotao.textContent =
+            "Matriculando...";
+
+
+        try{
+
+            const matriculaId =
+                aluno.id +
+                "_" +
+                curso.id;
+
+
+            const matriculaRef =
+                doc(
+                    db,
+                    "matriculas",
+                    matriculaId
+                );
+
+
+            const matriculaSnap =
+                await getDoc(
+                    matriculaRef
+                );
+
+
+            if(
+                matriculaSnap.exists()
+            ){
+
+                const existente =
+                    {
+
+                        id:
+                            matriculaSnap.id,
+
+                        ...matriculaSnap.data()
+
+                    };
+
+
+                matriculas.push(
+                    existente
+                );
+
+
+                abrirPrimeiraLicao(
+                    curso,
+                    existente
+                );
+
+
+                return;
+
+            }
+
+
+            const novaMatricula = {
+
+                id:
+                    matriculaId,
+
+                alunoId:
+                    aluno.id,
+
+                alunoNome:
+                    aluno.nome ||
+                    "Estudante",
+
+                cursoId:
+                    curso.id,
+
+                cursoNome:
+                    curso.nome ||
+                    "Curso",
+
+                ativa:
+                    true,
+
+                progresso:
+                    0,
+
+                licoesConcluidas:
+                    [],
+
+                matriculadoEm:
+                    serverTimestamp()
+
+            };
+
+
+            await setDoc(
+                matriculaRef,
+                novaMatricula
+            );
+
+
+            matriculas.push({
+
+                ...novaMatricula,
+
+                id:
+                    matriculaId
+
+            });
+
+
+            mostrarMensagem(
+                "Matrícula realizada com sucesso!",
+                "sucesso"
+            );
+
+
+            renderizar();
+
+
+            setTimeout(
+                function(){
+
+                    abrirPrimeiraLicao(
+                        curso,
+                        novaMatricula
+                    );
+
+                },
+                500
+            );
+
+
+        }catch(erro){
+
+            console.error(
+                "Erro ao matricular:",
+                erro
+            );
+
+
+            mostrarMensagem(
+                "Não foi possível realizar a matrícula. Verifique as regras do Firestore."
+            );
+
+
+            modalBotao.disabled =
+                false;
+
+            modalBotao.textContent =
+                "🎓 Matricular-se";
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// PRIMEIRA LIÇÃO
+// ============================================================
+
+function abrirPrimeiraLicao(
+    curso,
+    matricula
+){
+
+    let unidadeEscolhida =
+        null;
+
+    let licaoEscolhida =
+        null;
+
+
+    const unidades =
+        Array.isArray(
+            curso.unidades
+        )
+        ?
+        curso.unidades
+            .filter(
+                function(unidade){
+
+                    return unidade.ativo !== false;
+
+                }
+            )
+            .sort(
+                function(a,b){
+
+                    return (
+                        Number(a.ordem || 0)
+                        -
+                        Number(b.ordem || 0)
+                    );
+
+                }
+            )
+        :
+        [];
+
+
+    for(
+        const unidade of unidades
+    ){
+
+        const licoes =
+            Array.isArray(
+                unidade.licoes
+            )
+            ?
+            unidade.licoes
+                .filter(
+                    function(licao){
+
+                        return licao.ativo !== false;
+
+                    }
+                )
+                .sort(
+                    function(a,b){
+
+                        return (
+                            Number(a.ordem || 0)
+                            -
+                            Number(b.ordem || 0)
+                        );
+
+                    }
+                )
+            :
+            [];
+
+
+        for(
+            const licao of licoes
+        ){
+
+            const concluida =
+                Array.isArray(
+                    matricula.licoesConcluidas
+                )
+                &&
+                matricula
+                    .licoesConcluidas
+                    .includes(
+                        licao.id
+                    );
+
+
+            if(
+                !concluida
+            ){
+
+                unidadeEscolhida =
+                    unidade;
+
+                licaoEscolhida =
+                    licao;
+
+                break;
+
+            }
+
+        }
+
+
+        if(
+            licaoEscolhida
+        ){
+
+            break;
+
+        }
+
+    }
+
+
+    fechar();
+
+
+    if(
+        licaoEscolhida &&
+        unidadeEscolhida
+    ){
+
+        window.location.href =
+            "licao.html"
+            +
+            "?cursoId="
+            +
+            encodeURIComponent(
+                curso.id
+            )
+            +
+            "&unidadeId="
+            +
+            encodeURIComponent(
+                unidadeEscolhida.id
+            )
+            +
+            "&licaoId="
+            +
+            encodeURIComponent(
+                licaoEscolhida.id
+            );
+
+        return;
+
+    }
+
+
+    mostrarMensagem(
+        "Este curso ainda não possui lições disponíveis."
+    );
+
+}
+
+
+// ============================================================
+// PESQUISA
+// ============================================================
+
+pesquisa.addEventListener(
+    "input",
+    renderizar
+);
+
+
+// ============================================================
+// AUTENTICAÇÃO
+// ============================================================
+
+onAuthStateChanged(
+    auth,
+    async function(usuario){
+
+        try{
+
+            if(
+                !usuario
+            ){
+
+                window.location.replace(
+                    "login.html"
+                );
+
+                return;
+
+            }
+
+
+            const alunoOK =
+                await carregarAluno(
+                    usuario
+                );
+
+
+            if(
+                !alunoOK
+            ){
+
+                return;
+
+            }
+
+
+            await carregarCursos();
+
+            await carregarMatriculas();
+
+
+            carregando.style.display =
+                "none";
+
+
+            renderizar();
+
+
+        }catch(erro){
+
+            console.error(
+                "Erro ao carregar cursos:",
+                erro
+            );
+
+
+            carregando.style.display =
+                "none";
+
+
+            mostrarMensagem(
+                "Não foi possível carregar os cursos. Verifique o console."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
+```

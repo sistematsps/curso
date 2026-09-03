@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gerenciar Lições - Aprende+</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#1f2937;
+}
+
+header{
+    background:#ffffff;
+    border-bottom:1px solid #e5e7eb;
+    padding:18px 30px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+.logo span{
+    color:#16a34a;
+}
+
+.header-actions{
+    display:flex;
+    gap:10px;
+}
+
+button{
+    border:0;
+    border-radius:8px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.2s;
+}
+
+button:hover{
+    opacity:.88;
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-secondary{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.btn-success{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-warning{
+    background:#f59e0b;
+    color:white;
+}
+
+.btn-danger{
+    background:#dc2626;
+    color:white;
+}
+
+.btn-dark{
+    background:#374151;
+    color:white;
+}
+
+.container{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.breadcrumb{
+    margin-bottom:20px;
+    color:#6b7280;
+    font-size:14px;
+}
+
+.breadcrumb span{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.info-box{
+    background:white;
+    border-radius:12px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.info-box h1{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.info-box p{
+    color:#6b7280;
+    margin-bottom:5px;
+}
+
+.top-actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.search{
+    flex:1;
+    max-width:450px;
+}
+
+.search input{
+    width:100%;
+    padding:12px 15px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+.search input:focus{
+    border-color:#2563eb;
+}
+
+.form-box{
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    display:none;
+}
+
+.form-box.active{
+    display:block;
+}
+
+.form-box h2{
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+    font-family:inherit;
+}
+
+.form-group textarea{
+    resize:vertical;
+    min-height:90px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:#2563eb;
+}
+
+.form-actions{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+}
+
+.message{
+    padding:13px 16px;
+    border-radius:8px;
+    margin-bottom:20px;
+    display:none;
+    font-weight:bold;
+}
+
+.message.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.message.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.lessons{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.lesson-card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.lesson-number{
+    width:48px;
+    height:48px;
+    min-width:48px;
+    border-radius:50%;
+    background:#eff6ff;
+    color:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.lesson-info{
+    flex:1;
+}
+
+.lesson-info h3{
+    margin-bottom:6px;
+    font-size:18px;
+}
+
+.lesson-info p{
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:9px;
+}
+
+.badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.badge-active{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.badge-inactive{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.badge-question{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.lesson-actions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    gap:7px;
+}
+
+.lesson-actions button{
+    padding:8px 10px;
+    font-size:13px;
+}
+
+.empty{
+    background:white;
+    border-radius:12px;
+    padding:50px 20px;
+    text-align:center;
+    color:#6b7280;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.empty-icon{
+    font-size:45px;
+    margin-bottom:12px;
+}
+
+@media(max-width:800px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .top-actions{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search{
+        max-width:none;
+    }
+
+    .lesson-card{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .lesson-actions{
+        width:100%;
+        justify-content:flex-start;
+    }
+
+    header{
+        padding:15px;
+    }
+
+    .container{
+        padding:0 12px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+```
+<div class="logo">
+    Aprende<span>+</span>
+</div>
+
+<div class="header-actions">
+    <button class="btn-secondary" onclick="voltarUnidades()">
+        ← Unidades
+    </button>
+
+    <button class="btn-dark" onclick="irAluno()">
+        👨‍🎓 Área do aluno
+    </button>
+</div>
+```
+
+</header>
+
+<div class="container">
+
+```
+<div class="breadcrumb">
+    Cursos / <span id="nomeCurso">Carregando...</span> /
+    <span id="nomeUnidade">Carregando...</span> / Lições
+</div>
+
+<div class="info-box">
+
+    <h1 id="tituloUnidade">
+        Gerenciar Lições
+    </h1>
+
+    <p id="descricaoUnidade">
+        Carregando informações da unidade...
+    </p>
+
+    <p>
+        Aqui você poderá criar as lições e posteriormente adicionar as perguntas.
+    </p>
+
+</div>
+
+<div id="mensagem" class="message"></div>
+
+<div class="top-actions">
+
+    <div class="search">
+        <input
+            type="text"
+            id="pesquisa"
+            placeholder="🔎 Pesquisar lição..."
+            oninput="renderizar()"
+        >
+    </div>
+
+    <button class="btn-primary" onclick="abrirFormulario()">
+        + Nova Lição
+    </button>
+
+</div>
+
+<div id="formBox" class="form-box">
+
+    <h2 id="tituloFormulario">
+        Nova Lição
+    </h2>
+
+    <div class="form-grid">
+
+        <div class="form-group full">
+
+            <label for="titulo">
+                Título da lição
+            </label>
+
+            <input
+                type="text"
+                id="titulo"
+                placeholder="Ex.: Saudações em Inglês"
+            >
+
+        </div>
+
+        <div class="form-group full">
+
+            <label for="descricao">
+                Descrição
+            </label>
+
+            <textarea
+                id="descricao"
+                placeholder="Descreva o conteúdo desta lição..."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+
+        <button class="btn-success" onclick="salvarLicao()">
+            💾 Salvar Lição
+        </button>
+
+        <button class="btn-secondary" onclick="fecharFormulario()">
+            Cancelar
+        </button>
+
+    </div>
+
+</div>
+
+<div id="listaLicoes" class="lessons"></div>
+```
+
+</div>
+
+<script>
+
+const STORAGE_KEY = "aprendeCursos";
+
+const params = new URLSearchParams(window.location.search);
+
+const cursoId = params.get("cursoId");
+const unidadeId = params.get("unidadeId");
+
+let cursos = [];
+let cursoAtual = null;
+let unidadeAtual = null;
+let licaoEditando = null;
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    carregarDados();
+
+});
+
+
+/* =========================
+   CARREGAR DADOS
+========================= */
+
+function carregarDados(){
+
+    cursos = JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "[]"
+    );
+
+    cursoAtual = cursos.find(
+        curso => curso.id === cursoId
+    );
+
+    if(!cursoAtual){
+
+        mostrarErro(
+            "Curso não encontrado."
+        );
+
+        document.getElementById("listaLicoes").innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">❌</div>
+                <h3>Curso não encontrado</h3>
+                <p>Volte para a página de cursos.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    unidadeAtual = (cursoAtual.unidades || []).find(
+        unidade => unidade.id === unidadeId
+    );
+
+    if(!unidadeAtual){
+
+        mostrarErro(
+            "Unidade não encontrada."
+        );
+
+        document.getElementById("listaLicoes").innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">❌</div>
+                <h3>Unidade não encontrada</h3>
+                <p>Volte para o gerenciamento de unidades.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    if(!unidadeAtual.licoes){
+        unidadeAtual.licoes = [];
+    }
+
+    atualizarCabecalho();
+
+    renderizar();
+
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+function atualizarCabecalho(){
+
+    document.getElementById("nomeCurso").textContent =
+        cursoAtual.nome;
+
+    document.getElementById("nomeUnidade").textContent =
+        unidadeAtual.nome;
+
+    document.getElementById("tituloUnidade").textContent =
+        "Lições — " + unidadeAtual.nome;
+
+    document.getElementById("descricaoUnidade").textContent =
+        unidadeAtual.descricao || "Sem descrição cadastrada.";
+
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+function abrirFormulario(){
+
+    licaoEditando = null;
+
+    document.getElementById("tituloFormulario").textContent =
+        "Nova Lição";
+
+    document.getElementById("titulo").value = "";
+    document.getElementById("descricao").value = "";
+
+    document.getElementById("formBox").classList.add("active");
+
+    document.getElementById("titulo").focus();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+function fecharFormulario(){
+
+    licaoEditando = null;
+
+    document.getElementById("formBox").classList.remove("active");
+
+    document.getElementById("titulo").value = "";
+    document.getElementById("descricao").value = "";
+
+}
+
+
+/* =========================
+   SALVAR LIÇÃO
+========================= */
+
+function salvarLicao(){
+
+    const titulo =
+        document.getElementById("titulo").value.trim();
+
+    const descricao =
+        document.getElementById("descricao").value.trim();
+
+    if(!titulo){
+
+        mostrarErro(
+            "Informe o título da lição."
+        );
+
+        document.getElementById("titulo").focus();
+
+        return;
+    }
+
+    if(!unidadeAtual.licoes){
+        unidadeAtual.licoes = [];
+    }
+
+    if(licaoEditando){
+
+        const licao = unidadeAtual.licoes.find(
+            item => item.id === licaoEditando
+        );
+
+        if(licao){
+
+            licao.titulo = titulo;
+            licao.descricao = descricao;
+
+        }
+
+        mostrarSucesso(
+            "Lição atualizada com sucesso!"
+        );
+
+    }else{
+
+        const novaLicao = {
+
+            id: gerarId(),
+
+            titulo: titulo,
+
+            descricao: descricao,
+
+            ativo: true,
+
+            ordem: unidadeAtual.licoes.length + 1,
+
+            perguntas: [],
+
+            criadoEm: new Date().toISOString()
+
+        };
+
+        unidadeAtual.licoes.push(
+            novaLicao
+        );
+
+        mostrarSucesso(
+            "Lição criada com sucesso!"
+        );
+
+    }
+
+    salvarDados();
+
+    fecharFormulario();
+
+    renderizar();
+
+}
+
+
+/* =========================
+   EDITAR
+========================= */
+
+function editarLicao(id){
+
+    const licao =
+        unidadeAtual.licoes.find(
+            item => item.id === id
+        );
+
+    if(!licao) return;
+
+    licaoEditando = id;
+
+    document.getElementById("tituloFormulario").textContent =
+        "Editar Lição";
+
+    document.getElementById("titulo").value =
+        licao.titulo || "";
+
+    document.getElementById("descricao").value =
+        licao.descricao || "";
+
+    document.getElementById("formBox").classList.add("active");
+
+    document.getElementById("titulo").focus();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   ATIVAR / DESATIVAR
+========================= */
+
+function alternarStatus(id){
+
+    const licao =
+        unidadeAtual.licoes.find(
+            item => item.id === id
+        );
+
+    if(!licao) return;
+
+    licao.ativo = !licao.ativo;
+
+    salvarDados();
+
+    renderizar();
+
+    mostrarSucesso(
+        licao.ativo
+            ? "Lição ativada."
+            : "Lição desativada."
+    );
+
+}
+
+
+/* =========================
+   EXCLUIR
+========================= */
+
+function excluirLicao(id){
+
+    const licao =
+        unidadeAtual.licoes.find(
+            item => item.id === id
+        );
+
+    if(!licao) return;
+
+    const confirmou = confirm(
+        `Deseja realmente excluir a lição "${licao.titulo}"?`
+    );
+
+    if(!confirmou) return;
+
+    unidadeAtual.licoes =
+        unidadeAtual.licoes.filter(
+            item => item.id !== id
+        );
+
+    reorganizarOrdem();
+
+    salvarDados();
+
+    renderizar();
+
+    mostrarSucesso(
+        "Lição excluída com sucesso!"
+    );
+
+}
+
+
+/* =========================
+   MOVER PARA CIMA
+========================= */
+
+function moverCima(id){
+
+    const lista = unidadeAtual.licoes;
+
+    const indice = lista.findIndex(
+        item => item.id === id
+    );
+
+    if(indice <= 0) return;
+
+    [
+        lista[indice - 1],
+        lista[indice]
+    ] = [
+        lista[indice],
+        lista[indice - 1]
+    ];
+
+    reorganizarOrdem();
+
+    salvarDados();
+
+    renderizar();
+
+}
+
+
+/* =========================
+   MOVER PARA BAIXO
+========================= */
+
+function moverBaixo(id){
+
+    const lista = unidadeAtual.licoes;
+
+    const indice = lista.findIndex(
+        item => item.id === id
+    );
+
+    if(
+        indice === -1 ||
+        indice >= lista.length - 1
+    ) return;
+
+    [
+        lista[indice],
+        lista[indice + 1]
+    ] = [
+        lista[indice + 1],
+        lista[indice]
+    ];
+
+    reorganizarOrdem();
+
+    salvarDados();
+
+    renderizar();
+
+}
+
+
+/* =========================
+   REORGANIZAR ORDEM
+========================= */
+
+function reorganizarOrdem(){
+
+    unidadeAtual.licoes.forEach(
+        (licao, indice) => {
+
+            licao.ordem = indice + 1;
+
+        }
+    );
+
+}
+
+
+/* =========================
+   RENDERIZAR
+========================= */
+
+function renderizar(){
+
+    const container =
+        document.getElementById("listaLicoes");
+
+    if(!unidadeAtual){
+
+        container.innerHTML = "";
+
+        return;
+    }
+
+    const termo =
+        document.getElementById("pesquisa")
+            .value
+            .toLowerCase()
+            .trim();
+
+    let lista =
+        [...(unidadeAtual.licoes || [])]
+        .sort(
+            (a,b) =>
+                (a.ordem || 0) -
+                (b.ordem || 0)
+        );
+
+    if(termo){
+
+        lista = lista.filter(
+            licao =>
+                (licao.titulo || "")
+                    .toLowerCase()
+                    .includes(termo)
+                ||
+                (licao.descricao || "")
+                    .toLowerCase()
+                    .includes(termo)
+        );
+
+    }
+
+    if(lista.length === 0){
+
+        container.innerHTML = `
+            <div class="empty">
+
+                <div class="empty-icon">📖</div>
+
+                <h3>
+                    ${
+                        termo
+                        ? "Nenhuma lição encontrada"
+                        : "Nenhuma lição cadastrada"
+                    }
+                </h3>
+
+                <p>
+                    ${
+                        termo
+                        ? "Tente pesquisar por outro termo."
+                        : "Clique em '+ Nova Lição' para começar."
+                    }
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML =
+        lista.map(
+            (licao, indice) =>
+                criarCardLicao(
+                    licao,
+                    indice,
+                    lista.length
+                )
+        ).join("");
+
+}
+
+
+/* =========================
+   CARD DA LIÇÃO
+========================= */
+
+function criarCardLicao(
+    licao,
+    indice,
+    total
+){
+
+    const perguntas =
+        licao.perguntas
+            ? licao.perguntas.length
+            : 0;
+
+    const status =
+        licao.ativo !== false;
+
+    return `
+
+        <div class="lesson-card">
+
+            <div class="lesson-number">
+                ${indice + 1}
+            </div>
+
+            <div class="lesson-info">
+
+                <h3>
+                    ${escapar(licao.titulo)}
+                </h3>
+
+                <p>
+                    ${
+                        escapar(
+                            licao.descricao ||
+                            "Sem descrição cadastrada."
+                        )
+                    }
+                </p>
+
+                <div class="badges">
+
+                    <span class="badge ${
+                        status
+                            ? "badge-active"
+                            : "badge-inactive"
+                    }">
+
+                        ${
+                            status
+                                ? "✓ Ativa"
+                                : "✕ Inativa"
+                        }
+
+                    </span>
+
+                    <span class="badge badge-question">
+
+                        ❓ ${perguntas}
+                        ${
+                            perguntas === 1
+                                ? "pergunta"
+                                : "perguntas"
+                        }
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="lesson-actions">
+
+                <button
+                    class="btn-success"
+                    onclick="gerenciarPerguntas('${licao.id}')"
+                    title="Gerenciar perguntas"
+                >
+                    ❓ Perguntas
+                </button>
+
+                <button
+                    class="btn-secondary"
+                    onclick="editarLicao('${licao.id}')"
+                >
+                    ✏️ Editar
+                </button>
+
+                ${
+                    indice > 0
+                    ?
+                    `
+                    <button
+                        class="btn-secondary"
+                        onclick="moverCima('${licao.id}')"
+                        title="Mover para cima"
+                    >
+                        ↑
+                    </button>
+                    `
+                    :
+                    ""
+                }
+
+                ${
+                    indice < total - 1
+                    ?
+                    `
+                    <button
+                        class="btn-secondary"
+                        onclick="moverBaixo('${licao.id}')"
+                        title="Mover para baixo"
+                    >
+                        ↓
+                    </button>
+                    `
+                    :
+                    ""
+                }
+
+                <button
+                    class="${
+                        status
+                            ? "btn-warning"
+                            : "btn-success"
+                    }"
+                    onclick="alternarStatus('${licao.id}')"
+                >
+                    ${
+                        status
+                            ? "Desativar"
+                            : "Ativar"
+                    }
+                </button>
+
+                <button
+                    class="btn-danger"
+                    onclick="excluirLicao('${licao.id}')"
+                >
+                    🗑️
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   GERENCIAR PERGUNTAS
+========================= */
+
+function gerenciarPerguntas(id){
+
+    window.location.href =
+        `perguntas.html?cursoId=${encodeURIComponent(cursoId)}&unidadeId=${encodeURIComponent(unidadeId)}&licaoId=${encodeURIComponent(id)}`;
+
+}
+
+
+/* =========================
+   VOLTAR
+========================= */
+
+function voltarUnidades(){
+
+    window.location.href =
+        `unidades.html?id=${encodeURIComponent(cursoId)}`;
+
+}
+
+
+function irAluno(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =========================
+   SALVAR NO LOCALSTORAGE
+========================= */
+
+function salvarDados(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(cursos)
+    );
+
+}
+
+
+/* =========================
+   ID
+========================= */
+
+function gerarId(){
+
+    return Math.random()
+        .toString(36)
+        .substring(2,9);
+
+}
+
+
+/* =========================
+   ESCAPAR HTML
+========================= */
+
+function escapar(valor){
+
+    if(valor === null || valor === undefined){
+        return "";
+    }
+
+    return String(valor)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   MENSAGENS
+========================= */
+
+function mostrarSucesso(texto){
+
+    const mensagem =
+        document.getElementById("mensagem");
+
+    mensagem.textContent = texto;
+
+    mensagem.className =
+        "message success";
+
+    setTimeout(() => {
+
+        mensagem.className =
+            "message";
+
+    },3000);
+
+}
+
+
+function mostrarErro(texto){
+
+    const mensagem =
+        document.getElementById("mensagem");
+
+    mensagem.textContent = texto;
+
+    mensagem.className =
+        "message error";
+
+    setTimeout(() => {
+
+        mensagem.className =
+            "message";
+
+    },4000);
+
+}
+
+</script>
+
+</body>
+</html>

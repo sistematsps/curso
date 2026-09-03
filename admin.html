@@ -1,0 +1,2296 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Aprende+ | Administração</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f9;
+    color:#222;
+}
+
+header{
+    background:#2563eb;
+    color:white;
+    padding:18px 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.header-info{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-size:14px;
+}
+
+button{
+    border:0;
+    border-radius:8px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.btn-sair{
+    background:white;
+    color:#2563eb;
+}
+
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.loading{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+
+#painelAdmin{
+    display:none;
+}
+
+.topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.topo h1{
+    font-size:28px;
+}
+
+.btn-novo{
+    background:#16a34a;
+    color:white;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+
+.card small{
+    color:#666;
+}
+
+.card strong{
+    display:block;
+    font-size:30px;
+    margin-top:8px;
+}
+
+.pesquisa{
+    margin-bottom:20px;
+}
+
+.pesquisa input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.tabela-box{
+    background:white;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+th,
+td{
+    padding:14px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+th{
+    background:#f8fafc;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.ativo{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.inativo{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.acoes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.btn-editar{
+    background:#f59e0b;
+    color:white;
+}
+
+.btn-unidades{
+    background:#7c3aed;
+    color:white;
+}
+
+.btn-status{
+    background:#64748b;
+    color:white;
+}
+
+.btn-excluir{
+    background:#dc2626;
+    color:white;
+}
+
+.vazio{
+    text-align:center;
+    padding:35px;
+    color:#777;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:1000;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-conteudo{
+    max-width:700px;
+    margin:30px auto;
+    background:white;
+    border-radius:14px;
+    padding:25px;
+}
+
+.modal-topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.fechar{
+    background:#eee;
+    font-size:18px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.campo.full{
+    grid-column:1/-1;
+}
+
+.campo label{
+    font-weight:bold;
+    font-size:14px;
+}
+
+.campo input,
+.campo textarea,
+.campo select{
+    padding:11px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.campo textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.form-acoes{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:20px;
+}
+
+.btn-cancelar{
+    background:#e5e7eb;
+}
+
+.btn-salvar{
+    background:#2563eb;
+    color:white;
+}
+
+.mensagem{
+    display:none;
+    padding:13px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+.sucesso{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.erro{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+#erroAcesso{
+    display:none;
+    background:white;
+    max-width:650px;
+    margin:50px auto;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+
+#erroAcesso h2{
+    color:#dc2626;
+    margin-bottom:10px;
+}
+
+#erroAcesso p{
+    color:#666;
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+.btn-login{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-recarregar{
+    background:#16a34a;
+    color:white;
+    margin-left:8px;
+}
+
+.detalhes-erro{
+    margin-top:15px;
+    background:#f8fafc;
+    border-radius:8px;
+    padding:12px;
+    font-size:13px;
+    color:#555;
+    text-align:left;
+    word-break:break-word;
+}
+
+@media(max-width:800px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .campo.full{
+        grid-column:auto;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .header-info{
+        width:100%;
+        justify-content:space-between;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        📚 Aprende+
+    </div>
+
+    <div class="header-info">
+
+        <span id="nomeAdmin">
+            Verificando acesso...
+        </span>
+
+        <button
+            class="btn-sair"
+            id="btnSair">
+            Sair
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- CARREGANDO -->
+
+    <div
+        class="loading"
+        id="carregando">
+
+        <h2>
+            🔐 Verificando acesso...
+        </h2>
+
+        <p
+            style="margin-top:10px;color:#666;">
+            Aguarde enquanto restauramos sua sessão.
+        </p>
+
+    </div>
+
+
+    <!-- ERRO -->
+
+    <div id="erroAcesso">
+
+        <h2>
+            ⛔ Acesso não autorizado
+        </h2>
+
+        <p id="textoErroAcesso">
+            Não foi possível restaurar sua sessão administrativa.
+        </p>
+
+        <button
+            class="btn-login"
+            id="btnIrLogin">
+            Ir para o login
+        </button>
+
+        <button
+            class="btn-recarregar"
+            id="btnRecarregar">
+            🔄 Tentar novamente
+        </button>
+
+        <div
+            class="detalhes-erro"
+            id="detalhesErro">
+        </div>
+
+    </div>
+
+
+    <!-- PAINEL -->
+
+    <main id="painelAdmin">
+
+
+        <div class="topo">
+
+            <h1>
+                ⚙️ Painel Administrativo
+            </h1>
+
+            <button
+                class="btn-novo"
+                id="btnNovoCurso">
+                + Novo Curso
+            </button>
+
+        </div>
+
+
+        <!-- CARDS -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <small>
+                    Total de cursos
+                </small>
+
+                <strong id="totalCursos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="card">
+
+                <small>
+                    Cursos ativos
+                </small>
+
+                <strong id="cursosAtivos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="card">
+
+                <small>
+                    Cursos inativos
+                </small>
+
+                <strong id="cursosInativos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="card">
+
+                <small>
+                    Administrador
+                </small>
+
+                <strong
+                    style="font-size:18px;"
+                    id="adminNomeCard">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="mensagem"
+            class="mensagem">
+        </div>
+
+
+        <!-- PESQUISA -->
+
+        <div class="pesquisa">
+
+            <input
+                type="text"
+                id="pesquisa"
+                placeholder="🔎 Pesquisar curso...">
+
+        </div>
+
+
+        <!-- TABELA -->
+
+        <div class="tabela-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Curso
+                        </th>
+
+                        <th>
+                            Descrição
+                        </th>
+
+                        <th>
+                            Ordem
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaCursos">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+    class="modal"
+    id="modalCurso">
+
+    <div class="modal-conteudo">
+
+
+        <div class="modal-topo">
+
+            <h2 id="tituloModal">
+                Novo Curso
+            </h2>
+
+            <button
+                class="fechar"
+                id="btnFecharModal">
+                ✕
+            </button>
+
+        </div>
+
+
+        <form id="formCurso">
+
+            <div class="form-grid">
+
+
+                <div class="campo full">
+
+                    <label for="nomeCurso">
+                        Nome do curso
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomeCurso"
+                        required
+                        placeholder="Ex.: Matemática">
+
+                </div>
+
+
+                <div class="campo full">
+
+                    <label for="descricaoCurso">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricaoCurso"
+                        placeholder="Descrição do curso">
+                    </textarea>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="iconeCurso">
+                        Ícone / Emoji
+                    </label>
+
+                    <input
+                        type="text"
+                        id="iconeCurso"
+                        value="📚"
+                        placeholder="📚">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="ordemCurso">
+                        Ordem
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ordemCurso"
+                        value="1"
+                        min="0">
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-acoes">
+
+                <button
+                    type="button"
+                    class="btn-cancelar"
+                    id="btnCancelar">
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-salvar">
+                    💾 Salvar Curso
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+
+/* =========================================================
+   FIREBASE APP
+========================================================= */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+/* =========================================================
+   FIREBASE AUTH
+========================================================= */
+
+import {
+    initializeAuth,
+    indexedDBLocalPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence,
+    setPersistence,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+/* =========================================================
+   FIREBASE FIRESTORE
+========================================================= */
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    getDoc,
+    doc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =========================================================
+   CONFIGURAÇÃO OFICIAL DO PROJETO
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyC4AAbC8vCFAmlPlur12NmY7BKPjaSjumM",
+
+    authDomain:
+        "meuappweb-65522.firebaseapp.com",
+
+    projectId:
+        "meuappweb-65522",
+
+    storageBucket:
+        "meuappweb-65522.firebasestorage.app",
+
+    messagingSenderId:
+        "305368794616",
+
+    appId:
+        "1:305368794616:web:3199c6836a986d896ac20d",
+
+    measurementId:
+        "G-QN7GFD99N0"
+
+};
+
+
+/* =========================================================
+   INICIALIZAR APP
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+/* =========================================================
+   INICIALIZAR AUTH COM PERSISTÊNCIA
+========================================================= */
+
+let auth;
+
+try {
+
+    auth = initializeAuth(app, {
+
+        persistence: [
+            indexedDBLocalPersistence,
+            browserLocalPersistence,
+            browserSessionPersistence
+        ]
+
+    });
+
+} catch (erro) {
+
+    /*
+     * Caso o Auth já tenha sido inicializado
+     * neste contexto, utiliza a instância existente.
+     */
+
+    console.warn(
+        "Auth já inicializado ou persistência indisponível:",
+        erro
+    );
+
+    /*
+     * Importante:
+     * se ocorrer esse caso, recarregar a página
+     * normalmente resolve o contexto.
+     */
+
+}
+
+
+/* =========================================================
+   FIRESTORE
+========================================================= */
+
+const db =
+    getFirestore(app);
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const carregando =
+    document.getElementById("carregando");
+
+const painelAdmin =
+    document.getElementById("painelAdmin");
+
+const erroAcesso =
+    document.getElementById("erroAcesso");
+
+const textoErroAcesso =
+    document.getElementById("textoErroAcesso");
+
+const detalhesErro =
+    document.getElementById("detalhesErro");
+
+const nomeAdmin =
+    document.getElementById("nomeAdmin");
+
+const adminNomeCard =
+    document.getElementById("adminNomeCard");
+
+const listaCursos =
+    document.getElementById("listaCursos");
+
+const pesquisa =
+    document.getElementById("pesquisa");
+
+const totalCursos =
+    document.getElementById("totalCursos");
+
+const cursosAtivos =
+    document.getElementById("cursosAtivos");
+
+const cursosInativos =
+    document.getElementById("cursosInativos");
+
+const modalCurso =
+    document.getElementById("modalCurso");
+
+const tituloModal =
+    document.getElementById("tituloModal");
+
+const formCurso =
+    document.getElementById("formCurso");
+
+const nomeCurso =
+    document.getElementById("nomeCurso");
+
+const descricaoCurso =
+    document.getElementById("descricaoCurso");
+
+const iconeCurso =
+    document.getElementById("iconeCurso");
+
+const ordemCurso =
+    document.getElementById("ordemCurso");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+const btnSair =
+    document.getElementById("btnSair");
+
+const btnIrLogin =
+    document.getElementById("btnIrLogin");
+
+const btnRecarregar =
+    document.getElementById("btnRecarregar");
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+let cursos = [];
+
+let cursoEditando = null;
+
+let acessoAutorizado = false;
+
+let verificacaoFinalizada = false;
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+function mostrarMensagem(
+    texto,
+    tipo = "sucesso"
+){
+
+    mensagem.textContent =
+        texto;
+
+    mensagem.className =
+        "mensagem " + tipo;
+
+    setTimeout(() => {
+
+        mensagem.className =
+            "mensagem";
+
+        mensagem.textContent =
+            "";
+
+    }, 4000);
+
+}
+
+
+/* =========================================================
+   ESCAPAR HTML
+========================================================= */
+
+function escapar(valor){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
+        return "";
+
+    }
+
+    return String(valor)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   MOSTRAR ERRO
+========================================================= */
+
+function mostrarErroAcesso(
+    titulo,
+    texto,
+    detalhe = ""
+){
+
+    acessoAutorizado =
+        false;
+
+    painelAdmin.style.display =
+        "none";
+
+    carregando.style.display =
+        "none";
+
+    erroAcesso.style.display =
+        "block";
+
+    textoErroAcesso.textContent =
+        texto;
+
+    detalhesErro.textContent =
+        detalhe;
+
+    if(titulo){
+
+        const tituloElemento =
+            erroAcesso.querySelector("h2");
+
+        tituloElemento.textContent =
+            titulo;
+
+    }
+
+}
+
+
+/* =========================================================
+   ABRIR NOVO CURSO
+========================================================= */
+
+function novoCurso(){
+
+    cursoEditando =
+        null;
+
+    tituloModal.textContent =
+        "Novo Curso";
+
+    formCurso.reset();
+
+    iconeCurso.value =
+        "📚";
+
+    ordemCurso.value =
+        "1";
+
+    modalCurso.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   FECHAR MODAL
+========================================================= */
+
+function fecharModal(){
+
+    modalCurso.style.display =
+        "none";
+
+    cursoEditando =
+        null;
+
+    formCurso.reset();
+
+    iconeCurso.value =
+        "📚";
+
+    ordemCurso.value =
+        "1";
+
+}
+
+
+/* =========================================================
+   PREENCHER FORMULÁRIO
+========================================================= */
+
+function preencherFormulario(curso){
+
+    cursoEditando =
+        curso.id;
+
+    tituloModal.textContent =
+        "Editar Curso";
+
+    nomeCurso.value =
+        curso.nome || "";
+
+    descricaoCurso.value =
+        curso.descricao || "";
+
+    iconeCurso.value =
+        curso.icone || "📚";
+
+    ordemCurso.value =
+        curso.ordem ?? 1;
+
+    modalCurso.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   CARREGAR CURSOS
+========================================================= */
+
+async function carregarCursos(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "cursos"
+                )
+            );
+
+        cursos = [];
+
+        snapshot.forEach(
+            (documento) => {
+
+                cursos.push({
+
+                    id:
+                        documento.id,
+
+                    ...documento.data()
+
+                });
+
+            }
+        );
+
+
+        cursos.sort(
+            (a,b) => {
+
+                const ordemA =
+                    Number(
+                        a.ordem || 0
+                    );
+
+                const ordemB =
+                    Number(
+                        b.ordem || 0
+                    );
+
+                return ordemA - ordemB;
+
+            }
+        );
+
+
+        atualizarEstatisticas();
+
+        renderizarCursos();
+
+
+    }catch(erro){
+
+        console.error(
+            "ADMIN - erro ao carregar cursos:",
+            erro
+        );
+
+        mostrarMensagem(
+            "Não foi possível carregar os cursos: " +
+            erro.message,
+            "erro"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ESTATÍSTICAS
+========================================================= */
+
+function atualizarEstatisticas(){
+
+    const ativos =
+        cursos.filter(
+            curso =>
+                curso.ativo !== false
+        ).length;
+
+    const inativos =
+        cursos.filter(
+            curso =>
+                curso.ativo === false
+        ).length;
+
+
+    totalCursos.textContent =
+        cursos.length;
+
+    cursosAtivos.textContent =
+        ativos;
+
+    cursosInativos.textContent =
+        inativos;
+
+}
+
+
+/* =========================================================
+   RENDERIZAR
+========================================================= */
+
+function renderizarCursos(){
+
+    const termo =
+        pesquisa.value
+            .trim()
+            .toLowerCase();
+
+
+    const filtrados =
+        cursos.filter(
+            curso => {
+
+                const nome =
+                    String(
+                        curso.nome || ""
+                    )
+                    .toLowerCase();
+
+                const descricao =
+                    String(
+                        curso.descricao || ""
+                    )
+                    .toLowerCase();
+
+                return (
+
+                    nome.includes(
+                        termo
+                    )
+
+                    ||
+
+                    descricao.includes(
+                        termo
+                    )
+
+                );
+
+            }
+        );
+
+
+    if(
+        filtrados.length === 0
+    ){
+
+        listaCursos.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="vazio">
+
+                    Nenhum curso encontrado.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    listaCursos.innerHTML =
+
+        filtrados.map(
+            curso => {
+
+                const ativo =
+                    curso.ativo !== false;
+
+
+                return `
+
+                    <tr>
+
+                        <td>
+
+                            <strong>
+
+                                ${escapar(
+                                    curso.icone ||
+                                    "📚"
+                                )}
+
+                                ${escapar(
+                                    curso.nome ||
+                                    "Sem nome"
+                                )}
+
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapar(
+                                curso.descricao ||
+                                "Sem descrição"
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            ${Number(
+                                curso.ordem || 0
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="status ${
+                                    ativo
+                                    ? "ativo"
+                                    : "inativo"
+                                }">
+
+                                ${
+                                    ativo
+                                    ? "Ativo"
+                                    : "Inativo"
+                                }
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div
+                                class="acoes">
+
+
+                                <button
+                                    class="btn-editar"
+                                    data-acao="editar"
+                                    data-id="${curso.id}">
+
+                                    ✏️ Editar
+
+                                </button>
+
+
+                                <button
+                                    class="btn-unidades"
+                                    data-acao="unidades"
+                                    data-id="${curso.id}">
+
+                                    📚 Unidades
+
+                                </button>
+
+
+                                <button
+                                    class="btn-status"
+                                    data-acao="status"
+                                    data-id="${curso.id}">
+
+                                    ${
+                                        ativo
+                                        ? "⛔ Desativar"
+                                        : "✅ Ativar"
+                                    }
+
+                                </button>
+
+
+                                <button
+                                    class="btn-excluir"
+                                    data-acao="excluir"
+                                    data-id="${curso.id}">
+
+                                    🗑️ Excluir
+
+                                </button>
+
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================================================
+   SALVAR CURSO
+========================================================= */
+
+formCurso.addEventListener(
+    "submit",
+    async (evento) => {
+
+        evento.preventDefault();
+
+
+        if(
+            !acessoAutorizado
+        ){
+
+            mostrarMensagem(
+                "Acesso administrativo não autorizado.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        const usuario =
+            auth.currentUser;
+
+
+        if(!usuario){
+
+            mostrarMensagem(
+                "Sua sessão expirou. Faça login novamente.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        const nome =
+            nomeCurso.value.trim();
+
+        const descricao =
+            descricaoCurso.value.trim();
+
+        const icone =
+            iconeCurso.value.trim() ||
+            "📚";
+
+        const ordem =
+            Number(
+                ordemCurso.value
+            ) || 0;
+
+
+        if(!nome){
+
+            mostrarMensagem(
+                "Informe o nome do curso.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        try{
+
+            const dadosCurso = {
+
+                nome,
+
+                descricao,
+
+                icone,
+
+                ordem,
+
+                atualizadoEm:
+                    serverTimestamp()
+
+            };
+
+
+            if(
+                cursoEditando
+            ){
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "cursos",
+                        cursoEditando
+                    ),
+
+                    dadosCurso
+
+                );
+
+
+                mostrarMensagem(
+                    "Curso atualizado com sucesso."
+                );
+
+
+            }else{
+
+                await addDoc(
+
+                    collection(
+                        db,
+                        "cursos"
+                    ),
+
+                    {
+
+                        ...dadosCurso,
+
+                        ativo:
+                            true,
+
+                        unidades:
+                            [],
+
+                        criadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+
+                mostrarMensagem(
+                    "Curso criado com sucesso."
+                );
+
+            }
+
+
+            fecharModal();
+
+            await carregarCursos();
+
+
+        }catch(erro){
+
+            console.error(
+                "ADMIN - erro ao salvar curso:",
+                erro
+            );
+
+            mostrarMensagem(
+                "Erro ao salvar curso: " +
+                erro.message,
+                "erro"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+listaCursos.addEventListener(
+    "click",
+    async (evento) => {
+
+        const botao =
+            evento.target.closest(
+                "button"
+            );
+
+
+        if(!botao){
+            return;
+        }
+
+
+        const acao =
+            botao.dataset.acao;
+
+        const id =
+            botao.dataset.id;
+
+
+        const curso =
+            cursos.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if(!curso){
+            return;
+        }
+
+
+        /* EDITAR */
+
+        if(
+            acao === "editar"
+        ){
+
+            preencherFormulario(
+                curso
+            );
+
+            return;
+
+        }
+
+
+        /* UNIDADES */
+
+        if(
+            acao === "unidades"
+        ){
+
+            window.location.href =
+                "unidades.html?id=" +
+                encodeURIComponent(id);
+
+            return;
+
+        }
+
+
+        /* STATUS */
+
+        if(
+            acao === "status"
+        ){
+
+            const novoStatus =
+                curso.ativo === false;
+
+
+            const texto =
+                novoStatus
+                ? "ativar"
+                : "desativar";
+
+
+            const confirmar =
+                confirm(
+
+                    `Deseja ${texto} o curso "${curso.nome}"?`
+
+                );
+
+
+            if(!confirmar){
+                return;
+            }
+
+
+            try{
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "cursos",
+                        id
+                    ),
+
+                    {
+
+                        ativo:
+                            novoStatus,
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+
+                mostrarMensagem(
+
+                    novoStatus
+                    ? "Curso ativado."
+                    : "Curso desativado."
+
+                );
+
+
+                await carregarCursos();
+
+
+            }catch(erro){
+
+                console.error(
+                    "Erro ao alterar status:",
+                    erro
+                );
+
+                mostrarMensagem(
+                    "Erro ao alterar status: " +
+                    erro.message,
+                    "erro"
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        /* EXCLUIR */
+
+        if(
+            acao === "excluir"
+        ){
+
+            const confirmar =
+                confirm(
+
+                    `Tem certeza que deseja excluir o curso "${curso.nome}"?\n\nEssa ação não poderá ser desfeita.`
+
+                );
+
+
+            if(!confirmar){
+                return;
+            }
+
+
+            try{
+
+                await deleteDoc(
+
+                    doc(
+                        db,
+                        "cursos",
+                        id
+                    )
+
+                );
+
+
+                mostrarMensagem(
+                    "Curso excluído com sucesso."
+                );
+
+
+                await carregarCursos();
+
+
+            }catch(erro){
+
+                console.error(
+                    "Erro ao excluir curso:",
+                    erro
+                );
+
+                mostrarMensagem(
+                    "Erro ao excluir curso: " +
+                    erro.message,
+                    "erro"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PESQUISA
+========================================================= */
+
+pesquisa.addEventListener(
+    "input",
+    renderizarCursos
+);
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+document
+    .getElementById(
+        "btnNovoCurso"
+    )
+    .addEventListener(
+        "click",
+        novoCurso
+    );
+
+
+document
+    .getElementById(
+        "btnFecharModal"
+    )
+    .addEventListener(
+        "click",
+        fecharModal
+    );
+
+
+document
+    .getElementById(
+        "btnCancelar"
+    )
+    .addEventListener(
+        "click",
+        fecharModal
+    );
+
+
+modalCurso.addEventListener(
+    "click",
+    (evento) => {
+
+        if(
+            evento.target ===
+            modalCurso
+        ){
+
+            fecharModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SAIR
+========================================================= */
+
+btnSair.addEventListener(
+    "click",
+    async () => {
+
+        btnSair.disabled =
+            true;
+
+        try{
+
+            await signOut(auth);
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }catch(erro){
+
+            console.error(
+                "Erro ao sair:",
+                erro
+            );
+
+            btnSair.disabled =
+                false;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   BOTÃO LOGIN
+========================================================= */
+
+btnIrLogin.addEventListener(
+    "click",
+    () => {
+
+        window.location.replace(
+            "login.html"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   RECARREGAR
+========================================================= */
+
+btnRecarregar.addEventListener(
+    "click",
+    () => {
+
+        window.location.reload();
+
+    }
+);
+
+
+/* =========================================================
+   VERIFICAR ADMINISTRADOR
+========================================================= */
+
+async function verificarAdministrador(){
+
+    console.log(
+        "========================================"
+    );
+
+    console.log(
+        "ADMIN - iniciando verificação..."
+    );
+
+    console.log(
+        "ADMIN - URL:",
+        window.location.href
+    );
+
+    console.log(
+        "ADMIN - projeto Firebase:",
+        firebaseConfig.projectId
+    );
+
+
+    try{
+
+        /*
+         * IMPORTANTE:
+         *
+         * authStateReady() espera o Firebase
+         * terminar a restauração da sessão.
+         */
+
+        await auth.authStateReady();
+
+
+        console.log(
+            "ADMIN - Firebase terminou de restaurar a sessão."
+        );
+
+
+        let usuario =
+            auth.currentUser;
+
+
+        console.log(
+            "ADMIN - auth.currentUser:",
+            usuario
+                ? usuario.uid
+                : null
+        );
+
+
+        /*
+         * Pequena segunda tentativa.
+         *
+         * Isso ajuda principalmente quando
+         * o navegador está trabalhando com
+         * arquivos file://.
+         */
+
+        if(!usuario){
+
+            console.log(
+                "ADMIN - primeira leitura sem usuário. Aguardando..."
+            );
+
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        1200
+                    )
+            );
+
+
+            usuario =
+                auth.currentUser;
+
+
+            console.log(
+                "ADMIN - segunda leitura:",
+                usuario
+                    ? usuario.uid
+                    : null
+            );
+
+        }
+
+
+        /*
+         * Só agora consideramos realmente
+         * que não existe sessão.
+         */
+
+        if(!usuario){
+
+            console.error(
+                "ADMIN - sessão não restaurada."
+            );
+
+
+            mostrarErroAcesso(
+
+                "🔐 Sessão não encontrada",
+
+                "O Firebase não conseguiu restaurar sua sessão administrativa neste navegador.",
+
+                "Se você acabou de fazer login, abra o sistema através de um servidor local (por exemplo, Live Server) em vez de abrir diretamente com file:///."
+
+            );
+
+
+            return;
+
+        }
+
+
+        console.log(
+            "ADMIN - usuário autenticado:",
+            usuario.uid
+        );
+
+
+        /*
+         * Procurar perfil do usuário.
+         */
+
+        const referenciaUsuario =
+            doc(
+                db,
+                "users",
+                usuario.uid
+            );
+
+
+        const documentoUsuario =
+            await getDoc(
+                referenciaUsuario
+            );
+
+
+        if(
+            !documentoUsuario.exists()
+        ){
+
+            console.error(
+                "ADMIN - documento users não encontrado."
+            );
+
+
+            mostrarErroAcesso(
+
+                "⛔ Perfil não encontrado",
+
+                "Sua conta está autenticada, mas o documento users/{uid} não foi encontrado.",
+
+                "UID autenticado: " +
+                usuario.uid
+
+            );
+
+
+            return;
+
+        }
+
+
+        const dadosUsuario =
+            documentoUsuario.data();
+
+
+        console.log(
+            "ADMIN - dados do usuário:",
+            dadosUsuario
+        );
+
+
+        const tipo =
+            String(
+                dadosUsuario.tipo || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        const ativo =
+            dadosUsuario.ativo !== false;
+
+
+        /*
+         * CONTA INATIVA
+         */
+
+        if(!ativo){
+
+            mostrarErroAcesso(
+
+                "⛔ Conta desativada",
+
+                "Sua conta administrativa está desativada.",
+
+                "UID: " +
+                usuario.uid
+
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * NÃO É ADMIN
+         */
+
+        if(
+            tipo !== "admin"
+        ){
+
+            mostrarErroAcesso(
+
+                "⛔ Acesso não autorizado",
+
+                "Sua conta está autenticada, mas não possui permissão de administrador.",
+
+                "Tipo encontrado no Firestore: " +
+                (tipo || "não informado")
+
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * ADMIN AUTORIZADO
+         */
+
+        console.log(
+            "ADMIN - acesso autorizado."
+        );
+
+
+        acessoAutorizado =
+            true;
+
+        verificacaoFinalizada =
+            true;
+
+
+        const nome =
+            dadosUsuario.nome ||
+            usuario.displayName ||
+            "Administrador";
+
+
+        nomeAdmin.textContent =
+            nome;
+
+
+        adminNomeCard.textContent =
+            nome;
+
+
+        carregando.style.display =
+            "none";
+
+
+        erroAcesso.style.display =
+            "none";
+
+
+        painelAdmin.style.display =
+            "block";
+
+
+        /*
+         * Carregar cursos
+         */
+
+        await carregarCursos();
+
+
+        console.log(
+            "ADMIN - painel carregado com sucesso."
+        );
+
+        console.log(
+            "========================================"
+        );
+
+
+    }catch(erro){
+
+        console.error(
+            "ADMIN - erro geral:",
+            erro
+        );
+
+
+        mostrarErroAcesso(
+
+            "⚠️ Erro ao verificar acesso",
+
+            "Ocorreu um erro ao verificar sua sessão administrativa.",
+
+            erro.code
+            ? "Código: " +
+              erro.code +
+              " | " +
+              erro.message
+            : erro.message
+
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+verificarAdministrador();
+
+
+</script>
+
+</body>
+</html>
+```

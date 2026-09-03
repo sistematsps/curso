@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aprende+ | Missões</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#1f2937;
+    padding-bottom:85px;
+}
+
+header{
+    background:linear-gradient(135deg,#58cc02,#45a900);
+    color:white;
+    padding:20px 18px 28px;
+    border-radius:0 0 25px 25px;
+}
+
+.topo{
+    max-width:900px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    font-size:25px;
+}
+
+header p{
+    font-size:13px;
+    margin-top:5px;
+    opacity:.9;
+}
+
+.avatar{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:white;
+    color:#58a900;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    font-weight:bold;
+}
+
+/* CONTAINER */
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:18px;
+}
+
+/* SALDO */
+
+.saldo{
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:20px;
+    box-shadow:0 3px 13px rgba(0,0,0,.07);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.saldo-esquerda{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.moeda{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#fff4c2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.saldo small{
+    color:#777;
+    display:block;
+    font-size:12px;
+}
+
+.saldo strong{
+    display:block;
+    font-size:25px;
+    margin-top:2px;
+}
+
+.loja{
+    border:none;
+    background:#f0fdf4;
+    color:#3d8f00;
+    border-radius:10px;
+    padding:10px 12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* RESUMO */
+
+.resumo{
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:20px;
+    box-shadow:0 3px 13px rgba(0,0,0,.07);
+}
+
+.resumo-topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.resumo h2{
+    font-size:18px;
+}
+
+.contador{
+    background:#58cc02;
+    color:white;
+    padding:7px 11px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.barra{
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.barra div{
+    height:100%;
+    background:#58cc02;
+    border-radius:20px;
+    transition:.3s;
+}
+
+/* MISSÕES */
+
+.missao{
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:0 3px 13px rgba(0,0,0,.07);
+}
+
+.missao-topo{
+    display:flex;
+    gap:13px;
+    align-items:center;
+}
+
+.missao-icone{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:#eefbe8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    flex-shrink:0;
+}
+
+.missao-info{
+    flex:1;
+}
+
+.missao-info h3{
+    font-size:16px;
+}
+
+.missao-info p{
+    color:#777;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.recompensa{
+    text-align:center;
+    min-width:60px;
+}
+
+.recompensa strong{
+    display:block;
+    font-size:15px;
+}
+
+.recompensa span{
+    font-size:11px;
+    color:#777;
+}
+
+.progresso-info{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+    font-size:12px;
+    color:#666;
+}
+
+.progresso{
+    height:8px;
+    background:#e5e7eb;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:6px;
+}
+
+.progresso div{
+    height:100%;
+    background:#58cc02;
+    border-radius:10px;
+}
+
+.status{
+    margin-top:12px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.concluida{
+    border:2px solid #58cc02;
+}
+
+.concluida .status{
+    color:#58a900;
+}
+
+/* BONUS */
+
+.bonus{
+    display:none;
+    background:linear-gradient(135deg,#fff8d6,#fff1a8);
+    border-radius:20px;
+    padding:22px;
+    text-align:center;
+    margin-top:20px;
+    box-shadow:0 3px 13px rgba(0,0,0,.07);
+}
+
+.bonus.mostrar{
+    display:block;
+}
+
+.bonus .emoji{
+    font-size:42px;
+}
+
+.bonus h2{
+    margin-top:8px;
+    font-size:20px;
+}
+
+.bonus p{
+    margin-top:7px;
+    color:#666;
+    font-size:13px;
+}
+
+.bonus strong{
+    display:block;
+    font-size:24px;
+    margin-top:10px;
+}
+
+/* AVISO */
+
+.aviso{
+    display:none;
+    background:#eaf8e2;
+    color:#3f7e20;
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:18px;
+    font-size:13px;
+    text-align:center;
+}
+
+.aviso.mostrar{
+    display:block;
+}
+
+/* NAV */
+
+.nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:72px;
+    background:white;
+    border-top:1px solid #e5e7eb;
+    display:flex;
+    justify-content:center;
+    z-index:100;
+    box-shadow:0 -3px 15px rgba(0,0,0,.06);
+}
+
+.nav-inner{
+    width:100%;
+    max-width:900px;
+    display:flex;
+    justify-content:space-around;
+}
+
+.nav-item{
+    flex:1;
+    border:none;
+    background:none;
+    color:#777;
+    font-size:11px;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+}
+
+.nav-item span{
+    font-size:22px;
+}
+
+.nav-item.ativo{
+    color:#58a900;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+
+    .missao{
+        padding:15px;
+    }
+
+    .recompensa{
+        min-width:52px;
+    }
+
+    .loja{
+        padding:8px;
+        font-size:11px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+
+<div class="topo">
+
+    <div>
+        <h1>🎯 Missões</h1>
+        <p>Complete suas metas e ganhe recompensas</p>
+    </div>
+
+    <div class="avatar" id="avatar">
+        👤
+    </div>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<!-- SALDO -->
+
+<div class="saldo">
+
+    <div class="saldo-esquerda">
+
+        <div class="moeda">
+            🪙
+        </div>
+
+        <div>
+            <small>Suas moedas</small>
+            <strong id="moedas">0</strong>
+        </div>
+
+    </div>
+
+    <button class="loja" onclick="abrirLoja()">
+        🛍️ Loja
+    </button>
+
+</div>
+
+
+<div class="aviso" id="aviso"></div>
+
+
+<!-- RESUMO -->
+
+<div class="resumo">
+
+    <div class="resumo-topo">
+
+        <h2>Missões de hoje</h2>
+
+        <div class="contador" id="contador">
+            0/3
+        </div>
+
+    </div>
+
+    <div class="barra">
+        <div id="barra" style="width:0%"></div>
+    </div>
+
+</div>
+
+
+<!-- LISTA -->
+
+<div id="listaMissoes"></div>
+
+
+<!-- BÔNUS -->
+
+<div class="bonus" id="bonus">
+
+    <div class="emoji">
+        🎉
+    </div>
+
+    <h2>
+        Todas as missões concluídas!
+    </h2>
+
+    <p>
+        Você completou todas as metas de hoje.
+    </p>
+
+    <strong>
+        🪙 +50 moedas
+    </strong>
+
+</div>
+
+</div>
+
+<!-- NAV -->
+
+<nav class="nav">
+
+<div class="nav-inner">
+
+    <button class="nav-item" onclick="abrirInicio()">
+        <span>🏠</span>
+        Início
+    </button>
+
+    <button class="nav-item" onclick="abrirCursos()">
+        <span>📚</span>
+        Cursos
+    </button>
+
+    <button class="nav-item ativo">
+        <span>🎯</span>
+        Missões
+    </button>
+
+    <button class="nav-item" onclick="abrirPerfil()">
+        <span>👤</span>
+        Perfil
+    </button>
+
+</div>
+
+</nav>
+
+<script>
+
+/* =========================================================
+   CHAVES
+========================================================= */
+
+const CHAVE_ALUNO = "aprendeAluno";
+const CHAVE_XP = "aprendeXP";
+const CHAVE_MOEDAS = "aprendeMoedas";
+const CHAVE_MISSOES = "aprendeMissoesDiarias";
+const CHAVE_DATA_MISSOES = "aprendeDataMissoes";
+const CHAVE_ATIVIDADE = "aprendeAtividadeDiaria";
+
+
+/* =========================================================
+   ALUNO
+========================================================= */
+
+let aluno = JSON.parse(
+    localStorage.getItem(CHAVE_ALUNO)
+);
+
+if(!aluno){
+
+    aluno = {
+        id:"aluno_demo",
+        nome:"Estudante"
+    };
+
+    localStorage.setItem(
+        CHAVE_ALUNO,
+        JSON.stringify(aluno)
+    );
+}
+
+document.getElementById("avatar").textContent =
+    obterInicial(aluno.nome);
+
+
+function obterInicial(nome){
+
+    if(!nome)
+        return "👤";
+
+    return nome
+        .trim()
+        .charAt(0)
+        .toUpperCase();
+}
+
+
+/* =========================================================
+   MOEDAS
+========================================================= */
+
+function obterMoedas(){
+
+    let moedas =
+        Number(
+            localStorage.getItem(CHAVE_MOEDAS)
+        );
+
+    if(isNaN(moedas))
+        moedas = 0;
+
+    return moedas;
+}
+
+
+function salvarMoedas(valor){
+
+    valor = Math.max(
+        0,
+        Number(valor) || 0
+    );
+
+    localStorage.setItem(
+        CHAVE_MOEDAS,
+        valor
+    );
+
+    atualizarSaldo();
+
+}
+
+
+function adicionarMoedas(valor){
+
+    const atual =
+        obterMoedas();
+
+    salvarMoedas(
+        atual + Number(valor || 0)
+    );
+
+}
+
+
+function atualizarSaldo(){
+
+    document.getElementById(
+        "moedas"
+    ).textContent =
+        obterMoedas();
+
+}
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+function hoje(){
+
+    const agora = new Date();
+
+    const ano =
+        agora.getFullYear();
+
+    const mes =
+        String(
+            agora.getMonth()+1
+        ).padStart(2,"0");
+
+    const dia =
+        String(
+            agora.getDate()
+        ).padStart(2,"0");
+
+    return `${ano}-${mes}-${dia}`;
+}
+
+
+/* =========================================================
+   MISSÕES
+========================================================= */
+
+function obterMissoes(){
+
+    const dataHoje = hoje();
+
+    const dataSalva =
+        localStorage.getItem(
+            CHAVE_DATA_MISSOES
+        );
+
+    let missoes =
+        JSON.parse(
+            localStorage.getItem(
+                CHAVE_MISSOES
+            ) || "null"
+        );
+
+
+    /*
+       NOVO DIA:
+       cria novas missões.
+    */
+
+    if(
+        dataSalva !== dataHoje ||
+        !Array.isArray(missoes)
+    ){
+
+        missoes = [
+
+            {
+                id:"licao",
+                titulo:"Hora de estudar",
+                descricao:"Conclua pelo menos 1 lição.",
+                icone:"📖",
+                meta:1,
+                progresso:0,
+                recompensaXP:20,
+                recompensaMoedas:10,
+                concluida:false,
+                recompensaRecebida:false
+            },
+
+            {
+                id:"perguntas",
+                titulo:"Pratique bastante",
+                descricao:"Responda corretamente 5 perguntas.",
+                icone:"🧠",
+                meta:5,
+                progresso:0,
+                recompensaXP:30,
+                recompensaMoedas:15,
+                concluida:false,
+                recompensaRecebida:false
+            },
+
+            {
+                id:"experiencia",
+                titulo:"Ganhe experiência",
+                descricao:"Ganhe 50 XP estudando hoje.",
+                icone:"⭐",
+                meta:50,
+                progresso:0,
+                recompensaXP:50,
+                recompensaMoedas:25,
+                concluida:false,
+                recompensaRecebida:false
+            }
+
+        ];
+
+        localStorage.setItem(
+            CHAVE_DATA_MISSOES,
+            dataHoje
+        );
+
+        localStorage.setItem(
+            CHAVE_MISSOES,
+            JSON.stringify(missoes)
+        );
+    }
+
+
+    return missoes;
+}
+
+
+/* =========================================================
+   ATIVIDADE
+========================================================= */
+
+function obterAtividade(){
+
+    const atividade =
+        JSON.parse(
+            localStorage.getItem(
+                CHAVE_ATIVIDADE
+            ) || "null"
+        );
+
+    if(
+        atividade &&
+        atividade.data === hoje()
+    ){
+
+        return atividade;
+
+    }
+
+    return {
+        data:hoje(),
+        licoes:0,
+        perguntas:0,
+        xp:0
+    };
+}
+
+
+/* =========================================================
+   ATUALIZAR PROGRESSO
+========================================================= */
+
+function atualizarMissoes(){
+
+    let missoes =
+        obterMissoes();
+
+    const atividade =
+        obterAtividade();
+
+    let houveAlteracao = false;
+
+
+    missoes.forEach(missao => {
+
+        if(missao.id === "licao"){
+
+            missao.progresso =
+                Math.min(
+                    atividade.licoes || 0,
+                    missao.meta
+                );
+
+        }
+
+        if(missao.id === "perguntas"){
+
+            missao.progresso =
+                Math.min(
+                    atividade.perguntas || 0,
+                    missao.meta
+                );
+
+        }
+
+        if(missao.id === "experiencia"){
+
+            missao.progresso =
+                Math.min(
+                    atividade.xp || 0,
+                    missao.meta
+                );
+
+        }
+
+
+        /*
+           Quando atingir a meta,
+           entrega a recompensa somente uma vez.
+        */
+
+        if(
+            missao.progresso >= missao.meta &&
+            !missao.concluida
+        ){
+
+            missao.concluida = true;
+
+            houveAlteracao = true;
+
+        }
+
+    });
+
+
+    localStorage.setItem(
+        CHAVE_MISSOES,
+        JSON.stringify(missoes)
+    );
+
+
+    /*
+       Entregar recompensas separadamente.
+    */
+
+    missoes.forEach(missao => {
+
+        if(
+            missao.concluida &&
+            !missao.recompensaRecebida
+        ){
+
+            adicionarXP(
+                missao.recompensaXP
+            );
+
+            adicionarMoedas(
+                missao.recompensaMoedas
+            );
+
+            missao.recompensaRecebida = true;
+
+            mostrarAviso(
+                `🎉 Missão concluída! +${missao.recompensaXP} XP e +${missao.recompensaMoedas} 🪙`
+            );
+
+            houveAlteracao = true;
+        }
+
+    });
+
+
+    /*
+       Bônus por completar todas.
+    */
+
+    const todasConcluidas =
+        missoes.length > 0 &&
+        missoes.every(
+            missao => missao.concluida
+        );
+
+
+    if(todasConcluidas){
+
+        const chaveBonus =
+            "aprendeBonusMissoes_" + hoje();
+
+        const bonusRecebido =
+            localStorage.getItem(
+                chaveBonus
+            );
+
+
+        if(!bonusRecebido){
+
+            adicionarMoedas(50);
+
+            localStorage.setItem(
+                chaveBonus,
+                "true"
+            );
+
+            mostrarAviso(
+                "🏆 Todas as missões concluídas! Você ganhou +50 🪙 de bônus!"
+            );
+
+        }
+
+    }
+
+
+    localStorage.setItem(
+        CHAVE_MISSOES,
+        JSON.stringify(missoes)
+    );
+
+    renderizarMissoes();
+
+}
+
+
+/* =========================================================
+   XP
+========================================================= */
+
+function adicionarXP(valor){
+
+    const xp =
+        Number(
+            localStorage.getItem(CHAVE_XP)
+            || 0
+        );
+
+    localStorage.setItem(
+        CHAVE_XP,
+        xp + Number(valor || 0)
+    );
+
+}
+
+
+/* =========================================================
+   RENDERIZAR
+========================================================= */
+
+function renderizarMissoes(){
+
+    const missoes =
+        obterMissoes();
+
+    const container =
+        document.getElementById(
+            "listaMissoes"
+        );
+
+    container.innerHTML = "";
+
+
+    let concluidas = 0;
+
+
+    missoes.forEach(missao => {
+
+        if(missao.concluida)
+            concluidas++;
+
+
+        const percentual =
+            Math.min(
+                100,
+                Math.round(
+                    (
+                        missao.progresso /
+                        missao.meta
+                    ) * 100
+                )
+            );
+
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "missao" +
+            (
+                missao.concluida
+                ? " concluida"
+                : ""
+            );
+
+
+        let progressoTexto =
+            `${missao.progresso} / ${missao.meta}`;
+
+
+        if(missao.id === "experiencia"){
+
+            progressoTexto =
+                `${missao.progresso} / ${missao.meta} XP`;
+
+        }
+
+
+        div.innerHTML = `
+
+            <div class="missao-topo">
+
+                <div class="missao-icone">
+                    ${missao.icone}
+                </div>
+
+                <div class="missao-info">
+
+                    <h3>
+                        ${escapar(missao.titulo)}
+                    </h3>
+
+                    <p>
+                        ${escapar(missao.descricao)}
+                    </p>
+
+                </div>
+
+                <div class="recompensa">
+
+                    <strong>
+                        +${missao.recompensaXP} XP
+                    </strong>
+
+                    <span>
+                        🪙 +${missao.recompensaMoedas}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="progresso-info">
+
+                <span>
+                    ${progressoTexto}
+                </span>
+
+                <strong>
+                    ${percentual}%
+                </strong>
+
+            </div>
+
+            <div class="progresso">
+
+                <div
+                    style="width:${percentual}%"
+                ></div>
+
+            </div>
+
+            <div class="status">
+
+                ${
+                    missao.concluida
+                    ? "✅ Missão concluída"
+                    : "🎯 Em andamento"
+                }
+
+            </div>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+
+    const total =
+        missoes.length;
+
+    const percentualGeral =
+        total
+        ? Math.round(
+            (concluidas / total) * 100
+        )
+        : 0;
+
+
+    document.getElementById(
+        "contador"
+    ).textContent =
+        `${concluidas}/${total}`;
+
+
+    document.getElementById(
+        "barra"
+    ).style.width =
+        `${percentualGeral}%`;
+
+
+    document.getElementById(
+        "bonus"
+    ).classList.toggle(
+        "mostrar",
+        total > 0 &&
+        concluidas === total
+    );
+
+
+    atualizarSaldo();
+
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+function mostrarAviso(texto){
+
+    const aviso =
+        document.getElementById("aviso");
+
+    aviso.textContent =
+        texto;
+
+    aviso.classList.add("mostrar");
+
+    setTimeout(() => {
+
+        aviso.classList.remove("mostrar");
+
+    },5000);
+
+}
+
+
+/* =========================================================
+   SEGURANÇA
+========================================================= */
+
+function escapar(valor){
+
+    if(
+        valor === null ||
+        valor === undefined
+    )
+        return "";
+
+    return String(valor)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
+
+function abrirInicio(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+function abrirCursos(){
+
+    window.location.href =
+        "cursos.html";
+
+}
+
+
+function abrirPerfil(){
+
+    window.location.href =
+        "perfil.html";
+
+}
+
+
+function abrirLoja(){
+
+    /*
+       A loja será criada na próxima etapa.
+    */
+
+    window.location.href =
+        "loja.html";
+
+}
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+atualizarSaldo();
+atualizarMissoes();
+
+</script>
+
+</body>
+</html>

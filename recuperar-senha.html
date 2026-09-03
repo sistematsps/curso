@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Aprende+ | Recuperar senha</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+    }
+
+    .logo {
+      text-align: center;
+      color: white;
+      margin-bottom: 25px;
+    }
+
+    .logo-icon {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 12px;
+      border-radius: 24px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    }
+
+    .logo h1 {
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .logo p {
+      margin-top: 6px;
+      opacity: .9;
+      font-size: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.20);
+    }
+
+    .card h2 {
+      color: #171717;
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .subtitulo {
+      color: #737373;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .icone-email {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #eef2ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+    }
+
+    .campo {
+      margin-bottom: 18px;
+    }
+
+    .campo label {
+      display: block;
+      color: #404040;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .campo input {
+      width: 100%;
+      height: 50px;
+      border: 1px solid #d4d4d4;
+      border-radius: 12px;
+      padding: 0 14px;
+      font-size: 15px;
+      outline: none;
+      transition: .2s;
+    }
+
+    .campo input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+    }
+
+    .btn {
+      width: 100%;
+      height: 52px;
+      border: 0;
+      border-radius: 13px;
+      background: #4f46e5;
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      background: #4338ca;
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .mensagem {
+      display: none;
+      padding: 13px 14px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .mensagem.erro {
+      display: block;
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+
+    .mensagem.sucesso {
+      display: block;
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid #eeeeee;
+      font-size: 14px;
+    }
+
+    .links a {
+      color: #4f46e5;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .rodape {
+      text-align: center;
+      color: rgba(255,255,255,.75);
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .sucesso-box {
+      display: none;
+      text-align: center;
+    }
+
+    .sucesso-box .check {
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #dcfce7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+    }
+
+    .sucesso-box h3 {
+      color: #171717;
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .sucesso-box p {
+      color: #737373;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .btn-voltar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 50px;
+      border-radius: 12px;
+      background: #4f46e5;
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .btn-voltar:hover {
+      background: #4338ca;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 24px 20px;
+        border-radius: 20px;
+      }
+
+      .logo h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="logo">
+
+    <div class="logo-icon">
+      📚
+    </div>
+
+    <h1>Aprende+</h1>
+
+    <p>
+      Aprenda todos os dias. Evolua sempre.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <!-- ================================================
+         FORMULÁRIO
+         ================================================ -->
+
+    <div id="areaFormulario">
+
+      <div class="icone-email">
+        🔐
+      </div>
+
+      <h2>Recuperar senha</h2>
+
+      <p class="subtitulo">
+        Informe o e-mail da sua conta e enviaremos
+        um link para você criar uma nova senha.
+      </p>
+
+
+      <div id="mensagem" class="mensagem"></div>
+
+
+      <form id="formRecuperar">
+
+        <div class="campo">
+
+          <label for="email">
+            E-mail
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Digite seu e-mail"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn"
+          id="btnEnviar"
+        >
+          Enviar link de recuperação
+        </button>
+
+      </form>
+
+
+      <div class="links">
+
+        <a href="login.html">
+          ← Voltar para o login
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================================
+         SUCESSO
+         ================================================ -->
+
+    <div
+      id="areaSucesso"
+      class="sucesso-box"
+    >
+
+      <div class="check">
+        ✓
+      </div>
+
+      <h3>
+        E-mail enviado!
+      </h3>
+
+      <p>
+        Se existir uma conta associada a esse endereço,
+        você receberá um e-mail com as instruções para
+        redefinir sua senha.
+        <br><br>
+        Verifique também a pasta de spam ou lixo eletrônico.
+      </p>
+
+      <a
+        href="login.html"
+        class="btn-voltar"
+      >
+        Voltar para o login
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="rodape">
+    © 2026 Aprende+ — Sua jornada de aprendizado
+  </div>
+
+</div>
+
+
+<script type="module">
+
+  // =========================================================
+  // FIREBASE
+  // =========================================================
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+  import {
+    getAuth,
+    sendPasswordResetEmail
+  } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyC4AAbC8vCFAmlPlur12Nm7YBKPjaSjumM",
+
+    authDomain: "meuappweb-65522.firebaseapp.com",
+
+    projectId: "meuappweb-65522",
+
+    storageBucket: "meuappweb-65522.firebasestorage.app",
+
+    messagingSenderId: "305368794616",
+
+    appId: "1:305368794616:web:d987589863479e576ac20d",
+
+    measurementId: "G-L0VWMGJ003"
+
+  };
+
+
+  const app =
+    initializeApp(firebaseConfig);
+
+
+  const auth =
+    getAuth(app);
+
+
+  // =========================================================
+  // ELEMENTOS
+  // =========================================================
+
+  const form =
+    document.getElementById("formRecuperar");
+
+  const emailInput =
+    document.getElementById("email");
+
+  const btnEnviar =
+    document.getElementById("btnEnviar");
+
+  const mensagem =
+    document.getElementById("mensagem");
+
+  const areaFormulario =
+    document.getElementById("areaFormulario");
+
+  const areaSucesso =
+    document.getElementById("areaSucesso");
+
+
+  // =========================================================
+  // MENSAGEM
+  // =========================================================
+
+  function mostrarMensagem(
+    texto,
+    tipo = "erro"
+  ) {
+
+    mensagem.textContent = texto;
+
+    mensagem.className =
+      "mensagem " + tipo;
+
+  }
+
+
+  function limparMensagem() {
+
+    mensagem.textContent = "";
+
+    mensagem.className =
+      "mensagem";
+
+  }
+
+
+  // =========================================================
+  // ENVIO
+  // =========================================================
+
+  form.addEventListener(
+    "submit",
+    async (event) => {
+
+      event.preventDefault();
+
+      limparMensagem();
+
+
+      const email =
+        emailInput.value.trim().toLowerCase();
+
+
+      if (!email) {
+
+        mostrarMensagem(
+          "Digite seu e-mail."
+        );
+
+        emailInput.focus();
+
+        return;
+      }
+
+
+      btnEnviar.disabled = true;
+
+      btnEnviar.textContent =
+        "Enviando...";
+
+
+      try {
+
+        await sendPasswordResetEmail(
+          auth,
+          email
+        );
+
+
+        // ================================================
+        // SUCESSO
+        // ================================================
+
+        areaFormulario.style.display =
+          "none";
+
+        areaSucesso.style.display =
+          "block";
+
+
+      } catch (erro) {
+
+        console.error(
+          "Erro ao enviar recuperação:",
+          erro
+        );
+
+
+        let texto =
+          "Não foi possível enviar o e-mail de recuperação.";
+
+
+        switch (erro.code) {
+
+          case "auth/invalid-email":
+
+            texto =
+              "Digite um e-mail válido.";
+
+            break;
+
+
+          case "auth/user-not-found":
+
+            texto =
+              "Não encontramos uma conta com esse e-mail.";
+
+            break;
+
+
+          case "auth/too-many-requests":
+
+            texto =
+              "Muitas solicitações. Aguarde alguns minutos e tente novamente.";
+
+            break;
+
+
+          case "auth/network-request-failed":
+
+            texto =
+              "Verifique sua conexão com a internet.";
+
+            break;
+
+        }
+
+
+        mostrarMensagem(texto);
+
+
+        btnEnviar.disabled =
+          false;
+
+        btnEnviar.textContent =
+          "Enviar link de recuperação";
+
+      }
+
+    }
+  );
+
+</script>
+
+</body>
+</html>

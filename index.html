@@ -1,0 +1,753 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Aprende+ - Início</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #4f46e5;
+      color: white;
+
+      padding: 18px 25px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 15px;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    .usuario {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      font-size: 14px;
+    }
+
+    .btn-sair {
+      border: none;
+
+      background:
+        rgba(255,255,255,.18);
+
+      color: white;
+
+      padding: 9px 14px;
+
+      border-radius: 8px;
+
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    .boas-vindas {
+      background: white;
+
+      padding: 25px;
+
+      border-radius: 16px;
+
+      margin-bottom: 20px;
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.06);
+    }
+
+    .boas-vindas h2 {
+      margin-bottom: 8px;
+    }
+
+    .boas-vindas p {
+      color: #666;
+    }
+
+    .cards {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(180px, 1fr)
+        );
+
+      gap: 15px;
+
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: white;
+
+      padding: 22px;
+
+      border-radius: 14px;
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.06);
+    }
+
+    .card .icone {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .card strong {
+      display: block;
+
+      font-size: 27px;
+
+      margin-top: 5px;
+
+      color: #4f46e5;
+    }
+
+    .area {
+      background: white;
+
+      padding: 25px;
+
+      border-radius: 16px;
+
+      box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.06);
+    }
+
+    .area h2 {
+      margin-bottom: 15px;
+    }
+
+    .menu {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(180px, 1fr)
+        );
+
+      gap: 12px;
+    }
+
+    .menu a {
+      display: block;
+
+      text-decoration: none;
+
+      background: #f3f4f6;
+
+      color: #333;
+
+      padding: 18px;
+
+      border-radius: 12px;
+
+      font-weight: bold;
+
+      transition: .2s;
+    }
+
+    .menu a:hover {
+      background: #e5e7eb;
+      transform: translateY(-2px);
+    }
+
+    .carregando {
+      text-align: center;
+
+      padding: 50px;
+
+      color: #777;
+    }
+
+    @media(max-width:600px) {
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <header>
+
+    <h1>
+      🎓 Aprende+
+    </h1>
+
+
+    <div class="usuario">
+
+      <span id="nomeAluno">
+        Carregando...
+      </span>
+
+      <button
+        id="btnSair"
+        class="btn-sair"
+      >
+        Sair
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main
+    class="container"
+    id="conteudo"
+  >
+
+    <div class="carregando">
+      Verificando acesso...
+    </div>
+
+  </main>
+
+
+  <script type="module">
+
+
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    import {
+      getFirestore,
+      doc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+    // =====================================================
+    // FIREBASE
+    // =====================================================
+
+   const firebaseConfig = {
+  apiKey: "AIzaSyC4AAbC8vCFAmlPlur12Nm7YBKPjaSjumM",
+  authDomain: "meuappweb-65522.firebaseapp.com",
+  projectId: "meuappweb-65522",
+  storageBucket: "meuappweb-65522.firebasestorage.app",
+  messagingSenderId: "305368794616",
+  appId: "1:305368794616:web:3199c6836a986d896ac20d",
+  measurementId: "G-QN7GFD99N0"
+};
+    
+
+
+    const app =
+      initializeApp(firebaseConfig);
+
+    const auth =
+      getAuth(app);
+
+    const db =
+      getFirestore(app);
+
+
+    // =====================================================
+    // ELEMENTOS
+    // =====================================================
+
+    const conteudo =
+      document.getElementById(
+        "conteudo"
+      );
+
+    const nomeAluno =
+      document.getElementById(
+        "nomeAluno"
+      );
+
+    const btnSair =
+      document.getElementById(
+        "btnSair"
+      );
+
+
+    // =====================================================
+    // AUTENTICAÇÃO
+    // =====================================================
+
+    onAuthStateChanged(
+      auth,
+      async function(usuario) {
+
+
+        // -------------------------------------------------
+        // NÃO ESTÁ LOGADO
+        // -------------------------------------------------
+
+        if (!usuario) {
+
+          window.location.replace(
+            "login.html"
+          );
+
+          return;
+
+        }
+
+
+        try {
+
+
+          // ------------------------------------------------
+          // BUSCAR users/{uid}
+          // ------------------------------------------------
+
+          const referencia =
+            doc(
+              db,
+              "users",
+              usuario.uid
+            );
+
+
+          const documento =
+            await getDoc(
+              referencia
+            );
+
+
+          if (!documento.exists()) {
+
+            await signOut(auth);
+
+            localStorage.removeItem(
+              "aprendeUsuario"
+            );
+
+            window.location.replace(
+              "login.html"
+            );
+
+            return;
+
+          }
+
+
+          const dados =
+            documento.data();
+
+
+          // ------------------------------------------------
+          // USUÁRIO DESATIVADO
+          // ------------------------------------------------
+
+          if (
+            dados.ativo === false
+          ) {
+
+            await signOut(auth);
+
+            localStorage.removeItem(
+              "aprendeUsuario"
+            );
+
+            window.location.replace(
+              "login.html"
+            );
+
+            return;
+
+          }
+
+
+          // ------------------------------------------------
+          // TIPO
+          // ------------------------------------------------
+
+          const tipo =
+            String(
+              dados.tipo || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+          // ------------------------------------------------
+          // ADMIN NÃO FICA NO INDEX
+          // ------------------------------------------------
+
+          if (
+            tipo === "admin"
+          ) {
+
+            window.location.replace(
+              "admin.html"
+            );
+
+            return;
+
+          }
+
+
+          // ------------------------------------------------
+          // NÃO É ALUNO
+          // ------------------------------------------------
+
+          if (
+            tipo !== "aluno"
+          ) {
+
+            await signOut(auth);
+
+            localStorage.removeItem(
+              "aprendeUsuario"
+            );
+
+            window.location.replace(
+              "login.html"
+            );
+
+            return;
+
+          }
+
+
+          // ------------------------------------------------
+          // MOSTRAR ALUNO
+          // ------------------------------------------------
+
+          nomeAluno.textContent =
+            dados.nome ||
+            usuario.displayName ||
+            usuario.email ||
+            "Aluno";
+
+
+          // ------------------------------------------------
+          // CACHE
+          // ------------------------------------------------
+
+          localStorage.setItem(
+
+            "aprendeUsuario",
+
+            JSON.stringify({
+
+              uid:
+                usuario.uid,
+
+              nome:
+                dados.nome ||
+                "",
+
+              email:
+                dados.email ||
+                usuario.email ||
+                "",
+
+              tipo:
+                "aluno",
+
+              ativo:
+                true
+
+            })
+
+          );
+
+
+          // ------------------------------------------------
+          // ÁREA DO ALUNO
+          // ------------------------------------------------
+
+          conteudo.innerHTML = `
+
+            <section class="boas-vindas">
+
+              <h2>
+                Olá, ${escapar(
+                  dados.nome ||
+                  "Aluno"
+                )}! 👋
+              </h2>
+
+              <p>
+                Seja bem-vindo à plataforma Aprende+.
+              </p>
+
+            </section>
+
+
+            <section class="cards">
+
+              <div class="card">
+
+                <div class="icone">
+                  ⭐
+                </div>
+
+                <h3>
+                  XP
+                </h3>
+
+                <strong>
+                  ${Number(
+                    dados.xp || 0
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="card">
+
+                <div class="icone">
+                  🔥
+                </div>
+
+                <h3>
+                  Sequência
+                </h3>
+
+                <strong>
+                  ${Number(
+                    dados.sequencia || 0
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="card">
+
+                <div class="icone">
+                  ⚡
+                </div>
+
+                <h3>
+                  Energia
+                </h3>
+
+                <strong>
+                  ${Number(
+                    dados.energia ?? 5
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="card">
+
+                <div class="icone">
+                  🪙
+                </div>
+
+                <h3>
+                  Moedas
+                </h3>
+
+                <strong>
+                  ${Number(
+                    dados.moedas || 0
+                  )}
+                </strong>
+
+              </div>
+
+            </section>
+
+
+            <section class="area">
+
+              <h2>
+                Minha aprendizagem
+              </h2>
+
+
+              <div class="menu">
+
+                <a href="cursos.html">
+                  📚 Meus cursos
+                </a>
+
+                <a href="perfil.html">
+                  👤 Meu perfil
+                </a>
+
+                <a href="ranking.html">
+                  🏆 Ranking
+                </a>
+
+                <a href="missoes.html">
+                  🎯 Missões
+                </a>
+
+                <a href="loja.html">
+                  🛒 Loja
+                </a>
+
+              </div>
+
+            </section>
+
+          `;
+
+
+        } catch (erro) {
+
+
+          console.error(
+            "Erro ao carregar usuário:",
+            erro
+          );
+
+
+          conteudo.innerHTML = `
+
+            <div class="carregando">
+
+              Erro ao carregar sua conta.
+
+              <br><br>
+
+              <button
+                onclick="location.reload()"
+              >
+                Tentar novamente
+              </button>
+
+            </div>
+
+          `;
+
+        }
+
+      }
+    );
+
+
+    // =====================================================
+    // ESCAPAR HTML
+    // =====================================================
+
+    function escapar(valor) {
+
+      return String(
+        valor ?? ""
+      )
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+    }
+
+
+    // =====================================================
+    // SAIR
+    // =====================================================
+
+    btnSair.addEventListener(
+      "click",
+      async function() {
+
+        try {
+
+          await signOut(auth);
+
+        } finally {
+
+          localStorage.removeItem(
+            "aprendeUsuario"
+          );
+
+          window.location.replace(
+            "login.html"
+          );
+
+        }
+
+      }
+    );
+
+
+  </script>
+
+</body>
+
+</html>
+```

@@ -1,0 +1,626 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Criar Administrador - Aprende+</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.20);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 52px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 8px;
+    }
+
+    .subtitulo {
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .campo {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79,70,229,.12);
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      padding: 14px;
+      border-radius: 10px;
+      background: #4f46e5;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #4338ca;
+    }
+
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .mensagem {
+      display: none;
+      padding: 13px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .sucesso {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .erro {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .aviso {
+      margin-top: 20px;
+      padding: 12px;
+      background: #f3f4f6;
+      border-radius: 10px;
+      color: #666;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .voltar {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #4f46e5;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">🎓</div>
+
+    <h1>Criar Administrador</h1>
+
+    <p class="subtitulo">
+      Crie o primeiro administrador da plataforma Aprende+.
+    </p>
+
+    <div id="mensagem" class="mensagem"></div>
+
+    <form id="formAdmin">
+
+      <div class="campo">
+
+        <label for="nome">
+          Nome
+        </label>
+
+        <input
+          type="text"
+          id="nome"
+          placeholder="Nome do administrador"
+          required
+        >
+
+      </div>
+
+      <div class="campo">
+
+        <label for="email">
+          E-mail
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          placeholder="admin@email.com"
+          required
+        >
+
+      </div>
+
+      <div class="campo">
+
+        <label for="senha">
+          Senha
+        </label>
+
+        <input
+          type="password"
+          id="senha"
+          placeholder="Mínimo de 6 caracteres"
+          minlength="6"
+          required
+        >
+
+      </div>
+
+      <div class="campo">
+
+        <label for="confirmarSenha">
+          Confirmar senha
+        </label>
+
+        <input
+          type="password"
+          id="confirmarSenha"
+          placeholder="Digite a senha novamente"
+          minlength="6"
+          required
+        >
+
+      </div>
+
+      <button
+        type="submit"
+        id="btnCriar"
+      >
+        Criar Administrador
+      </button>
+
+    </form>
+
+    <div class="aviso">
+
+      O usuário será criado no Firebase Authentication
+      e seu perfil será salvo na coleção
+      <strong>users</strong> como administrador.
+
+    </div>
+
+    <a
+      href="login.html"
+      class="voltar"
+    >
+      ← Voltar para o login
+    </a>
+
+  </div>
+
+
+  <script type="module">
+
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDocs,
+      collection,
+      query,
+      where,
+      limit,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+    // =====================================================
+    // FIREBASE
+    // =====================================================
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyC4AAbC8vCFAmlPlur12Nm7YBKPjaSjumM",
+  authDomain: "meuappweb-65522.firebaseapp.com",
+  projectId: "meuappweb-65522",
+  storageBucket: "meuappweb-65522.firebasestorage.app",
+  messagingSenderId: "305368794616",
+  appId: "1:305368794616:web:3199c6836a986d896ac20d",
+  measurementId: "G-QN7GFD99N0"
+};
+
+
+    const app =
+      initializeApp(firebaseConfig);
+
+    const auth =
+      getAuth(app);
+
+    const db =
+      getFirestore(app);
+
+
+    // =====================================================
+    // ELEMENTOS
+    // =====================================================
+
+    const form =
+      document.getElementById("formAdmin");
+
+    const nome =
+      document.getElementById("nome");
+
+    const email =
+      document.getElementById("email");
+
+    const senha =
+      document.getElementById("senha");
+
+    const confirmarSenha =
+      document.getElementById("confirmarSenha");
+
+    const btnCriar =
+      document.getElementById("btnCriar");
+
+    const mensagem =
+      document.getElementById("mensagem");
+
+
+    // =====================================================
+    // MENSAGEM
+    // =====================================================
+
+    function mostrarMensagem(texto, tipo) {
+
+      mensagem.textContent = texto;
+
+      mensagem.className =
+        "mensagem " + tipo;
+
+    }
+
+
+    // =====================================================
+    // VERIFICAR ADMIN
+    // =====================================================
+
+    async function existeAdmin() {
+
+      const q = query(
+
+        collection(db, "users"),
+
+        where("tipo", "==", "admin"),
+
+        limit(1)
+
+      );
+
+      const resultado =
+        await getDocs(q);
+
+      return !resultado.empty;
+
+    }
+
+
+    // =====================================================
+    // CRIAR ADMIN
+    // =====================================================
+
+    form.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        const nomeValor =
+          nome.value.trim();
+
+        const emailValor =
+          email.value.trim();
+
+        const senhaValor =
+          senha.value;
+
+        const confirmarValor =
+          confirmarSenha.value;
+
+
+        if (!nomeValor) {
+
+          mostrarMensagem(
+            "Digite o nome.",
+            "erro"
+          );
+
+          return;
+        }
+
+
+        if (senhaValor.length < 6) {
+
+          mostrarMensagem(
+            "A senha precisa ter pelo menos 6 caracteres.",
+            "erro"
+          );
+
+          return;
+        }
+
+
+        if (senhaValor !== confirmarValor) {
+
+          mostrarMensagem(
+            "As senhas não são iguais.",
+            "erro"
+          );
+
+          return;
+        }
+
+
+        btnCriar.disabled = true;
+
+        btnCriar.textContent =
+          "Criando...";
+
+
+        try {
+
+          // ------------------------------------------------
+          // VERIFICAR SE JÁ EXISTE ADMIN
+          // ------------------------------------------------
+
+          const adminExiste =
+            await existeAdmin();
+
+
+          if (adminExiste) {
+
+            mostrarMensagem(
+              "Já existe um administrador cadastrado.",
+              "erro"
+            );
+
+            btnCriar.disabled = false;
+
+            btnCriar.textContent =
+              "Criar Administrador";
+
+            return;
+
+          }
+
+
+          // ------------------------------------------------
+          // CRIAR NO AUTH
+          // ------------------------------------------------
+
+          const credencial =
+            await createUserWithEmailAndPassword(
+              auth,
+              emailValor,
+              senhaValor
+            );
+
+
+          const usuario =
+            credencial.user;
+
+
+          // ------------------------------------------------
+          // NOME NO AUTH
+          // ------------------------------------------------
+
+          await updateProfile(
+            usuario,
+            {
+              displayName: nomeValor
+            }
+          );
+
+
+          // ------------------------------------------------
+          // GRAVAR NA COLEÇÃO users
+          // ------------------------------------------------
+
+          await setDoc(
+
+            doc(
+              db,
+              "users",
+              usuario.uid
+            ),
+
+            {
+
+              uid: usuario.uid,
+
+              nome: nomeValor,
+
+              email: emailValor,
+
+              tipo: "admin",
+
+              ativo: true,
+
+              criadoEm:
+                serverTimestamp(),
+
+              atualizadoEm:
+                serverTimestamp()
+
+            }
+
+          );
+
+
+          // ------------------------------------------------
+          // SUCESSO
+          // ------------------------------------------------
+
+          mostrarMensagem(
+            "Administrador criado com sucesso!",
+            "sucesso"
+          );
+
+
+          form.reset();
+
+
+          setTimeout(() => {
+
+            window.location.replace(
+              "login.html"
+            );
+
+          }, 1800);
+
+
+        } catch (erro) {
+
+          console.error(
+            erro
+          );
+
+
+          let texto =
+            "Erro ao criar administrador.";
+
+
+          if (
+            erro.code ===
+            "auth/email-already-in-use"
+          ) {
+
+            texto =
+              "Este e-mail já está cadastrado.";
+
+          } else if (
+            erro.code ===
+            "auth/invalid-email"
+          ) {
+
+            texto =
+              "E-mail inválido.";
+
+          } else if (
+            erro.code ===
+            "auth/weak-password"
+          ) {
+
+            texto =
+              "A senha é muito fraca.";
+
+          } else if (
+            erro.code ===
+            "auth/operation-not-allowed"
+          ) {
+
+            texto =
+              "Ative o provedor E-mail/Senha no Firebase Authentication.";
+
+          } else if (
+            erro.code ===
+            "permission-denied"
+          ) {
+
+            texto =
+              "O Firestore bloqueou a criação. Precisamos ajustar as regras.";
+
+          } else {
+
+            texto =
+              erro.message ||
+              texto;
+
+          }
+
+
+          mostrarMensagem(
+            texto,
+            "erro"
+          );
+
+
+          btnCriar.disabled = false;
+
+          btnCriar.textContent =
+            "Criar Administrador";
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
+```
