@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gerenciar Lições - Aprende+</title>
+<title>Aprende+ | Lições</title>
 
 <style>
 *{
@@ -23,7 +22,7 @@ body{
 header{
     background:#ffffff;
     border-bottom:1px solid #e5e7eb;
-    padding:18px 30px;
+    padding:16px 24px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -33,62 +32,29 @@ header{
 }
 
 .logo{
-    font-size:25px;
-    font-weight:bold;
+    font-size:24px;
+    font-weight:800;
     color:#2563eb;
 }
 
-.logo span{
-    color:#16a34a;
-}
-
-.header-actions{
+.usuario{
     display:flex;
-    gap:10px;
+    align-items:center;
+    gap:15px;
 }
 
-button{
+.usuario span{
+    font-weight:600;
+}
+
+.btn-sair{
     border:0;
+    background:#ef4444;
+    color:white;
+    padding:9px 15px;
     border-radius:8px;
-    padding:10px 15px;
     cursor:pointer;
-    font-weight:bold;
-    transition:.2s;
-}
-
-button:hover{
-    opacity:.88;
-    transform:translateY(-1px);
-}
-
-.btn-primary{
-    background:#2563eb;
-    color:white;
-}
-
-.btn-secondary{
-    background:#e5e7eb;
-    color:#374151;
-}
-
-.btn-success{
-    background:#16a34a;
-    color:white;
-}
-
-.btn-warning{
-    background:#f59e0b;
-    color:white;
-}
-
-.btn-danger{
-    background:#dc2626;
-    color:white;
-}
-
-.btn-dark{
-    background:#374151;
-    color:white;
+    font-weight:600;
 }
 
 .container{
@@ -97,195 +63,111 @@ button:hover{
     padding:0 20px;
 }
 
-.breadcrumb{
-    margin-bottom:20px;
-    color:#6b7280;
-    font-size:14px;
+.topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:25px;
 }
 
-.breadcrumb span{
-    color:#2563eb;
-    font-weight:bold;
-}
-
-.info-box{
-    background:white;
-    border-radius:12px;
-    padding:22px;
-    margin-bottom:20px;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
-}
-
-.info-box h1{
-    font-size:24px;
+.titulo h1{
+    font-size:30px;
     margin-bottom:8px;
 }
 
-.info-box p{
+.titulo p{
     color:#6b7280;
-    margin-bottom:5px;
 }
 
-.top-actions{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:20px;
-}
-
-.search{
-    flex:1;
-    max-width:450px;
-}
-
-.search input{
-    width:100%;
-    padding:12px 15px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:15px;
-    outline:none;
-}
-
-.search input:focus{
-    border-color:#2563eb;
-}
-
-.form-box{
-    background:white;
-    border-radius:12px;
-    padding:25px;
-    margin-bottom:25px;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
-    display:none;
-}
-
-.form-box.active{
-    display:block;
-}
-
-.form-box h2{
-    margin-bottom:20px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-}
-
-.form-group.full{
-    grid-column:1/-1;
-}
-
-.form-group label{
+.info-curso{
+    margin-top:8px;
     font-size:14px;
-    font-weight:bold;
+    color:#2563eb;
+    font-weight:600;
 }
 
-.form-group input,
-.form-group textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:15px;
-    outline:none;
-    font-family:inherit;
-}
-
-.form-group textarea{
-    resize:vertical;
-    min-height:90px;
-}
-
-.form-group input:focus,
-.form-group textarea:focus{
-    border-color:#2563eb;
-}
-
-.form-actions{
-    margin-top:20px;
+.acoes{
     display:flex;
     gap:10px;
 }
 
-.message{
-    padding:13px 16px;
+button{
+    border:0;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.btn{
+    padding:11px 16px;
     border-radius:8px;
-    margin-bottom:20px;
-    display:none;
-    font-weight:bold;
+    font-weight:700;
 }
 
-.message.success{
-    display:block;
-    background:#dcfce7;
-    color:#166534;
+.btn-voltar{
+    background:#e5e7eb;
+    color:#374151;
 }
 
-.message.error{
-    display:block;
-    background:#fee2e2;
-    color:#991b1b;
+.btn-nova{
+    background:#2563eb;
+    color:#fff;
 }
 
-.lessons{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.lesson-card{
-    background:white;
+.painel{
+    background:#fff;
+    border:1px solid #e5e7eb;
     border-radius:12px;
-    padding:20px;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    overflow:hidden;
+}
+
+.painel-topo{
+    padding:18px 20px;
+    border-bottom:1px solid #e5e7eb;
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    gap:18px;
+    gap:15px;
 }
 
-.lesson-number{
-    width:48px;
-    height:48px;
-    min-width:48px;
-    border-radius:50%;
-    background:#eff6ff;
-    color:#2563eb;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-    font-weight:bold;
+.pesquisa{
+    width:300px;
+    max-width:100%;
+    padding:11px 13px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    outline:none;
 }
 
-.lesson-info{
-    flex:1;
+.pesquisa:focus{
+    border-color:#2563eb;
 }
 
-.lesson-info h3{
-    margin-bottom:6px;
-    font-size:18px;
+.tabela-container{
+    overflow-x:auto;
 }
 
-.lesson-info p{
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:14px 16px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+}
+
+th{
+    background:#f9fafb;
+    font-size:13px;
     color:#6b7280;
-    font-size:14px;
-    margin-bottom:9px;
+    text-transform:uppercase;
 }
 
-.badges{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
+td{
+    font-size:14px;
 }
 
 .badge{
@@ -293,923 +175,602 @@ button:hover{
     padding:5px 9px;
     border-radius:20px;
     font-size:12px;
-    font-weight:bold;
+    font-weight:700;
 }
 
-.badge-active{
+.ativo{
     background:#dcfce7;
     color:#166534;
 }
 
-.badge-inactive{
+.inativo{
     background:#fee2e2;
     color:#991b1b;
 }
 
-.badge-question{
+.acoes-linha{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.btn-mini{
+    padding:7px 9px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.btn-editar{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.btn-perguntas{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
+.btn-status{
     background:#fef3c7;
     color:#92400e;
 }
 
-.lesson-actions{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    gap:7px;
+.btn-excluir{
+    background:#fee2e2;
+    color:#b91c1c;
 }
 
-.lesson-actions button{
-    padding:8px 10px;
-    font-size:13px;
+.btn-subir,
+.btn-descer{
+    background:#f3f4f6;
+    color:#374151;
 }
 
-.empty{
-    background:white;
-    border-radius:12px;
-    padding:50px 20px;
+.vazio{
     text-align:center;
+    padding:45px 20px;
     color:#6b7280;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 
-.empty-icon{
-    font-size:45px;
-    margin-bottom:12px;
+.loading{
+    text-align:center;
+    padding:45px;
+    color:#6b7280;
 }
 
-@media(max-width:800px){
+.mensagem{
+    display:none;
+    padding:13px 16px;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-weight:600;
+}
 
-    .form-grid{
-        grid-template-columns:1fr;
+.sucesso{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.erro{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.modal-fundo{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100;
+}
+
+.modal{
+    background:#fff;
+    width:100%;
+    max-width:550px;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+
+.modal h2{
+    margin-bottom:20px;
+}
+
+.campo{
+    margin-bottom:15px;
+}
+
+.campo label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:700;
+    font-size:14px;
+}
+
+.campo input,
+.campo textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    outline:none;
+    font-family:inherit;
+}
+
+.campo textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.campo input:focus,
+.campo textarea:focus{
+    border-color:#2563eb;
+}
+
+.modal-acoes{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:20px;
+}
+
+.btn-cancelar{
+    background:#e5e7eb;
+    color:#374151;
+    padding:11px 16px;
+    border-radius:8px;
+    font-weight:700;
+}
+
+.btn-salvar{
+    background:#2563eb;
+    color:#fff;
+    padding:11px 16px;
+    border-radius:8px;
+    font-weight:700;
+}
+
+.erro-url{
+    display:none;
+    background:#fff;
+    border:1px solid #fecaca;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:20px;
+}
+
+.erro-url h2{
+    color:#b91c1c;
+    margin-bottom:10px;
+}
+
+.erro-url code{
+    display:block;
+    background:#f3f4f6;
+    padding:10px;
+    border-radius:6px;
+    margin-top:10px;
+    word-break:break-all;
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:14px 16px;
     }
 
-    .top-actions{
+    .usuario span{
+        display:none;
+    }
+
+    .container{
+        margin:20px auto;
+        padding:0 12px;
+    }
+
+    .topo{
+        flex-direction:column;
+    }
+
+    .acoes{
+        width:100%;
+    }
+
+    .acoes .btn{
+        flex:1;
+    }
+
+    .painel-topo{
         flex-direction:column;
         align-items:stretch;
     }
 
-    .search{
-        max-width:none;
-    }
-
-    .lesson-card{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .lesson-actions{
+    .pesquisa{
         width:100%;
-        justify-content:flex-start;
-    }
-
-    header{
-        padding:15px;
-    }
-
-    .container{
-        padding:0 12px;
     }
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
 
-```
-<div class="logo">
-    Aprende<span>+</span>
-</div>
+    <div class="logo">
+        Aprende+
+    </div>
 
-<div class="header-actions">
-    <button class="btn-secondary" onclick="voltarUnidades()">
-        ← Unidades
-    </button>
-
-    <button class="btn-dark" onclick="irAluno()">
-        👨‍🎓 Área do aluno
-    </button>
-</div>
-```
+    <div class="usuario">
+        <span id="nomeAdmin">Carregando...</span>
+        <button class="btn-sair" id="btnSair">
+            Sair
+        </button>
+    </div>
 
 </header>
 
-<div class="container">
+<main class="container">
 
-```
-<div class="breadcrumb">
-    Cursos / <span id="nomeCurso">Carregando...</span> /
-    <span id="nomeUnidade">Carregando...</span> / Lições
-</div>
+    <div id="mensagem" class="mensagem"></div>
 
-<div class="info-box">
+    <div id="erroUrl" class="erro-url">
 
-    <h1 id="tituloUnidade">
-        Gerenciar Lições
-    </h1>
+        <h2>Curso ou unidade não identificados</h2>
 
-    <p id="descricaoUnidade">
-        Carregando informações da unidade...
-    </p>
+        <p>
+            Esta página precisa receber o ID do curso e o ID da unidade.
+        </p>
 
-    <p>
-        Aqui você poderá criar as lições e posteriormente adicionar as perguntas.
-    </p>
+        <code id="urlAtual"></code>
 
-</div>
+        <p style="margin-top:12px;">
+            O endereço esperado é:
+        </p>
 
-<div id="mensagem" class="message"></div>
+        <code>
+            licoes.html?cursoId=ID_DO_CURSO&unidadeId=ID_DA_UNIDADE
+        </code>
 
-<div class="top-actions">
-
-    <div class="search">
-        <input
-            type="text"
-            id="pesquisa"
-            placeholder="🔎 Pesquisar lição..."
-            oninput="renderizar()"
-        >
     </div>
 
-    <button class="btn-primary" onclick="abrirFormulario()">
-        + Nova Lição
-    </button>
+    <section class="topo">
 
-</div>
+        <div class="titulo">
 
-<div id="formBox" class="form-box">
+            <h1 id="tituloUnidade">
+                Lições
+            </h1>
 
-    <h2 id="tituloFormulario">
-        Nova Lição
-    </h2>
+            <p id="descricaoUnidade">
+                Gerencie as lições desta unidade.
+            </p>
 
-    <div class="form-grid">
+            <div class="info-curso" id="nomeCurso">
+                Carregando curso...
+            </div>
 
-        <div class="form-group full">
+        </div>
 
-            <label for="titulo">
-                Título da lição
-            </label>
+        <div class="acoes">
+
+            <button
+                class="btn btn-voltar"
+                id="btnVoltar">
+                ← Voltar
+            </button>
+
+            <button
+                class="btn btn-nova"
+                id="btnNova">
+                + Nova Lição
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="painel">
+
+        <div class="painel-topo">
+
+            <strong id="contador">
+                Carregando...
+            </strong>
 
             <input
                 type="text"
-                id="titulo"
-                placeholder="Ex.: Saudações em Inglês"
+                id="pesquisa"
+                class="pesquisa"
+                placeholder="Pesquisar lição..."
             >
 
         </div>
 
-        <div class="form-group full">
+        <div class="tabela-container">
 
-            <label for="descricao">
-                Descrição
-            </label>
+            <table>
 
-            <textarea
-                id="descricao"
-                placeholder="Descreva o conteúdo desta lição..."
-            ></textarea>
+                <thead>
+                    <tr>
+                        <th>Ordem</th>
+                        <th>Lição</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaLicoes">
+
+                    <tr>
+                        <td colspan="5" class="loading">
+                            Carregando lições...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
 
         </div>
 
-    </div>
+    </section>
 
-    <div class="form-actions">
+</main>
 
-        <button class="btn-success" onclick="salvarLicao()">
-            💾 Salvar Lição
-        </button>
+<!-- MODAL -->
 
-        <button class="btn-secondary" onclick="fecharFormulario()">
-            Cancelar
-        </button>
+<div class="modal-fundo" id="modalFundo">
+
+    <div class="modal">
+
+        <h2 id="tituloModal">
+            Nova Lição
+        </h2>
+
+        <form id="formLicao">
+
+            <div class="campo">
+
+                <label for="titulo">
+                    Título da lição
+                </label>
+
+                <input
+                    type="text"
+                    id="titulo"
+                    required
+                    maxlength="150"
+                    placeholder="Ex.: Cumprimentos básicos"
+                >
+
+            </div>
+
+            <div class="campo">
+
+                <label for="descricao">
+                    Descrição
+                </label>
+
+                <textarea
+                    id="descricao"
+                    maxlength="500"
+                    placeholder="Descrição da lição..."
+                ></textarea>
+
+            </div>
+
+            <div class="campo">
+
+                <label for="ordem">
+                    Ordem
+                </label>
+
+                <input
+                    type="number"
+                    id="ordem"
+                    min="1"
+                    step="1"
+                    value="1"
+                    required
+                >
+
+            </div>
+
+            <div class="modal-acoes">
+
+                <button
+                    type="button"
+                    class="btn-cancelar"
+                    id="btnCancelar">
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-salvar">
+                    Salvar Lição
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 
 </div>
 
-<div id="listaLicoes" class="lessons"></div>
-```
 
-</div>
+<script type="module">
 
-<script>
+/* =========================================================
+   FIREBASE
+   CONFIGURAÇÃO PADRÃO DO APRENDE+
+   ========================================================= */
 
-const STORAGE_KEY = "aprendeCursos";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-const params = new URLSearchParams(window.location.search);
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-const cursoId = params.get("cursoId");
-const unidadeId = params.get("unidadeId");
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    getDoc,
+    doc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-let cursos = [];
-let cursoAtual = null;
-let unidadeAtual = null;
+
+const firebaseConfig = {
+    apiKey: "AIzaSyC4AAbC8vCFAmlPlur12NmY7BKPjaSjumM",
+    authDomain: "meuappweb-65522.firebaseapp.com",
+    projectId: "meuappweb-65522",
+    storageBucket: "meuappweb-65522.firebasestorage.app",
+    messagingSenderId: "305368794616",
+    appId: "1:305368794616:web:3199c6836a986d896ac20d",
+    measurementId: "G-QN7GFD99N0"
+};
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =========================================================
+   ELEMENTOS
+   ========================================================= */
+
+const nomeAdmin =
+    document.getElementById("nomeAdmin");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+const listaLicoes =
+    document.getElementById("listaLicoes");
+
+const contador =
+    document.getElementById("contador");
+
+const pesquisa =
+    document.getElementById("pesquisa");
+
+const modalFundo =
+    document.getElementById("modalFundo");
+
+const formLicao =
+    document.getElementById("formLicao");
+
+const tituloModal =
+    document.getElementById("tituloModal");
+
+const titulo =
+    document.getElementById("titulo");
+
+const descricao =
+    document.getElementById("descricao");
+
+const ordem =
+    document.getElementById("ordem");
+
+const tituloUnidade =
+    document.getElementById("tituloUnidade");
+
+const descricaoUnidade =
+    document.getElementById("descricaoUnidade");
+
+const nomeCurso =
+    document.getElementById("nomeCurso");
+
+const erroUrl =
+    document.getElementById("erroUrl");
+
+const urlAtual =
+    document.getElementById("urlAtual");
+
+
+/* =========================================================
+   URL
+   ========================================================= */
+
+const parametros =
+    new URLSearchParams(window.location.search);
+
+const cursoId =
+    parametros.get("cursoId");
+
+const unidadeId =
+    parametros.get("unidadeId");
+
+
+console.log("================================");
+console.log("LICOES - URL:", window.location.href);
+console.log("LICOES - SEARCH:", window.location.search);
+console.log("LICOES - cursoId:", cursoId);
+console.log("LICOES - unidadeId:", unidadeId);
+console.log("================================");
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+let licoes = [];
+
 let licaoEditando = null;
 
+let cursoAtual = null;
 
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    carregarDados();
-
-});
+let unidadeAtual = null;
 
 
-/* =========================
-   CARREGAR DADOS
-========================= */
+/* =========================================================
+   MENSAGEM
+   ========================================================= */
 
-function carregarDados(){
+function mostrarMensagem(texto, tipo){
 
-    cursos = JSON.parse(
-        localStorage.getItem(STORAGE_KEY) || "[]"
-    );
+    mensagem.textContent = texto;
 
-    cursoAtual = cursos.find(
-        curso => curso.id === cursoId
-    );
+    mensagem.className =
+        "mensagem " + tipo;
 
-    if(!cursoAtual){
+    setTimeout(() => {
 
-        mostrarErro(
-            "Curso não encontrado."
-        );
+        mensagem.className =
+            "mensagem";
 
-        document.getElementById("listaLicoes").innerHTML = `
-            <div class="empty">
-                <div class="empty-icon">❌</div>
-                <h3>Curso não encontrado</h3>
-                <p>Volte para a página de cursos.</p>
-            </div>
-        `;
-
-        return;
-    }
-
-    unidadeAtual = (cursoAtual.unidades || []).find(
-        unidade => unidade.id === unidadeId
-    );
-
-    if(!unidadeAtual){
-
-        mostrarErro(
-            "Unidade não encontrada."
-        );
-
-        document.getElementById("listaLicoes").innerHTML = `
-            <div class="empty">
-                <div class="empty-icon">❌</div>
-                <h3>Unidade não encontrada</h3>
-                <p>Volte para o gerenciamento de unidades.</p>
-            </div>
-        `;
-
-        return;
-    }
-
-    if(!unidadeAtual.licoes){
-        unidadeAtual.licoes = [];
-    }
-
-    atualizarCabecalho();
-
-    renderizar();
-
+    }, 4000);
 }
 
 
-/* =========================
-   CABEÇALHO
-========================= */
-
-function atualizarCabecalho(){
-
-    document.getElementById("nomeCurso").textContent =
-        cursoAtual.nome;
-
-    document.getElementById("nomeUnidade").textContent =
-        unidadeAtual.nome;
-
-    document.getElementById("tituloUnidade").textContent =
-        "Lições — " + unidadeAtual.nome;
-
-    document.getElementById("descricaoUnidade").textContent =
-        unidadeAtual.descricao || "Sem descrição cadastrada.";
-
-}
-
-
-/* =========================
-   FORMULÁRIO
-========================= */
-
-function abrirFormulario(){
-
-    licaoEditando = null;
-
-    document.getElementById("tituloFormulario").textContent =
-        "Nova Lição";
-
-    document.getElementById("titulo").value = "";
-    document.getElementById("descricao").value = "";
-
-    document.getElementById("formBox").classList.add("active");
-
-    document.getElementById("titulo").focus();
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-
-function fecharFormulario(){
-
-    licaoEditando = null;
-
-    document.getElementById("formBox").classList.remove("active");
-
-    document.getElementById("titulo").value = "";
-    document.getElementById("descricao").value = "";
-
-}
-
-
-/* =========================
-   SALVAR LIÇÃO
-========================= */
-
-function salvarLicao(){
-
-    const titulo =
-        document.getElementById("titulo").value.trim();
-
-    const descricao =
-        document.getElementById("descricao").value.trim();
-
-    if(!titulo){
-
-        mostrarErro(
-            "Informe o título da lição."
-        );
-
-        document.getElementById("titulo").focus();
-
-        return;
-    }
-
-    if(!unidadeAtual.licoes){
-        unidadeAtual.licoes = [];
-    }
-
-    if(licaoEditando){
-
-        const licao = unidadeAtual.licoes.find(
-            item => item.id === licaoEditando
-        );
-
-        if(licao){
-
-            licao.titulo = titulo;
-            licao.descricao = descricao;
-
-        }
-
-        mostrarSucesso(
-            "Lição atualizada com sucesso!"
-        );
-
-    }else{
-
-        const novaLicao = {
-
-            id: gerarId(),
-
-            titulo: titulo,
-
-            descricao: descricao,
-
-            ativo: true,
-
-            ordem: unidadeAtual.licoes.length + 1,
-
-            perguntas: [],
-
-            criadoEm: new Date().toISOString()
-
-        };
-
-        unidadeAtual.licoes.push(
-            novaLicao
-        );
-
-        mostrarSucesso(
-            "Lição criada com sucesso!"
-        );
-
-    }
-
-    salvarDados();
-
-    fecharFormulario();
-
-    renderizar();
-
-}
-
-
-/* =========================
-   EDITAR
-========================= */
-
-function editarLicao(id){
-
-    const licao =
-        unidadeAtual.licoes.find(
-            item => item.id === id
-        );
-
-    if(!licao) return;
-
-    licaoEditando = id;
-
-    document.getElementById("tituloFormulario").textContent =
-        "Editar Lição";
-
-    document.getElementById("titulo").value =
-        licao.titulo || "";
-
-    document.getElementById("descricao").value =
-        licao.descricao || "";
-
-    document.getElementById("formBox").classList.add("active");
-
-    document.getElementById("titulo").focus();
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================
-   ATIVAR / DESATIVAR
-========================= */
-
-function alternarStatus(id){
-
-    const licao =
-        unidadeAtual.licoes.find(
-            item => item.id === id
-        );
-
-    if(!licao) return;
-
-    licao.ativo = !licao.ativo;
-
-    salvarDados();
-
-    renderizar();
-
-    mostrarSucesso(
-        licao.ativo
-            ? "Lição ativada."
-            : "Lição desativada."
-    );
-
-}
-
-
-/* =========================
-   EXCLUIR
-========================= */
-
-function excluirLicao(id){
-
-    const licao =
-        unidadeAtual.licoes.find(
-            item => item.id === id
-        );
-
-    if(!licao) return;
-
-    const confirmou = confirm(
-        `Deseja realmente excluir a lição "${licao.titulo}"?`
-    );
-
-    if(!confirmou) return;
-
-    unidadeAtual.licoes =
-        unidadeAtual.licoes.filter(
-            item => item.id !== id
-        );
-
-    reorganizarOrdem();
-
-    salvarDados();
-
-    renderizar();
-
-    mostrarSucesso(
-        "Lição excluída com sucesso!"
-    );
-
-}
-
-
-/* =========================
-   MOVER PARA CIMA
-========================= */
-
-function moverCima(id){
-
-    const lista = unidadeAtual.licoes;
-
-    const indice = lista.findIndex(
-        item => item.id === id
-    );
-
-    if(indice <= 0) return;
-
-    [
-        lista[indice - 1],
-        lista[indice]
-    ] = [
-        lista[indice],
-        lista[indice - 1]
-    ];
-
-    reorganizarOrdem();
-
-    salvarDados();
-
-    renderizar();
-
-}
-
-
-/* =========================
-   MOVER PARA BAIXO
-========================= */
-
-function moverBaixo(id){
-
-    const lista = unidadeAtual.licoes;
-
-    const indice = lista.findIndex(
-        item => item.id === id
-    );
-
-    if(
-        indice === -1 ||
-        indice >= lista.length - 1
-    ) return;
-
-    [
-        lista[indice],
-        lista[indice + 1]
-    ] = [
-        lista[indice + 1],
-        lista[indice]
-    ];
-
-    reorganizarOrdem();
-
-    salvarDados();
-
-    renderizar();
-
-}
-
-
-/* =========================
-   REORGANIZAR ORDEM
-========================= */
-
-function reorganizarOrdem(){
-
-    unidadeAtual.licoes.forEach(
-        (licao, indice) => {
-
-            licao.ordem = indice + 1;
-
-        }
-    );
-
-}
-
-
-/* =========================
-   RENDERIZAR
-========================= */
-
-function renderizar(){
-
-    const container =
-        document.getElementById("listaLicoes");
-
-    if(!unidadeAtual){
-
-        container.innerHTML = "";
-
-        return;
-    }
-
-    const termo =
-        document.getElementById("pesquisa")
-            .value
-            .toLowerCase()
-            .trim();
-
-    let lista =
-        [...(unidadeAtual.licoes || [])]
-        .sort(
-            (a,b) =>
-                (a.ordem || 0) -
-                (b.ordem || 0)
-        );
-
-    if(termo){
-
-        lista = lista.filter(
-            licao =>
-                (licao.titulo || "")
-                    .toLowerCase()
-                    .includes(termo)
-                ||
-                (licao.descricao || "")
-                    .toLowerCase()
-                    .includes(termo)
-        );
-
-    }
-
-    if(lista.length === 0){
-
-        container.innerHTML = `
-            <div class="empty">
-
-                <div class="empty-icon">📖</div>
-
-                <h3>
-                    ${
-                        termo
-                        ? "Nenhuma lição encontrada"
-                        : "Nenhuma lição cadastrada"
-                    }
-                </h3>
-
-                <p>
-                    ${
-                        termo
-                        ? "Tente pesquisar por outro termo."
-                        : "Clique em '+ Nova Lição' para começar."
-                    }
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML =
-        lista.map(
-            (licao, indice) =>
-                criarCardLicao(
-                    licao,
-                    indice,
-                    lista.length
-                )
-        ).join("");
-
-}
-
-
-/* =========================
-   CARD DA LIÇÃO
-========================= */
-
-function criarCardLicao(
-    licao,
-    indice,
-    total
-){
-
-    const perguntas =
-        licao.perguntas
-            ? licao.perguntas.length
-            : 0;
-
-    const status =
-        licao.ativo !== false;
-
-    return `
-
-        <div class="lesson-card">
-
-            <div class="lesson-number">
-                ${indice + 1}
-            </div>
-
-            <div class="lesson-info">
-
-                <h3>
-                    ${escapar(licao.titulo)}
-                </h3>
-
-                <p>
-                    ${
-                        escapar(
-                            licao.descricao ||
-                            "Sem descrição cadastrada."
-                        )
-                    }
-                </p>
-
-                <div class="badges">
-
-                    <span class="badge ${
-                        status
-                            ? "badge-active"
-                            : "badge-inactive"
-                    }">
-
-                        ${
-                            status
-                                ? "✓ Ativa"
-                                : "✕ Inativa"
-                        }
-
-                    </span>
-
-                    <span class="badge badge-question">
-
-                        ❓ ${perguntas}
-                        ${
-                            perguntas === 1
-                                ? "pergunta"
-                                : "perguntas"
-                        }
-
-                    </span>
-
-                </div>
-
-            </div>
-
-            <div class="lesson-actions">
-
-                <button
-                    class="btn-success"
-                    onclick="gerenciarPerguntas('${licao.id}')"
-                    title="Gerenciar perguntas"
-                >
-                    ❓ Perguntas
-                </button>
-
-                <button
-                    class="btn-secondary"
-                    onclick="editarLicao('${licao.id}')"
-                >
-                    ✏️ Editar
-                </button>
-
-                ${
-                    indice > 0
-                    ?
-                    `
-                    <button
-                        class="btn-secondary"
-                        onclick="moverCima('${licao.id}')"
-                        title="Mover para cima"
-                    >
-                        ↑
-                    </button>
-                    `
-                    :
-                    ""
-                }
-
-                ${
-                    indice < total - 1
-                    ?
-                    `
-                    <button
-                        class="btn-secondary"
-                        onclick="moverBaixo('${licao.id}')"
-                        title="Mover para baixo"
-                    >
-                        ↓
-                    </button>
-                    `
-                    :
-                    ""
-                }
-
-                <button
-                    class="${
-                        status
-                            ? "btn-warning"
-                            : "btn-success"
-                    }"
-                    onclick="alternarStatus('${licao.id}')"
-                >
-                    ${
-                        status
-                            ? "Desativar"
-                            : "Ativar"
-                    }
-                </button>
-
-                <button
-                    class="btn-danger"
-                    onclick="excluirLicao('${licao.id}')"
-                >
-                    🗑️
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================
-   GERENCIAR PERGUNTAS
-========================= */
-
-function gerenciarPerguntas(id){
-
-    window.location.href =
-        `perguntas.html?cursoId=${encodeURIComponent(cursoId)}&unidadeId=${encodeURIComponent(unidadeId)}&licaoId=${encodeURIComponent(id)}`;
-
-}
-
-
-/* =========================
-   VOLTAR
-========================= */
-
-function voltarUnidades(){
-
-    window.location.href =
-        `unidades.html?id=${encodeURIComponent(cursoId)}`;
-
-}
-
-
-function irAluno(){
-
-    window.location.href =
-        "index.html";
-
-}
-
-
-/* =========================
-   SALVAR NO LOCALSTORAGE
-========================= */
-
-function salvarDados(){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(cursos)
-    );
-
-}
-
-
-/* =========================
-   ID
-========================= */
-
-function gerarId(){
-
-    return Math.random()
-        .toString(36)
-        .substring(2,9);
-
-}
-
-
-/* =========================
+/* =========================================================
    ESCAPAR HTML
-========================= */
+   ========================================================= */
 
 function escapar(valor){
 
@@ -1218,59 +779,1031 @@ function escapar(valor){
     }
 
     return String(valor)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================================================
+   VALIDAR URL
+   ========================================================= */
+
+function validarUrl(){
+
+    if(!cursoId || !unidadeId){
+
+        erroUrl.style.display = "block";
+
+        urlAtual.textContent =
+            window.location.href;
+
+        document
+            .getElementById("btnNova")
+            .style.display = "none";
+
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =========================================================
+   CARREGAR CURSO
+   ========================================================= */
+
+async function carregarCurso(){
+
+    const referencia =
+        doc(db, "cursos", cursoId);
+
+    const resultado =
+        await getDoc(referencia);
+
+    if(!resultado.exists()){
+
+        throw new Error(
+            "Curso não encontrado."
+        );
+    }
+
+    cursoAtual = {
+
+        id: resultado.id,
+
+        ...resultado.data()
+
+    };
+
+    nomeCurso.textContent =
+        "Curso: " +
+        (cursoAtual.nome || "Sem nome");
+}
+
+
+/* =========================================================
+   CARREGAR UNIDADE
+   ========================================================= */
+
+async function carregarUnidade(){
+
+    const referencia =
+        doc(db, "unidades", unidadeId);
+
+    const resultado =
+        await getDoc(referencia);
+
+    if(!resultado.exists()){
+
+        throw new Error(
+            "Unidade não encontrada."
+        );
+    }
+
+    const dados =
+        resultado.data();
+
+    /*
+       Garantimos que a unidade pertence
+       ao curso recebido pela URL.
+    */
+
+    if(dados.cursoId !== cursoId){
+
+        throw new Error(
+            "Esta unidade não pertence ao curso informado."
+        );
+    }
+
+    unidadeAtual = {
+
+        id: resultado.id,
+
+        ...dados
+
+    };
+
+    tituloUnidade.textContent =
+        unidadeAtual.nome ||
+        "Lições";
+
+    descricaoUnidade.textContent =
+        unidadeAtual.descricao ||
+        "Gerencie as lições desta unidade.";
+}
+
+
+/* =========================================================
+   CARREGAR LIÇÕES
+   ========================================================= */
+
+async function carregarLicoes(){
+
+    listaLicoes.innerHTML = `
+        <tr>
+            <td colspan="5" class="loading">
+                Carregando lições...
+            </td>
+        </tr>
+    `;
+
+    const snapshot =
+        await getDocs(
+            collection(db, "licoes")
+        );
+
+    licoes = [];
+
+    snapshot.forEach((documento) => {
+
+        const dados =
+            documento.data();
+
+        /*
+           IMPORTANTE:
+           A lição precisa pertencer
+           ao curso E à unidade.
+        */
+
+        if(
+            dados.cursoId === cursoId &&
+            dados.unidadeId === unidadeId
+        ){
+
+            licoes.push({
+
+                id: documento.id,
+
+                ...dados
+
+            });
+
+        }
+
+    });
+
+
+    licoes.sort((a,b) => {
+
+        const ordemA =
+            Number(a.ordem || 0);
+
+        const ordemB =
+            Number(b.ordem || 0);
+
+        return ordemA - ordemB;
+
+    });
+
+
+    renderizar();
 
 }
 
 
-/* =========================
-   MENSAGENS
-========================= */
+/* =========================================================
+   RENDERIZAR
+   ========================================================= */
 
-function mostrarSucesso(texto){
+function renderizar(){
 
-    const mensagem =
-        document.getElementById("mensagem");
+    const termo =
+        pesquisa.value
+            .trim()
+            .toLowerCase();
 
-    mensagem.textContent = texto;
+    const filtradas =
+        licoes.filter((licao) => {
 
-    mensagem.className =
-        "message success";
+            const tituloLicao =
+                String(licao.titulo || "")
+                    .toLowerCase();
 
-    setTimeout(() => {
+            const descricaoLicao =
+                String(licao.descricao || "")
+                    .toLowerCase();
 
-        mensagem.className =
-            "message";
+            return (
+                tituloLicao.includes(termo) ||
+                descricaoLicao.includes(termo)
+            );
 
-    },3000);
+        });
+
+
+    contador.textContent =
+        filtradas.length +
+        (
+            filtradas.length === 1
+                ? " lição"
+                : " lições"
+        );
+
+
+    if(filtradas.length === 0){
+
+        listaLicoes.innerHTML = `
+            <tr>
+                <td colspan="5" class="vazio">
+                    Nenhuma lição encontrada.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    listaLicoes.innerHTML =
+        filtradas.map((licao) => {
+
+            const ativo =
+                licao.ativo !== false;
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapar(licao.ordem || 0)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${escapar(licao.titulo)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapar(
+                            licao.descricao ||
+                            "Sem descrição"
+                        )}
+                    </td>
+
+                    <td>
+
+                        <span class="badge ${
+                            ativo
+                                ? "ativo"
+                                : "inativo"
+                        }">
+
+                            ${
+                                ativo
+                                    ? "Ativa"
+                                    : "Inativa"
+                            }
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="acoes-linha">
+
+                            <button
+                                class="btn-mini btn-perguntas"
+                                onclick="abrirPerguntas('${licao.id}')">
+
+                                Perguntas
+
+                            </button>
+
+                            <button
+                                class="btn-mini btn-editar"
+                                onclick="editarLicao('${licao.id}')">
+
+                                Editar
+
+                            </button>
+
+                            <button
+                                class="btn-mini btn-status"
+                                onclick="alternarStatus('${licao.id}')">
+
+                                ${
+                                    ativo
+                                        ? "Desativar"
+                                        : "Ativar"
+                                }
+
+                            </button>
+
+                            <button
+                                class="btn-mini btn-subir"
+                                onclick="moverLicao('${licao.id}', -1)">
+
+                                ↑
+
+                            </button>
+
+                            <button
+                                class="btn-mini btn-descer"
+                                onclick="moverLicao('${licao.id}', 1)">
+
+                                ↓
+
+                            </button>
+
+                            <button
+                                class="btn-mini btn-excluir"
+                                onclick="excluirLicao('${licao.id}')">
+
+                                Excluir
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
 
 }
 
 
-function mostrarErro(texto){
+/* =========================================================
+   ABRIR MODAL
+   ========================================================= */
 
-    const mensagem =
-        document.getElementById("mensagem");
+function abrirModal(){
 
-    mensagem.textContent = texto;
-
-    mensagem.className =
-        "message error";
-
-    setTimeout(() => {
-
-        mensagem.className =
-            "message";
-
-    },4000);
+    modalFundo.style.display =
+        "flex";
 
 }
+
+
+/* =========================================================
+   FECHAR MODAL
+   ========================================================= */
+
+function fecharModal(){
+
+    modalFundo.style.display =
+        "none";
+
+    formLicao.reset();
+
+    licaoEditando = null;
+
+    tituloModal.textContent =
+        "Nova Lição";
+
+    ordem.value =
+        licoes.length + 1;
+
+}
+
+
+/* =========================================================
+   NOVA LIÇÃO
+   ========================================================= */
+
+document
+    .getElementById("btnNova")
+    .addEventListener("click", () => {
+
+        licaoEditando = null;
+
+        tituloModal.textContent =
+            "Nova Lição";
+
+        formLicao.reset();
+
+        ordem.value =
+            licoes.length + 1;
+
+        abrirModal();
+
+    });
+
+
+/* =========================================================
+   CANCELAR
+   ========================================================= */
+
+document
+    .getElementById("btnCancelar")
+    .addEventListener("click", fecharModal);
+
+
+/* =========================================================
+   SALVAR LIÇÃO
+   ========================================================= */
+
+formLicao.addEventListener(
+    "submit",
+    async (evento) => {
+
+        evento.preventDefault();
+
+        const tituloValor =
+            titulo.value.trim();
+
+        const descricaoValor =
+            descricao.value.trim();
+
+        const ordemValor =
+            Number(ordem.value);
+
+
+        if(!tituloValor){
+
+            mostrarMensagem(
+                "Informe o título da lição.",
+                "erro"
+            );
+
+            return;
+        }
+
+
+        if(!ordemValor || ordemValor < 1){
+
+            mostrarMensagem(
+                "Informe uma ordem válida.",
+                "erro"
+            );
+
+            return;
+        }
+
+
+        try{
+
+            if(licaoEditando){
+
+                const referencia =
+                    doc(
+                        db,
+                        "licoes",
+                        licaoEditando
+                    );
+
+                await updateDoc(
+                    referencia,
+                    {
+
+                        titulo:
+                            tituloValor,
+
+                        descricao:
+                            descricaoValor,
+
+                        ordem:
+                            ordemValor,
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+                );
+
+
+                mostrarMensagem(
+                    "Lição atualizada com sucesso.",
+                    "sucesso"
+                );
+
+            }else{
+
+                await addDoc(
+                    collection(db, "licoes"),
+                    {
+
+                        cursoId:
+                            cursoId,
+
+                        unidadeId:
+                            unidadeId,
+
+                        cursoNome:
+                            cursoAtual?.nome ||
+                            "",
+
+                        unidadeNome:
+                            unidadeAtual?.nome ||
+                            "",
+
+                        titulo:
+                            tituloValor,
+
+                        descricao:
+                            descricaoValor,
+
+                        ativo:
+                            true,
+
+                        ordem:
+                            ordemValor,
+
+                        criadoEm:
+                            serverTimestamp(),
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+                );
+
+
+                mostrarMensagem(
+                    "Lição criada com sucesso.",
+                    "sucesso"
+                );
+
+            }
+
+
+            fecharModal();
+
+            await carregarLicoes();
+
+        }catch(erro){
+
+            console.error(
+                "Erro ao salvar lição:",
+                erro
+            );
+
+            mostrarMensagem(
+                "Erro ao salvar a lição: " +
+                erro.message,
+                "erro"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   EDITAR LIÇÃO
+   ========================================================= */
+
+window.editarLicao =
+    function(id){
+
+        const licao =
+            licoes.find(
+                item => item.id === id
+            );
+
+        if(!licao){
+            return;
+        }
+
+        licaoEditando =
+            id;
+
+        tituloModal.textContent =
+            "Editar Lição";
+
+        titulo.value =
+            licao.titulo || "";
+
+        descricao.value =
+            licao.descricao || "";
+
+        ordem.value =
+            licao.ordem || 1;
+
+        abrirModal();
+
+    };
+
+
+/* =========================================================
+   ATIVAR / DESATIVAR
+   ========================================================= */
+
+window.alternarStatus =
+    async function(id){
+
+        const licao =
+            licoes.find(
+                item => item.id === id
+            );
+
+        if(!licao){
+            return;
+        }
+
+        const novoStatus =
+            licao.ativo === false;
+
+        try{
+
+            await updateDoc(
+                doc(db, "licoes", id),
+                {
+
+                    ativo:
+                        novoStatus,
+
+                    atualizadoEm:
+                        serverTimestamp()
+
+                }
+            );
+
+            mostrarMensagem(
+                novoStatus
+                    ? "Lição ativada."
+                    : "Lição desativada.",
+                "sucesso"
+            );
+
+            await carregarLicoes();
+
+        }catch(erro){
+
+            console.error(erro);
+
+            mostrarMensagem(
+                "Erro ao alterar o status.",
+                "erro"
+            );
+
+        }
+
+    };
+
+
+/* =========================================================
+   EXCLUIR
+   ========================================================= */
+
+window.excluirLicao =
+    async function(id){
+
+        const licao =
+            licoes.find(
+                item => item.id === id
+            );
+
+        if(!licao){
+            return;
+        }
+
+
+        const confirmar =
+            confirm(
+                'Deseja realmente excluir a lição "' +
+                (licao.titulo || "") +
+                '"?'
+            );
+
+
+        if(!confirmar){
+            return;
+        }
+
+
+        try{
+
+            await deleteDoc(
+                doc(db, "licoes", id)
+            );
+
+
+            mostrarMensagem(
+                "Lição excluída com sucesso.",
+                "sucesso"
+            );
+
+
+            await carregarLicoes();
+
+        }catch(erro){
+
+            console.error(erro);
+
+            mostrarMensagem(
+                "Erro ao excluir a lição.",
+                "erro"
+            );
+
+        }
+
+    };
+
+
+/* =========================================================
+   MOVER LIÇÃO
+   ========================================================= */
+
+window.moverLicao =
+    async function(id, direcao){
+
+        const indice =
+            licoes.findIndex(
+                item => item.id === id
+            );
+
+        if(indice === -1){
+            return;
+        }
+
+
+        const novoIndice =
+            indice + direcao;
+
+
+        if(
+            novoIndice < 0 ||
+            novoIndice >= licoes.length
+        ){
+
+            return;
+
+        }
+
+
+        const atual =
+            licoes[indice];
+
+        const outra =
+            licoes[novoIndice];
+
+
+        const ordemAtual =
+            Number(atual.ordem || indice + 1);
+
+        const ordemOutra =
+            Number(outra.ordem || novoIndice + 1);
+
+
+        try{
+
+            await updateDoc(
+                doc(db, "licoes", atual.id),
+                {
+
+                    ordem:
+                        ordemOutra,
+
+                    atualizadoEm:
+                        serverTimestamp()
+
+                }
+            );
+
+
+            await updateDoc(
+                doc(db, "licoes", outra.id),
+                {
+
+                    ordem:
+                        ordemAtual,
+
+                    atualizadoEm:
+                        serverTimestamp()
+
+                }
+            );
+
+
+            await carregarLicoes();
+
+        }catch(erro){
+
+            console.error(erro);
+
+            mostrarMensagem(
+                "Erro ao alterar a ordem.",
+                "erro"
+            );
+
+        }
+
+    };
+
+
+/* =========================================================
+   ABRIR PERGUNTAS
+   ========================================================= */
+
+window.abrirPerguntas =
+    function(licaoId){
+
+        /*
+           Mantemos os três IDs na URL.
+           Isso evita qualquer ambiguidade
+           na próxima página.
+        */
+
+        const url =
+            "./perguntas.html" +
+            "?cursoId=" +
+            encodeURIComponent(cursoId) +
+            "&unidadeId=" +
+            encodeURIComponent(unidadeId) +
+            "&licaoId=" +
+            encodeURIComponent(licaoId);
+
+
+        console.log(
+            "Abrindo perguntas:",
+            url
+        );
+
+
+        window.location.href =
+            url;
+
+    };
+
+
+/* =========================================================
+   VOLTAR PARA UNIDADES
+   ========================================================= */
+
+document
+    .getElementById("btnVoltar")
+    .addEventListener("click", () => {
+
+        window.location.href =
+            "./unidades.html?id=" +
+            encodeURIComponent(cursoId);
+
+    });
+
+
+/* =========================================================
+   PESQUISA
+   ========================================================= */
+
+pesquisa.addEventListener(
+    "input",
+    renderizar
+);
+
+
+/* =========================================================
+   SAIR
+   ========================================================= */
+
+document
+    .getElementById("btnSair")
+    .addEventListener(
+        "click",
+        async () => {
+
+            try{
+
+                await signOut(auth);
+
+                window.location.href =
+                    "./login.html";
+
+            }catch(erro){
+
+                console.error(erro);
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   AUTENTICAÇÃO
+   ========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async (usuario) => {
+
+        console.log(
+            "LICOES - authStateChanged:",
+            usuario?.uid
+        );
+
+
+        if(!usuario){
+
+            window.location.href =
+                "./login.html";
+
+            return;
+        }
+
+
+        try{
+
+            const referencia =
+                doc(
+                    db,
+                    "users",
+                    usuario.uid
+                );
+
+            const resultado =
+                await getDoc(referencia);
+
+
+            if(!resultado.exists()){
+
+                await signOut(auth);
+
+                window.location.href =
+                    "./login.html";
+
+                return;
+            }
+
+
+            const dados =
+                resultado.data();
+
+
+            if(
+                dados.tipo !== "admin" ||
+                dados.ativo === false
+            ){
+
+                await signOut(auth);
+
+                window.location.href =
+                    "./login.html";
+
+                return;
+            }
+
+
+            nomeAdmin.textContent =
+                dados.nome ||
+                usuario.email ||
+                "Administrador";
+
+
+            /*
+               Só carregamos o conteúdo
+               depois de confirmar a URL.
+            */
+
+            if(!validarUrl()){
+
+                return;
+
+            }
+
+
+            try{
+
+                await carregarCurso();
+
+                await carregarUnidade();
+
+                await carregarLicoes();
+
+            }catch(erro){
+
+                console.error(
+                    "Erro ao carregar contexto:",
+                    erro
+                );
+
+                mostrarMensagem(
+                    erro.message,
+                    "erro"
+                );
+
+            }
+
+        }catch(erro){
+
+            console.error(
+                "Erro na autenticação:",
+                erro
+            );
+
+            mostrarMensagem(
+                "Erro ao verificar acesso.",
+                "erro"
+            );
+
+        }
+
+    }
+);
 
 </script>
 
 </body>
 </html>
+
