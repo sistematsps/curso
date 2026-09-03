@@ -496,6 +496,220 @@ button:hover{
 </div>
 
 <script>
+<script type="module">
+
+
+/* =========================================================
+   FIREBASE APP
+========================================================= */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+/* =========================================================
+   FIREBASE AUTH
+========================================================= */
+
+import {
+    initializeAuth,
+    indexedDBLocalPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence,
+    setPersistence,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+/* =========================================================
+   FIREBASE FIRESTORE
+========================================================= */
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    getDoc,
+    doc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =========================================================
+   CONFIGURAÇÃO OFICIAL DO PROJETO
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyC4AAbC8vCFAmlPlur12NmY7BKPjaSjumM",
+
+    authDomain:
+        "meuappweb-65522.firebaseapp.com",
+
+    projectId:
+        "meuappweb-65522",
+
+    storageBucket:
+        "meuappweb-65522.firebasestorage.app",
+
+    messagingSenderId:
+        "305368794616",
+
+    appId:
+        "1:305368794616:web:3199c6836a986d896ac20d",
+
+    measurementId:
+        "G-QN7GFD99N0"
+
+};
+
+
+/* =========================================================
+   INICIALIZAR APP
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+/* =========================================================
+   INICIALIZAR AUTH COM PERSISTÊNCIA
+========================================================= */
+
+let auth;
+
+try {
+
+    auth = initializeAuth(app, {
+
+        persistence: [
+            indexedDBLocalPersistence,
+            browserLocalPersistence,
+            browserSessionPersistence
+        ]
+
+    });
+
+} catch (erro) {
+
+    /*
+     * Caso o Auth já tenha sido inicializado
+     * neste contexto, utiliza a instância existente.
+     */
+
+    console.warn(
+        "Auth já inicializado ou persistência indisponível:",
+        erro
+    );
+
+    /*
+     * Importante:
+     * se ocorrer esse caso, recarregar a página
+     * normalmente resolve o contexto.
+     */
+
+}
+
+
+/* =========================================================
+   FIRESTORE
+========================================================= */
+
+const db =
+    getFirestore(app);
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const carregando =
+    document.getElementById("carregando");
+
+const painelAdmin =
+    document.getElementById("painelAdmin");
+
+const erroAcesso =
+    document.getElementById("erroAcesso");
+
+const textoErroAcesso =
+    document.getElementById("textoErroAcesso");
+
+const detalhesErro =
+    document.getElementById("detalhesErro");
+
+const nomeAdmin =
+    document.getElementById("nomeAdmin");
+
+const adminNomeCard =
+    document.getElementById("adminNomeCard");
+
+const listaCursos =
+    document.getElementById("listaCursos");
+
+const pesquisa =
+    document.getElementById("pesquisa");
+
+const totalCursos =
+    document.getElementById("totalCursos");
+
+const cursosAtivos =
+    document.getElementById("cursosAtivos");
+
+const cursosInativos =
+    document.getElementById("cursosInativos");
+
+const modalCurso =
+    document.getElementById("modalCurso");
+
+const tituloModal =
+    document.getElementById("tituloModal");
+
+const formCurso =
+    document.getElementById("formCurso");
+
+const nomeCurso =
+    document.getElementById("nomeCurso");
+
+const descricaoCurso =
+    document.getElementById("descricaoCurso");
+
+const iconeCurso =
+    document.getElementById("iconeCurso");
+
+const ordemCurso =
+    document.getElementById("ordemCurso");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+const btnSair =
+    document.getElementById("btnSair");
+
+const btnIrLogin =
+    document.getElementById("btnIrLogin");
+
+const btnRecarregar =
+    document.getElementById("btnRecarregar");
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+let cursos = [];
+
+let cursoEditando = null;
+
+let acessoAutorizado = false;
+
+let verificacaoFinalizada = false;
+
 
 const STORAGE_KEY = "aprendeCursos";
 
