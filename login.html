@@ -13,7 +13,6 @@
 
   <title>Login - Aprende+</title>
 
-
   <style>
 
     * {
@@ -89,8 +88,7 @@
       width: 100%;
       padding: 14px;
 
-      border:
-        1px solid #d1d5db;
+      border: 1px solid #d1d5db;
 
       border-radius: 10px;
 
@@ -166,9 +164,7 @@
 
 </head>
 
-
 <body>
-
 
   <div class="login">
 
@@ -184,15 +180,12 @@
       Entre para continuar
     </p>
 
-
     <div
       id="mensagem"
       class="mensagem"
     ></div>
 
-
     <form id="formLogin">
-
 
       <div class="campo">
 
@@ -210,7 +203,6 @@
 
       </div>
 
-
       <div class="campo">
 
         <label for="senha">
@@ -227,7 +219,6 @@
 
       </div>
 
-
       <button
         type="submit"
         id="btnLogin"
@@ -235,15 +226,12 @@
         Entrar
       </button>
 
-
     </form>
-
 
   </div>
 
 
   <script type="module">
-
 
     import {
       initializeApp
@@ -251,7 +239,11 @@
 
 
     import {
-      getAuth,
+      initializeAuth,
+      indexedDBLocalPersistence,
+      browserLocalPersistence,
+      browserSessionPersistence,
+      setPersistence,
       signInWithEmailAndPassword,
       signOut
     } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -269,23 +261,59 @@
     // =====================================================
 
     const firebaseConfig = {
-  apiKey: "AIzaSyC4AAbC8vCFAmlPlur12Nm7YBKPjaSjumM",
-  authDomain: "meuappweb-65522.firebaseapp.com",
-  projectId: "meuappweb-65522",
-  storageBucket: "meuappweb-65522.firebasestorage.app",
-  messagingSenderId: "305368794616",
-  appId: "1:305368794616:web:3199c6836a986d896ac20d",
-  measurementId: "G-QN7GFD99N0"
-};
+
+      apiKey:
+        "AIzaSyC4AAbC8vCFAmlPlur12NmY7BKPjaSjumM",
+
+      authDomain:
+        "meuappweb-65522.firebaseapp.com",
+
+      projectId:
+        "meuappweb-65522",
+
+      storageBucket:
+        "meuappweb-65522.firebasestorage.app",
+
+      messagingSenderId:
+        "305368794616",
+
+      appId:
+        "1:305368277555:web:3199c6836a986d896ac20d",
+
+      measurementId:
+        "G-QN7GFD99N0"
+
+    };
+
 
     const app =
       initializeApp(firebaseConfig);
 
+
+    // =====================================================
+    // AUTH COM PERSISTÊNCIA
+    // =====================================================
+
     const auth =
-      getAuth(app);
+      initializeAuth(
+        app,
+        {
+          persistence: [
+            indexedDBLocalPersistence,
+            browserLocalPersistence,
+            browserSessionPersistence
+          ]
+        }
+      );
+
 
     const db =
       getFirestore(app);
+
+
+    console.log(
+      "LOGIN - Firebase inicializado."
+    );
 
 
     // =====================================================
@@ -363,10 +391,29 @@
 
         try {
 
+          console.log(
+            "LOGIN - configurando persistência..."
+          );
 
-          // ------------------------------------------------
-          // FIREBASE AUTH
-          // ------------------------------------------------
+
+          // =================================================
+          // GARANTIR PERSISTÊNCIA LOCAL
+          // =================================================
+
+          await setPersistence(
+            auth,
+            browserLocalPersistence
+          );
+
+
+          console.log(
+            "LOGIN - persistência configurada."
+          );
+
+
+          // =================================================
+          // AUTENTICAÇÃO
+          // =================================================
 
           const credencial =
             await signInWithEmailAndPassword(
@@ -381,14 +428,22 @@
 
 
           console.log(
-            "Usuário autenticado:",
+            "LOGIN - usuário autenticado:",
             usuario.uid
           );
 
 
-          // ------------------------------------------------
+          console.log(
+            "LOGIN - currentUser:",
+            auth.currentUser
+              ? auth.currentUser.uid
+              : null
+          );
+
+
+          // =================================================
           // BUSCAR users/{uid}
-          // ------------------------------------------------
+          // =================================================
 
           const referencia =
             doc(
@@ -405,7 +460,6 @@
 
 
           if (!documento.exists()) {
-
 
             await signOut(auth);
 
@@ -432,19 +486,18 @@
 
 
           console.log(
-            "Dados do usuário:",
+            "LOGIN - dados do usuário:",
             dados
           );
 
 
-          // ------------------------------------------------
+          // =================================================
           // STATUS
-          // ------------------------------------------------
+          // =================================================
 
           if (
             dados.ativo === false
           ) {
-
 
             await signOut(auth);
 
@@ -466,9 +519,9 @@
           }
 
 
-          // ------------------------------------------------
+          // =================================================
           // TIPO
-          // ------------------------------------------------
+          // =================================================
 
           const tipo =
             String(
@@ -482,7 +535,6 @@
             tipo !== "admin" &&
             tipo !== "aluno"
           ) {
-
 
             await signOut(auth);
 
@@ -504,9 +556,9 @@
           }
 
 
-          // ------------------------------------------------
-          // CACHE
-          // ------------------------------------------------
+          // =================================================
+          // SALVAR PERFIL LOCAL
+          // =================================================
 
           localStorage.setItem(
 
@@ -538,14 +590,37 @@
           );
 
 
-          // ------------------------------------------------
+          console.log(
+            "LOGIN - perfil salvo no localStorage."
+          );
+
+
+          // =================================================
+          // GARANTIR QUE A SESSÃO ESTÁ PRESENTE
+          // =================================================
+
+          if (!auth.currentUser) {
+
+            throw new Error(
+              "O Firebase autenticou o usuário, mas a sessão não está disponível."
+            );
+
+          }
+
+
+          console.log(
+            "LOGIN - sessão confirmada:",
+            auth.currentUser.uid
+          );
+
+
+          // =================================================
           // ADMIN
-          // ------------------------------------------------
+          // =================================================
 
           if (
             tipo === "admin"
           ) {
-
 
             mostrarMensagem(
               "Administrador identificado. Abrindo painel...",
@@ -556,12 +631,11 @@
             setTimeout(
               () => {
 
-                window.location.replace(
-                  "admin.html"
-                );
+                window.location.href =
+                  "./admin.html";
 
               },
-              400
+              500
             );
 
 
@@ -570,9 +644,9 @@
           }
 
 
-          // ------------------------------------------------
+          // =================================================
           // ALUNO
-          // ------------------------------------------------
+          // =================================================
 
           mostrarMensagem(
             "Aluno identificado. Abrindo plataforma...",
@@ -583,20 +657,18 @@
           setTimeout(
             () => {
 
-              window.location.replace(
-                "index.html"
-              );
+              window.location.href =
+                "./index.html";
 
             },
-            400
+            500
           );
 
 
         } catch (erro) {
 
-
           console.error(
-            "Erro no login:",
+            "LOGIN - erro:",
             erro
           );
 
@@ -670,7 +742,6 @@
 
       }
     );
-
 
   </script>
 
