@@ -3,11 +3,8 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Aprende+ | Administração</title>
 
@@ -390,7 +387,6 @@ th{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -407,9 +403,7 @@ th{
             Verificando acesso...
         </span>
 
-        <button
-            class="btn-sair"
-            id="btnSair">
+        <button class="btn-sair" id="btnSair">
             Sair
         </button>
 
@@ -420,19 +414,15 @@ th{
 
 <div class="container">
 
-
     <!-- CARREGANDO -->
 
-    <div
-        class="loading"
-        id="carregando">
+    <div class="loading" id="carregando">
 
         <h2>
             🔐 Verificando acesso...
         </h2>
 
-        <p
-            style="margin-top:10px;color:#666;">
+        <p style="margin-top:10px;color:#666;">
             Aguarde enquanto restauramos sua sessão.
         </p>
 
@@ -451,22 +441,15 @@ th{
             Não foi possível restaurar sua sessão administrativa.
         </p>
 
-        <button
-            class="btn-login"
-            id="btnIrLogin">
+        <button class="btn-login" id="btnIrLogin">
             Ir para o login
         </button>
 
-        <button
-            class="btn-recarregar"
-            id="btnRecarregar">
+        <button class="btn-recarregar" id="btnRecarregar">
             🔄 Tentar novamente
         </button>
 
-        <div
-            class="detalhes-erro"
-            id="detalhesErro">
-        </div>
+        <div class="detalhes-erro" id="detalhesErro"></div>
 
     </div>
 
@@ -475,16 +458,13 @@ th{
 
     <main id="painelAdmin">
 
-
         <div class="topo">
 
             <h1>
                 ⚙️ Painel Administrativo
             </h1>
 
-            <button
-                class="btn-novo"
-                id="btnNovoCurso">
+            <button class="btn-novo" id="btnNovoCurso">
                 + Novo Curso
             </button>
 
@@ -551,10 +531,7 @@ th{
         </div>
 
 
-        <div
-            id="mensagem"
-            class="mensagem">
-        </div>
+        <div id="mensagem" class="mensagem"></div>
 
 
         <!-- PESQUISA -->
@@ -564,7 +541,8 @@ th{
             <input
                 type="text"
                 id="pesquisa"
-                placeholder="🔎 Pesquisar curso...">
+                placeholder="🔎 Pesquisar curso..."
+            >
 
         </div>
 
@@ -603,13 +581,11 @@ th{
 
                 </thead>
 
-                <tbody id="listaCursos">
-                </tbody>
+                <tbody id="listaCursos"></tbody>
 
             </table>
 
         </div>
-
 
     </main>
 
@@ -618,12 +594,9 @@ th{
 
 <!-- MODAL -->
 
-<div
-    class="modal"
-    id="modalCurso">
+<div class="modal" id="modalCurso">
 
     <div class="modal-conteudo">
-
 
         <div class="modal-topo">
 
@@ -643,7 +616,6 @@ th{
         <form id="formCurso">
 
             <div class="form-grid">
-
 
                 <div class="campo full">
 
@@ -668,8 +640,7 @@ th{
 
                     <textarea
                         id="descricaoCurso"
-                        placeholder="Descrição do curso">
-                    </textarea>
+                        placeholder="Descrição do curso"></textarea>
 
                 </div>
 
@@ -702,7 +673,6 @@ th{
                         min="0">
 
                 </div>
-
 
             </div>
 
@@ -748,17 +718,15 @@ import {
 ========================================================= */
 
 import {
-    initializeAuth,
-    indexedDBLocalPersistence,
-    browserLocalPersistence,
-    browserSessionPersistence,
+    getAuth,
     setPersistence,
+    browserLocalPersistence,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
 /* =========================================================
-   FIREBASE FIRESTORE
+   FIRESTORE
 ========================================================= */
 
 import {
@@ -775,7 +743,7 @@ import {
 
 
 /* =========================================================
-   CONFIGURAÇÃO OFICIAL DO PROJETO
+   CONFIGURAÇÃO OFICIAL
 ========================================================= */
 
 const firebaseConfig = {
@@ -800,53 +768,45 @@ const firebaseConfig = {
 
     measurementId:
         "G-QN7GFD99N0"
-
 };
 
 
 /* =========================================================
-   INICIALIZAR APP
+   INICIALIZAR FIREBASE
 ========================================================= */
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 
 /* =========================================================
-   INICIALIZAR AUTH COM PERSISTÊNCIA
+   AUTH
 ========================================================= */
 
-let auth;
+const auth = getAuth(app);
+
+
+/*
+    Garantir que a sessão seja mantida
+    entre login.html e admin.html.
+*/
 
 try {
 
-    auth = initializeAuth(app, {
+    await setPersistence(
+        auth,
+        browserLocalPersistence
+    );
 
-        persistence: [
-            indexedDBLocalPersistence,
-            browserLocalPersistence,
-            browserSessionPersistence
-        ]
-
-    });
+    console.log(
+        "ADMIN - persistência local configurada."
+    );
 
 } catch (erro) {
 
-    /*
-     * Caso o Auth já tenha sido inicializado
-     * neste contexto, utiliza a instância existente.
-     */
-
     console.warn(
-        "Auth já inicializado ou persistência indisponível:",
+        "ADMIN - não foi possível configurar persistência:",
         erro
     );
-
-    /*
-     * Importante:
-     * se ocorrer esse caso, recarregar a página
-     * normalmente resolve o contexto.
-     */
 
 }
 
@@ -855,8 +815,12 @@ try {
    FIRESTORE
 ========================================================= */
 
-const db =
-    getFirestore(app);
+const db = getFirestore(app);
+
+console.log(
+    "ADMIN - Firebase inicializado:",
+    firebaseConfig.projectId
+);
 
 
 /* =========================================================
@@ -943,8 +907,6 @@ let cursoEditando = null;
 
 let acessoAutorizado = false;
 
-let verificacaoFinalizada = false;
-
 
 /* =========================================================
    MENSAGEM
@@ -955,8 +917,7 @@ function mostrarMensagem(
     tipo = "sucesso"
 ){
 
-    mensagem.textContent =
-        texto;
+    mensagem.textContent = texto;
 
     mensagem.className =
         "mensagem " + tipo;
@@ -966,8 +927,7 @@ function mostrarMensagem(
         mensagem.className =
             "mensagem";
 
-        mensagem.textContent =
-            "";
+        mensagem.textContent = "";
 
     }, 4000);
 
@@ -990,31 +950,11 @@ function escapar(valor){
     }
 
     return String(valor)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
@@ -1029,8 +969,7 @@ function mostrarErroAcesso(
     detalhe = ""
 ){
 
-    acessoAutorizado =
-        false;
+    acessoAutorizado = false;
 
     painelAdmin.style.display =
         "none";
@@ -1047,27 +986,22 @@ function mostrarErroAcesso(
     detalhesErro.textContent =
         detalhe;
 
-    if(titulo){
+    const tituloElemento =
+        erroAcesso.querySelector("h2");
 
-        const tituloElemento =
-            erroAcesso.querySelector("h2");
-
-        tituloElemento.textContent =
-            titulo;
-
-    }
+    tituloElemento.textContent =
+        titulo;
 
 }
 
 
 /* =========================================================
-   ABRIR NOVO CURSO
+   NOVO CURSO
 ========================================================= */
 
 function novoCurso(){
 
-    cursoEditando =
-        null;
+    cursoEditando = null;
 
     tituloModal.textContent =
         "Novo Curso";
@@ -1095,8 +1029,7 @@ function fecharModal(){
     modalCurso.style.display =
         "none";
 
-    cursoEditando =
-        null;
+    cursoEditando = null;
 
     formCurso.reset();
 
@@ -1149,21 +1082,17 @@ async function carregarCursos(){
 
         const snapshot =
             await getDocs(
-                collection(
-                    db,
-                    "cursos"
-                )
+                collection(db,"cursos")
             );
 
         cursos = [];
 
         snapshot.forEach(
-            (documento) => {
+            documento => {
 
                 cursos.push({
 
-                    id:
-                        documento.id,
+                    id: documento.id,
 
                     ...documento.data()
 
@@ -1177,14 +1106,10 @@ async function carregarCursos(){
             (a,b) => {
 
                 const ordemA =
-                    Number(
-                        a.ordem || 0
-                    );
+                    Number(a.ordem || 0);
 
                 const ordemB =
-                    Number(
-                        b.ordem || 0
-                    );
+                    Number(b.ordem || 0);
 
                 return ordemA - ordemB;
 
@@ -1233,7 +1158,6 @@ function atualizarEstatisticas(){
                 curso.ativo === false
         ).length;
 
-
     totalCursos.textContent =
         cursos.length;
 
@@ -1247,7 +1171,7 @@ function atualizarEstatisticas(){
 
 
 /* =========================================================
-   RENDERIZAR
+   RENDERIZAR CURSOS
 ========================================================= */
 
 function renderizarCursos(){
@@ -1259,37 +1183,24 @@ function renderizarCursos(){
 
 
     const filtrados =
-        cursos.filter(
-            curso => {
+        cursos.filter(curso => {
 
-                const nome =
-                    String(
-                        curso.nome || ""
-                    )
-                    .toLowerCase();
+            const nome =
+                String(
+                    curso.nome || ""
+                ).toLowerCase();
 
-                const descricao =
-                    String(
-                        curso.descricao || ""
-                    )
-                    .toLowerCase();
+            const descricao =
+                String(
+                    curso.descricao || ""
+                ).toLowerCase();
 
-                return (
+            return (
+                nome.includes(termo) ||
+                descricao.includes(termo)
+            );
 
-                    nome.includes(
-                        termo
-                    )
-
-                    ||
-
-                    descricao.includes(
-                        termo
-                    )
-
-                );
-
-            }
-        );
+        });
 
 
     if(
@@ -1318,136 +1229,131 @@ function renderizarCursos(){
 
 
     listaCursos.innerHTML =
+        filtrados.map(curso => {
 
-        filtrados.map(
-            curso => {
-
-                const ativo =
-                    curso.ativo !== false;
+            const ativo =
+                curso.ativo !== false;
 
 
-                return `
+            return `
 
-                    <tr>
+                <tr>
 
-                        <td>
+                    <td>
 
-                            <strong>
-
-                                ${escapar(
-                                    curso.icone ||
-                                    "📚"
-                                )}
-
-                                ${escapar(
-                                    curso.nome ||
-                                    "Sem nome"
-                                )}
-
-                            </strong>
-
-                        </td>
-
-
-                        <td>
+                        <strong>
 
                             ${escapar(
-                                curso.descricao ||
-                                "Sem descrição"
+                                curso.icone || "📚"
                             )}
 
-                        </td>
-
-
-                        <td>
-
-                            ${Number(
-                                curso.ordem || 0
+                            ${escapar(
+                                curso.nome ||
+                                "Sem nome"
                             )}
 
-                        </td>
+                        </strong>
+
+                    </td>
 
 
-                        <td>
+                    <td>
 
-                            <span
-                                class="status ${
-                                    ativo
+                        ${escapar(
+                            curso.descricao ||
+                            "Sem descrição"
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${Number(
+                            curso.ordem || 0
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="status ${
+                                ativo
                                     ? "ativo"
                                     : "inativo"
-                                }">
+                            }">
+
+                            ${
+                                ativo
+                                    ? "Ativo"
+                                    : "Inativo"
+                            }
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="acoes">
+
+
+                            <button
+                                class="btn-editar"
+                                data-acao="editar"
+                                data-id="${curso.id}">
+
+                                ✏️ Editar
+
+                            </button>
+
+
+                            <button
+                                class="btn-unidades"
+                                data-acao="unidades"
+                                data-id="${curso.id}">
+
+                                📚 Unidades
+
+                            </button>
+
+
+                            <button
+                                class="btn-status"
+                                data-acao="status"
+                                data-id="${curso.id}">
 
                                 ${
                                     ativo
-                                    ? "Ativo"
-                                    : "Inativo"
-                                }
-
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div
-                                class="acoes">
-
-
-                                <button
-                                    class="btn-editar"
-                                    data-acao="editar"
-                                    data-id="${curso.id}">
-
-                                    ✏️ Editar
-
-                                </button>
-
-
-                                <button
-                                    class="btn-unidades"
-                                    data-acao="unidades"
-                                    data-id="${curso.id}">
-
-                                    📚 Unidades
-
-                                </button>
-
-
-                                <button
-                                    class="btn-status"
-                                    data-acao="status"
-                                    data-id="${curso.id}">
-
-                                    ${
-                                        ativo
                                         ? "⛔ Desativar"
                                         : "✅ Ativar"
-                                    }
+                                }
 
-                                </button>
-
-
-                                <button
-                                    class="btn-excluir"
-                                    data-acao="excluir"
-                                    data-id="${curso.id}">
-
-                                    🗑️ Excluir
-
-                                </button>
+                            </button>
 
 
-                            </div>
+                            <button
+                                class="btn-excluir"
+                                data-acao="excluir"
+                                data-id="${curso.id}">
 
-                        </td>
+                                🗑️ Excluir
 
-                    </tr>
+                            </button>
 
-                `;
 
-            }
-        ).join("");
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
 
 }
 
@@ -1458,14 +1364,12 @@ function renderizarCursos(){
 
 formCurso.addEventListener(
     "submit",
-    async (evento) => {
+    async evento => {
 
         evento.preventDefault();
 
 
-        if(
-            !acessoAutorizado
-        ){
+        if(!acessoAutorizado){
 
             mostrarMensagem(
                 "Acesso administrativo não autorizado.",
@@ -1539,9 +1443,7 @@ formCurso.addEventListener(
             };
 
 
-            if(
-                cursoEditando
-            ){
+            if(cursoEditando){
 
                 await updateDoc(
 
@@ -1574,11 +1476,9 @@ formCurso.addEventListener(
 
                         ...dadosCurso,
 
-                        ativo:
-                            true,
+                        ativo:true,
 
-                        unidades:
-                            [],
+                        unidades:[],
 
                         criadoEm:
                             serverTimestamp()
@@ -1620,21 +1520,21 @@ formCurso.addEventListener(
 
 
 /* =========================================================
-   AÇÕES
+   AÇÕES DA TABELA
 ========================================================= */
 
 listaCursos.addEventListener(
     "click",
-    async (evento) => {
+    async evento => {
 
         const botao =
-            evento.target.closest(
-                "button"
-            );
+            evento.target.closest("button");
 
 
         if(!botao){
+
             return;
+
         }
 
 
@@ -1653,19 +1553,17 @@ listaCursos.addEventListener(
 
 
         if(!curso){
+
             return;
+
         }
 
 
         /* EDITAR */
 
-        if(
-            acao === "editar"
-        ){
+        if(acao === "editar"){
 
-            preencherFormulario(
-                curso
-            );
+            preencherFormulario(curso);
 
             return;
 
@@ -1674,9 +1572,7 @@ listaCursos.addEventListener(
 
         /* UNIDADES */
 
-        if(
-            acao === "unidades"
-        ){
+        if(acao === "unidades"){
 
             window.location.href =
                 "unidades.html?id=" +
@@ -1689,30 +1585,27 @@ listaCursos.addEventListener(
 
         /* STATUS */
 
-        if(
-            acao === "status"
-        ){
+        if(acao === "status"){
 
             const novoStatus =
                 curso.ativo === false;
 
-
             const texto =
                 novoStatus
-                ? "ativar"
-                : "desativar";
+                    ? "ativar"
+                    : "desativar";
 
 
             const confirmar =
                 confirm(
-
                     `Deseja ${texto} o curso "${curso.nome}"?`
-
                 );
 
 
             if(!confirmar){
+
                 return;
+
             }
 
 
@@ -1742,8 +1635,8 @@ listaCursos.addEventListener(
                 mostrarMensagem(
 
                     novoStatus
-                    ? "Curso ativado."
-                    : "Curso desativado."
+                        ? "Curso ativado."
+                        : "Curso desativado."
 
                 );
 
@@ -1754,7 +1647,7 @@ listaCursos.addEventListener(
             }catch(erro){
 
                 console.error(
-                    "Erro ao alterar status:",
+                    "ADMIN - erro ao alterar status:",
                     erro
                 );
 
@@ -1766,6 +1659,7 @@ listaCursos.addEventListener(
 
             }
 
+
             return;
 
         }
@@ -1773,20 +1667,21 @@ listaCursos.addEventListener(
 
         /* EXCLUIR */
 
-        if(
-            acao === "excluir"
-        ){
+        if(acao === "excluir"){
 
             const confirmar =
                 confirm(
 
-                    `Tem certeza que deseja excluir o curso "${curso.nome}"?\n\nEssa ação não poderá ser desfeita.`
+                    `Tem certeza que deseja excluir o curso "${curso.nome}"?\n\n` +
+                    `Essa ação não poderá ser desfeita.`
 
                 );
 
 
             if(!confirmar){
+
                 return;
+
             }
 
 
@@ -1814,7 +1709,7 @@ listaCursos.addEventListener(
             }catch(erro){
 
                 console.error(
-                    "Erro ao excluir curso:",
+                    "ADMIN - erro ao excluir curso:",
                     erro
                 );
 
@@ -1847,9 +1742,7 @@ pesquisa.addEventListener(
 ========================================================= */
 
 document
-    .getElementById(
-        "btnNovoCurso"
-    )
+    .getElementById("btnNovoCurso")
     .addEventListener(
         "click",
         novoCurso
@@ -1857,9 +1750,7 @@ document
 
 
 document
-    .getElementById(
-        "btnFecharModal"
-    )
+    .getElementById("btnFecharModal")
     .addEventListener(
         "click",
         fecharModal
@@ -1867,9 +1758,7 @@ document
 
 
 document
-    .getElementById(
-        "btnCancelar"
-    )
+    .getElementById("btnCancelar")
     .addEventListener(
         "click",
         fecharModal
@@ -1878,11 +1767,10 @@ document
 
 modalCurso.addEventListener(
     "click",
-    (evento) => {
+    evento => {
 
         if(
-            evento.target ===
-            modalCurso
+            evento.target === modalCurso
         ){
 
             fecharModal();
@@ -1915,7 +1803,7 @@ btnSair.addEventListener(
         }catch(erro){
 
             console.error(
-                "Erro ao sair:",
+                "ADMIN - erro ao sair:",
                 erro
             );
 
@@ -1929,7 +1817,7 @@ btnSair.addEventListener(
 
 
 /* =========================================================
-   BOTÃO LOGIN
+   IR PARA LOGIN
 ========================================================= */
 
 btnIrLogin.addEventListener(
@@ -1986,11 +1874,9 @@ async function verificarAdministrador(){
     try{
 
         /*
-         * IMPORTANTE:
-         *
-         * authStateReady() espera o Firebase
-         * terminar a restauração da sessão.
-         */
+            Aguarda o Firebase terminar
+            de restaurar a autenticação.
+        */
 
         await auth.authStateReady();
 
@@ -2000,7 +1886,7 @@ async function verificarAdministrador(){
         );
 
 
-        let usuario =
+        const usuario =
             auth.currentUser;
 
 
@@ -2013,52 +1899,13 @@ async function verificarAdministrador(){
 
 
         /*
-         * Pequena segunda tentativa.
-         *
-         * Isso ajuda principalmente quando
-         * o navegador está trabalhando com
-         * arquivos file://.
-         */
-
-        if(!usuario){
-
-            console.log(
-                "ADMIN - primeira leitura sem usuário. Aguardando..."
-            );
-
-
-            await new Promise(
-                resolve =>
-                    setTimeout(
-                        resolve,
-                        1200
-                    )
-            );
-
-
-            usuario =
-                auth.currentUser;
-
-
-            console.log(
-                "ADMIN - segunda leitura:",
-                usuario
-                    ? usuario.uid
-                    : null
-            );
-
-        }
-
-
-        /*
-         * Só agora consideramos realmente
-         * que não existe sessão.
-         */
+            NÃO existe sessão.
+        */
 
         if(!usuario){
 
             console.error(
-                "ADMIN - sessão não restaurada."
+                "ADMIN - sessão não encontrada."
             );
 
 
@@ -2066,9 +1913,11 @@ async function verificarAdministrador(){
 
                 "🔐 Sessão não encontrada",
 
-                "O Firebase não conseguiu restaurar sua sessão administrativa neste navegador.",
+                "O Firebase não encontrou uma sessão autenticada neste navegador.",
 
-                "Se você acabou de fazer login, abra o sistema através de um servidor local (por exemplo, Live Server) em vez de abrir diretamente com file:///."
+                "Verifique se o login foi realizado na mesma origem do sistema. " +
+                "URL atual: " +
+                window.location.origin
 
             );
 
@@ -2085,8 +1934,8 @@ async function verificarAdministrador(){
 
 
         /*
-         * Procurar perfil do usuário.
-         */
+            Buscar perfil.
+        */
 
         const referenciaUsuario =
             doc(
@@ -2115,7 +1964,7 @@ async function verificarAdministrador(){
 
                 "⛔ Perfil não encontrado",
 
-                "Sua conta está autenticada, mas o documento users/{uid} não foi encontrado.",
+                "Sua conta está autenticada, mas seu perfil administrativo não foi encontrado.",
 
                 "UID autenticado: " +
                 usuario.uid
@@ -2151,8 +2000,8 @@ async function verificarAdministrador(){
 
 
         /*
-         * CONTA INATIVA
-         */
+            CONTA INATIVA
+        */
 
         if(!ativo){
 
@@ -2173,12 +2022,10 @@ async function verificarAdministrador(){
 
 
         /*
-         * NÃO É ADMIN
-         */
+            NÃO É ADMIN
+        */
 
-        if(
-            tipo !== "admin"
-        ){
+        if(tipo !== "admin"){
 
             mostrarErroAcesso(
 
@@ -2197,8 +2044,8 @@ async function verificarAdministrador(){
 
 
         /*
-         * ADMIN AUTORIZADO
-         */
+            ADMIN AUTORIZADO
+        */
 
         console.log(
             "ADMIN - acesso autorizado."
@@ -2206,9 +2053,6 @@ async function verificarAdministrador(){
 
 
         acessoAutorizado =
-            true;
-
-        verificacaoFinalizada =
             true;
 
 
@@ -2239,8 +2083,8 @@ async function verificarAdministrador(){
 
 
         /*
-         * Carregar cursos
-         */
+            Carregar cursos.
+        */
 
         await carregarCursos();
 
@@ -2269,11 +2113,11 @@ async function verificarAdministrador(){
             "Ocorreu um erro ao verificar sua sessão administrativa.",
 
             erro.code
-            ? "Código: " +
-              erro.code +
-              " | " +
-              erro.message
-            : erro.message
+                ? "Código: " +
+                  erro.code +
+                  " | " +
+                  erro.message
+                : erro.message
 
         );
 
@@ -2288,9 +2132,8 @@ async function verificarAdministrador(){
 
 verificarAdministrador();
 
-
 </script>
 
 </body>
 </html>
-```
+
