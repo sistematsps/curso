@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,7 +17,7 @@
 }
 
 body{
-  font-family:Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:#f5f7fb;
   color:#1f2937;
   min-height:100vh;
@@ -431,15 +432,23 @@ td{
   cursor:not-allowed;
 }
 
-.acesso-negado{
-  display:none;
-  max-width:500px;
-  margin:80px auto;
+.acesso-negado,
+.erro-url{
+  max-width:700px;
+  margin:70px auto;
   background:white;
-  padding:40px 25px;
+  padding:35px 25px;
   border-radius:16px;
   text-align:center;
   box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.acesso-negado{
+  display:none;
+}
+
+.erro-url{
+  display:none;
 }
 
 .acesso-negado .icone{
@@ -447,14 +456,16 @@ td{
   margin-bottom:15px;
 }
 
-.acesso-negado h2{
-  margin-bottom:10px;
+.acesso-negado h2,
+.erro-url h2{
+  margin-bottom:12px;
 }
 
-.acesso-negado p{
+.acesso-negado p,
+.erro-url p{
   color:#6b7280;
-  line-height:1.5;
-  margin-bottom:20px;
+  line-height:1.6;
+  margin-bottom:10px;
 }
 
 .btn-login{
@@ -465,26 +476,7 @@ td{
   padding:11px 18px;
   border-radius:9px;
   font-weight:bold;
-}
-
-.erro-url{
-  max-width:700px;
-  margin:60px auto;
-  background:white;
-  padding:30px;
-  border-radius:16px;
-  box-shadow:0 10px 35px rgba(0,0,0,.08);
-  display:none;
-}
-
-.erro-url h2{
-  margin-bottom:12px;
-}
-
-.erro-url p{
-  color:#6b7280;
-  line-height:1.6;
-  margin-bottom:10px;
+  margin-top:10px;
 }
 
 .codigo-url{
@@ -531,6 +523,7 @@ td{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -557,17 +550,11 @@ td{
 
   <div class="usuario-area">
 
-    <span
-      class="usuario-nome"
-      id="usuarioNome"
-    >
+    <span class="usuario-nome" id="usuarioNome">
       Carregando...
     </span>
 
-    <button
-      class="btn-sair"
-      id="btnSair"
-    >
+    <button class="btn-sair" id="btnSair">
       Sair
     </button>
 
@@ -576,65 +563,42 @@ td{
 </header>
 
 
-<div
-  class="acesso-negado"
-  id="acessoNegado"
->
+<div class="acesso-negado" id="acessoNegado">
 
-  <div class="icone">
-    🔒
-  </div>
+  <div class="icone">🔒</div>
 
-  <h2>
-    Acesso restrito
-  </h2>
+  <h2>Acesso restrito</h2>
 
   <p id="textoAcesso">
     Você precisa estar autenticado como administrador.
   </p>
 
-  <a
-    href="./login.html"
-    class="btn-login"
-  >
+  <a href="./login.html" class="btn-login">
     Ir para o login
   </a>
 
 </div>
 
 
-<div
-  class="erro-url"
-  id="erroUrl"
->
+<div class="erro-url" id="erroUrl">
 
-  <h2>
-    ⚠️ Curso não informado
-  </h2>
+  <h2>⚠️ Curso não informado</h2>
 
   <p>
-    Esta página precisa receber o ID do curso para mostrar as unidades.
+    Esta página precisa receber o ID do curso.
   </p>
 
   <p>
-    O endereço deve terminar desta forma:
+    O endereço correto é:
   </p>
 
-  <span
-    class="codigo-url"
-    id="urlExemplo"
-  >
-    unidades.html?id=ID_DO_CURSO
+  <span class="codigo-url">
+    unidades.html?cursoId=ID_DO_CURSO
   </span>
-
-  <p>
-    Volte para a administração e abra novamente o curso.
-  </p>
 
   <button
     class="btn-voltar"
-    onclick="window.location.href='./admin.html'"
-  >
+    onclick="window.location.href='./admin.html'">
     ← Voltar para cursos
   </button>
 
@@ -653,21 +617,17 @@ td{
 
       <button
         class="btn-voltar"
-        id="btnVoltar"
-      >
+        id="btnVoltar">
         ← Cursos
       </button>
 
       <div>
 
-        <h1>
-          Unidades
-        </h1>
+        <h1>Unidades</h1>
 
         <div
           class="curso-info"
-          id="cursoInfo"
-        >
+          id="cursoInfo">
           Carregando curso...
         </div>
 
@@ -677,8 +637,7 @@ td{
 
     <button
       class="btn-nova"
-      id="btnNova"
-    >
+      id="btnNova">
       + Nova unidade
     </button>
 
@@ -687,8 +646,8 @@ td{
 
   <div
     class="mensagem"
-    id="mensagem"
-  ></div>
+    id="mensagem">
+  </div>
 
 
   <section class="card">
@@ -707,8 +666,7 @@ td{
 
     <div
       class="loading"
-      id="loading"
-    >
+      id="loading">
 
       <div class="spinner"></div>
 
@@ -720,30 +678,22 @@ td{
     <div
       class="tabela-container"
       id="tabelaContainer"
-      style="display:none;"
-    >
+      style="display:none;">
 
       <table>
 
         <thead>
 
           <tr>
-
             <th>Ordem</th>
-
             <th>Unidade</th>
-
             <th>Status</th>
-
             <th>Ações</th>
-
           </tr>
 
         </thead>
 
-        <tbody
-          id="listaUnidades"
-        ></tbody>
+        <tbody id="listaUnidades"></tbody>
 
       </table>
 
@@ -753,12 +703,9 @@ td{
     <div
       class="vazio"
       id="vazio"
-      style="display:none;"
-    >
+      style="display:none;">
 
-      <div class="vazio-icone">
-        📚
-      </div>
+      <div class="vazio-icone">📚</div>
 
       <strong>
         Nenhuma unidade encontrada
@@ -777,8 +724,7 @@ td{
 
 <div
   class="modal-fundo"
-  id="modalFundo"
->
+  id="modalFundo">
 
   <div class="modal">
 
@@ -791,8 +737,7 @@ td{
       <button
         class="fechar"
         id="btnFecharModal"
-        type="button"
-      >
+        type="button">
         ×
       </button>
 
@@ -814,8 +759,7 @@ td{
             id="nome"
             maxlength="150"
             placeholder="Ex.: Números e operações"
-            required
-          >
+            required>
 
         </div>
 
@@ -829,8 +773,7 @@ td{
           <textarea
             id="descricao"
             maxlength="500"
-            placeholder="Descrição da unidade..."
-          ></textarea>
+            placeholder="Descrição da unidade..."></textarea>
 
         </div>
 
@@ -847,8 +790,7 @@ td{
             min="1"
             step="1"
             value="1"
-            required
-          >
+            required>
 
         </div>
 
@@ -881,16 +823,14 @@ td{
         <button
           type="button"
           class="btn-cancelar"
-          id="btnCancelar"
-        >
+          id="btnCancelar">
           Cancelar
         </button>
 
         <button
           type="submit"
           class="btn-salvar"
-          id="btnSalvar"
-        >
+          id="btnSalvar">
           Salvar unidade
         </button>
 
@@ -926,6 +866,8 @@ import {
   getDocs,
   updateDoc,
   deleteDoc,
+  query,
+  where,
   serverTimestamp
 } from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -936,13 +878,28 @@ import {
 ===================================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC4AAbC8vCFAmlPlur12Nm7YBKPjaSjumM",
-  authDomain: "meuappweb-65522.firebaseapp.com",
-  projectId: "meuappweb-65522",
-  storageBucket: "meuappweb-65522.firebasestorage.app",
-  messagingSenderId: "305368794616",
-  appId: "1:305368794616:web:3199c6836a986d896ac20d",
-  measurementId: "G-QN7GFD99N0"
+
+  apiKey:
+    "AIzaSyC4AAbC8vCFAmlPlur12NmY7BKPjaSjumM",
+
+  authDomain:
+    "meuappweb-65522.firebaseapp.com",
+
+  projectId:
+    "meuappweb-65522",
+
+  storageBucket:
+    "meuappweb-65522.firebasestorage.app",
+
+  messagingSenderId:
+    "305368794616",
+
+  appId:
+    "1:305368794616:web:3199c6836a986d896ac20d",
+
+  measurementId:
+    "G-QN7GFD99N0"
+
 };
 
 
@@ -956,24 +913,9 @@ const db =
   getFirestore(app);
 
 
-console.log(
-  "UNIDADES - Firebase inicializado."
-);
-
-
 /* =====================================================
-   LEITURA DO ID DO CURSO
+   ID DO CURSO
 ===================================================== */
-
-console.log(
-  "UNIDADES - URL completa:",
-  window.location.href
-);
-
-console.log(
-  "UNIDADES - window.location.search:",
-  window.location.search
-);
 
 const parametros =
   new URLSearchParams(
@@ -981,16 +923,16 @@ const parametros =
   );
 
 let cursoId =
-  parametros.get("id");
-
+  parametros.get("cursoId");
 
 if(cursoId){
-
-  cursoId =
-    cursoId.trim();
-
+  cursoId = cursoId.trim();
 }
 
+console.log(
+  "UNIDADES - URL:",
+  window.location.href
+);
 
 console.log(
   "UNIDADES - cursoId:",
@@ -1003,104 +945,64 @@ console.log(
 ===================================================== */
 
 const conteudo =
-  document.getElementById(
-    "conteudo"
-  );
+  document.getElementById("conteudo");
 
 const acessoNegado =
-  document.getElementById(
-    "acessoNegado"
-  );
+  document.getElementById("acessoNegado");
 
 const textoAcesso =
-  document.getElementById(
-    "textoAcesso"
-  );
+  document.getElementById("textoAcesso");
 
 const erroUrl =
-  document.getElementById(
-    "erroUrl"
-  );
+  document.getElementById("erroUrl");
 
 const usuarioNome =
-  document.getElementById(
-    "usuarioNome"
-  );
+  document.getElementById("usuarioNome");
 
 const cursoInfo =
-  document.getElementById(
-    "cursoInfo"
-  );
+  document.getElementById("cursoInfo");
 
 const listaUnidades =
-  document.getElementById(
-    "listaUnidades"
-  );
+  document.getElementById("listaUnidades");
 
 const loading =
-  document.getElementById(
-    "loading"
-  );
+  document.getElementById("loading");
 
 const tabelaContainer =
-  document.getElementById(
-    "tabelaContainer"
-  );
+  document.getElementById("tabelaContainer");
 
 const vazio =
-  document.getElementById(
-    "vazio"
-  );
+  document.getElementById("vazio");
 
 const pesquisa =
-  document.getElementById(
-    "pesquisa"
-  );
+  document.getElementById("pesquisa");
 
 const mensagem =
-  document.getElementById(
-    "mensagem"
-  );
+  document.getElementById("mensagem");
 
 const modalFundo =
-  document.getElementById(
-    "modalFundo"
-  );
+  document.getElementById("modalFundo");
 
 const modalTitulo =
-  document.getElementById(
-    "modalTitulo"
-  );
+  document.getElementById("modalTitulo");
 
 const formUnidade =
-  document.getElementById(
-    "formUnidade"
-  );
+  document.getElementById("formUnidade");
 
 const nome =
-  document.getElementById(
-    "nome"
-  );
+  document.getElementById("nome");
 
 const descricao =
-  document.getElementById(
-    "descricao"
-  );
+  document.getElementById("descricao");
 
 const ordem =
-  document.getElementById(
-    "ordem"
-  );
+  document.getElementById("ordem");
 
 const ativo =
-  document.getElementById(
-    "ativo"
-  );
+  document.getElementById("ativo");
 
 const btnSalvar =
-  document.getElementById(
-    "btnSalvar"
-  );
+  document.getElementById("btnSalvar");
 
 
 /* =====================================================
@@ -1118,10 +1020,7 @@ let curso = null;
    MENSAGEM
 ===================================================== */
 
-function mostrarMensagem(
-  texto,
-  tipo
-){
+function mostrarMensagem(texto,tipo){
 
   mensagem.textContent =
     texto;
@@ -1129,18 +1028,15 @@ function mostrarMensagem(
   mensagem.className =
     "mensagem " + tipo;
 
-  setTimeout(
-    () => {
+  setTimeout(()=>{
 
-      mensagem.className =
-        "mensagem";
+    mensagem.className =
+      "mensagem";
 
-      mensagem.textContent =
-        "";
+    mensagem.textContent =
+      "";
 
-    },
-    4000
-  );
+  },4000);
 
 }
 
@@ -1155,21 +1051,14 @@ function escapar(valor){
     valor === null ||
     valor === undefined
   ){
-
     return "";
-
   }
 
   return String(valor)
-
     .replace(/&/g,"&amp;")
-
     .replace(/</g,"&lt;")
-
     .replace(/>/g,"&gt;")
-
     .replace(/"/g,"&quot;")
-
     .replace(/'/g,"&#039;");
 
 }
@@ -1181,25 +1070,15 @@ function escapar(valor){
 
 function proximaOrdem(){
 
-  if(
-    unidades.length === 0
-  ){
-
+  if(unidades.length === 0){
     return 1;
-
   }
 
-  const maior =
-    Math.max(
-      ...unidades.map(
-        item =>
-          Number(
-            item.ordem || 0
-          )
-      )
-    );
-
-  return maior + 1;
+  return Math.max(
+    ...unidades.map(
+      item => Number(item.ordem || 0)
+    )
+  ) + 1;
 
 }
 
@@ -1208,15 +1087,12 @@ function proximaOrdem(){
    ABRIR MODAL
 ===================================================== */
 
-function abrirModal(
-  unidade = null
-){
+function abrirModal(unidade=null){
 
   unidadeEditando =
     unidade
       ? unidade.id
       : null;
-
 
   if(unidade){
 
@@ -1230,9 +1106,7 @@ function abrirModal(
       unidade.descricao || "";
 
     ordem.value =
-      Number(
-        unidade.ordem || 1
-      );
+      Number(unidade.ordem || 1);
 
     ativo.value =
       unidade.ativo === false
@@ -1260,13 +1134,10 @@ function abrirModal(
 
   }
 
-
-  modalFundo.classList.add(
-    "aberto"
-  );
+  modalFundo.classList.add("aberto");
 
   setTimeout(
-    () => nome.focus(),
+    ()=>nome.focus(),
     100
   );
 
@@ -1279,9 +1150,7 @@ function abrirModal(
 
 function fecharModal(){
 
-  modalFundo.classList.remove(
-    "aberto"
-  );
+  modalFundo.classList.remove("aberto");
 
   formUnidade.reset();
 
@@ -1308,13 +1177,9 @@ async function carregarCurso(){
     erroUrl.style.display =
       "block";
 
-    conteudo.style.display =
-      "none";
-
     return false;
 
   }
-
 
   try{
 
@@ -1325,59 +1190,42 @@ async function carregarCurso(){
         cursoId
       );
 
-
     const documento =
-      await getDoc(
-        referencia
-      );
+      await getDoc(referencia);
 
-
-    if(
-      !documento.exists()
-    ){
+    if(!documento.exists()){
 
       erroUrl.style.display =
         "block";
 
-      cursoInfo.textContent =
-        "Curso não encontrado.";
+      erroUrl.querySelector("h2")
+        .textContent =
+        "⚠️ Curso não encontrado";
 
       return false;
 
     }
 
-
     curso = {
-
-      id:
-        documento.id,
-
+      id:documento.id,
       ...documento.data()
-
     };
-
 
     cursoInfo.textContent =
       curso.nome ||
       "Curso sem nome";
 
-
     document.title =
       "Unidades - " +
-      (
-        curso.nome ||
-        "Curso"
-      ) +
+      (curso.nome || "Curso") +
       " - Aprende+";
 
-
     return true;
-
 
   }catch(erro){
 
     console.error(
-      "UNIDADES - erro ao carregar curso:",
+      "Erro ao carregar curso:",
       erro
     );
 
@@ -1409,73 +1257,48 @@ async function carregarUnidades(){
   vazio.style.display =
     "none";
 
-
   try{
 
-    const snapshot =
-      await getDocs(
-        collection(
-          db,
-          "unidades"
+    const consulta =
+      query(
+        collection(db,"unidades"),
+        where(
+          "cursoId",
+          "==",
+          cursoId
         )
       );
 
+    const snapshot =
+      await getDocs(consulta);
 
     unidades = [];
 
+    snapshot.forEach(documento=>{
 
-    snapshot.forEach(
-      documento => {
+      unidades.push({
 
-        const dados =
-          documento.data();
+        id:
+          documento.id,
 
+        ...documento.data()
 
-        if(
-          dados.cursoId === cursoId
-        ){
+      });
 
-          unidades.push({
-
-            id:
-              documento.id,
-
-            ...dados
-
-          });
-
-        }
-
-      }
-    );
-
+    });
 
     unidades.sort(
-      (a,b) => {
-
-        const ordemA =
-          Number(
-            a.ordem || 0
-          );
-
-        const ordemB =
-          Number(
-            b.ordem || 0
-          );
-
-        return ordemA - ordemB;
-
-      }
+      (a,b)=>
+        Number(a.ordem || 0) -
+        Number(b.ordem || 0)
     );
 
-
     renderizar();
-
 
   }catch(erro){
 
     console.error(
-      "UNIDADES - erro ao carregar unidades:",
+      "Erro ao carregar unidades:",
       erro
     );
 
@@ -1484,7 +1307,6 @@ async function carregarUnidades(){
       "Não foi possível carregar as unidades.",
       "erro"
     );
-
 
   }finally{
 
@@ -1507,47 +1329,30 @@ function renderizar(){
       .trim()
       .toLowerCase();
 
-
   const filtradas =
-    unidades.filter(
-      unidade => {
+    unidades.filter(unidade=>{
 
-        const nomeUnidade =
-          String(
-            unidade.nome || ""
-          ).toLowerCase();
+      const nomeUnidade =
+        String(
+          unidade.nome || ""
+        ).toLowerCase();
 
-        const descricaoUnidade =
-          String(
-            unidade.descricao || ""
-          ).toLowerCase();
+      const descricaoUnidade =
+        String(
+          unidade.descricao || ""
+        ).toLowerCase();
 
+      return (
+        nomeUnidade.includes(termo) ||
+        descricaoUnidade.includes(termo)
+      );
 
-        return (
-
-          nomeUnidade.includes(
-            termo
-          )
-
-          ||
-
-          descricaoUnidade.includes(
-            termo
-          )
-
-        );
-
-      }
-    );
-
+    });
 
   listaUnidades.innerHTML =
     "";
 
-
-  if(
-    filtradas.length === 0
-  ){
+  if(filtradas.length === 0){
 
     tabelaContainer.style.display =
       "none";
@@ -1559,186 +1364,148 @@ function renderizar(){
 
   }
 
-
   tabelaContainer.style.display =
     "block";
 
   vazio.style.display =
     "none";
 
+  filtradas.forEach(unidade=>{
 
-  filtradas.forEach(
-    unidade => {
+    const tr =
+      document.createElement("tr");
 
-      const tr =
-        document.createElement(
-          "tr"
-        );
+    const inativa =
+      unidade.ativo === false;
 
+    tr.innerHTML = `
 
-      const status =
-        unidade.ativo === false
-          ? "inativo"
-          : "ativo";
+      <td>
 
+        <div class="ordem">
 
-      const textoStatus =
-        unidade.ativo === false
-          ? "Inativa"
-          : "Ativa";
+          <strong>
+            ${escapar(unidade.ordem || 1)}
+          </strong>
 
+          <button
+            class="btn-ordem"
+            data-acao="subir"
+            data-id="${escapar(unidade.id)}">
+            ↑
+          </button>
 
-      tr.innerHTML = `
+          <button
+            class="btn-ordem"
+            data-acao="descer"
+            data-id="${escapar(unidade.id)}">
+            ↓
+          </button>
 
-        <td>
+        </div>
 
-          <div class="ordem">
-
-            <strong>
-              ${escapar(
-                unidade.ordem || 1
-              )}
-            </strong>
-
-            <button
-              class="btn-ordem"
-              data-acao="subir"
-              data-id="${escapar(
-                unidade.id
-              )}"
-              title="Subir"
-            >
-              ↑
-            </button>
-
-            <button
-              class="btn-ordem"
-              data-acao="descer"
-              data-id="${escapar(
-                unidade.id
-              )}"
-              title="Descer"
-            >
-              ↓
-            </button>
-
-          </div>
-
-        </td>
+      </td>
 
 
-        <td>
+      <td>
 
-          <div class="nome-unidade">
+        <div class="nome-unidade">
+          ${escapar(unidade.nome || "Sem nome")}
+        </div>
 
-            ${escapar(
-              unidade.nome ||
-              "Sem nome"
-            )}
+        ${
+          unidade.descricao
+          ? `
+            <div class="descricao">
+              ${escapar(unidade.descricao)}
+            </div>
+          `
+          : ""
+        }
 
-          </div>
-
-          ${
-            unidade.descricao
-              ? `
-                <div class="descricao">
-                  ${escapar(
-                    unidade.descricao
-                  )}
-                </div>
-              `
-              : ""
-          }
-
-        </td>
+      </td>
 
 
-        <td>
+      <td>
 
-          <span
-            class="status ${status}"
-          >
-            ${textoStatus}
-          </span>
+        <span
+          class="status ${inativa ? "inativo" : "ativo"}">
 
-        </td>
+          ${inativa ? "Inativa" : "Ativa"}
 
+        </span>
 
-        <td>
-
-          <div class="acoes">
-
-            <button
-              class="btn btn-licoes"
-              data-acao="licoes"
-              data-id="${escapar(
-                unidade.id
-              )}"
-            >
-              📖 Lições
-            </button>
-
-            <button
-              class="btn btn-editar"
-              data-acao="editar"
-              data-id="${escapar(
-                unidade.id
-              )}"
-            >
-              ✏️ Editar
-            </button>
-
-            <button
-              class="btn btn-status"
-              data-acao="status"
-              data-id="${escapar(
-                unidade.id
-              )}"
-            >
-              ${
-                unidade.ativo === false
-                  ? "✅ Ativar"
-                  : "⏸️ Desativar"
-              }
-            </button>
-
-            <button
-              class="btn btn-excluir"
-              data-acao="excluir"
-              data-id="${escapar(
-                unidade.id
-              )}"
-            >
-              🗑️ Excluir
-            </button>
-
-          </div>
-
-        </td>
-
-      `;
+      </td>
 
 
-      listaUnidades.appendChild(
-        tr
-      );
+      <td>
 
-    }
-  );
+        <div class="acoes">
+
+          <button
+            class="btn btn-licoes"
+            data-acao="licoes"
+            data-id="${escapar(unidade.id)}">
+            📖 Lições
+          </button>
+
+          <button
+            class="btn btn-editar"
+            data-acao="editar"
+            data-id="${escapar(unidade.id)}">
+            ✏️ Editar
+          </button>
+
+          <button
+            class="btn btn-status"
+            data-acao="status"
+            data-id="${escapar(unidade.id)}">
+
+            ${inativa ? "✅ Ativar" : "⏸️ Desativar"}
+
+          </button>
+
+          <button
+            class="btn btn-excluir"
+            data-acao="excluir"
+            data-id="${escapar(unidade.id)}">
+            🗑️ Excluir
+          </button>
+
+        </div>
+
+      </td>
+
+    `;
+
+    listaUnidades.appendChild(tr);
+
+  });
 
 }
 
 
 /* =====================================================
-   SALVAR
+   SALVAR UNIDADE
 ===================================================== */
 
 formUnidade.addEventListener(
   "submit",
-  async event => {
+  async event=>{
 
     event.preventDefault();
 
+    const nomeValor =
+      nome.value.trim();
+
+    const descricaoValor =
+      descricao.value.trim();
+
+    const ordemValor =
+      Number(ordem.value);
+
+    const ativoValor =
+      ativo.value === "true";
 
     if(!cursoId){
 
@@ -1750,25 +1517,6 @@ formUnidade.addEventListener(
       return;
 
     }
-
-
-    const nomeValor =
-      nome.value.trim();
-
-
-    const descricaoValor =
-      descricao.value.trim();
-
-
-    const ordemValor =
-      Number(
-        ordem.value
-      );
-
-
-    const ativoValor =
-      ativo.value === "true";
-
 
     if(!nomeValor){
 
@@ -1783,11 +1531,8 @@ formUnidade.addEventListener(
 
     }
 
-
     if(
-      !Number.isInteger(
-        ordemValor
-      ) ||
+      !Number.isInteger(ordemValor) ||
       ordemValor < 1
     ){
 
@@ -1800,13 +1545,11 @@ formUnidade.addEventListener(
 
     }
 
-
     btnSalvar.disabled =
       true;
 
     btnSalvar.textContent =
       "Salvando...";
-
 
     try{
 
@@ -1841,12 +1584,10 @@ formUnidade.addEventListener(
 
         );
 
-
         mostrarMensagem(
           "Unidade atualizada com sucesso.",
           "sucesso"
         );
-
 
       }else{
 
@@ -1887,7 +1628,6 @@ formUnidade.addEventListener(
 
         );
 
-
         mostrarMensagem(
           "Unidade criada com sucesso.",
           "sucesso"
@@ -1895,16 +1635,14 @@ formUnidade.addEventListener(
 
       }
 
-
       fecharModal();
 
       await carregarUnidades();
 
-
     }catch(erro){
 
       console.error(
-        "UNIDADES - erro ao salvar:",
+        "Erro ao salvar unidade:",
         erro
       );
 
@@ -1913,7 +1651,6 @@ formUnidade.addEventListener(
         "Não foi possível salvar a unidade.",
         "erro"
       );
-
 
       btnSalvar.disabled =
         false;
@@ -1935,81 +1672,57 @@ formUnidade.addEventListener(
 
 listaUnidades.addEventListener(
   "click",
-  async event => {
+  async event=>{
 
     const botao =
       event.target.closest(
         "button[data-acao]"
       );
 
-
     if(!botao){
       return;
     }
 
-
     const acao =
       botao.dataset.acao;
-
 
     const id =
       botao.dataset.id;
 
-
     const unidade =
       unidades.find(
-        item =>
-          item.id === id
+        item => item.id === id
       );
-
 
     if(!unidade){
       return;
     }
 
 
-    /* LIÇÕES */
-
-    if(
-      acao === "licoes"
-    ){
+    if(acao === "licoes"){
 
       window.location.href =
         "./licoes.html" +
         "?cursoId=" +
-        encodeURIComponent(
-          cursoId
-        ) +
+        encodeURIComponent(cursoId) +
         "&unidadeId=" +
-        encodeURIComponent(
-          id
-        );
+        encodeURIComponent(id);
 
       return;
 
     }
 
 
-    /* EDITAR */
+    if(acao === "editar"){
 
-    if(
-      acao === "editar"
-    ){
-
-      abrirModal(
-        unidade
-      );
+      abrirModal(unidade);
 
       return;
 
     }
 
 
-    /* STATUS */
-
-    if(
-      acao === "status"
-    ){
+    if(acao === "status"){
 
       try{
 
@@ -2033,6 +1746,7 @@ listaUnidades.addEventListener(
 
         );
 
+        await carregarUnidades();
 
         mostrarMensagem(
           unidade.ativo === false
@@ -2041,16 +1755,9 @@ listaUnidades.addEventListener(
           "sucesso"
         );
 
-
-        await carregarUnidades();
-
-
       }catch(erro){
 
-        console.error(
-          "UNIDADES - erro status:",
-          erro
-        );
+        console.error(erro);
 
         mostrarMensagem(
           erro.message ||
@@ -2065,55 +1772,36 @@ listaUnidades.addEventListener(
     }
 
 
-    /* EXCLUIR */
+    if(acao === "excluir"){
 
-    if(
-      acao === "excluir"
-    ){
-
-      const confirmou =
-        confirm(
-          "Tem certeza que deseja excluir a unidade \"" +
-          (
-            unidade.nome || ""
-          ) +
-          "\"?\n\nEsta ação não poderá ser desfeita."
-        );
-
-
-      if(!confirmou){
+      if(
+        !confirm(
+          `Tem certeza que deseja excluir a unidade "${unidade.nome || ""}"?\n\nEsta ação não poderá ser desfeita.`
+        )
+      ){
         return;
       }
-
 
       try{
 
         await deleteDoc(
-
           doc(
             db,
             "unidades",
             id
           )
-
         );
 
+        await carregarUnidades();
 
         mostrarMensagem(
           "Unidade excluída com sucesso.",
           "sucesso"
         );
 
-
-        await carregarUnidades();
-
-
       }catch(erro){
 
-        console.error(
-          "UNIDADES - erro excluir:",
-          erro
-        );
+        console.error(erro);
 
         mostrarMensagem(
           erro.message ||
@@ -2128,34 +1816,15 @@ listaUnidades.addEventListener(
     }
 
 
-    /* SUBIR */
-
     if(
-      acao === "subir"
-    ){
-
-      await moverUnidade(
-        id,
-        -1
-      );
-
-      return;
-
-    }
-
-
-    /* DESCER */
-
-    if(
+      acao === "subir" ||
       acao === "descer"
     ){
 
       await moverUnidade(
         id,
-        1
+        acao === "subir" ? -1 : 1
       );
-
-      return;
 
     }
 
@@ -2174,49 +1843,34 @@ async function moverUnidade(
 
   const indice =
     unidades.findIndex(
-      unidade =>
-        unidade.id === id
+      item => item.id === id
     );
-
 
   if(indice === -1){
     return;
   }
 
-
   const novoIndice =
     indice + direcao;
-
 
   if(
     novoIndice < 0 ||
     novoIndice >= unidades.length
   ){
-
     return;
-
   }
-
 
   const atual =
     unidades[indice];
 
-
   const outra =
     unidades[novoIndice];
 
-
   const ordemAtual =
-    Number(
-      atual.ordem || 0
-    );
-
+    Number(atual.ordem || 0);
 
   const ordemOutra =
-    Number(
-      outra.ordem || 0
-    );
-
+    Number(outra.ordem || 0);
 
   try{
 
@@ -2229,17 +1883,11 @@ async function moverUnidade(
       ),
 
       {
-
-        ordem:
-          ordemOutra,
-
-        atualizadoEm:
-          serverTimestamp()
-
+        ordem:ordemOutra,
+        atualizadoEm:serverTimestamp()
       }
 
     );
-
 
     await updateDoc(
 
@@ -2250,27 +1898,17 @@ async function moverUnidade(
       ),
 
       {
-
-        ordem:
-          ordemAtual,
-
-        atualizadoEm:
-          serverTimestamp()
-
+        ordem:ordemAtual,
+        atualizadoEm:serverTimestamp()
       }
 
     );
 
-
     await carregarUnidades();
-
 
   }catch(erro){
 
-    console.error(
-      "UNIDADES - erro ordem:",
-      erro
-    );
+    console.error(erro);
 
     mostrarMensagem(
       erro.message ||
@@ -2284,78 +1922,54 @@ async function moverUnidade(
 
 
 /* =====================================================
-   NOVA UNIDADE
+   BOTÕES
 ===================================================== */
 
 document
-  .getElementById("btnNova")
-  .addEventListener(
-    "click",
-    () => {
-
-      abrirModal();
-
-    }
-  );
-
-
-/* =====================================================
-   MODAL
-===================================================== */
+.getElementById("btnNova")
+.addEventListener(
+  "click",
+  ()=>abrirModal()
+);
 
 document
-  .getElementById("btnFecharModal")
-  .addEventListener(
-    "click",
-    fecharModal
-  );
+.getElementById("btnFecharModal")
+.addEventListener(
+  "click",
+  fecharModal
+);
 
 document
-  .getElementById("btnCancelar")
-  .addEventListener(
-    "click",
-    fecharModal
-  );
-
+.getElementById("btnCancelar")
+.addEventListener(
+  "click",
+  fecharModal
+);
 
 modalFundo.addEventListener(
   "click",
-  event => {
+  event=>{
 
-    if(
-      event.target === modalFundo
-    ){
-
+    if(event.target === modalFundo){
       fecharModal();
-
     }
 
   }
 );
-
 
 document.addEventListener(
   "keydown",
-  event => {
+  event=>{
 
     if(
       event.key === "Escape" &&
-      modalFundo.classList.contains(
-        "aberto"
-      )
+      modalFundo.classList.contains("aberto")
     ){
-
       fecharModal();
-
     }
 
   }
 );
-
-
-/* =====================================================
-   PESQUISA
-===================================================== */
 
 pesquisa.addEventListener(
   "input",
@@ -2368,16 +1982,16 @@ pesquisa.addEventListener(
 ===================================================== */
 
 document
-  .getElementById("btnVoltar")
-  .addEventListener(
-    "click",
-    () => {
+.getElementById("btnVoltar")
+.addEventListener(
+  "click",
+  ()=>{
 
-      window.location.href =
-        "./admin.html";
+    window.location.href =
+      "./admin.html";
 
-    }
-  );
+  }
+);
 
 
 /* =====================================================
@@ -2385,36 +1999,31 @@ document
 ===================================================== */
 
 document
-  .getElementById("btnSair")
-  .addEventListener(
-    "click",
-    async () => {
+.getElementById("btnSair")
+.addEventListener(
+  "click",
+  async ()=>{
 
-      try{
+    try{
 
-        await signOut(
-          auth
-        );
+      await signOut(auth);
 
-        localStorage.removeItem(
-          "aprendeUsuario"
-        );
+      localStorage.removeItem(
+        "aprendeUsuario"
+      );
 
-        window.location.replace(
-          "./login.html"
-        );
+      window.location.replace(
+        "./login.html"
+      );
 
-      }catch(erro){
+    }catch(erro){
 
-        console.error(
-          "UNIDADES - erro ao sair:",
-          erro
-        );
-
-      }
+      console.error(erro);
 
     }
-  );
+
+  }
+);
 
 
 /* =====================================================
@@ -2423,15 +2032,7 @@ document
 
 onAuthStateChanged(
   auth,
-  async usuario => {
-
-    console.log(
-      "UNIDADES - authStateChanged:",
-      usuario
-        ? usuario.uid
-        : null
-    );
-
+  async usuario=>{
 
     if(!usuario){
 
@@ -2448,7 +2049,6 @@ onAuthStateChanged(
 
     }
 
-
     try{
 
       const referencia =
@@ -2458,16 +2058,10 @@ onAuthStateChanged(
           usuario.uid
         );
 
-
       const documento =
-        await getDoc(
-          referencia
-        );
+        await getDoc(referencia);
 
-
-      if(
-        !documento.exists()
-      ){
+      if(!documento.exists()){
 
         conteudo.style.display =
           "none";
@@ -2482,10 +2076,8 @@ onAuthStateChanged(
 
       }
 
-
       const dados =
         documento.data();
-
 
       const tipo =
         String(
@@ -2494,26 +2086,8 @@ onAuthStateChanged(
         .trim()
         .toLowerCase();
 
-
       if(
-        tipo !== "admin"
-      ){
-
-        conteudo.style.display =
-          "none";
-
-        acessoNegado.style.display =
-          "block";
-
-        textoAcesso.textContent =
-          "Somente administradores podem acessar esta página.";
-
-        return;
-
-      }
-
-
-      if(
+        tipo !== "admin" ||
         dados.ativo === false
       ){
 
@@ -2524,12 +2098,11 @@ onAuthStateChanged(
           "block";
 
         textoAcesso.textContent =
-          "Seu acesso está desativado.";
+          "Você não possui permissão para acessar esta página.";
 
         return;
 
       }
-
 
       usuarioNome.textContent =
         dados.nome ||
@@ -2537,51 +2110,49 @@ onAuthStateChanged(
         "Administrador";
 
 
-      /*
-        IMPORTANTE:
-        Só mostra o conteúdo depois
-        de confirmar que existe cursoId.
-      */
-
       if(!cursoId){
 
         erroUrl.style.display =
           "block";
 
-        conteudo.style.display =
-          "none";
-
         return;
 
       }
-      const cursoCarregado =
+
+
+      const carregouCurso =
         await carregarCurso();
 
-
-      if(!cursoCarregado){
+      if(!carregouCurso){
         return;
       }
-     conteudo.style.display =
-       "block";
+
+
+      conteudo.style.display =
+        "block";
+
       await carregarUnidades();
-   }catch(erro){
-     console.error(
-        "UNIDADES - erro na autenticação:",
+
+    }catch(erro){
+
+      console.error(
+        "Erro na autenticação:",
         erro
       );
-      conteudo.style.display =
-        "none";
+
       acessoNegado.style.display =
         "block";
+
       textoAcesso.textContent =
         erro.message ||
         "Não foi possível verificar seu acesso.";
+
     }
 
   }
 );
+
 </script>
 
 </body>
 </html>
-```
