@@ -673,7 +673,7 @@ main {
 
 <header>
 
-```
+
 <div class="logo">
     Plataforma<span> Cursos</span>
 </div>
@@ -716,13 +716,13 @@ main {
     </button>
 
 </div>
-```
+
 
 </header>
 
 <main>
 
-```
+
 <div id="conteudo">
 
     <div class="carregando">
@@ -736,7 +736,7 @@ main {
     </div>
 
 </div>
-```
+
 
 </main>
 
@@ -1315,7 +1315,7 @@ function mostrarExercicio() {
                 placeholder="Digite sua resposta..."
             ></textarea>
 
-```
+
     `;
 
 }
@@ -1378,7 +1378,7 @@ atualizarProgresso(
 configurarResposta(
     exercicio
 );
-```
+
 
 }
 
@@ -1392,7 +1392,7 @@ numero,
 total
 ) {
 
-```
+
 const topo =
     document.querySelector(
         ".licao-topo"
@@ -1475,7 +1475,7 @@ if (numeroElemento) {
         `${numero}/${total}`;
 
 }
-```
+
 
 }
 
@@ -1487,7 +1487,7 @@ function configurarResposta(
 exercicio
 ) {
 
-```
+
 const btn =
     document.getElementById(
         "btnResponder"
@@ -1638,7 +1638,7 @@ btn.addEventListener(
 
     }
 );
-```
+
 
 }
 
@@ -1650,7 +1650,7 @@ function verificarResposta(
 exercicio
 ) {
 
-```
+
 const resposta =
     respostas[
         exercicio.id
@@ -1799,7 +1799,7 @@ mostrarFeedback(
     exercicio,
     correta
 );
-```
+
 
 }
 
@@ -1812,7 +1812,7 @@ exercicio,
 correta
 ) {
 
-```
+
 const feedback =
     document.getElementById(
         "feedback"
@@ -1951,7 +1951,7 @@ btn.onclick =
         mostrarExercicio();
 
     };
-```
+
 
 }
 
@@ -1961,7 +1961,7 @@ RESULTADO
 
 function mostrarResultado() {
 
-```
+
 const percentual =
     exercicios.length > 0
     ?
@@ -2049,7 +2049,7 @@ document
 
         }
     );
-```
+
 
 }
 
@@ -2059,7 +2059,7 @@ PONTOS POSSÍVEIS
 
 function pontosPossiveis() {
 
-```
+
 let total = 0;
 
 
@@ -2076,7 +2076,7 @@ exercicios.forEach(
 
 
 return total || 1;
-```
+
 
 }
 
@@ -2086,9 +2086,9 @@ PONTUAÇÃO
 
 function pontuacaoTotal() {
 
-```
+
 return pontuacao;
-```
+
 
 }
 
@@ -2098,7 +2098,7 @@ SEM EXERCÍCIOS
 
 function mostrarSemExercicios() {
 
-```
+
 const area =
     document.getElementById(
         "areaExercicio"
@@ -2121,7 +2121,7 @@ area.innerHTML = `
     </div>
 
 `;
-```
+
 
 }
 
@@ -2134,7 +2134,7 @@ titulo,
 texto
 ) {
 
-```
+
 conteudo.innerHTML = `
 
     <div class="mensagem erro">
@@ -2170,7 +2170,7 @@ conteudo.innerHTML = `
     </div>
 
 `;
-```
+
 
 }
 
@@ -2182,7 +2182,7 @@ btnVoltar.addEventListener(
 "click",
 () => {
 
-```
+
     if (cursoId) {
 
         window.location.href =
@@ -2196,7 +2196,7 @@ btnVoltar.addEventListener(
     }
 
 }
-```
+
 
 );
 
@@ -2208,7 +2208,7 @@ btnSair.addEventListener(
 "click",
 async () => {
 
-```
+
     try {
 
         await signOut(auth);
@@ -2230,7 +2230,7 @@ async () => {
     }
 
 }
-```
+
 
 );
 
@@ -2242,7 +2242,7 @@ onAuthStateChanged(
 auth,
 async (usuario) => {
 
-```
+
     if (!usuario) {
 
         window.location.href =
@@ -2261,7 +2261,7 @@ async (usuario) => {
     await carregarLicao();
 
 }
-```
+
 
 );
 
