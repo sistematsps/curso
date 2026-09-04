@@ -1,0 +1,1979 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Lições - Administração</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+header {
+    background: #1f2937;
+    color: white;
+    padding: 16px 22px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+button,
+.btn-link {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    text-decoration: none;
+
+    display: inline-block;
+}
+
+.btn-voltar {
+    background: #374151;
+    color: white;
+}
+
+.btn-sair {
+    background: #dc2626;
+    color: white;
+}
+
+.container {
+    max-width: 1100px;
+
+    margin: 25px auto;
+
+    padding: 0 15px;
+}
+
+.card {
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+input,
+textarea,
+select {
+
+    width: 100%;
+
+    padding: 11px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color: #2563eb;
+}
+
+textarea {
+
+    min-height: 90px;
+
+    resize: vertical;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.botoes {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.btn-salvar {
+
+    background: #16a34a;
+
+    color: white;
+}
+
+.btn-cancelar {
+
+    background: #6b7280;
+
+    color: white;
+}
+
+.btn-novo {
+
+    background: #2563eb;
+
+    color: white;
+}
+
+.btn-novo:disabled {
+
+    background: #9ca3af;
+
+    cursor: not-allowed;
+}
+
+.mensagem {
+
+    padding: 12px;
+
+    border-radius: 7px;
+
+    margin-bottom: 15px;
+
+    display: none;
+}
+
+.sucesso {
+
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+.erro {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+.info {
+
+    background: #dbeafe;
+
+    color: #1e40af;
+}
+
+.selecao-info {
+
+    margin-top: 12px;
+
+    padding: 12px;
+
+    background: #eff6ff;
+
+    border-radius: 7px;
+
+    color: #1e40af;
+
+    font-weight: bold;
+}
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 160px;
+
+    gap: 15px;
+}
+
+#formBox {
+
+    display: none;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+th,
+td {
+
+    padding: 12px 10px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    text-align: left;
+
+    vertical-align: middle;
+}
+
+th {
+
+    background: #f9fafb;
+}
+
+.status {
+
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.status-ativo {
+
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+.status-inativo {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+.acoes {
+
+    display: flex;
+
+    gap: 5px;
+
+    flex-wrap: wrap;
+}
+
+.btn-editar {
+
+    background: #f59e0b;
+
+    color: white;
+}
+
+.btn-status {
+
+    background: #6366f1;
+
+    color: white;
+}
+
+.btn-excluir {
+
+    background: #dc2626;
+
+    color: white;
+}
+
+.loading {
+
+    text-align: center;
+
+    padding: 25px;
+
+    color: #6b7280;
+}
+
+.vazio {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #6b7280;
+}
+
+@media (max-width: 700px) {
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    table {
+
+        min-width: 800px;
+    }
+
+    .tabela-container {
+
+        overflow-x: auto;
+    }
+
+    header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>
+        ⚙️ Administração — Lições
+    </h1>
+
+    <div class="header-buttons">
+
+        <a
+            href="modulos.html"
+            class="btn-link btn-voltar"
+        >
+            ← Módulos
+        </a>
+
+        <button
+            id="btnSair"
+            class="btn-sair"
+        >
+            Sair
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <div
+        id="mensagem"
+        class="mensagem"
+    ></div>
+
+
+    <!-- CURSO -->
+
+    <div class="card">
+
+        <h2>
+            📚 1. Selecionar Curso
+        </h2>
+
+        <div class="campo">
+
+            <label for="cursoSelect">
+                Curso
+            </label>
+
+            <select id="cursoSelect">
+
+                <option value="">
+                    Carregando cursos...
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- MÓDULO -->
+
+    <div class="card">
+
+        <h2>
+            📦 2. Selecionar Módulo
+        </h2>
+
+        <div class="campo">
+
+            <label for="moduloSelect">
+                Módulo
+            </label>
+
+            <select
+                id="moduloSelect"
+                disabled
+            >
+
+                <option value="">
+                    Selecione primeiro um curso
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="selecaoInfo"
+            class="selecao-info"
+            style="display:none;"
+        ></div>
+
+    </div>
+
+
+    <!-- NOVO -->
+
+    <div class="card">
+
+        <button
+            id="btnNovo"
+            class="btn-novo"
+            disabled
+        >
+            + Nova lição
+        </button>
+
+    </div>
+
+
+    <!-- FORM -->
+
+    <div
+        class="card"
+        id="formBox"
+    >
+
+        <h2 id="tituloFormulario">
+            Nova lição
+        </h2>
+
+
+        <form id="formLicao">
+
+
+            <div class="campo">
+
+                <label for="titulo">
+                    Título da lição
+                </label>
+
+                <input
+                    type="text"
+                    id="titulo"
+                    placeholder="Ex.: Como cumprimentar alguém"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="descricao">
+                    Descrição
+                </label>
+
+                <textarea
+                    id="descricao"
+                    placeholder="Explique brevemente o conteúdo da lição..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="campo">
+
+                    <label for="ordem">
+                        Ordem da lição
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ordem"
+                        min="1"
+                        value="1"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="botoes">
+
+                <button
+                    type="submit"
+                    class="btn-salvar"
+                >
+                    💾 Salvar lição
+                </button>
+
+                <button
+                    type="button"
+                    id="btnCancelar"
+                    class="btn-cancelar"
+                >
+                    Cancelar
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+    <!-- LISTA -->
+
+    <div class="card">
+
+        <h2>
+            📝 Lições do módulo
+        </h2>
+
+
+        <div
+            id="loading"
+            class="loading"
+        >
+            Selecione um curso e um módulo.
+        </div>
+
+
+        <div class="tabela-container">
+
+            <table
+                id="tabela"
+                style="display:none;"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Ordem
+                        </th>
+
+                        <th>
+                            Lição
+                        </th>
+
+                        <th>
+                            Descrição
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="listaLicoes"
+                ></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script type="module">
+
+
+// ======================================================
+// FIREBASE
+// ======================================================
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+// ======================================================
+// ELEMENTOS
+// ======================================================
+
+const cursoSelect =
+    document.getElementById("cursoSelect");
+
+const moduloSelect =
+    document.getElementById("moduloSelect");
+
+const selecaoInfo =
+    document.getElementById("selecaoInfo");
+
+const btnNovo =
+    document.getElementById("btnNovo");
+
+const btnSair =
+    document.getElementById("btnSair");
+
+const btnCancelar =
+    document.getElementById("btnCancelar");
+
+const formBox =
+    document.getElementById("formBox");
+
+const formLicao =
+    document.getElementById("formLicao");
+
+const tituloFormulario =
+    document.getElementById("tituloFormulario");
+
+const titulo =
+    document.getElementById("titulo");
+
+const descricao =
+    document.getElementById("descricao");
+
+const ordem =
+    document.getElementById("ordem");
+
+const listaLicoes =
+    document.getElementById("listaLicoes");
+
+const tabela =
+    document.getElementById("tabela");
+
+const loading =
+    document.getElementById("loading");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+
+// ======================================================
+// VARIÁVEIS
+// ======================================================
+
+let cursos = [];
+
+let modulos = [];
+
+let licoes = [];
+
+let licaoEditando = null;
+
+
+// ======================================================
+// MENSAGEM
+// ======================================================
+
+function mostrarMensagem(texto, tipo = "sucesso") {
+
+    mensagem.textContent = texto;
+
+    mensagem.className =
+        "mensagem " + tipo;
+
+    mensagem.style.display =
+        "block";
+
+
+    setTimeout(() => {
+
+        mensagem.style.display =
+            "none";
+
+    }, 4000);
+
+}
+
+
+// ======================================================
+// ESCAPAR HTML
+// ======================================================
+
+function escapar(valor) {
+
+    if (
+        valor === null ||
+        valor === undefined
+    ) {
+        return "";
+    }
+
+
+    return String(valor)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+}
+
+
+// ======================================================
+// AUTENTICAÇÃO
+// ======================================================
+
+onAuthStateChanged(
+    auth,
+    async (user) => {
+
+        if (!user) {
+
+            mostrarMensagem(
+                "Você precisa estar logado para acessar esta página.",
+                "erro"
+            );
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "index.html";
+
+            }, 1500);
+
+
+            return;
+        }
+
+
+        await carregarCursos();
+
+    }
+);
+
+
+// ======================================================
+// CARREGAR CURSOS
+// ======================================================
+
+async function carregarCursos() {
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(db, "cursos")
+            );
+
+
+        cursos = [];
+
+
+        snapshot.forEach((item) => {
+
+            cursos.push({
+
+                id: item.id,
+
+                ...item.data()
+
+            });
+
+        });
+
+
+        cursos.sort((a, b) => {
+
+            const nomeA =
+                (a.titulo || "")
+                .toLowerCase();
+
+            const nomeB =
+                (b.titulo || "")
+                .toLowerCase();
+
+
+            return nomeA.localeCompare(nomeB);
+
+        });
+
+
+        cursoSelect.innerHTML =
+            '<option value="">Selecione um curso...</option>';
+
+
+        cursos.forEach((curso) => {
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                curso.id;
+
+
+            option.textContent =
+                (curso.titulo || "Curso sem título") +
+                (curso.ativo === false
+                    ? " — INATIVO"
+                    : "");
+
+
+            cursoSelect.appendChild(option);
+
+        });
+
+
+        if (cursos.length === 0) {
+
+            cursoSelect.innerHTML =
+                '<option value="">Nenhum curso cadastrado</option>';
+
+
+            loading.textContent =
+                "Cadastre primeiro um curso.";
+
+        }
+
+    } catch (erro) {
+
+        console.error(erro);
+
+
+        mostrarMensagem(
+            "Erro ao carregar os cursos.",
+            "erro"
+        );
+
+
+        cursoSelect.innerHTML =
+            '<option value="">Erro ao carregar</option>';
+
+    }
+
+}
+
+
+// ======================================================
+// SELECIONAR CURSO
+// ======================================================
+
+cursoSelect.addEventListener(
+    "change",
+    async () => {
+
+        const cursoId =
+            cursoSelect.value;
+
+
+        limparFormulario();
+
+
+        moduloSelect.innerHTML =
+            '<option value="">Carregando módulos...</option>';
+
+
+        moduloSelect.disabled =
+            true;
+
+
+        btnNovo.disabled =
+            true;
+
+
+        tabela.style.display =
+            "none";
+
+
+        selecaoInfo.style.display =
+            "none";
+
+
+        if (!cursoId) {
+
+            moduloSelect.innerHTML =
+                '<option value="">Selecione primeiro um curso</option>';
+
+
+            loading.style.display =
+                "block";
+
+
+            loading.textContent =
+                "Selecione um curso e um módulo.";
+
+
+            return;
+
+        }
+
+
+        await carregarModulos(cursoId);
+
+    }
+);
+
+
+// ======================================================
+// CARREGAR MÓDULOS
+// ======================================================
+
+async function carregarModulos(cursoId) {
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(db, "modulos")
+            );
+
+
+        modulos = [];
+
+
+        snapshot.forEach((item) => {
+
+            const dados =
+                item.data();
+
+
+            if (
+                dados.cursoId === cursoId
+            ) {
+
+                modulos.push({
+
+                    id: item.id,
+
+                    ...dados
+
+                });
+
+            }
+
+        });
+
+
+        modulos.sort((a, b) => {
+
+            return Number(a.ordem || 0)
+                -
+                Number(b.ordem || 0);
+
+        });
+
+
+        moduloSelect.innerHTML =
+            '<option value="">Selecione um módulo...</option>';
+
+
+        modulos.forEach((modulo) => {
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                modulo.id;
+
+
+            option.textContent =
+                (modulo.ordem || 0) +
+                " — " +
+                (modulo.titulo || "Módulo sem título") +
+                (modulo.ativo === false
+                    ? " — INATIVO"
+                    : "");
+
+
+            moduloSelect.appendChild(option);
+
+        });
+
+
+        moduloSelect.disabled =
+            modulos.length === 0;
+
+
+        if (modulos.length === 0) {
+
+            moduloSelect.innerHTML =
+                '<option value="">Este curso não possui módulos</option>';
+
+
+            loading.style.display =
+                "block";
+
+
+            loading.textContent =
+                "Cadastre primeiro um módulo para este curso.";
+
+            return;
+
+        }
+
+
+        loading.style.display =
+            "block";
+
+
+        loading.textContent =
+            "Selecione um módulo para visualizar as lições.";
+
+    } catch (erro) {
+
+        console.error(erro);
+
+
+        mostrarMensagem(
+            "Erro ao carregar os módulos.",
+            "erro"
+        );
+
+    }
+
+}
+
+
+// ======================================================
+// SELECIONAR MÓDULO
+// ======================================================
+
+moduloSelect.addEventListener(
+    "change",
+    async () => {
+
+        const moduloId =
+            moduloSelect.value;
+
+
+        limparFormulario();
+
+
+        if (!moduloId) {
+
+            btnNovo.disabled =
+                true;
+
+
+            selecaoInfo.style.display =
+                "none";
+
+
+            tabela.style.display =
+                "none";
+
+
+            loading.style.display =
+                "block";
+
+
+            loading.textContent =
+                "Selecione um módulo para visualizar as lições.";
+
+
+            return;
+
+        }
+
+
+        const modulo =
+            modulos.find(
+                item =>
+                    item.id === moduloId
+            );
+
+
+        if (modulo) {
+
+            selecaoInfo.textContent =
+                "Módulo selecionado: " +
+                (modulo.titulo || "Sem título");
+
+
+            selecaoInfo.style.display =
+                "block";
+
+        }
+
+
+        btnNovo.disabled =
+            false;
+
+
+        await carregarLicoes(moduloId);
+
+    }
+);
+
+
+// ======================================================
+// CARREGAR LIÇÕES
+// ======================================================
+
+async function carregarLicoes(moduloId) {
+
+    loading.style.display =
+        "block";
+
+
+    loading.textContent =
+        "Carregando lições...";
+
+
+    tabela.style.display =
+        "none";
+
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(db, "licoes")
+            );
+
+
+        licoes = [];
+
+
+        snapshot.forEach((item) => {
+
+            const dados =
+                item.data();
+
+
+            if (
+                dados.moduloId === moduloId
+            ) {
+
+                licoes.push({
+
+                    id: item.id,
+
+                    ...dados
+
+                });
+
+            }
+
+        });
+
+
+        licoes.sort((a, b) => {
+
+            return Number(a.ordem || 0)
+                -
+                Number(b.ordem || 0);
+
+        });
+
+
+        renderizarLicoes();
+
+    } catch (erro) {
+
+        console.error(erro);
+
+
+        mostrarMensagem(
+            "Erro ao carregar as lições.",
+            "erro"
+        );
+
+
+        loading.textContent =
+            "Não foi possível carregar as lições.";
+
+    }
+
+}
+
+
+// ======================================================
+// RENDERIZAR
+// ======================================================
+
+function renderizarLicoes() {
+
+    listaLicoes.innerHTML =
+        "";
+
+
+    loading.style.display =
+        "none";
+
+
+    if (licoes.length === 0) {
+
+        tabela.style.display =
+            "none";
+
+
+        loading.style.display =
+            "block";
+
+
+        loading.textContent =
+            "Este módulo ainda não possui lições.";
+
+
+        return;
+
+    }
+
+
+    tabela.style.display =
+        "table";
+
+
+    licoes.forEach((licao) => {
+
+        const tr =
+            document.createElement("tr");
+
+
+        const status =
+            licao.ativo !== false
+
+                ? '<span class="status status-ativo">ATIVA</span>'
+
+                : '<span class="status status-inativo">INATIVA</span>';
+
+
+        const botaoStatus =
+            licao.ativo !== false
+
+                ? "Desativar"
+
+                : "Ativar";
+
+
+        tr.innerHTML = `
+
+            <td>
+                <strong>
+                    ${escapar(licao.ordem || 0)}
+                </strong>
+            </td>
+
+            <td>
+                <strong>
+                    ${escapar(licao.titulo)}
+                </strong>
+            </td>
+
+            <td>
+                ${escapar(
+                    licao.descricao || "-"
+                )}
+            </td>
+
+            <td>
+                ${status}
+            </td>
+
+            <td>
+
+                <div class="acoes">
+
+                    <button
+                        class="btn-editar"
+                        data-acao="editar"
+                        data-id="${licao.id}"
+                    >
+                        Editar
+                    </button>
+
+                    <button
+                        class="btn-status"
+                        data-acao="status"
+                        data-id="${licao.id}"
+                    >
+                        ${botaoStatus}
+                    </button>
+
+                    <button
+                        class="btn-excluir"
+                        data-acao="excluir"
+                        data-id="${licao.id}"
+                    >
+                        Excluir
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
+
+
+        listaLicoes.appendChild(tr);
+
+    });
+
+}
+
+
+// ======================================================
+// NOVA LIÇÃO
+// ======================================================
+
+btnNovo.addEventListener(
+    "click",
+    () => {
+
+        if (!moduloSelect.value) {
+
+            mostrarMensagem(
+                "Selecione um módulo primeiro.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        licaoEditando =
+            null;
+
+
+        formLicao.reset();
+
+
+        ordem.value =
+            licoes.length + 1;
+
+
+        tituloFormulario.textContent =
+            "Nova lição";
+
+
+        formBox.style.display =
+            "block";
+
+
+        titulo.focus();
+
+
+        window.scrollTo({
+
+            top:
+                formBox.offsetTop - 20,
+
+            behavior:
+                "smooth"
+
+        });
+
+    }
+);
+
+
+// ======================================================
+// CANCELAR
+// ======================================================
+
+btnCancelar.addEventListener(
+    "click",
+    () => {
+
+        limparFormulario();
+
+    }
+);
+
+
+// ======================================================
+// LIMPAR FORM
+// ======================================================
+
+function limparFormulario() {
+
+    licaoEditando =
+        null;
+
+
+    formLicao.reset();
+
+
+    ordem.value =
+        1;
+
+
+    tituloFormulario.textContent =
+        "Nova lição";
+
+
+    formBox.style.display =
+        "none";
+
+}
+
+
+// ======================================================
+// SALVAR LIÇÃO
+// ======================================================
+
+formLicao.addEventListener(
+    "submit",
+    async (evento) => {
+
+        evento.preventDefault();
+
+
+        const cursoId =
+            cursoSelect.value;
+
+
+        const moduloId =
+            moduloSelect.value;
+
+
+        if (!cursoId) {
+
+            mostrarMensagem(
+                "Selecione um curso.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        if (!moduloId) {
+
+            mostrarMensagem(
+                "Selecione um módulo.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        const dados = {
+
+            cursoId:
+                cursoId,
+
+            moduloId:
+                moduloId,
+
+            titulo:
+                titulo.value.trim(),
+
+            descricao:
+                descricao.value.trim(),
+
+            ordem:
+                Number(ordem.value),
+
+            atualizadoEm:
+                serverTimestamp()
+
+        };
+
+
+        if (!dados.titulo) {
+
+            mostrarMensagem(
+                "Digite o título da lição.",
+                "erro"
+            );
+
+            titulo.focus();
+
+            return;
+
+        }
+
+
+        if (
+            !dados.ordem ||
+            dados.ordem < 1
+        ) {
+
+            mostrarMensagem(
+                "Informe uma ordem válida.",
+                "erro"
+            );
+
+            ordem.focus();
+
+            return;
+
+        }
+
+
+        try {
+
+            if (licaoEditando) {
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "licoes",
+                        licaoEditando
+                    ),
+
+                    dados
+
+                );
+
+
+                mostrarMensagem(
+                    "Lição atualizada com sucesso!"
+                );
+
+            } else {
+
+                await addDoc(
+
+                    collection(
+                        db,
+                        "licoes"
+                    ),
+
+                    {
+
+                        ...dados,
+
+                        ativo:
+                            true,
+
+                        criadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+
+                mostrarMensagem(
+                    "Lição criada com sucesso!"
+                );
+
+            }
+
+
+            limparFormulario();
+
+
+            await carregarLicoes(
+                moduloId
+            );
+
+
+        } catch (erro) {
+
+            console.error(erro);
+
+
+            mostrarMensagem(
+                "Erro ao salvar a lição: " +
+                erro.message,
+                "erro"
+            );
+
+        }
+
+    }
+);
+
+
+// ======================================================
+// AÇÕES
+// ======================================================
+
+listaLicoes.addEventListener(
+    "click",
+    async (evento) => {
+
+        const botao =
+            evento.target.closest(
+                "button"
+            );
+
+
+        if (!botao) {
+            return;
+        }
+
+
+        const id =
+            botao.dataset.id;
+
+
+        const acao =
+            botao.dataset.acao;
+
+
+        const licao =
+            licoes.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if (!licao) {
+            return;
+        }
+
+
+        // ==========================
+        // EDITAR
+        // ==========================
+
+        if (acao === "editar") {
+
+            licaoEditando =
+                id;
+
+
+            titulo.value =
+                licao.titulo || "";
+
+
+            descricao.value =
+                licao.descricao || "";
+
+
+            ordem.value =
+                licao.ordem || 1;
+
+
+            tituloFormulario.textContent =
+                "Editar lição";
+
+
+            formBox.style.display =
+                "block";
+
+
+            titulo.focus();
+
+
+            window.scrollTo({
+
+                top:
+                    formBox.offsetTop - 20,
+
+                behavior:
+                    "smooth"
+
+            });
+
+
+            return;
+
+        }
+
+
+        // ==========================
+        // STATUS
+        // ==========================
+
+        if (acao === "status") {
+
+            const novoStatus =
+                licao.ativo === false;
+
+
+            const confirmacao =
+                novoStatus
+
+                    ? "Deseja ativar esta lição?"
+
+                    : "Deseja desativar esta lição?";
+
+
+            if (!confirm(confirmacao)) {
+                return;
+            }
+
+
+            try {
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "licoes",
+                        id
+                    ),
+
+                    {
+
+                        ativo:
+                            novoStatus,
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+
+                mostrarMensagem(
+
+                    novoStatus
+
+                        ? "Lição ativada!"
+
+                        : "Lição desativada!"
+
+                );
+
+
+                await carregarLicoes(
+                    moduloSelect.value
+                );
+
+
+            } catch (erro) {
+
+                console.error(erro);
+
+
+                mostrarMensagem(
+                    "Erro ao alterar o status.",
+                    "erro"
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        // ==========================
+        // EXCLUIR
+        // ==========================
+
+        if (acao === "excluir") {
+
+            const confirmacao =
+                confirm(
+
+                    "Tem certeza que deseja excluir a lição \"" +
+
+                    (licao.titulo || "") +
+
+                    "\"?\n\n" +
+
+                    "Esta ação não poderá ser desfeita."
+
+                );
+
+
+            if (!confirmacao) {
+                return;
+            }
+
+
+            try {
+
+                await deleteDoc(
+
+                    doc(
+                        db,
+                        "licoes",
+                        id
+                    )
+
+                );
+
+
+                mostrarMensagem(
+                    "Lição excluída com sucesso!"
+                );
+
+
+                await carregarLicoes(
+                    moduloSelect.value
+                );
+
+
+            } catch (erro) {
+
+                console.error(erro);
+
+
+                mostrarMensagem(
+                    "Erro ao excluir a lição.",
+                    "erro"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+// ======================================================
+// SAIR
+// ======================================================
+
+btnSair.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await signOut(auth);
+
+
+            window.location.href =
+                "index.html";
+
+
+        } catch (erro) {
+
+            console.error(erro);
+
+
+            mostrarMensagem(
+                "Erro ao sair.",
+                "erro"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
