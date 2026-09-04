@@ -3,1584 +3,1773 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Administração - Cursos</title>
+<meta charset="UTF-8">
 
-  <style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<title>Administração de Cursos</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6fb;
+    color:#1f2937;
+}
+
+header{
+    background:#4f46e5;
+    color:white;
+    padding:18px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+header h1{
+    margin:0;
+    font-size:22px;
+}
+
+.header-acoes{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:0;
+    border-radius:9px;
+    padding:10px 14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn-primary{
+    background:#4f46e5;
+    color:white;
+}
+
+.btn-success{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-warning{
+    background:#f59e0b;
+    color:white;
+}
+
+.btn-danger{
+    background:#dc2626;
+    color:white;
+}
+
+.btn-secondary{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.container{
+    width:min(1200px,94%);
+    margin:25px auto;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.card h2{
+    margin-top:0;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.campo-full{
+    grid-column:1 / -1;
+}
+
+label{
+    font-weight:bold;
+    font-size:14px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #d1d5db;
+    border-radius:9px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#4f46e5;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.radio-area{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:5px;
+}
+
+.radio-item{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-weight:normal;
+}
+
+.radio-item input{
+    width:auto;
+}
+
+.valor-info{
+    padding:12px;
+    border-radius:10px;
+    background:#f9fafb;
+    color:#4b5563;
+    font-size:14px;
+    margin-top:8px;
+}
+
+.acoes-form{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.mensagem{
+    display:none;
+    padding:12px 15px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+.mensagem.sucesso{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.mensagem.erro{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.topo-lista{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+.pesquisa{
+    max-width:400px;
+}
+
+.tabela-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:13px 10px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+    vertical-align:middle;
+}
+
+th{
+    background:#f9fafb;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.badge-ativo{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.badge-inativo{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.badge-gratuito{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.badge-pago{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.acoes-tabela{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+}
+
+.acoes-tabela button{
+    padding:7px 9px;
+    font-size:12px;
+}
+
+.vazio{
+    text-align:center;
+    padding:35px;
+    color:#6b7280;
+}
+
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#6b7280;
+}
+
+@media(max-width:700px){
+
+    .form-grid{
+        grid-template-columns:1fr;
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6f8;
-      color: #222;
-      min-height: 100vh;
-    }
-
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid #ddd;
-      padding: 18px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      font-size: 22px;
-    }
-
-    .btn-sair {
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 9px 16px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    .topo {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-      gap: 15px;
-    }
-
-    .topo h2 {
-      font-size: 25px;
-    }
-
-    .btn-novo {
-      background: #4a6cf7;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .btn-novo:hover {
-      background: #3d5edb;
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 25px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
-    }
-
-    .card h3 {
-      margin-bottom: 20px;
-    }
-
-    .formulario {
-      display: none;
-    }
-
-    .campo {
-      margin-bottom: 16px;
-    }
-
-    .campo label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: bold;
-    }
-
-    .campo input,
-    .campo textarea,
-    .campo select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 7px;
-      font-size: 15px;
-      font-family: inherit;
-    }
-
-    .campo textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .campo input:focus,
-    .campo textarea:focus,
-    .campo select:focus {
-      outline: none;
-      border-color: #4a6cf7;
-    }
-
-    .botoes-formulario {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .botoes-formulario button {
-      border: none;
-      padding: 11px 18px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .btn-salvar {
-      background: #27ae60;
-      color: white;
-    }
-
-    .btn-cancelar {
-      background: #eee;
-      color: #333;
-    }
-
-    .pesquisa {
-      margin-bottom: 20px;
-    }
-
-    .pesquisa input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-
-    .mensagem {
-      display: none;
-      padding: 13px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .sucesso {
-      background: #d4edda;
-      color: #155724;
-    }
-
-    .erro {
-      background: #f8d7da;
-      color: #721c24;
-    }
-
-    .tabela-container {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .campo-full{
+        grid-column:auto;
     }
 
     th,
-    td {
-      padding: 13px 10px;
-      border-bottom: 1px solid #eee;
-      text-align: left;
-      vertical-align: middle;
+    td{
+        font-size:13px;
     }
 
-    th {
-      background: #f7f7f7;
-      font-size: 14px;
-    }
+}
 
-    td {
-      font-size: 14px;
-    }
-
-    .status {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .ativo {
-      background: #d4edda;
-      color: #155724;
-    }
-
-    .inativo {
-      background: #f8d7da;
-      color: #721c24;
-    }
-
-    .acoes {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .acoes button {
-      border: none;
-      padding: 7px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .btn-editar {
-      background: #3498db;
-      color: white;
-    }
-
-    .btn-status {
-      background: #f39c12;
-      color: white;
-    }
-
-    .btn-excluir {
-      background: #e74c3c;
-      color: white;
-    }
-
-    .vazio {
-      text-align: center;
-      padding: 35px;
-      color: #777;
-    }
-
-    .carregando {
-      text-align: center;
-      padding: 30px;
-      color: #777;
-    }
-
-    #areaAdmin {
-      display: none;
-    }
-
-    #acessoNegado {
-      display: none;
-      max-width: 500px;
-      margin: 80px auto;
-      padding: 30px;
-      text-align: center;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-    }
-
-    #acessoNegado h2 {
-      margin-bottom: 12px;
-    }
-
-    #acessoNegado p {
-      color: #666;
-      margin-bottom: 20px;
-    }
-
-    .btn-voltar {
-      display: inline-block;
-      text-decoration: none;
-      background: #4a6cf7;
-      color: white;
-      padding: 11px 18px;
-      border-radius: 7px;
-      font-weight: bold;
-    }
-
-    @media (max-width: 700px) {
-
-      header {
-        padding: 15px;
-      }
-
-      header h1 {
-        font-size: 18px;
-      }
-
-      .container {
-        padding: 0 12px;
-      }
-
-      .topo {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .topo h2 {
-        font-size: 21px;
-      }
-
-      .card {
-        padding: 18px;
-      }
-
-      .botoes-formulario {
-        flex-direction: column;
-      }
-
-      .botoes-formulario button {
-        width: 100%;
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
-
 <body>
 
-  <header>
+<header>
 
-    <h1>⚙️ Administração</h1>
+    <h1>⚙️ Administração de Cursos</h1>
 
-    <button
-      class="btn-sair"
-      id="btnSair"
-    >
-      Sair
-    </button>
+    <div class="header-acoes">
 
-  </header>
+        <button
+            class="btn-secondary"
+            id="btnNovo"
+        >
+            + Novo Curso
+        </button>
 
-
-  <!--
-  ============================================================
-  ÁREA PRINCIPAL DO ADMINISTRADOR
-  ============================================================
-  -->
-
-  <main
-    id="areaAdmin"
-    class="container"
-  >
-
-    <div class="topo">
-
-      <h2>📚 Cursos</h2>
-
-      <button
-        class="btn-novo"
-        id="btnNovoCurso"
-      >
-        + Novo curso
-      </button>
+        <button
+            class="btn-secondary"
+            id="btnSair"
+        >
+            Sair
+        </button>
 
     </div>
 
-
-    <div
-      id="mensagem"
-      class="mensagem"
-    ></div>
+</header>
 
 
-    <!--
-    ============================================================
-    FORMULÁRIO
-    ============================================================
-    -->
+<main class="container">
+
+    <!-- FORMULÁRIO -->
 
     <section
-      id="formularioCurso"
-      class="card formulario"
+        class="card"
+        id="formCard"
     >
 
-      <h3 id="tituloFormulario">
-        Novo curso
-      </h3>
+        <h2 id="tituloFormulario">
+            ➕ Novo Curso
+        </h2>
+
+        <div
+            id="mensagem"
+            class="mensagem"
+        ></div>
 
 
-      <form id="formCurso">
+        <form id="formCurso">
 
-        <div class="campo">
-
-          <label for="titulo">
-            Título do curso
-          </label>
-
-          <input
-            type="text"
-            id="titulo"
-            placeholder="Ex.: Inglês Básico"
-            required
-          >
-
-        </div>
+            <div class="form-grid">
 
 
-        <div class="campo">
+                <!-- TÍTULO -->
 
-          <label for="descricao">
-            Descrição
-          </label>
+                <div class="campo campo-full">
 
-          <textarea
-            id="descricao"
-            placeholder="Descreva o curso..."
-          ></textarea>
+                    <label for="titulo">
+                        Título do curso
+                    </label>
 
-        </div>
+                    <input
+                        type="text"
+                        id="titulo"
+                        required
+                        placeholder="Ex.: Curso de Informática Básica"
+                    >
 
-
-        <div class="campo">
-
-          <label for="imagem">
-            URL da imagem
-          </label>
-
-          <input
-            type="url"
-            id="imagem"
-            placeholder="https://..."
-          >
-
-        </div>
+                </div>
 
 
-        <div class="campo">
+                <!-- DESCRIÇÃO -->
 
-          <label for="nivel">
-            Nível
-          </label>
+                <div class="campo campo-full">
 
-          <select id="nivel">
+                    <label for="descricao">
+                        Descrição
+                    </label>
 
-            <option value="iniciante">
-              Iniciante
-            </option>
+                    <textarea
+                        id="descricao"
+                        placeholder="Descrição do curso"
+                    ></textarea>
 
-            <option value="basico">
-              Básico
-            </option>
-
-            <option value="intermediario">
-              Intermediário
-            </option>
-
-            <option value="avancado">
-              Avançado
-            </option>
-
-          </select>
-
-        </div>
+                </div>
 
 
-        <div class="botoes-formulario">
+                <!-- IMAGEM -->
 
-          <button
-            type="submit"
-            class="btn-salvar"
-          >
-            💾 Salvar curso
-          </button>
+                <div class="campo campo-full">
+
+                    <label for="imagem">
+                        URL da imagem
+                    </label>
+
+                    <input
+                        type="url"
+                        id="imagem"
+                        placeholder="https://..."
+                    >
+
+                </div>
 
 
-          <button
-            type="button"
-            class="btn-cancelar"
-            id="btnCancelar"
-          >
-            Cancelar
-          </button>
+                <!-- NÍVEL -->
 
-        </div>
+                <div class="campo">
 
-      </form>
+                    <label for="nivel">
+                        Nível
+                    </label>
+
+                    <select id="nivel">
+
+                        <option value="Iniciante">
+                            Iniciante
+                        </option>
+
+                        <option value="Intermediário">
+                            Intermediário
+                        </option>
+
+                        <option value="Avançado">
+                            Avançado
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TIPO -->
+
+                <div class="campo">
+
+                    <label>
+                        Tipo do curso
+                    </label>
+
+                    <div class="radio-area">
+
+                        <label class="radio-item">
+
+                            <input
+                                type="radio"
+                                name="tipoCurso"
+                                value="gratuito"
+                                checked
+                            >
+
+                            🆓 Gratuito
+
+                        </label>
+
+
+                        <label class="radio-item">
+
+                            <input
+                                type="radio"
+                                name="tipoCurso"
+                                value="pago"
+                            >
+
+                            💰 Pago
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VALOR -->
+
+                <div
+                    class="campo"
+                    id="campoValor"
+                >
+
+                    <label for="valor">
+                        Valor do curso
+                    </label>
+
+                    <input
+                        type="number"
+                        id="valor"
+                        min="0"
+                        step="0.01"
+                        value="0"
+                        placeholder="0,00"
+                    >
+
+                    <div
+                        class="valor-info"
+                        id="valorInfo"
+                    >
+                        Curso gratuito. O aluno poderá acessar o curso
+                        gratuitamente e pagará R$ 10,00 somente para emitir
+                        o certificado após a conclusão.
+                    </div>
+
+                </div>
+
+
+                <!-- VALOR CERTIFICADO -->
+
+                <div class="campo">
+
+                    <label for="valorCertificado">
+                        Valor do certificado
+                    </label>
+
+                    <input
+                        type="number"
+                        id="valorCertificado"
+                        min="0"
+                        step="0.01"
+                        value="10"
+                        readonly
+                    >
+
+                    <div class="valor-info">
+                        Para cursos gratuitos, o certificado custa R$ 10,00.
+                        Para cursos pagos, o certificado é incluído.
+                    </div>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="campo">
+
+                    <label for="ativo">
+                        Status
+                    </label>
+
+                    <select id="ativo">
+
+                        <option value="true">
+                            Ativo
+                        </option>
+
+                        <option value="false">
+                            Inativo
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="acoes-form">
+
+                <button
+                    type="submit"
+                    class="btn-success"
+                >
+                    💾 Salvar Curso
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="btnCancelar"
+                >
+                    Cancelar
+                </button>
+
+            </div>
+
+        </form>
 
     </section>
 
 
-    <!--
-    ============================================================
-    LISTA DE CURSOS
-    ============================================================
-    -->
+    <!-- LISTA -->
 
     <section class="card">
 
-      <h3>
-        Cursos cadastrados
-      </h3>
+        <div class="topo-lista">
+
+            <h2>
+                📚 Cursos cadastrados
+            </h2>
+
+            <input
+                type="search"
+                id="pesquisa"
+                class="pesquisa"
+                placeholder="Pesquisar curso..."
+            >
+
+        </div>
 
 
-      <div class="pesquisa">
+        <div class="tabela-container">
 
-        <input
-          type="search"
-          id="pesquisa"
-          placeholder="🔎 Pesquisar curso..."
-        >
+            <table>
 
-      </div>
+                <thead>
 
+                    <tr>
 
-      <div class="tabela-container">
+                        <th>
+                            Curso
+                        </th>
 
-        <table>
+                        <th>
+                            Tipo
+                        </th>
 
-          <thead>
+                        <th>
+                            Valor
+                        </th>
 
-            <tr>
+                        <th>
+                            Certificado
+                        </th>
 
-              <th>
-                Curso
-              </th>
+                        <th>
+                            Nível
+                        </th>
 
-              <th>
-                Nível
-              </th>
+                        <th>
+                            Status
+                        </th>
 
-              <th>
-                Status
-              </th>
+                        <th>
+                            Ações
+                        </th>
 
-              <th>
-                Ações
-              </th>
+                    </tr>
 
-            </tr>
+                </thead>
 
-          </thead>
+                <tbody id="listaCursos">
 
-          <tbody id="listaCursos">
+                    <tr>
 
-          </tbody>
+                        <td
+                            colspan="7"
+                            class="loading"
+                        >
+                            Carregando cursos...
+                        </td>
 
-        </table>
+                    </tr>
 
-      </div>
+                </tbody>
+
+            </table>
+
+        </div>
 
     </section>
 
-  </main>
+</main>
 
 
-  <!--
-  ============================================================
-  ACESSO NEGADO
-  ============================================================
-  -->
+<script type="module">
 
-  <section id="acessoNegado">
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-    <h2>🔒 Acesso restrito</h2>
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-    <p>
-      Você precisa estar autenticado para acessar
-      esta área administrativa.
-    </p>
-
-    <a
-      href="index.html"
-      class="btn-voltar"
-    >
-      Voltar para o início
-    </a>
-
-  </section>
-
-
-  <div
-    id="carregando"
-    class="carregando"
-  >
-    Verificando acesso...
-  </div>
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-  <!--
-  ============================================================
-  FIREBASE
-  ============================================================
-  -->
+/* =========================================================
+   FIREBASE
+========================================================= */
 
-  <script type="module">
+const firebaseConfig = {
 
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
 
+    authDomain: "dezenas-1ed47.firebaseapp.com",
 
-    import {
-      getAuth,
-      onAuthStateChanged,
-      signOut
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+    projectId: "dezenas-1ed47",
 
+    storageBucket: "dezenas-1ed47.firebasestorage.app",
 
-    import {
-      getFirestore,
-      collection,
-      addDoc,
-      getDocs,
-      doc,
-      updateDoc,
-      deleteDoc,
-      serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+    messagingSenderId: "372788277555",
+
+    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId: "G-NMPP8PKPK3"
+
+};
 
 
-    /*
-    ============================================================
-    CONFIGURAÇÃO FIREBASE
-    ============================================================
-    */
+const app =
+    initializeApp(firebaseConfig);
 
-    const firebaseConfig = {
+const auth =
+    getAuth(app);
 
-      apiKey:
-        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+const db =
+    getFirestore(app);
 
-      authDomain:
-        "dezenas-1ed47.firebaseapp.com",
 
-      projectId:
-        "dezenas-1ed47",
+/* =========================================================
+   ELEMENTOS
+========================================================= */
 
-      storageBucket:
-        "dezenas-1ed47.firebasestorage.app",
+const formCurso =
+    document.getElementById("formCurso");
 
-      messagingSenderId:
-        "372788277555",
+const formCard =
+    document.getElementById("formCard");
 
-      appId:
-        "1:372788277555:web:1c1a6a80adee1722b54e46",
+const tituloFormulario =
+    document.getElementById("tituloFormulario");
 
-      measurementId:
-        "G-NMPP8PKPK3"
+const mensagem =
+    document.getElementById("mensagem");
+
+const titulo =
+    document.getElementById("titulo");
+
+const descricao =
+    document.getElementById("descricao");
+
+const imagem =
+    document.getElementById("imagem");
+
+const nivel =
+    document.getElementById("nivel");
+
+const valor =
+    document.getElementById("valor");
+
+const valorCertificado =
+    document.getElementById("valorCertificado");
+
+const ativo =
+    document.getElementById("ativo");
+
+const campoValor =
+    document.getElementById("campoValor");
+
+const valorInfo =
+    document.getElementById("valorInfo");
+
+const listaCursos =
+    document.getElementById("listaCursos");
+
+const pesquisa =
+    document.getElementById("pesquisa");
+
+const btnNovo =
+    document.getElementById("btnNovo");
+
+const btnCancelar =
+    document.getElementById("btnCancelar");
+
+const btnSair =
+    document.getElementById("btnSair");
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+let cursos = [];
+
+let cursoEditando = null;
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+function mostrarMensagem(texto, tipo){
+
+    mensagem.textContent =
+        texto;
+
+    mensagem.className =
+        "mensagem " + tipo;
+
+    setTimeout(() => {
+
+        mensagem.className =
+            "mensagem";
+
+    }, 4000);
+}
+
+
+/* =========================================================
+   TIPO DO CURSO
+========================================================= */
+
+function obterTipo(){
+
+    const selecionado =
+        document.querySelector(
+            'input[name="tipoCurso"]:checked'
+        );
+
+    return selecionado
+        ? selecionado.value
+        : "gratuito";
+}
+
+
+/* =========================================================
+   ATUALIZAR CAMPOS DE PAGAMENTO
+========================================================= */
+
+function atualizarCamposPagamento(){
+
+    const tipo =
+        obterTipo();
+
+
+    if(tipo === "gratuito"){
+
+        valor.value = "0";
+
+        valor.disabled = true;
+
+        valorCertificado.value = "10";
+
+        valorInfo.textContent =
+            "Curso gratuito. O aluno poderá acessar o curso gratuitamente e pagará R$ 10,00 somente para emitir o certificado após a conclusão.";
+
+    }else{
+
+        valor.disabled = false;
+
+        valorCertificado.value = "0";
+
+        valorInfo.textContent =
+            "Curso pago. O aluno deverá pagar o valor definido para ter acesso ao curso. O certificado será incluído após a conclusão.";
+
+    }
+
+}
+
+
+/* =========================================================
+   EVENTOS TIPO
+========================================================= */
+
+document
+    .querySelectorAll(
+        'input[name="tipoCurso"]'
+    )
+    .forEach(radio => {
+
+        radio.addEventListener(
+            "change",
+            atualizarCamposPagamento
+        );
+
+    });
+
+
+/* =========================================================
+   DADOS DO FORMULÁRIO
+========================================================= */
+
+function pegarDados(){
+
+    const tipo =
+        obterTipo();
+
+
+    let valorCurso =
+        Number(valor.value || 0);
+
+    let valorDoCertificado =
+        Number(
+            valorCertificado.value || 0
+        );
+
+
+    if(tipo === "gratuito"){
+
+        valorCurso = 0;
+
+        valorDoCertificado = 10;
+
+    }else{
+
+        if(valorCurso <= 0){
+
+            throw new Error(
+                "Informe o valor do curso pago."
+            );
+
+        }
+
+        valorDoCertificado = 0;
+
+    }
+
+
+    return {
+
+        titulo:
+            titulo.value.trim(),
+
+        descricao:
+            descricao.value.trim(),
+
+        imagem:
+            imagem.value.trim(),
+
+        nivel:
+            nivel.value,
+
+        tipo:
+            tipo,
+
+        valor:
+            valorCurso,
+
+        valorCertificado:
+            valorDoCertificado,
+
+        ativo:
+            ativo.value === "true"
 
     };
 
-
-    /*
-    ============================================================
-    INICIALIZAÇÃO
-    ============================================================
-    */
-
-    const app =
-      initializeApp(firebaseConfig);
+}
 
 
-    const auth =
-      getAuth(app);
+/* =========================================================
+   LIMPAR FORMULÁRIO
+========================================================= */
+
+function limparFormulario(){
+
+    formCurso.reset();
+
+    nivel.value =
+        "Iniciante";
+
+    ativo.value =
+        "true";
+
+    cursoEditando =
+        null;
+
+    tituloFormulario.textContent =
+        "➕ Novo Curso";
+
+    atualizarCamposPagamento();
+
+}
 
 
-    const db =
-      getFirestore(app);
+/* =========================================================
+   PREENCHER FORMULÁRIO
+========================================================= */
+
+function preencherFormulario(curso){
+
+    titulo.value =
+        curso.titulo || "";
+
+    descricao.value =
+        curso.descricao || "";
+
+    imagem.value =
+        curso.imagem || "";
+
+    nivel.value =
+        curso.nivel || "Iniciante";
+
+    ativo.value =
+        curso.ativo === false
+        ? "false"
+        : "true";
 
 
-    /*
-    ============================================================
-    ELEMENTOS
-    ============================================================
-    */
-
-    const areaAdmin =
-      document.getElementById("areaAdmin");
-
-    const acessoNegado =
-      document.getElementById("acessoNegado");
-
-    const carregando =
-      document.getElementById("carregando");
-
-    const formularioCurso =
-      document.getElementById("formularioCurso");
-
-    const formCurso =
-      document.getElementById("formCurso");
-
-    const listaCursos =
-      document.getElementById("listaCursos");
-
-    const pesquisa =
-      document.getElementById("pesquisa");
-
-    const mensagem =
-      document.getElementById("mensagem");
-
-    const tituloFormulario =
-      document.getElementById("tituloFormulario");
-
-    const btnNovoCurso =
-      document.getElementById("btnNovoCurso");
-
-    const btnCancelar =
-      document.getElementById("btnCancelar");
-
-    const btnSair =
-      document.getElementById("btnSair");
+    const tipo =
+        curso.tipo || "gratuito";
 
 
-    /*
-    ============================================================
-    VARIÁVEIS
-    ============================================================
-    */
-
-    let cursos = [];
-
-    let cursoEditando = null;
+    const radio =
+        document.querySelector(
+            `input[name="tipoCurso"][value="${tipo}"]`
+        );
 
 
-    /*
-    ============================================================
-    MENSAGEM
-    ============================================================
-    */
+    if(radio){
 
-    function mostrarMensagem(texto, tipo = "sucesso") {
-
-      mensagem.textContent = texto;
-
-      mensagem.className =
-        "mensagem " + tipo;
-
-      mensagem.style.display = "block";
-
-
-      setTimeout(() => {
-
-        mensagem.style.display = "none";
-
-      }, 4000);
+        radio.checked =
+            true;
 
     }
 
 
-    /*
-    ============================================================
-    ESCAPAR HTML
-    ============================================================
-    */
-
-    function escapar(valor) {
-
-      if (valor === null || valor === undefined) {
-        return "";
-      }
-
-      return String(valor)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
+    valor.value =
+        Number(curso.valor || 0);
 
 
-    /*
-    ============================================================
-    ABRIR NOVO CURSO
-    ============================================================
-    */
+    valorCertificado.value =
+        Number(
+            curso.valorCertificado ??
+            (tipo === "gratuito" ? 10 : 0)
+        );
 
-    btnNovoCurso.addEventListener("click", () => {
 
-      cursoEditando = null;
+    cursoEditando =
+        curso.id;
 
-      formCurso.reset();
 
-      tituloFormulario.textContent =
-        "Novo curso";
+    tituloFormulario.textContent =
+        "✏️ Editar Curso";
 
-      formularioCurso.style.display =
-        "block";
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+    atualizarCamposPagamento();
 
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
     });
 
-
-    /*
-    ============================================================
-    CANCELAR
-    ============================================================
-    */
-
-    btnCancelar.addEventListener("click", () => {
-
-      fecharFormulario();
-
-    });
+}
 
 
-    function fecharFormulario() {
+/* =========================================================
+   CARREGAR CURSOS
+========================================================= */
 
-      cursoEditando = null;
+async function carregarCursos(){
 
-      formCurso.reset();
+    try{
 
-      formularioCurso.style.display =
-        "none";
-
-    }
-
-
-    /*
-    ============================================================
-    PEGAR DADOS
-    ============================================================
-    */
-
-    function pegarDados() {
-
-      return {
-
-        titulo:
-          document.getElementById("titulo")
-            .value.trim(),
-
-        descricao:
-          document.getElementById("descricao")
-            .value.trim(),
-
-        imagem:
-          document.getElementById("imagem")
-            .value.trim(),
-
-        nivel:
-          document.getElementById("nivel")
-            .value
-
-      };
-
-    }
-
-
-    /*
-    ============================================================
-    SALVAR CURSO
-    ============================================================
-    */
-
-    formCurso.addEventListener(
-      "submit",
-      async (event) => {
-
-        event.preventDefault();
-
-
-        const dados =
-          pegarDados();
-
-
-        if (!dados.titulo) {
-
-          mostrarMensagem(
-            "Informe o título do curso.",
-            "erro"
-          );
-
-          return;
-
-        }
-
-
-        try {
-
-          /*
-          ------------------------------------------------------
-          EDITAR
-          ------------------------------------------------------
-          */
-
-          if (cursoEditando) {
-
-            await updateDoc(
-
-              doc(
-                db,
-                "cursos",
-                cursoEditando
-              ),
-
-              {
-
-                titulo:
-                  dados.titulo,
-
-                descricao:
-                  dados.descricao,
-
-                imagem:
-                  dados.imagem,
-
-                nivel:
-                  dados.nivel,
-
-                atualizadoEm:
-                  serverTimestamp()
-
-              }
-
+        const snap =
+            await getDocs(
+                collection(
+                    db,
+                    "cursos"
+                )
             );
-
-
-            mostrarMensagem(
-              "Curso atualizado com sucesso!"
-            );
-
-          }
-
-
-          /*
-          ------------------------------------------------------
-          NOVO CURSO
-          ------------------------------------------------------
-          */
-
-          else {
-
-            await addDoc(
-
-              collection(
-                db,
-                "cursos"
-              ),
-
-              {
-
-                titulo:
-                  dados.titulo,
-
-                descricao:
-                  dados.descricao,
-
-                imagem:
-                  dados.imagem,
-
-                nivel:
-                  dados.nivel,
-
-                ativo:
-                  true,
-
-                criadoEm:
-                  serverTimestamp(),
-
-                atualizadoEm:
-                  serverTimestamp()
-
-              }
-
-            );
-
-
-            mostrarMensagem(
-              "Curso criado com sucesso!"
-            );
-
-          }
-
-
-          fecharFormulario();
-
-          await carregarCursos();
-
-        }
-
-
-        catch (erro) {
-
-          console.error(
-            "Erro ao salvar curso:",
-            erro
-          );
-
-
-          mostrarMensagem(
-            "Erro ao salvar o curso. Verifique o console.",
-            "erro"
-          );
-
-        }
-
-      }
-    );
-
-
-    /*
-    ============================================================
-    CARREGAR CURSOS
-    ============================================================
-    */
-
-    async function carregarCursos() {
-
-      listaCursos.innerHTML = `
-
-        <tr>
-
-          <td
-            colspan="4"
-            class="vazio"
-          >
-            Carregando cursos...
-          </td>
-
-        </tr>
-
-      `;
-
-
-      try {
-
-        const resultado =
-          await getDocs(
-            collection(
-              db,
-              "cursos"
-            )
-          );
 
 
         cursos = [];
 
 
-        resultado.forEach((documento) => {
+        snap.forEach(item => {
 
-          cursos.push({
+            cursos.push({
 
-            id:
-              documento.id,
+                id:item.id,
 
-            ...documento.data()
+                ...item.data()
 
-          });
-
-        });
-
-
-        cursos.sort((a, b) => {
-
-          const dataA =
-            a.criadoEm?.seconds || 0;
-
-          const dataB =
-            b.criadoEm?.seconds || 0;
-
-          return dataB - dataA;
+            });
 
         });
 
 
-        renderizarCursos();
-
-      }
+        renderizar();
 
 
-      catch (erro) {
+    }catch(erro){
 
         console.error(
-          "Erro ao carregar cursos:",
-          erro
+            "Erro ao carregar cursos:",
+            erro
         );
 
-
-        listaCursos.innerHTML = `
-
-          <tr>
-
-            <td
-              colspan="4"
-              class="vazio"
-            >
-              Erro ao carregar os cursos.
-            </td>
-
-          </tr>
-
-        `;
-
-      }
+        mostrarMensagem(
+            "Erro ao carregar cursos.",
+            "erro"
+        );
 
     }
 
+}
 
-    /*
-    ============================================================
-    RENDERIZAR
-    ============================================================
-    */
 
-    function renderizarCursos() {
+/* =========================================================
+   RENDERIZAR
+========================================================= */
 
-      const termo =
+function renderizar(){
+
+    const termo =
         pesquisa.value
-          .trim()
-          .toLowerCase();
+            .trim()
+            .toLowerCase();
 
 
-      const filtrados =
-        cursos.filter((curso) => {
+    const filtrados =
+        cursos.filter(curso => {
 
-          const titulo =
-            (curso.titulo || "")
-              .toLowerCase();
+            const texto = (
 
-          const descricao =
-            (curso.descricao || "")
-              .toLowerCase();
+                (curso.titulo || "") +
+                " " +
+                (curso.descricao || "") +
+                " " +
+                (curso.nivel || "") +
+                " " +
+                (curso.tipo || "")
 
-          return (
-            titulo.includes(termo) ||
-            descricao.includes(termo)
-          );
+            ).toLowerCase();
+
+
+            return texto.includes(
+                termo
+            );
 
         });
 
 
-      if (filtrados.length === 0) {
+    listaCursos.innerHTML = "";
+
+
+    if(filtrados.length === 0){
 
         listaCursos.innerHTML = `
 
-          <tr>
+            <tr>
 
-            <td
-              colspan="4"
-              class="vazio"
-            >
-              Nenhum curso encontrado.
-            </td>
+                <td
+                    colspan="7"
+                    class="vazio"
+                >
+                    Nenhum curso encontrado.
+                </td>
 
-          </tr>
+            </tr>
 
         `;
 
         return;
-
-      }
-
-
-      listaCursos.innerHTML =
-        filtrados.map((curso) => {
-
-          const status =
-            curso.ativo !== false;
+    }
 
 
-          return `
+    filtrados.forEach(curso => {
 
-            <tr>
+        const tr =
+            document.createElement("tr");
 
-              <td>
+
+        const tipo =
+            curso.tipo || "gratuito";
+
+
+        const valorCurso =
+            Number(curso.valor || 0);
+
+
+        const valorCert =
+            Number(
+                curso.valorCertificado ??
+                (tipo === "gratuito" ? 10 : 0)
+            );
+
+
+        const tipoTexto =
+            tipo === "gratuito"
+            ? "🆓 Gratuito"
+            : "💰 Pago";
+
+
+        const tipoClasse =
+            tipo === "gratuito"
+            ? "badge-gratuito"
+            : "badge-pago";
+
+
+        const status =
+            curso.ativo === false
+            ? "Inativo"
+            : "Ativo";
+
+
+        const statusClasse =
+            curso.ativo === false
+            ? "badge-inativo"
+            : "badge-ativo";
+
+
+        tr.innerHTML = `
+
+            <td>
 
                 <strong>
-                  ${escapar(curso.titulo)}
+                    ${escapar(curso.titulo || "-")}
                 </strong>
 
                 ${
-                  curso.descricao
-                    ? `
-                      <br>
-                      <small>
-                        ${escapar(curso.descricao)}
-                      </small>
-                    `
-                    : ""
+                    curso.descricao
+                    ?
+                    `<br>
+                     <small>
+                        ${escapar(
+                            curso.descricao
+                        )}
+                     </small>`
+                    :
+                    ""
                 }
 
-              </td>
+            </td>
 
 
-              <td>
-                ${escapar(
-                  curso.nivel || "iniciante"
-                )}
-              </td>
+            <td>
 
-
-              <td>
-
-                <span
-                  class="status ${
-                    status
-                      ? "ativo"
-                      : "inativo"
-                  }"
-                >
-
-                  ${
-                    status
-                      ? "Ativo"
-                      : "Inativo"
-                  }
-
+                <span class="badge ${tipoClasse}">
+                    ${tipoTexto}
                 </span>
 
-              </td>
+            </td>
 
 
-              <td>
+            <td>
 
-                <div class="acoes">
+                ${
+                    tipo === "pago"
+                    ?
+                    formatarMoeda(valorCurso)
+                    :
+                    "Grátis"
+                }
 
-                  <button
-                    class="btn-editar"
-                    onclick="editarCurso('${curso.id}')"
-                  >
-                    Editar
-                  </button>
-
-
-                  <button
-                    class="btn-status"
-                    onclick="alterarStatus('${curso.id}')"
-                  >
-
-                    ${
-                      status
-                        ? "Desativar"
-                        : "Ativar"
-                    }
-
-                  </button>
+            </td>
 
 
-                  <button
-                    class="btn-excluir"
-                    onclick="excluirCurso('${curso.id}')"
-                  >
-                    Excluir
-                  </button>
+            <td>
+
+                ${
+                    valorCert > 0
+                    ?
+                    formatarMoeda(valorCert)
+                    :
+                    "Incluído"
+                }
+
+            </td>
+
+
+            <td>
+                ${escapar(curso.nivel || "-")}
+            </td>
+
+
+            <td>
+
+                <span class="badge ${statusClasse}">
+                    ${status}
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <div class="acoes-tabela">
+
+                    <button
+                        class="btn-primary"
+                        data-acao="editar"
+                        data-id="${curso.id}"
+                    >
+                        Editar
+                    </button>
+
+
+                    <button
+                        class="${
+                            curso.ativo === false
+                            ? "btn-success"
+                            : "btn-warning"
+                        }"
+                        data-acao="status"
+                        data-id="${curso.id}"
+                    >
+                        ${
+                            curso.ativo === false
+                            ? "Ativar"
+                            : "Desativar"
+                        }
+                    </button>
+
+
+                    <button
+                        class="btn-danger"
+                        data-acao="excluir"
+                        data-id="${curso.id}"
+                    >
+                        Excluir
+                    </button>
 
                 </div>
 
-              </td>
+            </td>
 
-            </tr>
+        `;
 
-          `;
 
-        }).join("");
+        listaCursos.appendChild(
+            tr
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   MOEDA
+========================================================= */
+
+function formatarMoeda(valor){
+
+    return Number(valor || 0)
+        .toLocaleString(
+            "pt-BR",
+            {
+                style:"currency",
+                currency:"BRL"
+            }
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPAR
+========================================================= */
+
+function escapar(valor){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
+        return "";
 
     }
 
 
-    /*
-    ============================================================
-    PESQUISA
-    ============================================================
-    */
+    return String(valor)
 
-    pesquisa.addEventListener(
-      "input",
-      renderizarCursos
-    );
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-    /*
-    ============================================================
-    EDITAR CURSO
-    ============================================================
-    */
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-    window.editarCurso =
-      function(id) {
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-        const curso =
-          cursos.find(
-            (item) => item.id === id
-          );
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
-
-        if (!curso) {
-          return;
-        }
+}
 
 
-        cursoEditando = id;
+/* =========================================================
+   SALVAR
+========================================================= */
+
+formCurso.addEventListener(
+    "submit",
+    async evento => {
+
+        evento.preventDefault();
 
 
-        document.getElementById("titulo")
-          .value =
-          curso.titulo || "";
+        try{
+
+            const dados =
+                pegarDados();
 
 
-        document.getElementById("descricao")
-          .value =
-          curso.descricao || "";
+            if(!dados.titulo){
 
-
-        document.getElementById("imagem")
-          .value =
-          curso.imagem || "";
-
-
-        document.getElementById("nivel")
-          .value =
-          curso.nivel || "iniciante";
-
-
-        tituloFormulario.textContent =
-          "Editar curso";
-
-
-        formularioCurso.style.display =
-          "block";
-
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-      };
-
-
-    /*
-    ============================================================
-    ALTERAR STATUS
-    ============================================================
-    */
-
-    window.alterarStatus =
-      async function(id) {
-
-        const curso =
-          cursos.find(
-            (item) => item.id === id
-          );
-
-
-        if (!curso) {
-          return;
-        }
-
-
-        const novoStatus =
-          curso.ativo === false;
-
-
-        try {
-
-          await updateDoc(
-
-            doc(
-              db,
-              "cursos",
-              id
-            ),
-
-            {
-
-              ativo:
-                novoStatus,
-
-              atualizadoEm:
-                serverTimestamp()
+                throw new Error(
+                    "Informe o título do curso."
+                );
 
             }
 
-          );
+
+            if(cursoEditando){
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "cursos",
+                        cursoEditando
+                    ),
+
+                    {
+
+                        ...dados,
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
 
 
-          mostrarMensagem(
-            novoStatus
-              ? "Curso ativado."
-              : "Curso desativado."
-          );
+                mostrarMensagem(
+                    "Curso atualizado com sucesso!",
+                    "sucesso"
+                );
 
 
-          await carregarCursos();
+            }else{
+
+                await addDoc(
+
+                    collection(
+                        db,
+                        "cursos"
+                    ),
+
+                    {
+
+                        ...dados,
+
+                        criadoEm:
+                            serverTimestamp(),
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+
+                mostrarMensagem(
+                    "Curso criado com sucesso!",
+                    "sucesso"
+                );
+
+            }
+
+
+            limparFormulario();
+
+            await carregarCursos();
+
+
+        }catch(erro){
+
+            console.error(
+                "Erro ao salvar curso:",
+                erro
+            );
+
+
+            mostrarMensagem(
+                erro.message ||
+                "Erro ao salvar curso.",
+                "erro"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AÇÕES DA TABELA
+========================================================= */
+
+listaCursos.addEventListener(
+    "click",
+    async evento => {
+
+        const botao =
+            evento.target.closest(
+                "button[data-acao]"
+            );
+
+
+        if(!botao){
+
+            return;
 
         }
 
 
-        catch (erro) {
+        const acao =
+            botao.dataset.acao;
 
-          console.error(
-            erro
-          );
+        const id =
+            botao.dataset.id;
 
-
-          mostrarMensagem(
-            "Erro ao alterar o status.",
-            "erro"
-          );
-
-        }
-
-      };
-
-
-    /*
-    ============================================================
-    EXCLUIR
-    ============================================================
-    */
-
-    window.excluirCurso =
-      async function(id) {
 
         const curso =
-          cursos.find(
-            (item) => item.id === id
-          );
+            cursos.find(
+                item => item.id === id
+            );
 
 
-        if (!curso) {
-          return;
-        }
+        if(!curso){
 
-
-        const confirmar =
-          confirm(
-            `Deseja realmente excluir o curso "${curso.titulo}"?`
-          );
-
-
-        if (!confirmar) {
-          return;
-        }
-
-
-        try {
-
-          await deleteDoc(
-
-            doc(
-              db,
-              "cursos",
-              id
-            )
-
-          );
-
-
-          mostrarMensagem(
-            "Curso excluído com sucesso!"
-          );
-
-
-          await carregarCursos();
+            return;
 
         }
 
 
-        catch (erro) {
+        /* EDITAR */
 
-          console.error(
-            erro
-          );
+        if(acao === "editar"){
 
+            preencherFormulario(
+                curso
+            );
 
-          mostrarMensagem(
-            "Erro ao excluir o curso.",
-            "erro"
-          );
-
-        }
-
-      };
-
-
-    /*
-    ============================================================
-    LOGOUT
-    ============================================================
-    */
-
-    btnSair.addEventListener(
-      "click",
-      async () => {
-
-        try {
-
-          await signOut(auth);
-
-          window.location.href =
-            "index.html";
-
-        }
-
-        catch (erro) {
-
-          console.error(
-            erro
-          );
-
-        }
-
-      }
-    );
-
-
-    /*
-    ============================================================
-    AUTENTICAÇÃO
-    ============================================================
-    */
-
-    onAuthStateChanged(
-      auth,
-      async (usuario) => {
-
-        carregando.style.display =
-          "none";
-
-
-        if (!usuario) {
-
-          areaAdmin.style.display =
-            "none";
-
-          acessoNegado.style.display =
-            "block";
-
-          return;
+            return;
 
         }
 
 
-        /*
-        Usuário autenticado.
-        Nesta primeira etapa qualquer usuário
-        autenticado pode acessar o painel.
-        A função de administrador será criada
-        posteriormente com segurança no Firestore.
-        */
+        /* STATUS */
 
-        acessoNegado.style.display =
-          "none";
+        if(acao === "status"){
 
-        areaAdmin.style.display =
-          "block";
+            try{
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "cursos",
+                        id
+                    ),
+
+                    {
+
+                        ativo:
+                            curso.ativo === false,
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+
+                mostrarMensagem(
+                    curso.ativo === false
+                    ?
+                    "Curso ativado com sucesso!"
+                    :
+                    "Curso desativado com sucesso!",
+                    "sucesso"
+                );
+
+
+                await carregarCursos();
+
+
+            }catch(erro){
+
+                console.error(
+                    erro
+                );
+
+                mostrarMensagem(
+                    "Erro ao alterar status.",
+                    "erro"
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* EXCLUIR */
+
+        if(acao === "excluir"){
+
+            const confirmar =
+                confirm(
+                    `Deseja realmente excluir o curso "${curso.titulo}"?`
+                );
+
+
+            if(!confirmar){
+
+                return;
+
+            }
+
+
+            try{
+
+                await deleteDoc(
+
+                    doc(
+                        db,
+                        "cursos",
+                        id
+                    )
+
+                );
+
+
+                mostrarMensagem(
+                    "Curso excluído com sucesso!",
+                    "sucesso"
+                );
+
+
+                await carregarCursos();
+
+
+            }catch(erro){
+
+                console.error(
+                    erro
+                );
+
+                mostrarMensagem(
+                    "Erro ao excluir curso.",
+                    "erro"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   NOVO
+========================================================= */
+
+btnNovo.addEventListener(
+    "click",
+    () => {
+
+        limparFormulario();
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+);
+
+
+/* =========================================================
+   CANCELAR
+========================================================= */
+
+btnCancelar.addEventListener(
+    "click",
+    () => {
+
+        limparFormulario();
+
+    }
+);
+
+
+/* =========================================================
+   PESQUISA
+========================================================= */
+
+pesquisa.addEventListener(
+    "input",
+    renderizar
+);
+
+
+/* =========================================================
+   SAIR
+========================================================= */
+
+btnSair.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "index.html";
+
+        }catch(erro){
+
+            console.error(
+                erro
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTENTICAÇÃO
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async usuario => {
+
+        if(!usuario){
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
 
 
         await carregarCursos();
 
-      }
-    );
+        atualizarCamposPagamento();
 
-  </script>
+    }
+);
+
+</script>
 
 </body>
-
 </html>
 ```
