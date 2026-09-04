@@ -1,0 +1,976 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Minha Plataforma de Cursos</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 22px;
+    }
+
+    #usuarioHeader {
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #usuarioNome {
+      font-weight: bold;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .subtitulo {
+      text-align: center;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .campo {
+      margin-bottom: 15px;
+    }
+
+    .campo label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .campo input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .campo input:focus {
+      outline: none;
+      border-color: #4a6cf7;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .btn-principal {
+      background: #4a6cf7;
+      color: white;
+    }
+
+    .btn-principal:hover {
+      background: #3d5edb;
+    }
+
+    .btn-secundario {
+      background: #eee;
+      color: #333;
+    }
+
+    .btn-sair {
+      width: auto;
+      padding: 8px 15px;
+      background: #e74c3c;
+      color: white;
+      margin: 0;
+    }
+
+    .mensagem {
+      display: none;
+      padding: 12px;
+      border-radius: 7px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .sucesso {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .erro {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    #areaUsuario {
+      display: none;
+    }
+
+    .boasVindas {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .boasVindas h2 {
+      margin-bottom: 10px;
+    }
+
+    .info {
+      background: #f7f7f7;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+    }
+
+    .info p {
+      margin-bottom: 8px;
+    }
+
+    .alternar {
+      text-align: center;
+      margin-top: 20px;
+      color: #555;
+    }
+
+    .alternar button {
+      width: auto;
+      background: none;
+      color: #4a6cf7;
+      padding: 5px;
+      margin: 0;
+    }
+
+    .carregando {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 12px 15px;
+      }
+
+      header h1 {
+        font-size: 18px;
+      }
+
+      .container {
+        margin: 25px auto;
+        padding: 15px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>📚 Minha Plataforma</h1>
+
+    <div id="usuarioHeader">
+      <span id="usuarioNome"></span>
+      <button class="btn-sair" id="btnSair">Sair</button>
+    </div>
+  </header>
+
+
+  <main class="container">
+
+    <!-- ÁREA DE LOGIN/CADASTRO -->
+    <section id="areaLogin">
+
+      <div class="card">
+
+        <h2 id="tituloFormulario">Entrar</h2>
+
+        <p class="subtitulo" id="subtituloFormulario">
+          Entre na sua conta para continuar
+        </p>
+
+        <div id="mensagemLogin" class="mensagem"></div>
+
+        <!-- FORMULÁRIO DE LOGIN -->
+        <form id="formLogin">
+
+          <div class="campo">
+            <label for="loginEmail">E-mail</label>
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="Digite seu e-mail"
+              required
+            >
+          </div>
+
+          <div class="campo">
+            <label for="loginSenha">Senha</label>
+            <input
+              type="password"
+              id="loginSenha"
+              placeholder="Digite sua senha"
+              required
+            >
+          </div>
+
+          <button type="submit" class="btn-principal">
+            Entrar
+          </button>
+
+        </form>
+
+
+        <!-- FORMULÁRIO DE CADASTRO -->
+        <form id="formCadastro" style="display:none;">
+
+          <div class="campo">
+            <label for="cadastroNome">Nome</label>
+            <input
+              type="text"
+              id="cadastroNome"
+              placeholder="Digite seu nome"
+              required
+            >
+          </div>
+
+          <div class="campo">
+            <label for="cadastroEmail">E-mail</label>
+            <input
+              type="email"
+              id="cadastroEmail"
+              placeholder="Digite seu e-mail"
+              required
+            >
+          </div>
+
+          <div class="campo">
+            <label for="cadastroSenha">Senha</label>
+            <input
+              type="password"
+              id="cadastroSenha"
+              placeholder="Mínimo de 6 caracteres"
+              minlength="6"
+              required
+            >
+          </div>
+
+          <button type="submit" class="btn-principal">
+            Criar minha conta
+          </button>
+
+        </form>
+
+
+        <div class="alternar">
+
+          <span id="textoAlternar">
+            Ainda não possui uma conta?
+          </span>
+
+          <button type="button" id="btnAlternar">
+            Criar conta
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ÁREA DO USUÁRIO -->
+    <section id="areaUsuario">
+
+      <div class="card">
+
+        <div class="boasVindas">
+
+          <h2>
+            Seja bem-vindo! 🎓
+          </h2>
+
+          <p>
+            Sua conta foi criada com sucesso.
+          </p>
+
+        </div>
+
+        <div class="info">
+
+          <p>
+            <strong>Nome:</strong>
+            <span id="perfilNome">-</span>
+          </p>
+
+          <p>
+            <strong>E-mail:</strong>
+            <span id="perfilEmail">-</span>
+          </p>
+
+          <p>
+            <strong>XP:</strong>
+            <span id="perfilXP">0</span>
+          </p>
+
+          <p>
+            <strong>Nível:</strong>
+            <span id="perfilNivel">1</span>
+          </p>
+
+        </div>
+
+        <button
+          class="btn-principal"
+          id="btnCursos"
+          type="button"
+        >
+          📚 Meus cursos
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <div id="carregando" class="carregando">
+      Verificando sessão...
+    </div>
+
+  </main>
+
+
+  <script type="module">
+
+    /*
+    ============================================================
+    FIREBASE
+    ============================================================
+    */
+
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+    /*
+    ============================================================
+    CONFIGURAÇÃO DO FIREBASE
+    ============================================================
+    */
+
+    const firebaseConfig = {
+
+      apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+      authDomain: "dezenas-1ed47.firebaseapp.com",
+
+      projectId: "dezenas-1ed47",
+
+      storageBucket: "dezenas-1ed47.firebasestorage.app",
+
+      messagingSenderId: "372788277555",
+
+      appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+      measurementId: "G-NMPP8PKPK3"
+
+    };
+
+
+    /*
+    ============================================================
+    INICIALIZAR FIREBASE
+    ============================================================
+    */
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const db = getFirestore(app);
+
+
+    /*
+    ============================================================
+    ELEMENTOS DA PÁGINA
+    ============================================================
+    */
+
+    const areaLogin =
+      document.getElementById("areaLogin");
+
+    const areaUsuario =
+      document.getElementById("areaUsuario");
+
+    const usuarioHeader =
+      document.getElementById("usuarioHeader");
+
+    const usuarioNome =
+      document.getElementById("usuarioNome");
+
+    const carregando =
+      document.getElementById("carregando");
+
+    const formLogin =
+      document.getElementById("formLogin");
+
+    const formCadastro =
+      document.getElementById("formCadastro");
+
+    const btnAlternar =
+      document.getElementById("btnAlternar");
+
+    const textoAlternar =
+      document.getElementById("textoAlternar");
+
+    const tituloFormulario =
+      document.getElementById("tituloFormulario");
+
+    const subtituloFormulario =
+      document.getElementById("subtituloFormulario");
+
+    const btnSair =
+      document.getElementById("btnSair");
+
+
+    /*
+    ============================================================
+    MENSAGENS
+    ============================================================
+    */
+
+    function mostrarMensagem(texto, tipo = "erro") {
+
+      const elemento =
+        document.getElementById("mensagemLogin");
+
+      elemento.textContent = texto;
+
+      elemento.className =
+        "mensagem " + tipo;
+
+      elemento.style.display = "block";
+
+    }
+
+
+    function esconderMensagem() {
+
+      const elemento =
+        document.getElementById("mensagemLogin");
+
+      elemento.style.display = "none";
+
+    }
+
+
+    /*
+    ============================================================
+    ALTERNAR LOGIN / CADASTRO
+    ============================================================
+    */
+
+    btnAlternar.addEventListener("click", () => {
+
+      esconderMensagem();
+
+      const cadastroAberto =
+        formCadastro.style.display !== "none";
+
+
+      if (cadastroAberto) {
+
+        formCadastro.style.display = "none";
+
+        formLogin.style.display = "block";
+
+        tituloFormulario.textContent =
+          "Entrar";
+
+        subtituloFormulario.textContent =
+          "Entre na sua conta para continuar";
+
+        textoAlternar.textContent =
+          "Ainda não possui uma conta?";
+
+        btnAlternar.textContent =
+          "Criar conta";
+
+      } else {
+
+        formLogin.style.display = "none";
+
+        formCadastro.style.display = "block";
+
+        tituloFormulario.textContent =
+          "Criar conta";
+
+        subtituloFormulario.textContent =
+          "Cadastre-se para começar seus estudos";
+
+        textoAlternar.textContent =
+          "Já possui uma conta?";
+
+        btnAlternar.textContent =
+          "Entrar";
+
+      }
+
+    });
+
+
+    /*
+    ============================================================
+    CADASTRO
+    ============================================================
+    */
+
+    formCadastro.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      esconderMensagem();
+
+
+      const nome =
+        document.getElementById("cadastroNome").value.trim();
+
+      const email =
+        document.getElementById("cadastroEmail").value.trim();
+
+      const senha =
+        document.getElementById("cadastroSenha").value;
+
+
+      if (!nome || !email || !senha) {
+
+        mostrarMensagem(
+          "Preencha todos os campos."
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        const resultado =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            senha
+          );
+
+
+        const usuario =
+          resultado.user;
+
+
+        /*
+        Atualiza o nome no Firebase Authentication
+        */
+
+        await updateProfile(usuario, {
+          displayName: nome
+        });
+
+
+        /*
+        Cria o perfil do aluno no Firestore
+        */
+
+        await setDoc(
+          doc(db, "usuarios", usuario.uid),
+          {
+
+            uid: usuario.uid,
+
+            nome: nome,
+
+            email: email,
+
+            xp: 0,
+
+            nivel: 1,
+
+            vidas: 5,
+
+            sequencia: 0,
+
+            criadoEm: serverTimestamp(),
+
+            atualizadoEm: serverTimestamp()
+
+          }
+        );
+
+
+        mostrarMensagem(
+          "Conta criada com sucesso!",
+          "sucesso"
+        );
+
+
+      } catch (erro) {
+
+        console.error(erro);
+
+        let mensagem =
+          "Não foi possível criar a conta.";
+
+
+        if (erro.code === "auth/email-already-in-use") {
+
+          mensagem =
+            "Este e-mail já está cadastrado.";
+
+        }
+
+        else if (erro.code === "auth/invalid-email") {
+
+          mensagem =
+            "Digite um e-mail válido.";
+
+        }
+
+        else if (erro.code === "auth/weak-password") {
+
+          mensagem =
+            "A senha precisa ter pelo menos 6 caracteres.";
+
+        }
+
+
+        mostrarMensagem(mensagem);
+
+      }
+
+    });
+
+
+    /*
+    ============================================================
+    LOGIN
+    ============================================================
+    */
+
+    formLogin.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      esconderMensagem();
+
+
+      const email =
+        document.getElementById("loginEmail").value.trim();
+
+      const senha =
+        document.getElementById("loginSenha").value;
+
+
+      try {
+
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          senha
+        );
+
+
+        mostrarMensagem(
+          "Login realizado com sucesso!",
+          "sucesso"
+        );
+
+
+      } catch (erro) {
+
+        console.error(erro);
+
+        let mensagem =
+          "Não foi possível entrar.";
+
+
+        if (
+          erro.code === "auth/invalid-credential" ||
+          erro.code === "auth/wrong-password" ||
+          erro.code === "auth/user-not-found"
+        ) {
+
+          mensagem =
+            "E-mail ou senha incorretos.";
+
+        }
+
+        else if (erro.code === "auth/invalid-email") {
+
+          mensagem =
+            "Digite um e-mail válido.";
+
+        }
+
+
+        mostrarMensagem(mensagem);
+
+      }
+
+    });
+
+
+    /*
+    ============================================================
+    CARREGAR PERFIL DO FIRESTORE
+    ============================================================
+    */
+
+    async function carregarPerfil(usuario) {
+
+      try {
+
+        const referencia =
+          doc(db, "usuarios", usuario.uid);
+
+        const resultado =
+          await getDoc(referencia);
+
+
+        if (resultado.exists()) {
+
+          const dados =
+            resultado.data();
+
+
+          document.getElementById("perfilNome")
+            .textContent =
+            dados.nome || usuario.displayName || "-";
+
+
+          document.getElementById("perfilEmail")
+            .textContent =
+            dados.email || usuario.email || "-";
+
+
+          document.getElementById("perfilXP")
+            .textContent =
+            dados.xp ?? 0;
+
+
+          document.getElementById("perfilNivel")
+            .textContent =
+            dados.nivel ?? 1;
+
+
+          usuarioNome.textContent =
+            dados.nome || usuario.displayName || "Aluno";
+
+        }
+
+        else {
+
+          /*
+          Caso o usuário exista no Authentication
+          mas ainda não tenha documento no Firestore.
+          */
+
+          await setDoc(
+            referencia,
+            {
+
+              uid: usuario.uid,
+
+              nome: usuario.displayName || "",
+
+              email: usuario.email || "",
+
+              xp: 0,
+
+              nivel: 1,
+
+              vidas: 5,
+
+              sequencia: 0,
+
+              criadoEm: serverTimestamp(),
+
+              atualizadoEm: serverTimestamp()
+
+            },
+            {
+              merge: true
+            }
+          );
+
+
+          usuarioNome.textContent =
+            usuario.displayName || "Aluno";
+
+        }
+
+
+      } catch (erro) {
+
+        console.error(
+          "Erro ao carregar perfil:",
+          erro
+        );
+
+        mostrarMensagem(
+          "Não foi possível carregar seu perfil."
+        );
+
+      }
+
+    }
+
+
+    /*
+    ============================================================
+    OBSERVAR LOGIN
+    ============================================================
+    */
+
+    onAuthStateChanged(auth, async (usuario) => {
+
+      carregando.style.display = "none";
+
+
+      if (usuario) {
+
+        /*
+        Usuário está logado
+        */
+
+        areaLogin.style.display = "none";
+
+        areaUsuario.style.display = "block";
+
+        usuarioHeader.style.display = "flex";
+
+
+        await carregarPerfil(usuario);
+
+
+      } else {
+
+        /*
+        Usuário não está logado
+        */
+
+        areaLogin.style.display = "block";
+
+        areaUsuario.style.display = "none";
+
+        usuarioHeader.style.display = "none";
+
+      }
+
+    });
+
+
+    /*
+    ============================================================
+    LOGOUT
+    ============================================================
+    */
+
+    btnSair.addEventListener("click", async () => {
+
+      try {
+
+        await signOut(auth);
+
+      } catch (erro) {
+
+        console.error(erro);
+
+        mostrarMensagem(
+          "Não foi possível sair da conta."
+        );
+
+      }
+
+    });
+
+
+    /*
+    ============================================================
+    BOTÃO MEUS CURSOS
+    ============================================================
+    */
+
+    document
+      .getElementById("btnCursos")
+      .addEventListener("click", () => {
+
+        alert(
+          "A área de cursos será construída na próxima etapa."
+        );
+
+      });
+
+
+  </script>
+
+</body>
+</html>
