@@ -1,0 +1,762 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Loja</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f8;
+    color:#1f2937;
+}
+
+header{
+    background:#111827;
+    color:white;
+    padding:18px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.usuario{
+    background:white;
+    padding:18px;
+    border-radius:14px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.saldo{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+
+.saldo div{
+    background:#f3f4f6;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 4px 16px rgba(0,0,0,.08);
+}
+
+.icone{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.card h2{
+    margin:10px 0;
+}
+
+.descricao{
+    color:#6b7280;
+    min-height:48px;
+    line-height:1.4;
+}
+
+.preco{
+    font-size:28px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.btn{
+    width:100%;
+    border:0;
+    padding:14px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn-comprar{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-voltar{
+    background:#e5e7eb;
+    margin-top:20px;
+}
+
+.mensagem{
+    display:none;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.sucesso{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.erro{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🛒 Loja</h1>
+
+</header>
+
+
+<div class="container">
+
+    <div class="usuario">
+
+        <strong id="nomeUsuario">
+            Carregando...
+        </strong>
+
+        <div class="saldo">
+
+            <div>
+                ❤️ Vidas:
+                <span id="vidas">-</span>
+            </div>
+
+            <div>
+                🪙 Moedas:
+                <span id="moedas">-</span>
+            </div>
+
+            <div>
+                ⭐ XP:
+                <span id="xp">-</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="mensagem"
+         class="mensagem">
+    </div>
+
+
+    <div class="grid">
+
+
+        <!-- VIDAS INFINITAS -->
+
+        <div class="card">
+
+            <div class="icone">
+                ♾️
+            </div>
+
+            <h2>
+                Vidas Infinitas
+            </h2>
+
+            <div class="descricao">
+
+                Jogue sem se preocupar
+                com a quantidade de vidas.
+
+            </div>
+
+            <div class="preco">
+                R$ 9,90
+            </div>
+
+            <button
+                class="btn btn-comprar"
+                onclick="comprar(
+                    'vidas_infinitas',
+                    'Vidas Infinitas',
+                    9.90
+                )">
+
+                💳 Comprar
+
+            </button>
+
+        </div>
+
+
+        <!-- XP -->
+
+        <div class="card">
+
+            <div class="icone">
+                ⭐
+            </div>
+
+            <h2>
+                100 XP
+            </h2>
+
+            <div class="descricao">
+
+                Adicione 100 pontos de experiência
+                à sua conta.
+
+            </div>
+
+            <div class="preco">
+                R$ 5,00
+            </div>
+
+            <button
+                class="btn btn-comprar"
+                onclick="comprar(
+                    'xp',
+                    '100 XP',
+                    5.00
+                )">
+
+                💳 Comprar
+
+            </button>
+
+        </div>
+
+
+        <!-- MOEDAS -->
+
+        <div class="card">
+
+            <div class="icone">
+                🪙
+            </div>
+
+            <h2>
+                100 Moedas
+            </h2>
+
+            <div class="descricao">
+
+                Adicione 100 moedas
+                à sua carteira.
+
+            </div>
+
+            <div class="preco">
+                R$ 5,00
+            </div>
+
+            <button
+                class="btn btn-comprar"
+                onclick="comprar(
+                    'moedas',
+                    '100 Moedas',
+                    5.00
+                )">
+
+                💳 Comprar
+
+            </button>
+
+        </div>
+
+
+        <!-- MOEDAS 500 -->
+
+        <div class="card">
+
+            <div class="icone">
+                🪙
+            </div>
+
+            <h2>
+                500 Moedas
+            </h2>
+
+            <div class="descricao">
+
+                Pacote com 500 moedas
+                para utilizar na plataforma.
+
+            </div>
+
+            <div class="preco">
+                R$ 20,00
+            </div>
+
+            <button
+                class="btn btn-comprar"
+                onclick="comprar(
+                    'moedas',
+                    '500 Moedas',
+                    20.00
+                )">
+
+                💳 Comprar
+
+            </button>
+
+        </div>
+
+
+        <!-- XP 500 -->
+
+        <div class="card">
+
+            <div class="icone">
+                ⭐
+            </div>
+
+            <h2>
+                500 XP
+            </h2>
+
+            <div class="descricao">
+
+                Pacote com 500 pontos
+                de experiência.
+
+            </div>
+
+            <div class="preco">
+                R$ 20,00
+            </div>
+
+            <button
+                class="btn btn-comprar"
+                onclick="comprar(
+                    'xp',
+                    '500 XP',
+                    20.00
+                )">
+
+                💳 Comprar
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="btn btn-voltar"
+        onclick="window.location.href='painel.html'">
+
+        ← Voltar para o painel
+
+    </button>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =========================================
+   CONFIGURAÇÃO
+========================================= */
+
+const WHATSAPP =
+    "5588999999999";
+
+
+let usuarioAtual = null;
+
+
+/* =========================================
+   ELEMENTOS
+========================================= */
+
+const nomeUsuario =
+    document.getElementById("nomeUsuario");
+
+const vidas =
+    document.getElementById("vidas");
+
+const moedas =
+    document.getElementById("moedas");
+
+const xp =
+    document.getElementById("xp");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+
+/* =========================================
+   MENSAGEM
+========================================= */
+
+function mostrarMensagem(
+    texto,
+    tipo
+){
+
+    mensagem.textContent = texto;
+
+    mensagem.className =
+        "mensagem " + tipo;
+
+}
+
+
+/* =========================================
+   MOEDA
+========================================= */
+
+function dinheiro(valor){
+
+    return Number(valor).toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+
+/* =========================================
+   CARREGAR USUÁRIO
+========================================= */
+
+async function carregarUsuario(){
+
+    const ref =
+        doc(
+            db,
+            "usuarios",
+            usuarioAtual.uid
+        );
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        return;
+
+    }
+
+
+    const dados =
+        snap.data();
+
+
+    nomeUsuario.textContent =
+        "Olá, " +
+        (dados.nome ||
+         usuarioAtual.email);
+
+
+    vidas.textContent =
+        dados.vidas ?? 0;
+
+    moedas.textContent =
+        dados.moedas ?? 0;
+
+    xp.textContent =
+        dados.xp ?? 0;
+
+}
+
+
+/* =========================================
+   COMPRAR
+========================================= */
+
+window.comprar = async function(
+    tipo,
+    nome,
+    valor
+){
+
+    if(!usuarioAtual){
+
+        mostrarMensagem(
+            "Usuário não autenticado.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const codigo =
+            "LOJ-" +
+            Math.random()
+                .toString(36)
+                .substring(2,8)
+                .toUpperCase();
+
+
+        const compra = {
+
+            usuarioId:
+                usuarioAtual.uid,
+
+            nomeUsuario:
+                usuarioAtual.nome || "",
+
+            emailUsuario:
+                usuarioAtual.email || "",
+
+            tipo:
+                tipo,
+
+            produtoId:
+                tipo,
+
+            produtoNome:
+                nome,
+
+            valor:
+                valor,
+
+            codigo:
+                codigo,
+
+            status:
+                "pendente",
+
+            criadoEm:
+                serverTimestamp(),
+
+            pagoEm:
+                null,
+
+            entregueEm:
+                null
+
+        };
+
+
+        await addDoc(
+            collection(db,"compras"),
+            compra
+        );
+
+
+        const texto =
+
+`Olá! Gostaria de realizar uma compra.
+
+🛒 PRODUTO
+
+${nome}
+
+💰 Valor:
+${dinheiro(valor)}
+
+📋 Código:
+${codigo}
+
+👤 Nome:
+${usuarioAtual.nome || "Aluno"}
+
+📧 E-mail:
+${usuarioAtual.email || ""}
+
+Vou realizar o pagamento via PIX e enviar o comprovante nesta conversa.
+
+Aguardo a confirmação.`;
+
+
+        const url =
+            "https://wa.me/" +
+            WHATSAPP +
+            "?text=" +
+            encodeURIComponent(texto);
+
+
+        mostrarMensagem(
+            "Pedido criado! Envie o comprovante pelo WhatsApp.",
+            "sucesso"
+        );
+
+
+        setTimeout(()=>{
+
+            window.open(
+                url,
+                "_blank"
+            );
+
+        },500);
+
+
+    }catch(error){
+
+        console.error(error);
+
+        mostrarMensagem(
+            "Não foi possível criar o pedido.",
+            "erro"
+        );
+
+    }
+
+};
+
+
+/* =========================================
+   AUTENTICAÇÃO
+========================================= */
+
+onAuthStateChanged(
+    auth,
+    async (user)=>{
+
+        if(!user){
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        usuarioAtual = user;
+
+
+        try{
+
+            const ref =
+                doc(
+                    db,
+                    "usuarios",
+                    user.uid
+                );
+
+
+            const snap =
+                await getDoc(ref);
+
+
+            if(snap.exists()){
+
+                const dados =
+                    snap.data();
+
+
+                usuarioAtual.nome =
+                    dados.nome || "";
+
+            }
+
+
+            await carregarUsuario();
+
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
+```
