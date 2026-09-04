@@ -1,255 +1,248 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Painel do Aluno</title>
 
 <style>
-
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-    margin:0;
     font-family:Arial,Helvetica,sans-serif;
     background:#f4f7fb;
     color:#1f2937;
 }
 
-/* HEADER */
-
 header{
-    background:white;
-    border-bottom:1px solid #e5e7eb;
-    padding:15px 25px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:22px;
+}
 
+.header-container{
+    max-width:1200px;
+    margin:auto;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.logo{
-    font-size:22px;
-    font-weight:bold;
-}
-
-.headerDireita{
-    display:flex;
     align-items:center;
+    gap:20px;
+}
+
+.usuario-info h1{
+    font-size:25px;
+    margin-bottom:6px;
+}
+
+.usuario-info p{
+    opacity:.9;
+}
+
+.header-acoes{
+    display:flex;
     gap:10px;
     flex-wrap:wrap;
 }
 
-.info{
-    background:#f3f4f6;
-    padding:9px 13px;
-    border-radius:20px;
-    font-weight:bold;
-}
-
-button{
+.btn{
     border:none;
     border-radius:10px;
     padding:11px 16px;
-    font-weight:bold;
     cursor:pointer;
+    font-weight:bold;
+    transition:.2s;
 }
 
-.btnCarteira{
-    background:#f59e0b;
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-branco{
+    background:white;
+    color:#2563eb;
+}
+
+.btn-sair{
+    background:#dc2626;
     color:white;
 }
 
-.btnSair{
-    background:#ef4444;
-    color:white;
-}
-
-/* CONTEÚDO */
-
-main{
+.container{
     max-width:1200px;
     margin:30px auto;
-    padding:0 18px;
+    padding:0 20px;
 }
 
-.boasVindas{
-    margin-bottom:25px;
-}
-
-.boasVindas h1{
-    margin:0 0 8px;
-    font-size:30px;
-}
-
-.boasVindas p{
-    margin:0;
-    color:#6b7280;
-}
-
-/* ESTATÍSTICAS */
+/* =========================
+   CARDS DE ESTATÍSTICAS
+========================= */
 
 .estatisticas{
     display:grid;
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:15px;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
     margin-bottom:30px;
 }
 
-.estatistica{
+.stat-card{
     background:white;
     border-radius:16px;
-    padding:20px;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.06);
+    padding:22px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
 
-.estatisticaIcone{
-    font-size:28px;
+.stat-topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
 }
 
-.estatisticaTitulo{
+.stat-icon{
+    font-size:30px;
+}
+
+.stat-titulo{
     color:#6b7280;
-    margin-top:8px;
+    font-size:14px;
 }
 
-.estatisticaValor{
-    font-size:26px;
+.stat-valor{
+    font-size:30px;
     font-weight:bold;
-    margin-top:5px;
 }
 
-/* CURSOS */
+/* =========================
+   TITULO
+========================= */
 
-.secaoTitulo{
+.secao-titulo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.secao-titulo h2{
+    font-size:24px;
+}
+
+.secao-titulo span{
+    color:#6b7280;
+    font-size:14px;
+}
+
+/* =========================
+   CURSOS
+========================= */
+
+.cursos{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.curso-card{
+    background:white;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+    transition:.2s;
+}
+
+.curso-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 22px rgba(0,0,0,.10);
+}
+
+.curso-topo{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.curso-topo h3{
+    font-size:21px;
+    margin-bottom:6px;
+}
+
+.curso-descricao{
+    color:#6b7280;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.nivel{
+    background:#eef2ff;
+    color:#4338ca;
+    border-radius:20px;
+    padding:6px 10px;
+    height:max-content;
+    font-size:12px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.progresso-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:14px;
+}
+
+.progresso-percentual{
+    font-weight:bold;
+}
+
+.barra{
+    width:100%;
+    height:12px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:16px;
+}
+
+.barra-progresso{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#2563eb,#4f46e5);
+    border-radius:20px;
+    transition:width .4s ease;
+}
+
+.curso-rodape{
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:10px;
-    margin-bottom:15px;
 }
 
-.secaoTitulo h2{
-    margin:0;
-}
-
-.btnCursos{
-    background:#2563eb;
-    color:white;
-}
-
-.cursos{
-    display:grid;
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:20px;
-}
-
-.curso{
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.06);
-
-    display:flex;
-    flex-direction:column;
-}
-
-.cursoImagem{
-    width:100%;
-    height:170px;
-    object-fit:cover;
-    background:#e5e7eb;
-}
-
-.cursoConteudo{
-    padding:18px;
-}
-
-.cursoTitulo{
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-.cursoDescricao{
+.info-licoes{
     color:#6b7280;
     font-size:14px;
-    line-height:1.5;
-
-    min-height:42px;
 }
 
-.nivel{
-    display:inline-block;
-    margin-top:10px;
-
-    background:#eef2ff;
-    color:#4338ca;
-
-    padding:5px 9px;
-    border-radius:8px;
-
-    font-size:12px;
-    font-weight:bold;
-}
-
-.progressoTexto{
-    margin-top:15px;
-    display:flex;
-    justify-content:space-between;
-
-    font-size:13px;
-    font-weight:bold;
-}
-
-.progresso{
-    width:100%;
-    height:9px;
-
-    background:#e5e7eb;
-    border-radius:10px;
-
-    overflow:hidden;
-    margin-top:7px;
-}
-
-.progressoBarra{
-    height:100%;
-    width:0%;
-
-    background:#22c55e;
-    transition:.3s;
-}
-
-.btnContinuar{
-    width:100%;
-    margin-top:15px;
-
+.btn-curso{
     background:#2563eb;
     color:white;
 }
 
-/* VAZIO */
+.btn-curso:hover{
+    background:#1d4ed8;
+}
 
-.vazio{
+/* =========================
+   ESTADOS
+========================= */
+
+.loading{
     background:white;
     border-radius:16px;
     padding:35px;
@@ -257,263 +250,312 @@ main{
     color:#6b7280;
 }
 
-/* CARREGANDO */
-
-.carregando{
-    text-align:center;
+.vazio{
+    background:white;
+    border-radius:16px;
     padding:40px;
+    text-align:center;
 }
 
-/* RESPONSIVO */
+.vazio h3{
+    margin-bottom:8px;
+}
+
+.vazio p{
+    color:#6b7280;
+    margin-bottom:18px;
+}
+
+.erro{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
 
 @media(max-width:900px){
-
     .estatisticas{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .cursos{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-}
-
-@media(max-width:600px){
-
-    header{
-        padding:15px;
-    }
-
-    .estatisticas{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:repeat(2,1fr);
     }
 
     .cursos{
         grid-template-columns:1fr;
     }
-
-    .boasVindas h1{
-        font-size:25px;
-    }
-
 }
 
-</style>
+@media(max-width:600px){
+    header{
+        padding:18px;
+    }
 
+    .header-container{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .header-acoes{
+        width:100%;
+    }
+
+    .header-acoes .btn{
+        flex:1;
+    }
+
+    .container{
+        margin:20px auto;
+        padding:0 15px;
+    }
+
+    .estatisticas{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+    }
+
+    .stat-card{
+        padding:16px;
+    }
+
+    .stat-valor{
+        font-size:24px;
+    }
+
+    .curso-topo{
+        flex-direction:column;
+    }
+
+    .curso-rodape{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .btn-curso{
+        width:100%;
+    }
+}
+</style>
 </head>
 
 <body>
 
-
 <header>
 
-    <div class="logo">
-        🎓 Plataforma de Cursos
-    </div>
+    <div class="header-container">
 
-
-    <div class="headerDireita">
-
-        <div class="info">
-            ❤️ <span id="vidas">0</span>
+        <div class="usuario-info">
+            <h1 id="nomeUsuario">Olá!</h1>
+            <p>Continue sua jornada de aprendizado 🚀</p>
         </div>
 
-        <div class="info">
-            🪙 <span id="moedas">0</span>
+        <div class="header-acoes">
+
+            <button class="btn btn-branco" onclick="abrirCarteira()">
+                💰 Carteira
+            </button>
+
+            <button class="btn btn-branco" onclick="abrirCursos()">
+                📚 Cursos
+            </button>
+
+            <button class="btn btn-sair" onclick="sair()">
+                Sair
+            </button>
+
         </div>
-
-        <div class="info">
-            ⭐ <span id="xp">0</span> XP
-        </div>
-
-        <div class="info">
-            🔥 <span id="sequencia">0</span>
-        </div>
-
-        <button
-            id="btnCarteira"
-            class="btnCarteira">
-            💰 Carteira
-        </button>
-
-        <button
-            id="btnSair"
-            class="btnSair">
-            Sair
-        </button>
 
     </div>
 
 </header>
 
 
-<main>
+<main class="container">
 
+    <div id="mensagem"></div>
 
-    <section class="boasVindas">
-
-        <h1>
-            Olá, <span id="nomeAluno">Aluno</span>! 👋
-        </h1>
-
-        <p>
-            Continue seus estudos e avance cada vez mais.
-        </p>
-
-    </section>
-
-
-    <!-- ESTATÍSTICAS -->
+    <!-- =========================
+         ESTATÍSTICAS
+    ========================== -->
 
     <section class="estatisticas">
 
+        <div class="stat-card">
 
-        <div class="estatistica">
+            <div class="stat-topo">
+                <div>
+                    <div class="stat-titulo">Vidas</div>
+                    <div class="stat-valor" id="vidas">-</div>
+                </div>
 
-            <div class="estatisticaIcone">
-                📚
-            </div>
-
-            <div class="estatisticaTitulo">
-                Cursos
-            </div>
-
-            <div
-                id="totalCursos"
-                class="estatisticaValor">
-                0
+                <div class="stat-icon">❤️</div>
             </div>
 
         </div>
 
 
-        <div class="estatistica">
+        <div class="stat-card">
 
-            <div class="estatisticaIcone">
-                📝
-            </div>
+            <div class="stat-topo">
+                <div>
+                    <div class="stat-titulo">Moedas</div>
+                    <div class="stat-valor" id="moedas">-</div>
+                </div>
 
-            <div class="estatisticaTitulo">
-                Lições concluídas
-            </div>
-
-            <div
-                id="licoesConcluidas"
-                class="estatisticaValor">
-                0
+                <div class="stat-icon">🪙</div>
             </div>
 
         </div>
 
 
-        <div class="estatistica">
+        <div class="stat-card">
 
-            <div class="estatisticaIcone">
-                🏆
-            </div>
+            <div class="stat-topo">
+                <div>
+                    <div class="stat-titulo">XP</div>
+                    <div class="stat-valor" id="xp">-</div>
+                </div>
 
-            <div class="estatisticaTitulo">
-                Melhor aproveitamento
-            </div>
-
-            <div
-                id="melhorAproveitamento"
-                class="estatisticaValor">
-                0%
+                <div class="stat-icon">⭐</div>
             </div>
 
         </div>
 
 
-        <div class="estatistica">
+        <div class="stat-card">
 
-            <div class="estatisticaIcone">
-                ⭐
-            </div>
+            <div class="stat-topo">
+                <div>
+                    <div class="stat-titulo">Sequência</div>
+                    <div class="stat-valor" id="sequencia">-</div>
+                </div>
 
-            <div class="estatisticaTitulo">
-                XP total
-            </div>
-
-            <div
-                id="xpTotal"
-                class="estatisticaValor">
-                0
+                <div class="stat-icon">🔥</div>
             </div>
 
         </div>
-
 
     </section>
 
 
-    <!-- CURSOS -->
+    <!-- =========================
+         RESUMO
+    ========================== -->
 
     <section>
 
-        <div class="secaoTitulo">
+        <div class="secao-titulo">
 
-            <h2>
-                📚 Meus cursos
-            </h2>
+            <h2>📊 Seu progresso</h2>
 
-            <button
-                id="btnVerCursos"
-                class="btnCursos">
-                Ver todos
-            </button>
+            <span id="resumoGeral">
+                Carregando...
+            </span>
 
         </div>
 
 
-        <div
-            id="carregandoCursos"
-            class="carregando">
-            Carregando cursos...
-        </div>
+        <div class="estatisticas">
+
+            <div class="stat-card">
+
+                <div class="stat-titulo">
+                    Cursos disponíveis
+                </div>
+
+                <div class="stat-valor" id="totalCursos">
+                    0
+                </div>
+
+            </div>
 
 
-        <div
-            id="cursos"
-            class="cursos">
-        </div>
+            <div class="stat-card">
+
+                <div class="stat-titulo">
+                    Lições concluídas
+                </div>
+
+                <div class="stat-valor" id="licoesConcluidas">
+                    0
+                </div>
+
+            </div>
 
 
-        <div
-            id="vazio"
-            class="vazio"
-            style="display:none;">
+            <div class="stat-card">
 
-            Nenhum curso disponível no momento.
+                <div class="stat-titulo">
+                    Melhor aproveitamento
+                </div>
+
+                <div class="stat-valor" id="melhorAproveitamento">
+                    0%
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-titulo">
+                    XP acumulado
+                </div>
+
+                <div class="stat-valor" id="xpResumo">
+                    0
+                </div>
+
+            </div>
 
         </div>
 
     </section>
 
+
+    <!-- =========================
+         CURSOS
+    ========================== -->
+
+    <section>
+
+        <div class="secao-titulo">
+
+            <h2>📚 Meus cursos</h2>
+
+            <span>
+                Continue de onde parou
+            </span>
+
+        </div>
+
+
+        <div id="listaCursos">
+
+            <div class="loading">
+                Carregando cursos...
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
 
 <script type="module">
 
-
-/* FIREBASE */
-
 import {
     initializeApp
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged,
     signOut
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
     getFirestore,
@@ -521,196 +563,241 @@ import {
     getDoc,
     collection,
     getDocs
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
-
-    authDomain:
-    "dezenas-1ed47.firebaseapp.com",
-
-    projectId:
-    "dezenas-1ed47",
-
-    storageBucket:
-    "dezenas-1ed47.firebasestorage.app",
-
-    messagingSenderId:
-    "372788277555",
-
-    appId:
-    "1:372788277555:web:1c1a6a80adee1722b54e46",
-
-    measurementId:
-    "G-NMPP8PKPK3"
-
+    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+    authDomain: "dezenas-1ed47.firebaseapp.com",
+    projectId: "dezenas-1ed47",
+    storageBucket: "dezenas-1ed47.firebasestorage.app",
+    messagingSenderId: "372788277555",
+    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+    measurementId: "G-NMPP8PKPK3"
 };
 
+const app = initializeApp(firebaseConfig);
 
-const app =
-    initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-
-const auth =
-    getAuth(app);
+const db = getFirestore(app);
 
 
-const db =
-    getFirestore(app);
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const nomeUsuario = document.getElementById("nomeUsuario");
+
+const vidasEl = document.getElementById("vidas");
+const moedasEl = document.getElementById("moedas");
+const xpEl = document.getElementById("xp");
+const sequenciaEl = document.getElementById("sequencia");
+
+const totalCursosEl = document.getElementById("totalCursos");
+const licoesConcluidasEl = document.getElementById("licoesConcluidas");
+const melhorAproveitamentoEl = document.getElementById("melhorAproveitamento");
+const xpResumoEl = document.getElementById("xpResumo");
+
+const resumoGeralEl = document.getElementById("resumoGeral");
+
+const listaCursosEl = document.getElementById("listaCursos");
+
+const mensagemEl = document.getElementById("mensagem");
 
 
-/* ELEMENTOS */
-
-const nomeAluno =
-    document.getElementById("nomeAluno");
-
-const vidas =
-    document.getElementById("vidas");
-
-const moedas =
-    document.getElementById("moedas");
-
-const xp =
-    document.getElementById("xp");
-
-const sequencia =
-    document.getElementById("sequencia");
-
-const totalCursos =
-    document.getElementById("totalCursos");
-
-const licoesConcluidas =
-    document.getElementById("licoesConcluidas");
-
-const melhorAproveitamento =
-    document.getElementById(
-        "melhorAproveitamento"
-    );
-
-const xpTotal =
-    document.getElementById("xpTotal");
-
-const cursosEl =
-    document.getElementById("cursos");
-
-const carregandoCursos =
-    document.getElementById(
-        "carregandoCursos"
-    );
-
-const vazio =
-    document.getElementById("vazio");
-
-const btnCarteira =
-    document.getElementById(
-        "btnCarteira"
-    );
-
-const btnSair =
-    document.getElementById("btnSair");
-
-const btnVerCursos =
-    document.getElementById(
-        "btnVerCursos"
-    );
-
-
-/* DADOS */
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
 
 let usuarioAtual = null;
-let usuarioDados = null;
+
+let dadosUsuario = {};
 
 let cursos = [];
+
+let licoes = [];
+
 let progresso = [];
 
 
-/* ========================= */
-/* CARREGAR USUÁRIO */
-/* ========================= */
+/* =====================================================
+   MENSAGEM
+===================================================== */
 
-async function carregarUsuario(){
+function mostrarErro(texto){
 
-    const ref =
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        );
+    mensagemEl.innerHTML = `
+        <div class="erro">
+            ${escapar(texto)}
+        </div>
+    `;
 
-    const snap =
-        await getDoc(ref);
-
-
-    if(!snap.exists()){
-
-        throw new Error(
-            "Perfil do aluno não encontrado."
-        );
-    }
-
-
-    usuarioDados =
-        snap.data();
-
-
-    nomeAluno.textContent =
-        usuarioDados.nome ||
-        "Aluno";
-
-
-    vidas.textContent =
-        usuarioDados.vidas ?? 0;
-
-
-    moedas.textContent =
-        usuarioDados.moedas ?? 0;
-
-
-    xp.textContent =
-        usuarioDados.xp ?? 0;
-
-
-    sequencia.textContent =
-        usuarioDados.sequencia ?? 0;
-
-
-    xpTotal.textContent =
-        usuarioDados.xp ?? 0;
 }
 
 
-/* ========================= */
-/* CARREGAR PROGRESSO */
-/* ========================= */
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escapar(valor){
+
+    if(valor === null || valor === undefined){
+        return "";
+    }
+
+    return String(valor)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+/* =====================================================
+   CARREGAR USUÁRIO
+===================================================== */
+
+async function carregarUsuario(){
+
+    const ref = doc(
+        db,
+        "usuarios",
+        usuarioAtual.uid
+    );
+
+    const snap = await getDoc(ref);
+
+    if(!snap.exists()){
+
+        dadosUsuario = {
+            nome: "Aluno",
+            vidas: 6,
+            moedas: 0,
+            xp: 0,
+            sequencia: 0
+        };
+
+        return;
+    }
+
+    dadosUsuario = snap.data();
+
+    nomeUsuario.textContent =
+        `Olá, ${dadosUsuario.nome || "Aluno"}!`;
+
+    vidasEl.textContent =
+        dadosUsuario.vidas ?? 6;
+
+    moedasEl.textContent =
+        dadosUsuario.moedas ?? 0;
+
+    xpEl.textContent =
+        dadosUsuario.xp ?? 0;
+
+    sequenciaEl.textContent =
+        dadosUsuario.sequencia ?? 0;
+
+}
+
+
+/* =====================================================
+   CARREGAR CURSOS
+===================================================== */
+
+async function carregarCursos(){
+
+    const snap = await getDocs(
+        collection(db,"cursos")
+    );
+
+    cursos = [];
+
+    snap.forEach(item => {
+
+        const curso = {
+            id:item.id,
+            ...item.data()
+        };
+
+        if(curso.ativo === true){
+            cursos.push(curso);
+        }
+
+    });
+
+    cursos.sort((a,b) =>
+        String(a.titulo || "")
+            .localeCompare(
+                String(b.titulo || ""),
+                "pt-BR"
+            )
+    );
+
+}
+
+
+/* =====================================================
+   CARREGAR LIÇÕES
+===================================================== */
+
+async function carregarLicoes(){
+
+    const snap = await getDocs(
+        collection(db,"licoes")
+    );
+
+    licoes = [];
+
+    snap.forEach(item => {
+
+        const licao = {
+            id:item.id,
+            ...item.data()
+        };
+
+        /*
+         * Somente lições ativas entram
+         * no cálculo do progresso.
+         */
+
+        if(licao.ativo === true){
+            licoes.push(licao);
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   CARREGAR PROGRESSO
+===================================================== */
 
 async function carregarProgresso(){
 
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "progresso"
-            )
-        );
-
+    const snap = await getDocs(
+        collection(db,"progresso")
+    );
 
     progresso = [];
 
+    snap.forEach(item => {
 
-    snapshot.forEach(item => {
+        const dados = item.data();
 
-        const dados =
-            item.data();
+        /*
+         * Segurança:
+         * só usamos documentos pertencentes
+         * ao usuário atualmente logado.
+         */
 
-
-        if(
-            dados.usuarioId ===
-            usuarioAtual.uid
-        ){
+        if(dados.usuarioId === usuarioAtual.uid){
 
             progresso.push({
                 id:item.id,
@@ -721,433 +808,405 @@ async function carregarProgresso(){
 
     });
 
-
-    calcularEstatisticas();
 }
 
 
-/* ========================= */
-/* ESTATÍSTICAS */
-/* ========================= */
+/* =====================================================
+   ENCONTRAR PROGRESSO DA LIÇÃO
+===================================================== */
+
+function progressoDaLicao(licaoId){
+
+    return progresso.find(
+        item => item.licaoId === licaoId
+    );
+
+}
+
+
+/* =====================================================
+   CALCULAR ESTATÍSTICAS
+===================================================== */
 
 function calcularEstatisticas(){
 
-    const concluidas =
-        progresso.filter(
-            item =>
-            item.aprovado === true
-        );
+    let totalConcluidas = 0;
 
-
-    licoesConcluidas.textContent =
-        concluidas.length;
-
-
-    let melhor = 0;
-
+    let melhorAproveitamento = 0;
 
     progresso.forEach(item => {
 
-        const percentual =
-            Number(
-                item.aproveitamento ?? 0
-            );
+        if(item.aprovado === true){
 
+            totalConcluidas++;
 
-        if(percentual > melhor){
-            melhor = percentual;
         }
 
-    });
+        const aproveitamento =
+            Number(item.aproveitamento || 0);
 
+        if(aproveitamento > melhorAproveitamento){
 
-    melhorAproveitamento.textContent =
-        `${melhor}%`;
-}
-
-
-/* ========================= */
-/* CARREGAR CURSOS */
-/* ========================= */
-
-async function carregarCursos(){
-
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "cursos"
-            )
-        );
-
-
-    cursos = [];
-
-
-    snapshot.forEach(item => {
-
-        const dados =
-            item.data();
-
-
-        if(dados.ativo !== false){
-
-            cursos.push({
-
-                id:item.id,
-
-                ...dados
-
-            });
+            melhorAproveitamento =
+                aproveitamento;
 
         }
 
     });
 
 
-    cursos.sort(
-        (a,b) =>
-        String(a.titulo || "")
-        .localeCompare(
-            String(b.titulo || "")
-        )
-    );
-
-
-    totalCursos.textContent =
+    totalCursosEl.textContent =
         cursos.length;
 
+    licoesConcluidasEl.textContent =
+        totalConcluidas;
 
-    renderizarCursos();
+    melhorAproveitamentoEl.textContent =
+        `${Math.round(melhorAproveitamento)}%`;
+
+    xpResumoEl.textContent =
+        dadosUsuario.xp ?? 0;
+
+
+    if(licoes.length > 0){
+
+        resumoGeralEl.textContent =
+            `${totalConcluidas} de ${licoes.length} lições concluídas`;
+
+    }else{
+
+        resumoGeralEl.textContent =
+            "Nenhuma lição cadastrada";
+
+    }
+
 }
 
 
-/* ========================= */
-/* CALCULAR PROGRESSO CURSO */
-/* ========================= */
+/* =====================================================
+   CALCULAR PROGRESSO DO CURSO
+===================================================== */
 
-function progressoCurso(cursoId){
+function calcularProgressoCurso(cursoId){
 
-    const cursoProgresso =
-        progresso.filter(
-            item =>
-            item.cursoId === cursoId
+    /*
+     * Todas as lições ativas pertencentes
+     * a este curso.
+     */
+
+    const licoesDoCurso =
+        licoes.filter(
+            licao =>
+                licao.cursoId === cursoId
         );
 
 
-    const concluidas =
-        cursoProgresso.filter(
-            item =>
-            item.aprovado === true
-        ).length;
+    const total =
+        licoesDoCurso.length;
 
 
     /*
-     * O total de lições será
-     * preenchido posteriormente
-     * usando a coleção licoes.
+     * Conta somente lições aprovadas.
      */
 
+    let concluidas = 0;
+
+    licoesDoCurso.forEach(licao => {
+
+        const prog =
+            progressoDaLicao(licao.id);
+
+        if(
+            prog &&
+            prog.aprovado === true
+        ){
+
+            concluidas++;
+
+        }
+
+    });
+
+
+    let percentual = 0;
+
+    if(total > 0){
+
+        percentual =
+            Math.round(
+                (concluidas / total) * 100
+            );
+
+    }
+
+
     return {
-        concluidas
+        total,
+        concluidas,
+        percentual
     };
+
 }
 
 
-/* ========================= */
-/* RENDERIZAR CURSOS */
-/* ========================= */
+/* =====================================================
+   RENDERIZAR CURSOS
+===================================================== */
 
 function renderizarCursos(){
 
-    carregandoCursos.style.display =
-        "none";
-
-
-    cursosEl.innerHTML = "";
-
-
     if(cursos.length === 0){
 
-        vazio.style.display =
-            "block";
+        listaCursosEl.innerHTML = `
+            <div class="vazio">
+
+                <h3>📚 Nenhum curso disponível</h3>
+
+                <p>
+                    Ainda não existem cursos ativos
+                    disponíveis para você.
+                </p>
+
+                <button
+                    class="btn btn-curso"
+                    onclick="abrirCursos()"
+                >
+                    Ver cursos
+                </button>
+
+            </div>
+        `;
 
         return;
     }
 
 
-    vazio.style.display =
-        "none";
+    listaCursosEl.innerHTML = "";
+
+    const container =
+        document.createElement("div");
+
+    container.className = "cursos";
 
 
-    /*
-     * Mostra inicialmente
-     * até 6 cursos.
-     */
+    cursos.forEach(curso => {
 
-    cursos
-        .slice(0,6)
-        .forEach(curso => {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-            card.className =
-                "curso";
+        const progressoCurso =
+            calcularProgressoCurso(curso.id);
 
 
-            const imagem =
-                document.createElement(
-                    "img"
-                );
+        const card =
+            document.createElement("div");
 
-            imagem.className =
-                "cursoImagem";
+        card.className =
+            "curso-card";
 
 
-            imagem.src =
-                curso.imagem ||
-                "https://via.placeholder.com/600x300?text=Curso";
-
-
-            imagem.alt =
+        const titulo =
+            escapar(
                 curso.titulo ||
-                "Curso";
+                "Curso sem título"
+            );
 
 
-            imagem.onerror =
-                () => {
-
-                    imagem.src =
-                    "https://via.placeholder.com/600x300?text=Curso";
-
-                };
-
-
-            const conteudo =
-                document.createElement(
-                    "div"
-                );
-
-            conteudo.className =
-                "cursoConteudo";
-
-
-            const titulo =
-                document.createElement(
-                    "div"
-                );
-
-            titulo.className =
-                "cursoTitulo";
-
-            titulo.textContent =
-                curso.titulo ||
-                "Curso";
-
-
-            const descricao =
-                document.createElement(
-                    "div"
-                );
-
-            descricao.className =
-                "cursoDescricao";
-
-            descricao.textContent =
+        const descricao =
+            escapar(
                 curso.descricao ||
-                "Continue seus estudos neste curso.";
+                "Continue seus estudos neste curso."
+            );
 
 
-            const nivel =
-                document.createElement(
-                    "span"
-                );
-
-            nivel.className =
-                "nivel";
-
-            nivel.textContent =
+        const nivel =
+            escapar(
                 curso.nivel ||
-                "Todos os níveis";
-
-
-            const dados =
-                progressoCurso(
-                    curso.id
-                );
-
-
-            const barra =
-                document.createElement(
-                    "div"
-                );
-
-            barra.className =
-                "progressoTexto";
-
-
-            const texto =
-                document.createElement(
-                    "span"
-                );
-
-            texto.textContent =
-                `${dados.concluidas} lições concluídas`;
-
-
-            const percentual =
-                document.createElement(
-                    "span"
-                );
-
-            percentual.textContent =
-                "Em andamento";
-
-
-            barra.appendChild(texto);
-            barra.appendChild(percentual);
-
-
-            const progressoBarra =
-                document.createElement(
-                    "div"
-                );
-
-            progressoBarra.className =
-                "progresso";
-
-
-            const preenchimento =
-                document.createElement(
-                    "div"
-                );
-
-            preenchimento.className =
-                "progressoBarra";
-
-
-            /*
-             * Como o total de lições
-             * ainda será carregado pela
-             * página curso.html, usamos
-             * uma indicação visual
-             * baseada na quantidade
-             * de lições concluídas.
-             */
-
-            preenchimento.style.width =
-                dados.concluidas > 0
-                ? "50%"
-                : "0%";
-
-
-            progressoBarra.appendChild(
-                preenchimento
+                "Iniciante"
             );
 
 
-            const botao =
-                document.createElement(
-                    "button"
-                );
-
-            botao.className =
-                "btnContinuar";
-
-            botao.textContent =
-                dados.concluidas > 0
-                ? "▶ Continuar curso"
-                : "🚀 Começar curso";
+        const percentual =
+            progressoCurso.percentual;
 
 
-            botao.addEventListener(
-                "click",
-                () => {
+        card.innerHTML = `
 
-                    window.location.href =
-                        `curso.html?cursoId=${encodeURIComponent(curso.id)}`;
+            <div class="curso-topo">
 
-                }
+                <div>
+
+                    <h3>
+                        ${titulo}
+                    </h3>
+
+                    <div class="curso-descricao">
+                        ${descricao}
+                    </div>
+
+                </div>
+
+                <div class="nivel">
+                    ${nivel}
+                </div>
+
+            </div>
+
+
+            <div class="progresso-info">
+
+                <span>
+                    Progresso
+                </span>
+
+                <span class="progresso-percentual">
+                    ${percentual}%
+                </span>
+
+            </div>
+
+
+            <div class="barra">
+
+                <div
+                    class="barra-progresso"
+                    style="width:${percentual}%"
+                ></div>
+
+            </div>
+
+
+            <div class="curso-rodape">
+
+                <span class="info-licoes">
+
+                    ${progressoCurso.concluidas}
+                    /
+                    ${progressoCurso.total}
+                    lições concluídas
+
+                </span>
+
+
+                <button
+                    class="btn btn-curso"
+                    data-curso="${curso.id}"
+                >
+                    ${percentual >= 100
+                        ? "Revisar curso"
+                        : "Continuar curso"
+                    }
+                </button>
+
+            </div>
+
+        `;
+
+
+        const botao =
+            card.querySelector(
+                "[data-curso]"
             );
 
 
-            conteudo.appendChild(titulo);
-            conteudo.appendChild(descricao);
-            conteudo.appendChild(nivel);
-            conteudo.appendChild(barra);
-            conteudo.appendChild(progressoBarra);
-            conteudo.appendChild(botao);
+        botao.addEventListener(
+            "click",
+            () => {
+
+                abrirCurso(curso.id);
+
+            }
+        );
 
 
-            card.appendChild(imagem);
-            card.appendChild(conteudo);
+        container.appendChild(card);
+
+    });
 
 
-            cursosEl.appendChild(card);
+    listaCursosEl.appendChild(container);
 
-        });
 }
 
 
-/* ========================= */
-/* NAVEGAÇÃO */
-/* ========================= */
+/* =====================================================
+   ABRIR CURSO
+===================================================== */
 
-btnCarteira.addEventListener(
-    "click",
-    () => {
+function abrirCurso(cursoId){
+
+    window.location.href =
+        `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+
+}
+
+
+/* =====================================================
+   ABRIR CURSOS
+===================================================== */
+
+function abrirCursos(){
+
+    window.location.href =
+        "cursos.html";
+
+}
+
+
+/* =====================================================
+   ABRIR CARTEIRA
+===================================================== */
+
+function abrirCarteira(){
+
+    window.location.href =
+        "carteira.html";
+
+}
+
+
+/* =====================================================
+   SAIR
+===================================================== */
+
+async function sair(){
+
+    try{
+
+        await signOut(auth);
 
         window.location.href =
-            "carteira.html";
+            "index.html";
+
+    }catch(error){
+
+        console.error(error);
+
+        mostrarErro(
+            "Não foi possível sair da conta."
+        );
 
     }
-);
+
+}
 
 
-btnVerCursos.addEventListener(
-    "click",
-    () => {
+/* =====================================================
+   EXPOR FUNÇÕES
+===================================================== */
 
-        window.location.href =
-            "cursos.html";
-
-    }
-);
-
-
-btnSair.addEventListener(
-    "click",
-    async () => {
-
-        try{
-
-            await signOut(auth);
-
-            window.location.href =
-                "index.html";
-
-        }catch(error){
-
-            console.error(error);
-
-        }
-
-    }
-);
+window.abrirCurso = abrirCurso;
+window.abrirCursos = abrirCursos;
+window.abrirCarteira = abrirCarteira;
+window.sair = sair;
 
 
-/* ========================= */
-/* AUTENTICAÇÃO */
-/* ========================= */
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
 
 onAuthStateChanged(
     auth,
-    async usuario => {
+    async (user) => {
 
-        if(!usuario){
+        if(!user){
 
             window.location.href =
                 "index.html";
@@ -1156,24 +1215,51 @@ onAuthStateChanged(
         }
 
 
-        usuarioAtual =
-            usuario;
+        usuarioAtual = user;
 
 
         try{
 
-            await carregarUsuario();
+            /*
+             * Carregamos tudo antes de
+             * montar o painel.
+             */
 
-            await carregarProgresso();
+            await carregarUsuario();
 
             await carregarCursos();
 
+            await carregarLicoes();
+
+            await carregarProgresso();
+
+
+            /*
+             * Agora temos:
+             *
+             * cursos
+             * lições
+             * progresso
+             *
+             * e podemos calcular
+             * o progresso real.
+             */
+
+            calcularEstatisticas();
+
+            renderizarCursos();
+
+
         }catch(error){
 
-            console.error(error);
+            console.error(
+                "Erro ao carregar painel:",
+                error
+            );
 
-            carregandoCursos.textContent =
-                "Não foi possível carregar o painel.";
+            mostrarErro(
+                "Não foi possível carregar seu painel. Verifique o console."
+            );
 
         }
 
@@ -1183,6 +1269,5 @@ onAuthStateChanged(
 </script>
 
 </body>
-
 </html>
 ```
