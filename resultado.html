@@ -1,0 +1,1235 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Resultado da Lição</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+}
+
+/* HEADER */
+
+header{
+    background:white;
+    border-bottom:1px solid #e5e7eb;
+
+    padding:15px 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.headerDireita{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.info{
+    background:#f3f4f6;
+    padding:9px 13px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+button{
+    border:none;
+    border-radius:10px;
+    padding:12px 18px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btnCarteira{
+    background:#f59e0b;
+    color:white;
+}
+
+.btnSair{
+    background:#ef4444;
+    color:white;
+}
+
+/* PRINCIPAL */
+
+main{
+    max-width:850px;
+    margin:35px auto;
+    padding:0 15px;
+}
+
+/* CARD PRINCIPAL */
+
+.card{
+    background:white;
+    border-radius:22px;
+    padding:35px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.07);
+
+    text-align:center;
+}
+
+/* RESULTADO */
+
+.iconeResultado{
+    font-size:75px;
+    margin-bottom:10px;
+}
+
+.tituloResultado{
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.subtitulo{
+    color:#6b7280;
+    margin-bottom:30px;
+}
+
+/* PERCENTUAL */
+
+.percentual{
+    font-size:65px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.percentual.aprovado{
+    color:#16a34a;
+}
+
+.percentual.reprovado{
+    color:#dc2626;
+}
+
+.status{
+    display:inline-block;
+    padding:9px 18px;
+    border-radius:30px;
+    font-weight:bold;
+    margin-bottom:30px;
+}
+
+.status.aprovado{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status.reprovado{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* INFORMAÇÕES */
+
+.infoCurso{
+    background:#f8fafc;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:25px;
+}
+
+.infoCurso strong{
+    display:block;
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+/* ESTATÍSTICAS */
+
+.estatisticas{
+    display:grid;
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+    margin:25px 0;
+}
+
+.estatistica{
+    background:#f8fafc;
+    border-radius:14px;
+    padding:18px 10px;
+}
+
+.estatisticaIcone{
+    font-size:27px;
+}
+
+.estatisticaValor{
+    font-size:23px;
+    font-weight:bold;
+    margin-top:7px;
+}
+
+.estatisticaTitulo{
+    color:#6b7280;
+    font-size:13px;
+    margin-top:4px;
+}
+
+/* REQUISITO */
+
+.requisito{
+    margin:25px 0;
+    padding:15px;
+
+    background:#f8fafc;
+
+    border-radius:12px;
+
+    color:#6b7280;
+}
+
+.requisito strong{
+    color:#1f2937;
+}
+
+/* BOTÕES */
+
+.acoes{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.btnContinuar{
+    background:#2563eb;
+    color:white;
+}
+
+.btnRefazer{
+    background:#e5e7eb;
+}
+
+.btnPainel{
+    background:#16a34a;
+    color:white;
+}
+
+/* CARREGANDO */
+
+.carregando{
+    text-align:center;
+    padding:50px;
+    font-size:18px;
+}
+
+/* ERRO */
+
+.erro{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    header{
+        padding:15px;
+    }
+
+    .card{
+        padding:25px 18px;
+    }
+
+    .tituloResultado{
+        font-size:26px;
+    }
+
+    .percentual{
+        font-size:52px;
+    }
+
+    .estatisticas{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🎓 Plataforma de Cursos
+    </div>
+
+
+    <div class="headerDireita">
+
+        <div class="info">
+            ❤️ <span id="vidas">0</span>
+        </div>
+
+        <div class="info">
+            🪙 <span id="moedas">0</span>
+        </div>
+
+        <div class="info">
+            ⭐ <span id="xp">0</span> XP
+        </div>
+
+        <button
+            id="btnCarteira"
+            class="btnCarteira">
+
+            💰 Carteira
+
+        </button>
+
+
+        <button
+            id="btnSair"
+            class="btnSair">
+
+            Sair
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+    <div
+        id="carregando"
+        class="card carregando">
+
+        Carregando resultado...
+
+    </div>
+
+
+    <div
+        id="erro"
+        class="erro"
+        style="display:none;">
+
+    </div>
+
+
+    <div
+        id="resultado"
+        class="card"
+        style="display:none;">
+
+
+        <div
+            id="iconeResultado"
+            class="iconeResultado">
+
+            🏆
+
+        </div>
+
+
+        <div
+            id="tituloResultado"
+            class="tituloResultado">
+
+            Parabéns!
+
+        </div>
+
+
+        <div
+            id="subtitulo"
+            class="subtitulo">
+
+            Você concluiu a lição.
+
+        </div>
+
+
+        <div
+            id="percentual"
+            class="percentual">
+
+            0%
+
+        </div>
+
+
+        <div
+            id="status"
+            class="status">
+
+            Resultado
+
+        </div>
+
+
+        <div class="infoCurso">
+
+            <strong id="cursoNome">
+                Curso
+            </strong>
+
+            <span id="licaoNome">
+                Lição
+            </span>
+
+        </div>
+
+
+        <!-- ESTATÍSTICAS -->
+
+        <div class="estatisticas">
+
+
+            <div class="estatistica">
+
+                <div class="estatisticaIcone">
+                    ✅
+                </div>
+
+                <div
+                    id="acertos"
+                    class="estatisticaValor">
+
+                    0
+
+                </div>
+
+                <div class="estatisticaTitulo">
+                    Acertos
+                </div>
+
+            </div>
+
+
+            <div class="estatistica">
+
+                <div class="estatisticaIcone">
+                    ❌
+                </div>
+
+                <div
+                    id="erros"
+                    class="estatisticaValor">
+
+                    0
+
+                </div>
+
+                <div class="estatisticaTitulo">
+                    Erros
+                </div>
+
+            </div>
+
+
+            <div class="estatistica">
+
+                <div class="estatisticaIcone">
+                    ⭐
+                </div>
+
+                <div
+                    id="xpGanho"
+                    class="estatisticaValor">
+
+                    0
+
+                </div>
+
+                <div class="estatisticaTitulo">
+                    XP ganho
+                </div>
+
+            </div>
+
+
+            <div class="estatistica">
+
+                <div class="estatisticaIcone">
+                    🪙
+                </div>
+
+                <div
+                    id="moedasGanhas"
+                    class="estatisticaValor">
+
+                    0
+
+                </div>
+
+                <div class="estatisticaTitulo">
+                    Moedas ganhas
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="requisito">
+
+            Mínimo para aprovação:
+
+            <strong>
+                60%
+            </strong>
+
+            <br>
+
+            Seu aproveitamento:
+
+            <strong id="aproveitamentoTexto">
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="acoes">
+
+
+            <button
+                id="btnContinuar"
+                class="btnContinuar">
+
+                📚 Continuar curso
+
+            </button>
+
+
+            <button
+                id="btnRefazer"
+                class="btnRefazer">
+
+                🔄 Refazer lição
+
+            </button>
+
+
+            <button
+                id="btnPainel"
+                class="btnPainel">
+
+                🏠 Painel
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script type="module">
+
+
+/* FIREBASE */
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+    "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+    "dezenas-1ed47",
+
+    storageBucket:
+    "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+    "372788277555",
+
+    appId:
+    "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+    "G-NMPP8PKPK3"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+/* ELEMENTOS */
+
+const carregando =
+    document.getElementById(
+        "carregando"
+    );
+
+const resultado =
+    document.getElementById(
+        "resultado"
+    );
+
+const erro =
+    document.getElementById(
+        "erro"
+    );
+
+const vidas =
+    document.getElementById(
+        "vidas"
+    );
+
+const moedas =
+    document.getElementById(
+        "moedas"
+    );
+
+const xp =
+    document.getElementById(
+        "xp"
+    );
+
+const iconeResultado =
+    document.getElementById(
+        "iconeResultado"
+    );
+
+const tituloResultado =
+    document.getElementById(
+        "tituloResultado"
+    );
+
+const subtitulo =
+    document.getElementById(
+        "subtitulo"
+    );
+
+const percentual =
+    document.getElementById(
+        "percentual"
+    );
+
+const status =
+    document.getElementById(
+        "status"
+    );
+
+const cursoNome =
+    document.getElementById(
+        "cursoNome"
+    );
+
+const licaoNome =
+    document.getElementById(
+        "licaoNome"
+    );
+
+const acertos =
+    document.getElementById(
+        "acertos"
+    );
+
+const erros =
+    document.getElementById(
+        "erros"
+    );
+
+const xpGanho =
+    document.getElementById(
+        "xpGanho"
+    );
+
+const moedasGanhas =
+    document.getElementById(
+        "moedasGanhas"
+    );
+
+const aproveitamentoTexto =
+    document.getElementById(
+        "aproveitamentoTexto"
+    );
+
+const btnContinuar =
+    document.getElementById(
+        "btnContinuar"
+    );
+
+const btnRefazer =
+    document.getElementById(
+        "btnRefazer"
+    );
+
+const btnPainel =
+    document.getElementById(
+        "btnPainel"
+    );
+
+const btnCarteira =
+    document.getElementById(
+        "btnCarteira"
+    );
+
+const btnSair =
+    document.getElementById(
+        "btnSair"
+    );
+
+
+/* URL */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const cursoId =
+    params.get("cursoId");
+
+
+const moduloId =
+    params.get("moduloId");
+
+
+const licaoId =
+    params.get("licaoId");
+
+
+/* ========================= */
+/* ERRO */
+/* ========================= */
+
+function mostrarErro(texto){
+
+    carregando.style.display =
+        "none";
+
+    resultado.style.display =
+        "none";
+
+    erro.style.display =
+        "block";
+
+    erro.textContent =
+        texto;
+}
+
+
+/* ========================= */
+/* CARREGAR USUÁRIO */
+/* ========================= */
+
+async function carregarUsuario(uid){
+
+    const ref =
+        doc(
+            db,
+            "usuarios",
+            uid
+        );
+
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Perfil do aluno não encontrado."
+        );
+
+    }
+
+
+    const dados =
+        snap.data();
+
+
+    vidas.textContent =
+        dados.vidas ?? 0;
+
+
+    moedas.textContent =
+        dados.moedas ?? 0;
+
+
+    xp.textContent =
+        dados.xp ?? 0;
+}
+
+
+/* ========================= */
+/* CARREGAR CURSO */
+/* ========================= */
+
+async function carregarCurso(){
+
+    if(!cursoId){
+
+        cursoNome.textContent =
+            "Curso";
+
+        return;
+    }
+
+
+    const ref =
+        doc(
+            db,
+            "cursos",
+            cursoId
+        );
+
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(snap.exists()){
+
+        cursoNome.textContent =
+            snap.data().titulo ||
+            "Curso";
+
+    }
+
+}
+
+
+/* ========================= */
+/* CARREGAR LIÇÃO */
+/* ========================= */
+
+async function carregarLicao(){
+
+    if(!licaoId){
+
+        licaoNome.textContent =
+            "Lição";
+
+        return;
+    }
+
+
+    const ref =
+        doc(
+            db,
+            "licoes",
+            licaoId
+        );
+
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(snap.exists()){
+
+        licaoNome.textContent =
+            snap.data().titulo ||
+            "Lição";
+
+    }
+
+}
+
+
+/* ========================= */
+/* CARREGAR RESULTADO */
+/* ========================= */
+
+async function carregarResultado(uid){
+
+    if(!licaoId){
+
+        throw new Error(
+            "ID da lição não encontrado."
+        );
+
+    }
+
+
+    const progressoId =
+        `${uid}_${licaoId}`;
+
+
+    const ref =
+        doc(
+            db,
+            "progresso",
+            progressoId
+        );
+
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Resultado da lição não encontrado."
+        );
+
+    }
+
+
+    const dados =
+        snap.data();
+
+
+    const aproveitamento =
+        Number(
+            dados.aproveitamento ?? 0
+        );
+
+
+    const aprovado =
+        dados.aprovado === true;
+
+
+    const totalQuestoes =
+        Number(
+            dados.totalQuestoes ?? 0
+        );
+
+
+    const acertosValor =
+        Number(
+            dados.acertos ?? 0
+        );
+
+
+    const errosValor =
+        Number(
+            dados.erros ?? 0
+        );
+
+
+    const xpValor =
+        Number(
+            dados.xpGanho ?? 0
+        );
+
+
+    const moedasValor =
+        Number(
+            dados.moedasGanhas ?? 0
+        );
+
+
+    /* RESULTADO */
+
+    percentual.textContent =
+        `${aproveitamento}%`;
+
+
+    aproveitamentoTexto.textContent =
+        `${aproveitamento}%`;
+
+
+    acertos.textContent =
+        acertosValor;
+
+
+    erros.textContent =
+        errosValor;
+
+
+    xpGanho.textContent =
+        `+${xpValor}`;
+
+
+    moedasGanhas.textContent =
+        `+${moedasValor}`;
+
+
+    if(aprovado){
+
+        iconeResultado.textContent =
+            "🏆";
+
+
+        tituloResultado.textContent =
+            "Parabéns!";
+
+
+        subtitulo.textContent =
+            "Você foi aprovado nesta lição!";
+
+
+        percentual.className =
+            "percentual aprovado";
+
+
+        status.textContent =
+            "✅ LIÇÃO APROVADA";
+
+
+        status.className =
+            "status aprovado";
+
+    }else{
+
+        iconeResultado.textContent =
+            "💪";
+
+
+        tituloResultado.textContent =
+            "Continue tentando!";
+
+
+        subtitulo.textContent =
+            "Você ainda não atingiu o mínimo necessário.";
+
+
+        percentual.className =
+            "percentual reprovado";
+
+
+        status.textContent =
+            "❌ LIÇÃO NÃO APROVADA";
+
+
+        status.className =
+            "status reprovado";
+
+    }
+
+
+    /*
+     * Caso uma versão antiga do
+     * progresso não tenha acertos,
+     * podemos mostrar pelo menos
+     * o total de questões.
+     */
+
+    if(
+        totalQuestoes > 0 &&
+        acertosValor === 0 &&
+        errosValor === 0
+    ){
+
+        erros.textContent =
+            totalQuestoes;
+
+    }
+
+
+    carregando.style.display =
+        "none";
+
+
+    resultado.style.display =
+        "block";
+}
+
+
+/* ========================= */
+/* NAVEGAÇÃO */
+/* ========================= */
+
+btnContinuar.addEventListener(
+    "click",
+    () => {
+
+        if(!cursoId){
+
+            window.location.href =
+                "cursos.html";
+
+            return;
+        }
+
+
+        window.location.href =
+            `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+
+    }
+);
+
+
+btnRefazer.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            `licao.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
+
+    }
+);
+
+
+btnPainel.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "painel.html";
+
+    }
+);
+
+
+btnCarteira.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "carteira.html";
+
+    }
+);
+
+
+btnSair.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "index.html";
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+);
+
+
+/* ========================= */
+/* AUTENTICAÇÃO */
+/* ========================= */
+
+onAuthStateChanged(
+    auth,
+    async usuario => {
+
+        if(!usuario){
+
+            window.location.href =
+                "index.html";
+
+            return;
+        }
+
+
+        try{
+
+            await carregarUsuario(
+                usuario.uid
+            );
+
+
+            await carregarCurso();
+
+
+            await carregarLicao();
+
+
+            await carregarResultado(
+                usuario.uid
+            );
+
+        }catch(error){
+
+            console.error(error);
+
+            mostrarErro(
+                error.message ||
+                "Não foi possível carregar o resultado."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
+```
