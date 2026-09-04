@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Curso</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    min-height: 100vh;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 15px 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #2563eb;
+}
+
+.header-direita {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.usuario {
+    text-align: right;
+}
+
+.usuario-nome {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.usuario-email {
+    font-size: 12px;
+    color: #777;
+}
+
+.btn-voltar {
+    border: none;
+    background: #eef2ff;
+    color: #2563eb;
+
+    padding: 9px 14px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-voltar:hover {
+    background: #dbeafe;
+}
+
+.btn-sair {
+    border: none;
+    background: #ef4444;
+    color: white;
+
+    padding: 9px 14px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-sair:hover {
+    background: #dc2626;
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+/* =========================
+   HERO DO CURSO
+========================= */
+
+.curso-header {
+    background: white;
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+
+    margin-bottom: 30px;
+}
+
+.curso-imagem {
+    width: 100%;
+    height: 250px;
+
+    background: #e5e7eb;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.curso-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sem-imagem {
+    font-size: 70px;
+    color: #9ca3af;
+}
+
+.curso-info {
+    padding: 28px;
+}
+
+.curso-nivel {
+    display: inline-block;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+.curso-titulo {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.curso-descricao {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* =========================
+   MÓDULOS
+========================= */
+
+.secao-titulo {
+    margin-bottom: 18px;
+}
+
+.secao-titulo h2 {
+    font-size: 25px;
+}
+
+.secao-titulo p {
+    margin-top: 5px;
+    color: #777;
+}
+
+/* =========================
+   MÓDULO
+========================= */
+
+.modulo {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    margin-bottom: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+}
+
+.modulo-header {
+    padding: 18px 20px;
+
+    background: #fafafa;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.modulo-numero {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.modulo-titulo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modulo-descricao {
+    color: #777;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* =========================
+   LIÇÕES
+========================= */
+
+.licoes {
+    padding: 8px 15px 12px;
+}
+
+.licao {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: background 0.2s;
+
+    margin-bottom: 5px;
+}
+
+.licao:hover {
+    background: #f1f5f9;
+}
+
+.licao-numero {
+    width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+
+    background: #e0e7ff;
+    color: #3730a3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    flex-shrink: 0;
+}
+
+.licao-info {
+    flex: 1;
+}
+
+.licao-titulo {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.licao-descricao {
+    color: #777;
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+.licao-seta {
+    font-size: 20px;
+    color: #9ca3af;
+}
+
+/* =========================
+   ESTADOS
+========================= */
+
+.carregando {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 50px;
+
+    color: #666;
+}
+
+.spinner {
+    width: 23px;
+    height: 23px;
+
+    border: 3px solid #ddd;
+    border-top-color: #2563eb;
+
+    border-radius: 50%;
+
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.mensagem {
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    border: 1px solid #e5e7eb;
+}
+
+.mensagem h2 {
+    margin-bottom: 8px;
+}
+
+.mensagem p {
+    color: #777;
+}
+
+.mensagem.erro {
+    color: #dc2626;
+}
+
+.sem-licoes {
+    padding: 25px;
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    header {
+        padding: 12px 15px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .usuario {
+        display: none;
+    }
+
+    .header-direita {
+        gap: 7px;
+    }
+
+    .btn-voltar,
+    .btn-sair {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    main {
+        padding: 20px 15px 40px;
+    }
+
+    .curso-imagem {
+        height: 180px;
+    }
+
+    .curso-info {
+        padding: 20px;
+    }
+
+    .curso-titulo {
+        font-size: 25px;
+    }
+
+    .modulo-header {
+        padding: 15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+```
+<div class="logo">
+    Plataforma<span> Cursos</span>
+</div>
+
+
+<div class="header-direita">
+
+    <div class="usuario">
+
+        <div
+            class="usuario-nome"
+            id="usuarioNome"
+        >
+            Carregando...
+        </div>
+
+        <div
+            class="usuario-email"
+            id="usuarioEmail"
+        >
+            ...
+        </div>
+
+    </div>
+
+
+    <button
+        class="btn-voltar"
+        id="btnVoltar"
+    >
+        ← Cursos
+    </button>
+
+
+    <button
+        class="btn-sair"
+        id="btnSair"
+    >
+        Sair
+    </button>
+
+</div>
+```
+
+</header>
+
+<main>
+
+```
+<div id="conteudo">
+
+    <div class="carregando">
+
+        <div class="spinner"></div>
+
+        <span>
+            Carregando curso...
+        </span>
+
+    </div>
+
+</div>
+```
+
+</main>
+
+<script type="module">
+
+
+/* =====================================
+   FIREBASE
+===================================== */
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    collection,
+    getDocs
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+/* =====================================
+   ELEMENTOS
+===================================== */
+
+const conteudo =
+    document.getElementById("conteudo");
+
+const usuarioNome =
+    document.getElementById("usuarioNome");
+
+const usuarioEmail =
+    document.getElementById("usuarioEmail");
+
+const btnVoltar =
+    document.getElementById("btnVoltar");
+
+const btnSair =
+    document.getElementById("btnSair");
+
+
+/* =====================================
+   CURSO ID
+===================================== */
+
+const parametros =
+    new URLSearchParams(window.location.search);
+
+const cursoId =
+    parametros.get("cursoId");
+
+
+/* =====================================
+   ESCAPAR HTML
+===================================== */
+
+function escapar(valor) {
+
+    if (
+        valor === null ||
+        valor === undefined
+    ) {
+        return "";
+    }
+
+    return String(valor)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =====================================
+   CARREGAR PERFIL
+===================================== */
+
+async function carregarPerfil(usuario) {
+
+    try {
+
+        usuarioEmail.textContent =
+            usuario.email || "";
+
+
+        const referencia =
+            doc(
+                db,
+                "usuarios",
+                usuario.uid
+            );
+
+
+        const snapshot =
+            await getDoc(referencia);
+
+
+        if (snapshot.exists()) {
+
+            const dados =
+                snapshot.data();
+
+
+            usuarioNome.textContent =
+                dados.nome ||
+                usuario.email ||
+                "Aluno";
+
+        } else {
+
+            usuarioNome.textContent =
+                usuario.email ||
+                "Aluno";
+        }
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar perfil:",
+            erro
+        );
+
+
+        usuarioNome.textContent =
+            usuario.email ||
+            "Aluno";
+    }
+
+}
+
+
+/* =====================================
+   CARREGAR CURSO
+===================================== */
+
+async function carregarCurso() {
+
+
+    if (!cursoId) {
+
+        mostrarErro(
+            "Curso não informado.",
+            "O endereço da página não possui um ID de curso."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        conteudo.innerHTML = `
+
+            <div class="carregando">
+
+                <div class="spinner"></div>
+
+                <span>
+                    Carregando curso...
+                </span>
+
+            </div>
+
+        `;
+
+
+        /* ==============================
+           BUSCAR CURSO
+        ============================== */
+
+        const cursoReferencia =
+            doc(
+                db,
+                "cursos",
+                cursoId
+            );
+
+
+        const cursoSnapshot =
+            await getDoc(cursoReferencia);
+
+
+        if (!cursoSnapshot.exists()) {
+
+            mostrarErro(
+                "Curso não encontrado.",
+                "Este curso pode ter sido removido ou não está mais disponível."
+            );
+
+            return;
+        }
+
+
+        const curso =
+            cursoSnapshot.data();
+
+
+        if (curso.ativo === false) {
+
+            mostrarErro(
+                "Curso indisponível.",
+                "Este curso não está disponível no momento."
+            );
+
+            return;
+        }
+
+
+        /* ==============================
+           BUSCAR MÓDULOS
+        ============================== */
+
+        const modulosSnapshot =
+            await getDocs(
+                collection(db, "modulos")
+            );
+
+
+        const modulos = [];
+
+
+        modulosSnapshot.forEach(
+            (documento) => {
+
+                const dados =
+                    documento.data();
+
+
+                if (
+                    dados.cursoId === cursoId &&
+                    dados.ativo !== false
+                ) {
+
+                    modulos.push({
+
+                        id: documento.id,
+
+                        ...dados
+
+                    });
+
+                }
+
+            }
+        );
+
+
+        /* ==============================
+           ORDENAR MÓDULOS
+        ============================== */
+
+        modulos.sort(
+            (a, b) => {
+
+                const ordemA =
+                    Number(a.ordem) || 0;
+
+                const ordemB =
+                    Number(b.ordem) || 0;
+
+                return ordemA - ordemB;
+
+            }
+        );
+
+
+        /* ==============================
+           BUSCAR LIÇÕES
+        ============================== */
+
+        const licoesSnapshot =
+            await getDocs(
+                collection(db, "licoes")
+            );
+
+
+        const licoes = [];
+
+
+        licoesSnapshot.forEach(
+            (documento) => {
+
+                const dados =
+                    documento.data();
+
+
+                if (
+                    dados.cursoId === cursoId &&
+                    dados.ativo !== false
+                ) {
+
+                    licoes.push({
+
+                        id: documento.id,
+
+                        ...dados
+
+                    });
+
+                }
+
+            }
+        );
+
+
+        /* ==============================
+           RENDERIZAR
+        ============================== */
+
+        renderizarCurso(
+            curso,
+            modulos,
+            licoes
+        );
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar curso:",
+            erro
+        );
+
+
+        mostrarErro(
+            "Erro ao carregar o curso.",
+            "Verifique sua conexão e tente novamente."
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   RENDERIZAR CURSO
+===================================== */
+
+function renderizarCurso(
+    curso,
+    modulos,
+    licoes
+) {
+
+
+    let imagemHTML = `
+
+        <div class="curso-imagem">
+
+            <div class="sem-imagem">
+                📚
+            </div>
+
+        </div>
+
+    `;
+
+
+    if (
+        curso.imagem &&
+        curso.imagem.trim() !== ""
+    ) {
+
+        imagemHTML = `
+
+            <div class="curso-imagem">
+
+                <img
+                    src="${escapar(curso.imagem)}"
+                    alt="${escapar(curso.titulo || "Curso")}"
+                    onerror="
+                        this.style.display='none';
+                        this.parentElement.innerHTML='<div class=&quot;sem-imagem&quot;>📚</div>';
+                    "
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    let modulosHTML = "";
+
+
+    if (modulos.length === 0) {
+
+        modulosHTML = `
+
+            <div class="mensagem">
+
+                <h2>
+                    Nenhum módulo disponível
+                </h2>
+
+                <p>
+                    Este curso ainda não possui
+                    módulos publicados.
+                </p>
+
+            </div>
+
+        `;
+
+    } else {
+
+
+        modulos.forEach(
+            (modulo, indice) => {
+
+
+                const licoesDoModulo =
+                    licoes
+
+                        .filter(
+                            (licao) =>
+                                licao.moduloId === modulo.id
+                        )
+
+                        .sort(
+                            (a, b) => {
+
+                                const ordemA =
+                                    Number(a.ordem) || 0;
+
+                                const ordemB =
+                                    Number(b.ordem) || 0;
+
+                                return ordemA - ordemB;
+
+                            }
+                        );
+
+
+                let licoesHTML = "";
+
+
+                if (
+                    licoesDoModulo.length === 0
+                ) {
+
+                    licoesHTML = `
+
+                        <div class="sem-licoes">
+
+                            Nenhuma lição disponível
+                            neste módulo.
+
+                        </div>
+
+                    `;
+
+                } else {
+
+
+                    licoesDoModulo.forEach(
+                        (licao, numero) => {
+
+                            licoesHTML += `
+
+                                <div
+                                    class="licao"
+                                    data-licao-id="${escapar(licao.id)}"
+                                    data-modulo-id="${escapar(modulo.id)}"
+                                >
+
+                                    <div class="licao-numero">
+                                        ${numero + 1}
+                                    </div>
+
+
+                                    <div class="licao-info">
+
+                                        <div class="licao-titulo">
+
+                                            ${escapar(
+                                                licao.titulo ||
+                                                "Lição sem título"
+                                            )}
+
+                                        </div>
+
+
+                                        ${
+                                            licao.descricao
+                                            ?
+                                            `
+                                            <div class="licao-descricao">
+
+                                                ${escapar(
+                                                    licao.descricao
+                                                )}
+
+                                            </div>
+                                            `
+                                            :
+                                            ""
+                                        }
+
+                                    </div>
+
+
+                                    <div class="licao-seta">
+                                        →
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }
+                    );
+
+                }
+
+
+                modulosHTML += `
+
+                    <div class="modulo">
+
+
+                        <div class="modulo-header">
+
+                            <div class="modulo-numero">
+
+                                ${indice + 1}
+
+                            </div>
+
+
+                            <div>
+
+                                <div class="modulo-titulo">
+
+                                    ${escapar(
+                                        modulo.titulo ||
+                                        "Módulo sem título"
+                                    )}
+
+                                </div>
+
+
+                                ${
+                                    modulo.descricao
+                                    ?
+                                    `
+                                    <div class="modulo-descricao">
+
+                                        ${escapar(
+                                            modulo.descricao
+                                        )}
+
+                                    </div>
+                                    `
+                                    :
+                                    ""
+                                }
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="licoes">
+
+                            ${licoesHTML}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+    }
+
+
+    conteudo.innerHTML = `
+
+        <section class="curso-header">
+
+            ${imagemHTML}
+
+
+            <div class="curso-info">
+
+                <div class="curso-nivel">
+
+                    ${escapar(
+                        curso.nivel ||
+                        "Iniciante"
+                    )}
+
+                </div>
+
+
+                <h1 class="curso-titulo">
+
+                    ${escapar(
+                        curso.titulo ||
+                        "Curso"
+                    )}
+
+                </h1>
+
+
+                <p class="curso-descricao">
+
+                    ${escapar(
+                        curso.descricao ||
+                        "Bem-vindo ao curso."
+                    )}
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <div class="secao-titulo">
+
+            <h2>
+                Conteúdo do curso
+            </h2>
+
+            <p>
+                Escolha uma lição para começar.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            ${modulosHTML}
+
+        </div>
+
+    `;
+
+
+    /* =================================
+       EVENTOS DAS LIÇÕES
+    ================================= */
+
+    const botoesLicoes =
+        document.querySelectorAll(".licao");
+
+
+    botoesLicoes.forEach(
+        (licao) => {
+
+            licao.addEventListener(
+                "click",
+                () => {
+
+                    const licaoId =
+                        licao.dataset.licaoId;
+
+                    const moduloId =
+                        licao.dataset.moduloId;
+
+
+                    if (!licaoId) {
+
+                        return;
+                    }
+
+
+                    window.location.href =
+                        `licao.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   ERRO
+===================================== */
+
+function mostrarErro(
+    titulo,
+    texto
+) {
+
+    conteudo.innerHTML = `
+
+        <div class="mensagem erro">
+
+            <h2>
+                ${escapar(titulo)}
+            </h2>
+
+            <p>
+                ${escapar(texto)}
+            </p>
+
+            <button
+                onclick="window.location.href='cursos.html'"
+                style="
+                    margin-top:20px;
+                    padding:10px 18px;
+                    border:none;
+                    border-radius:8px;
+                    background:#2563eb;
+                    color:white;
+                    cursor:pointer;
+                    font-weight:bold;
+                "
+            >
+                Voltar para cursos
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================
+   VOLTAR
+===================================== */
+
+btnVoltar.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "cursos.html";
+
+    }
+);
+
+
+/* =====================================
+   SAIR
+===================================== */
+
+btnSair.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await signOut(auth);
+
+            window.location.href =
+                "index.html";
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao sair:",
+                erro
+            );
+
+            alert(
+                "Não foi possível sair da conta."
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================
+   AUTENTICAÇÃO
+===================================== */
+
+onAuthStateChanged(
+    auth,
+    async (usuario) => {
+
+        if (!usuario) {
+
+            window.location.href =
+                "index.html";
+
+            return;
+        }
+
+
+        await carregarPerfil(usuario);
+
+        await carregarCurso();
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
