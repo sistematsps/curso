@@ -1,0 +1,1188 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Painel do Aluno</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+}
+
+/* HEADER */
+
+header{
+    background:white;
+    border-bottom:1px solid #e5e7eb;
+    padding:15px 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.headerDireita{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.info{
+    background:#f3f4f6;
+    padding:9px 13px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+button{
+    border:none;
+    border-radius:10px;
+    padding:11px 16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btnCarteira{
+    background:#f59e0b;
+    color:white;
+}
+
+.btnSair{
+    background:#ef4444;
+    color:white;
+}
+
+/* CONTEÚDO */
+
+main{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 18px;
+}
+
+.boasVindas{
+    margin-bottom:25px;
+}
+
+.boasVindas h1{
+    margin:0 0 8px;
+    font-size:30px;
+}
+
+.boasVindas p{
+    margin:0;
+    color:#6b7280;
+}
+
+/* ESTATÍSTICAS */
+
+.estatisticas{
+    display:grid;
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.estatistica{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.06);
+}
+
+.estatisticaIcone{
+    font-size:28px;
+}
+
+.estatisticaTitulo{
+    color:#6b7280;
+    margin-top:8px;
+}
+
+.estatisticaValor{
+    font-size:26px;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+/* CURSOS */
+
+.secaoTitulo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.secaoTitulo h2{
+    margin:0;
+}
+
+.btnCursos{
+    background:#2563eb;
+    color:white;
+}
+
+.cursos{
+    display:grid;
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.curso{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.06);
+
+    display:flex;
+    flex-direction:column;
+}
+
+.cursoImagem{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    background:#e5e7eb;
+}
+
+.cursoConteudo{
+    padding:18px;
+}
+
+.cursoTitulo{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.cursoDescricao{
+    color:#6b7280;
+    font-size:14px;
+    line-height:1.5;
+
+    min-height:42px;
+}
+
+.nivel{
+    display:inline-block;
+    margin-top:10px;
+
+    background:#eef2ff;
+    color:#4338ca;
+
+    padding:5px 9px;
+    border-radius:8px;
+
+    font-size:12px;
+    font-weight:bold;
+}
+
+.progressoTexto{
+    margin-top:15px;
+    display:flex;
+    justify-content:space-between;
+
+    font-size:13px;
+    font-weight:bold;
+}
+
+.progresso{
+    width:100%;
+    height:9px;
+
+    background:#e5e7eb;
+    border-radius:10px;
+
+    overflow:hidden;
+    margin-top:7px;
+}
+
+.progressoBarra{
+    height:100%;
+    width:0%;
+
+    background:#22c55e;
+    transition:.3s;
+}
+
+.btnContinuar{
+    width:100%;
+    margin-top:15px;
+
+    background:#2563eb;
+    color:white;
+}
+
+/* VAZIO */
+
+.vazio{
+    background:white;
+    border-radius:16px;
+    padding:35px;
+    text-align:center;
+    color:#6b7280;
+}
+
+/* CARREGANDO */
+
+.carregando{
+    text-align:center;
+    padding:40px;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:900px){
+
+    .estatisticas{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .cursos{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:15px;
+    }
+
+    .estatisticas{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .cursos{
+        grid-template-columns:1fr;
+    }
+
+    .boasVindas h1{
+        font-size:25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🎓 Plataforma de Cursos
+    </div>
+
+
+    <div class="headerDireita">
+
+        <div class="info">
+            ❤️ <span id="vidas">0</span>
+        </div>
+
+        <div class="info">
+            🪙 <span id="moedas">0</span>
+        </div>
+
+        <div class="info">
+            ⭐ <span id="xp">0</span> XP
+        </div>
+
+        <div class="info">
+            🔥 <span id="sequencia">0</span>
+        </div>
+
+        <button
+            id="btnCarteira"
+            class="btnCarteira">
+            💰 Carteira
+        </button>
+
+        <button
+            id="btnSair"
+            class="btnSair">
+            Sair
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+    <section class="boasVindas">
+
+        <h1>
+            Olá, <span id="nomeAluno">Aluno</span>! 👋
+        </h1>
+
+        <p>
+            Continue seus estudos e avance cada vez mais.
+        </p>
+
+    </section>
+
+
+    <!-- ESTATÍSTICAS -->
+
+    <section class="estatisticas">
+
+
+        <div class="estatistica">
+
+            <div class="estatisticaIcone">
+                📚
+            </div>
+
+            <div class="estatisticaTitulo">
+                Cursos
+            </div>
+
+            <div
+                id="totalCursos"
+                class="estatisticaValor">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="estatistica">
+
+            <div class="estatisticaIcone">
+                📝
+            </div>
+
+            <div class="estatisticaTitulo">
+                Lições concluídas
+            </div>
+
+            <div
+                id="licoesConcluidas"
+                class="estatisticaValor">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="estatistica">
+
+            <div class="estatisticaIcone">
+                🏆
+            </div>
+
+            <div class="estatisticaTitulo">
+                Melhor aproveitamento
+            </div>
+
+            <div
+                id="melhorAproveitamento"
+                class="estatisticaValor">
+                0%
+            </div>
+
+        </div>
+
+
+        <div class="estatistica">
+
+            <div class="estatisticaIcone">
+                ⭐
+            </div>
+
+            <div class="estatisticaTitulo">
+                XP total
+            </div>
+
+            <div
+                id="xpTotal"
+                class="estatisticaValor">
+                0
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- CURSOS -->
+
+    <section>
+
+        <div class="secaoTitulo">
+
+            <h2>
+                📚 Meus cursos
+            </h2>
+
+            <button
+                id="btnVerCursos"
+                class="btnCursos">
+                Ver todos
+            </button>
+
+        </div>
+
+
+        <div
+            id="carregandoCursos"
+            class="carregando">
+            Carregando cursos...
+        </div>
+
+
+        <div
+            id="cursos"
+            class="cursos">
+        </div>
+
+
+        <div
+            id="vazio"
+            class="vazio"
+            style="display:none;">
+
+            Nenhum curso disponível no momento.
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script type="module">
+
+
+/* FIREBASE */
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    collection,
+    getDocs
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+    "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+    "dezenas-1ed47",
+
+    storageBucket:
+    "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+    "372788277555",
+
+    appId:
+    "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+    "G-NMPP8PKPK3"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+/* ELEMENTOS */
+
+const nomeAluno =
+    document.getElementById("nomeAluno");
+
+const vidas =
+    document.getElementById("vidas");
+
+const moedas =
+    document.getElementById("moedas");
+
+const xp =
+    document.getElementById("xp");
+
+const sequencia =
+    document.getElementById("sequencia");
+
+const totalCursos =
+    document.getElementById("totalCursos");
+
+const licoesConcluidas =
+    document.getElementById("licoesConcluidas");
+
+const melhorAproveitamento =
+    document.getElementById(
+        "melhorAproveitamento"
+    );
+
+const xpTotal =
+    document.getElementById("xpTotal");
+
+const cursosEl =
+    document.getElementById("cursos");
+
+const carregandoCursos =
+    document.getElementById(
+        "carregandoCursos"
+    );
+
+const vazio =
+    document.getElementById("vazio");
+
+const btnCarteira =
+    document.getElementById(
+        "btnCarteira"
+    );
+
+const btnSair =
+    document.getElementById("btnSair");
+
+const btnVerCursos =
+    document.getElementById(
+        "btnVerCursos"
+    );
+
+
+/* DADOS */
+
+let usuarioAtual = null;
+let usuarioDados = null;
+
+let cursos = [];
+let progresso = [];
+
+
+/* ========================= */
+/* CARREGAR USUÁRIO */
+/* ========================= */
+
+async function carregarUsuario(){
+
+    const ref =
+        doc(
+            db,
+            "usuarios",
+            usuarioAtual.uid
+        );
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Perfil do aluno não encontrado."
+        );
+    }
+
+
+    usuarioDados =
+        snap.data();
+
+
+    nomeAluno.textContent =
+        usuarioDados.nome ||
+        "Aluno";
+
+
+    vidas.textContent =
+        usuarioDados.vidas ?? 0;
+
+
+    moedas.textContent =
+        usuarioDados.moedas ?? 0;
+
+
+    xp.textContent =
+        usuarioDados.xp ?? 0;
+
+
+    sequencia.textContent =
+        usuarioDados.sequencia ?? 0;
+
+
+    xpTotal.textContent =
+        usuarioDados.xp ?? 0;
+}
+
+
+/* ========================= */
+/* CARREGAR PROGRESSO */
+/* ========================= */
+
+async function carregarProgresso(){
+
+    const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "progresso"
+            )
+        );
+
+
+    progresso = [];
+
+
+    snapshot.forEach(item => {
+
+        const dados =
+            item.data();
+
+
+        if(
+            dados.usuarioId ===
+            usuarioAtual.uid
+        ){
+
+            progresso.push({
+                id:item.id,
+                ...dados
+            });
+
+        }
+
+    });
+
+
+    calcularEstatisticas();
+}
+
+
+/* ========================= */
+/* ESTATÍSTICAS */
+/* ========================= */
+
+function calcularEstatisticas(){
+
+    const concluidas =
+        progresso.filter(
+            item =>
+            item.aprovado === true
+        );
+
+
+    licoesConcluidas.textContent =
+        concluidas.length;
+
+
+    let melhor = 0;
+
+
+    progresso.forEach(item => {
+
+        const percentual =
+            Number(
+                item.aproveitamento ?? 0
+            );
+
+
+        if(percentual > melhor){
+            melhor = percentual;
+        }
+
+    });
+
+
+    melhorAproveitamento.textContent =
+        `${melhor}%`;
+}
+
+
+/* ========================= */
+/* CARREGAR CURSOS */
+/* ========================= */
+
+async function carregarCursos(){
+
+    const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "cursos"
+            )
+        );
+
+
+    cursos = [];
+
+
+    snapshot.forEach(item => {
+
+        const dados =
+            item.data();
+
+
+        if(dados.ativo !== false){
+
+            cursos.push({
+
+                id:item.id,
+
+                ...dados
+
+            });
+
+        }
+
+    });
+
+
+    cursos.sort(
+        (a,b) =>
+        String(a.titulo || "")
+        .localeCompare(
+            String(b.titulo || "")
+        )
+    );
+
+
+    totalCursos.textContent =
+        cursos.length;
+
+
+    renderizarCursos();
+}
+
+
+/* ========================= */
+/* CALCULAR PROGRESSO CURSO */
+/* ========================= */
+
+function progressoCurso(cursoId){
+
+    const cursoProgresso =
+        progresso.filter(
+            item =>
+            item.cursoId === cursoId
+        );
+
+
+    const concluidas =
+        cursoProgresso.filter(
+            item =>
+            item.aprovado === true
+        ).length;
+
+
+    /*
+     * O total de lições será
+     * preenchido posteriormente
+     * usando a coleção licoes.
+     */
+
+    return {
+        concluidas
+    };
+}
+
+
+/* ========================= */
+/* RENDERIZAR CURSOS */
+/* ========================= */
+
+function renderizarCursos(){
+
+    carregandoCursos.style.display =
+        "none";
+
+
+    cursosEl.innerHTML = "";
+
+
+    if(cursos.length === 0){
+
+        vazio.style.display =
+            "block";
+
+        return;
+    }
+
+
+    vazio.style.display =
+        "none";
+
+
+    /*
+     * Mostra inicialmente
+     * até 6 cursos.
+     */
+
+    cursos
+        .slice(0,6)
+        .forEach(curso => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "curso";
+
+
+            const imagem =
+                document.createElement(
+                    "img"
+                );
+
+            imagem.className =
+                "cursoImagem";
+
+
+            imagem.src =
+                curso.imagem ||
+                "https://via.placeholder.com/600x300?text=Curso";
+
+
+            imagem.alt =
+                curso.titulo ||
+                "Curso";
+
+
+            imagem.onerror =
+                () => {
+
+                    imagem.src =
+                    "https://via.placeholder.com/600x300?text=Curso";
+
+                };
+
+
+            const conteudo =
+                document.createElement(
+                    "div"
+                );
+
+            conteudo.className =
+                "cursoConteudo";
+
+
+            const titulo =
+                document.createElement(
+                    "div"
+                );
+
+            titulo.className =
+                "cursoTitulo";
+
+            titulo.textContent =
+                curso.titulo ||
+                "Curso";
+
+
+            const descricao =
+                document.createElement(
+                    "div"
+                );
+
+            descricao.className =
+                "cursoDescricao";
+
+            descricao.textContent =
+                curso.descricao ||
+                "Continue seus estudos neste curso.";
+
+
+            const nivel =
+                document.createElement(
+                    "span"
+                );
+
+            nivel.className =
+                "nivel";
+
+            nivel.textContent =
+                curso.nivel ||
+                "Todos os níveis";
+
+
+            const dados =
+                progressoCurso(
+                    curso.id
+                );
+
+
+            const barra =
+                document.createElement(
+                    "div"
+                );
+
+            barra.className =
+                "progressoTexto";
+
+
+            const texto =
+                document.createElement(
+                    "span"
+                );
+
+            texto.textContent =
+                `${dados.concluidas} lições concluídas`;
+
+
+            const percentual =
+                document.createElement(
+                    "span"
+                );
+
+            percentual.textContent =
+                "Em andamento";
+
+
+            barra.appendChild(texto);
+            barra.appendChild(percentual);
+
+
+            const progressoBarra =
+                document.createElement(
+                    "div"
+                );
+
+            progressoBarra.className =
+                "progresso";
+
+
+            const preenchimento =
+                document.createElement(
+                    "div"
+                );
+
+            preenchimento.className =
+                "progressoBarra";
+
+
+            /*
+             * Como o total de lições
+             * ainda será carregado pela
+             * página curso.html, usamos
+             * uma indicação visual
+             * baseada na quantidade
+             * de lições concluídas.
+             */
+
+            preenchimento.style.width =
+                dados.concluidas > 0
+                ? "50%"
+                : "0%";
+
+
+            progressoBarra.appendChild(
+                preenchimento
+            );
+
+
+            const botao =
+                document.createElement(
+                    "button"
+                );
+
+            botao.className =
+                "btnContinuar";
+
+            botao.textContent =
+                dados.concluidas > 0
+                ? "▶ Continuar curso"
+                : "🚀 Começar curso";
+
+
+            botao.addEventListener(
+                "click",
+                () => {
+
+                    window.location.href =
+                        `curso.html?cursoId=${encodeURIComponent(curso.id)}`;
+
+                }
+            );
+
+
+            conteudo.appendChild(titulo);
+            conteudo.appendChild(descricao);
+            conteudo.appendChild(nivel);
+            conteudo.appendChild(barra);
+            conteudo.appendChild(progressoBarra);
+            conteudo.appendChild(botao);
+
+
+            card.appendChild(imagem);
+            card.appendChild(conteudo);
+
+
+            cursosEl.appendChild(card);
+
+        });
+}
+
+
+/* ========================= */
+/* NAVEGAÇÃO */
+/* ========================= */
+
+btnCarteira.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "carteira.html";
+
+    }
+);
+
+
+btnVerCursos.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "cursos.html";
+
+    }
+);
+
+
+btnSair.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "index.html";
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+);
+
+
+/* ========================= */
+/* AUTENTICAÇÃO */
+/* ========================= */
+
+onAuthStateChanged(
+    auth,
+    async usuario => {
+
+        if(!usuario){
+
+            window.location.href =
+                "index.html";
+
+            return;
+        }
+
+
+        usuarioAtual =
+            usuario;
+
+
+        try{
+
+            await carregarUsuario();
+
+            await carregarProgresso();
+
+            await carregarCursos();
+
+        }catch(error){
+
+            console.error(error);
+
+            carregandoCursos.textContent =
+                "Não foi possível carregar o painel.";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
+```
