@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lição</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    min-height: 100vh;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+
+    padding: 14px 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #2563eb;
+}
+
+.header-direita {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.usuario {
+    text-align: right;
+}
+
+.usuario-nome {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.usuario-email {
+    color: #777;
+    font-size: 12px;
+}
+
+.btn-voltar {
+    border: none;
+    background: #eef2ff;
+    color: #2563eb;
+
+    padding: 9px 13px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.btn-voltar:hover {
+    background: #dbeafe;
+}
+
+.btn-sair {
+    border: none;
+    background: #ef4444;
+    color: white;
+
+    padding: 9px 13px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.btn-sair:hover {
+    background: #dc2626;
+}
+
+/* =====================================
+   CONTAINER
+===================================== */
+
+main {
+    width: 100%;
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 30px 20px 60px;
+}
+
+/* =====================================
+   TOPO DA LIÇÃO
+===================================== */
+
+.licao-topo {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.breadcrumb {
+    color: #2563eb;
+
+    font-size: 13px;
+
+    margin-bottom: 10px;
+}
+
+.licao-titulo {
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+.licao-descricao {
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+/* =====================================
+   PROGRESSO
+===================================== */
+
+.progresso-area {
+    margin-top: 20px;
+}
+
+.progresso-texto {
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 13px;
+
+    color: #666;
+
+    margin-bottom: 7px;
+}
+
+.progresso-barra {
+    width: 100%;
+
+    height: 9px;
+
+    background: #e5e7eb;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progresso-preenchimento {
+    height: 100%;
+
+    width: 0%;
+
+    background: #2563eb;
+
+    transition: width 0.3s ease;
+}
+
+/* =====================================
+   EXERCÍCIO
+===================================== */
+
+.exercicio {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.exercicio-numero {
+    color: #2563eb;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    margin-bottom: 14px;
+}
+
+.pergunta {
+    font-size: 23px;
+
+    line-height: 1.4;
+
+    margin-bottom: 25px;
+}
+
+/* =====================================
+   ALTERNATIVAS
+===================================== */
+
+.alternativas {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.alternativa {
+    width: 100%;
+
+    background: white;
+
+    border: 2px solid #e5e7eb;
+
+    border-radius: 11px;
+
+    padding: 15px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.alternativa:hover {
+    border-color: #93c5fd;
+
+    background: #f8fbff;
+}
+
+.alternativa.lecionada {
+    border-color: #2563eb;
+
+    background: #eff6ff;
+}
+
+.alternativa.correta {
+    border-color: #16a34a;
+
+    background: #f0fdf4;
+}
+
+.alternativa.incorreta {
+    border-color: #dc2626;
+
+    background: #fef2f2;
+}
+
+.letra {
+    width: 32px;
+    height: 32px;
+
+    min-width: 32px;
+
+    border-radius: 50%;
+
+    background: #eef2ff;
+
+    color: #3730a3;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: bold;
+}
+
+/* =====================================
+   VERDADEIRO / FALSO
+===================================== */
+
+.vf-area {
+    display: flex;
+
+    gap: 12px;
+}
+
+.vf-botao {
+    flex: 1;
+
+    border: 2px solid #e5e7eb;
+
+    background: white;
+
+    border-radius: 11px;
+
+    padding: 16px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+.vf-botao:hover {
+    border-color: #93c5fd;
+}
+
+.vf-botao.selecionado {
+    border-color: #2563eb;
+
+    background: #eff6ff;
+}
+
+.vf-botao.correto {
+    border-color: #16a34a;
+
+    background: #f0fdf4;
+}
+
+.vf-botao.incorreto {
+    border-color: #dc2626;
+
+    background: #fef2f2;
+}
+
+/* =====================================
+   RESPOSTA TEXTO
+===================================== */
+
+.resposta-texto {
+    width: 100%;
+
+    min-height: 130px;
+
+    resize: vertical;
+
+    border: 2px solid #e5e7eb;
+
+    border-radius: 11px;
+
+    padding: 15px;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+.resposta-texto:focus {
+    border-color: #2563eb;
+}
+
+/* =====================================
+   FEEDBACK
+===================================== */
+
+.feedback {
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 17px;
+
+    border-radius: 11px;
+
+    line-height: 1.5;
+}
+
+.feedback.mostrar {
+    display: block;
+}
+
+.feedback.correto {
+    background: #f0fdf4;
+
+    border: 1px solid #86efac;
+
+    color: #166534;
+}
+
+.feedback.incorreto {
+    background: #fef2f2;
+
+    border: 1px solid #fca5a5;
+
+    color: #991b1b;
+}
+
+.feedback-titulo {
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+.feedback-explicacao {
+    margin-top: 8px;
+}
+
+/* =====================================
+   BOTÃO
+===================================== */
+
+.acoes {
+    margin-top: 25px;
+}
+
+.btn-principal {
+    width: 100%;
+
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+.btn-principal:hover {
+    background: #1d4ed8;
+}
+
+.btn-principal:disabled {
+    background: #9ca3af;
+
+    cursor: not-allowed;
+}
+
+/* =====================================
+   RESULTADO
+===================================== */
+
+.resultado {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 40px 25px;
+
+    text-align: center;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.resultado-icone {
+    font-size: 65px;
+
+    margin-bottom: 15px;
+}
+
+.resultado h2 {
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+.resultado p {
+    color: #666;
+
+    margin-bottom: 20px;
+}
+
+.resultado-pontos {
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #2563eb;
+
+    margin-bottom: 25px;
+}
+
+.btn-final {
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 13px 22px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.btn-final:hover {
+    background: #1d4ed8;
+}
+
+/* =====================================
+   CARREGANDO / ERRO
+===================================== */
+
+.carregando {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 50px;
+
+    color: #666;
+}
+
+.spinner {
+    width: 23px;
+    height: 23px;
+
+    border: 3px solid #ddd;
+
+    border-top-color: #2563eb;
+
+    border-radius: 50%;
+
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.mensagem {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 15px;
+
+    padding: 45px 20px;
+
+    text-align: center;
+}
+
+.mensagem h2 {
+    margin-bottom: 10px;
+}
+
+.mensagem p {
+    color: #777;
+}
+
+.mensagem.erro {
+    color: #dc2626;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 650px) {
+
+    header {
+        padding: 12px 15px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .usuario {
+        display: none;
+    }
+
+    .header-direita {
+        gap: 6px;
+    }
+
+    .btn-voltar,
+    .btn-sair {
+        padding: 8px 10px;
+
+        font-size: 12px;
+    }
+
+    main {
+        padding: 20px 15px 40px;
+    }
+
+    .licao-titulo {
+        font-size: 24px;
+    }
+
+    .pergunta {
+        font-size: 20px;
+    }
+
+    .exercicio {
+        padding: 20px;
+    }
+
+    .vf-area {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+```
+<div class="logo">
+    Plataforma<span> Cursos</span>
+</div>
+
+
+<div class="header-direita">
+
+    <div class="usuario">
+
+        <div
+            class="usuario-nome"
+            id="usuarioNome"
+        >
+            Carregando...
+        </div>
+
+        <div
+            class="usuario-email"
+            id="usuarioEmail"
+        >
+            ...
+        </div>
+
+    </div>
+
+
+    <button
+        class="btn-voltar"
+        id="btnVoltar"
+    >
+        ← Curso
+    </button>
+
+
+    <button
+        class="btn-sair"
+        id="btnSair"
+    >
+        Sair
+    </button>
+
+</div>
+```
+
+</header>
+
+<main>
+
+```
+<div id="conteudo">
+
+    <div class="carregando">
+
+        <div class="spinner"></div>
+
+        <span>
+            Carregando lição...
+        </span>
+
+    </div>
+
+</div>
+```
+
+</main>
+
+<script type="module">
+
+
+/* =====================================
+   FIREBASE
+===================================== */
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    collection,
+    getDocs
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+/* =====================================
+   ELEMENTOS
+===================================== */
+
+const conteudo =
+    document.getElementById("conteudo");
+
+const usuarioNome =
+    document.getElementById("usuarioNome");
+
+const usuarioEmail =
+    document.getElementById("usuarioEmail");
+
+const btnVoltar =
+    document.getElementById("btnVoltar");
+
+const btnSair =
+    document.getElementById("btnSair");
+
+
+/* =====================================
+   PARÂMETROS
+===================================== */
+
+const parametros =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const cursoId =
+    parametros.get("cursoId");
+
+const moduloId =
+    parametros.get("moduloId");
+
+const licaoId =
+    parametros.get("licaoId");
+
+
+/* =====================================
+   VARIÁVEIS
+===================================== */
+
+let exercicios = [];
+
+let exercicioAtual = 0;
+
+let respostas = {};
+
+let pontuacao = 0;
+
+
+/* =====================================
+   ESCAPAR HTML
+===================================== */
+
+function escapar(valor) {
+
+    if (
+        valor === null ||
+        valor === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(valor)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================
+   PERFIL
+===================================== */
+
+async function carregarPerfil(usuario) {
+
+    try {
+
+        usuarioEmail.textContent =
+            usuario.email || "";
+
+
+        const referencia =
+            doc(
+                db,
+                "usuarios",
+                usuario.uid
+            );
+
+
+        const snapshot =
+            await getDoc(referencia);
+
+
+        if (snapshot.exists()) {
+
+            const dados =
+                snapshot.data();
+
+
+            usuarioNome.textContent =
+                dados.nome ||
+                usuario.email ||
+                "Aluno";
+
+        } else {
+
+            usuarioNome.textContent =
+                usuario.email ||
+                "Aluno";
+
+        }
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar perfil:",
+            erro
+        );
+
+
+        usuarioNome.textContent =
+            usuario.email ||
+            "Aluno";
+
+    }
+
+}
+
+
+/* =====================================
+   CARREGAR LIÇÃO
+===================================== */
+
+async function carregarLicao() {
+
+    if (
+        !cursoId ||
+        !moduloId ||
+        !licaoId
+    ) {
+
+        mostrarErro(
+            "Lição não informada.",
+            "O endereço da página não contém todas as informações necessárias."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        /* ==============================
+           LIÇÃO
+        ============================== */
+
+        const licaoRef =
+            doc(
+                db,
+                "licoes",
+                licaoId
+            );
+
+
+        const licaoSnap =
+            await getDoc(licaoRef);
+
+
+        if (!licaoSnap.exists()) {
+
+            mostrarErro(
+                "Lição não encontrada.",
+                "Esta lição pode ter sido removida."
+            );
+
+            return;
+        }
+
+
+        const licao =
+            licaoSnap.data();
+
+
+        if (licao.ativo === false) {
+
+            mostrarErro(
+                "Lição indisponível.",
+                "Esta lição não está disponível no momento."
+            );
+
+            return;
+        }
+
+
+        /* ==============================
+           EXERCÍCIOS
+        ============================== */
+
+        const exerciciosSnap =
+            await getDocs(
+                collection(
+                    db,
+                    "exercicios"
+                )
+            );
+
+
+        exercicios = [];
+
+
+        exerciciosSnap.forEach(
+            (documento) => {
+
+                const dados =
+                    documento.data();
+
+
+                if (
+                    dados.licaoId === licaoId &&
+                    dados.ativo !== false
+                ) {
+
+                    exercicios.push({
+
+                        id: documento.id,
+
+                        ...dados
+
+                    });
+
+                }
+
+            }
+        );
+
+
+        /* ==============================
+           ORDENAR
+        ============================== */
+
+        exercicios.sort(
+            (a, b) => {
+
+                const ordemA =
+                    Number(a.ordem) || 0;
+
+                const ordemB =
+                    Number(b.ordem) || 0;
+
+                return ordemA - ordemB;
+
+            }
+        );
+
+
+        renderizarTopo(
+            licao
+        );
+
+
+        if (
+            exercicios.length === 0
+        ) {
+
+            mostrarSemExercicios();
+
+            return;
+        }
+
+
+        mostrarExercicio();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar lição:",
+            erro
+        );
+
+
+        mostrarErro(
+            "Erro ao carregar a lição.",
+            "Verifique sua conexão e tente novamente."
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   TOPO DA LIÇÃO
+===================================== */
+
+function renderizarTopo(licao) {
+
+    conteudo.innerHTML = `
+
+        <section class="licao-topo">
+
+            <div class="breadcrumb">
+                Lição
+            </div>
+
+            <h1 class="licao-titulo">
+                ${escapar(
+                    licao.titulo ||
+                    "Lição"
+                )}
+            </h1>
+
+            ${
+                licao.descricao
+                ?
+                `
+                <p class="licao-descricao">
+                    ${escapar(
+                        licao.descricao
+                    )}
+                </p>
+                `
+                :
+                ""
+            }
+
+        </section>
+
+        <div id="areaExercicio"></div>
+
+    `;
+
+}
+
+
+/* =====================================
+   EXERCÍCIO ATUAL
+===================================== */
+
+function mostrarExercicio() {
+
+    const area =
+        document.getElementById(
+            "areaExercicio"
+        );
+
+
+    const exercicio =
+        exercicios[
+            exercicioAtual
+        ];
+
+
+    if (!exercicio) {
+
+        mostrarResultado();
+
+        return;
+    }
+
+
+    const total =
+        exercicios.length;
+
+
+    const numero =
+        exercicioAtual + 1;
+
+
+    const percentual =
+        ((numero - 1) / total) * 100;
+
+
+    let conteudoResposta = "";
+
+
+    /* =================================
+       MÚLTIPLA ESCOLHA
+    ================================= */
+
+    if (
+        exercicio.tipo ===
+        "multipla_escolha"
+    ) {
+
+        const alternativas =
+            Array.isArray(
+                exercicio.alternativas
+            )
+            ?
+            exercicio.alternativas
+            :
+            [];
+
+
+        conteudoResposta = `
+
+            <div
+                class="alternativas"
+                id="alternativas"
+            >
+
+                ${
+                    alternativas
+                    .map(
+                        (alternativa) => `
+
+                        <button
+                            class="alternativa"
+                            data-letra="${escapar(
+                                alternativa.letra
+                            )}"
+                        >
+
+                            <span class="letra">
+                                ${escapar(
+                                    alternativa.letra
+                                )}
+                            </span>
+
+                            <span>
+                                ${escapar(
+                                    alternativa.texto
+                                )}
+                            </span>
+
+                        </button>
+
+                    `
+                    )
+                    .join("")
+                }
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =================================
+       VERDADEIRO / FALSO
+    ================================= */
+
+    else if (
+        exercicio.tipo ===
+        "verdadeiro_falso"
+    ) {
+
+        conteudoResposta = `
+
+            <div
+                class="vf-area"
+                id="verdadeiroFalso"
+            >
+
+                <button
+                    class="vf-botao"
+                    data-valor="verdadeiro"
+                >
+                    ✓ Verdadeiro
+                </button>
+
+                <button
+                    class="vf-botao"
+                    data-valor="falso"
+                >
+                    ✕ Falso
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =================================
+       RESPOSTA TEXTO
+    ================================= */
+
+    else if (
+        exercicio.tipo ===
+        "resposta_texto"
+    ) {
+
+        conteudoResposta = `
+
+            <textarea
+                id="respostaTexto"
+                class="resposta-texto"
+                placeholder="Digite sua resposta..."
+            ></textarea>
+
+```
+    `;
+
+}
+
+
+area.innerHTML = `
+
+    <section class="exercicio">
+
+        <div class="exercicio-numero">
+
+            Exercício ${numero}
+            de ${total}
+
+        </div>
+
+
+        <div class="pergunta">
+
+            ${escapar(
+                exercicio.pergunta ||
+                "Pergunta"
+            )}
+
+        </div>
+
+
+        ${conteudoResposta}
+
+
+        <div
+            id="feedback"
+            class="feedback"
+        ></div>
+
+
+        <div class="acoes">
+
+            <button
+                id="btnResponder"
+                class="btn-principal"
+            >
+                Verificar resposta
+            </button>
+
+        </div>
+
+    </section>
+
+`;
+
+
+atualizarProgresso(
+    percentual,
+    numero,
+    total
+);
+
+
+configurarResposta(
+    exercicio
+);
+```
+
+}
+
+/* =====================================
+BARRA DE PROGRESSO
+===================================== */
+
+function atualizarProgresso(
+percentual,
+numero,
+total
+) {
+
+```
+const topo =
+    document.querySelector(
+        ".licao-topo"
+    );
+
+
+let areaProgresso =
+    document.querySelector(
+        ".progresso-area"
+    );
+
+
+if (!areaProgresso) {
+
+    areaProgresso =
+        document.createElement(
+            "div"
+        );
+
+    areaProgresso.className =
+        "progresso-area";
+
+
+    areaProgresso.innerHTML = `
+
+        <div class="progresso-texto">
+
+            <span>
+                Progresso da lição
+            </span>
+
+            <span id="progressoNumero">
+                1/${total}
+            </span>
+
+        </div>
+
+        <div class="progresso-barra">
+
+            <div
+                class="progresso-preenchimento"
+                id="progressoPreenchimento"
+            ></div>
+
+        </div>
+
+    `;
+
+
+    topo.appendChild(
+        areaProgresso
+    );
+
+}
+
+
+const preenchimento =
+    document.getElementById(
+        "progressoPreenchimento"
+    );
+
+
+const numeroElemento =
+    document.getElementById(
+        "progressoNumero"
+    );
+
+
+if (preenchimento) {
+
+    preenchimento.style.width =
+        percentual + "%";
+
+}
+
+
+if (numeroElemento) {
+
+    numeroElemento.textContent =
+        `${numero}/${total}`;
+
+}
+```
+
+}
+
+/* =====================================
+CONFIGURAR RESPOSTA
+===================================== */
+
+function configurarResposta(
+exercicio
+) {
+
+```
+const btn =
+    document.getElementById(
+        "btnResponder"
+    );
+
+
+/* ==============================
+   MÚLTIPLA ESCOLHA
+============================== */
+
+if (
+    exercicio.tipo ===
+    "multipla_escolha"
+) {
+
+    const botoes =
+        document.querySelectorAll(
+            ".alternativa"
+        );
+
+
+    botoes.forEach(
+        (botao) => {
+
+            botao.addEventListener(
+                "click",
+                () => {
+
+                    botoes.forEach(
+                        (b) => {
+
+                            b.classList.remove(
+                                "lecionada"
+                            );
+
+                        }
+                    );
+
+
+                    botao.classList.add(
+                        "lecionada"
+                    );
+
+
+                    respostas[
+                        exercicio.id
+                    ] =
+                        botao.dataset.letra;
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* ==============================
+   VERDADEIRO / FALSO
+============================== */
+
+else if (
+    exercicio.tipo ===
+    "verdadeiro_falso"
+) {
+
+    const botoes =
+        document.querySelectorAll(
+            ".vf-botao"
+        );
+
+
+    botoes.forEach(
+        (botao) => {
+
+            botao.addEventListener(
+                "click",
+                () => {
+
+                    botoes.forEach(
+                        (b) => {
+
+                            b.classList.remove(
+                                "selecionado"
+                            );
+
+                        }
+                    );
+
+
+                    botao.classList.add(
+                        "selecionado"
+                    );
+
+
+                    respostas[
+                        exercicio.id
+                    ] =
+                        botao.dataset.valor;
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* ==============================
+   TEXTO
+============================== */
+
+else if (
+    exercicio.tipo ===
+    "resposta_texto"
+) {
+
+    const campo =
+        document.getElementById(
+            "respostaTexto"
+        );
+
+
+    campo.addEventListener(
+        "input",
+        () => {
+
+            respostas[
+                exercicio.id
+            ] =
+                campo.value.trim();
+
+        }
+    );
+
+}
+
+
+btn.addEventListener(
+    "click",
+    () => {
+
+        verificarResposta(
+            exercicio
+        );
+
+    }
+);
+```
+
+}
+
+/* =====================================
+VERIFICAR RESPOSTA
+===================================== */
+
+function verificarResposta(
+exercicio
+) {
+
+```
+const resposta =
+    respostas[
+        exercicio.id
+    ];
+
+
+if (
+    resposta === undefined ||
+    resposta === ""
+) {
+
+    alert(
+        "Selecione ou digite uma resposta antes de continuar."
+    );
+
+    return;
+}
+
+
+let correta = false;
+
+
+/* ==============================
+   MÚLTIPLA ESCOLHA
+============================== */
+
+if (
+    exercicio.tipo ===
+    "multipla_escolha"
+) {
+
+    const alternativas =
+        Array.isArray(
+            exercicio.alternativas
+        )
+        ?
+        exercicio.alternativas
+        :
+        [];
+
+
+    const alternativaCorreta =
+        alternativas.find(
+            (alternativa) =>
+                alternativa.correta === true
+        );
+
+
+    if (
+        alternativaCorreta &&
+        resposta === alternativaCorreta.letra
+    ) {
+
+        correta = true;
+
+    }
+
+}
+
+
+/* ==============================
+   VERDADEIRO / FALSO
+============================== */
+
+else if (
+    exercicio.tipo ===
+    "verdadeiro_falso"
+) {
+
+    const respostaCorreta =
+        String(
+            exercicio.respostaTexto ||
+            ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    if (
+        resposta.toLowerCase() ===
+        respostaCorreta
+    ) {
+
+        correta = true;
+
+    }
+
+}
+
+
+/* ==============================
+   RESPOSTA TEXTO
+============================== */
+
+else if (
+    exercicio.tipo ===
+    "resposta_texto"
+) {
+
+    const respostaCorreta =
+        String(
+            exercicio.respostaTexto ||
+            ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const respostaAluno =
+        String(
+            resposta
+        )
+        .trim()
+        .toLowerCase();
+
+
+    /*
+     * Nesta primeira versão,
+     * a resposta precisa coincidir
+     * com a resposta cadastrada.
+     */
+
+    if (
+        respostaAluno ===
+        respostaCorreta
+    ) {
+
+        correta = true;
+
+    }
+
+}
+
+
+if (correta) {
+
+    pontuacao +=
+        Number(
+            exercicio.pontos
+        ) || 0;
+
+}
+
+
+mostrarFeedback(
+    exercicio,
+    correta
+);
+```
+
+}
+
+/* =====================================
+FEEDBACK
+===================================== */
+
+function mostrarFeedback(
+exercicio,
+correta
+) {
+
+```
+const feedback =
+    document.getElementById(
+        "feedback"
+    );
+
+
+const btn =
+    document.getElementById(
+        "btnResponder"
+    );
+
+
+if (correta) {
+
+    feedback.className =
+        "feedback mostrar correto";
+
+
+    feedback.innerHTML = `
+
+        <div class="feedback-titulo">
+            ✓ Resposta correta!
+        </div>
+
+        ${
+            exercicio.explicacao
+            ?
+            `
+            <div class="feedback-explicacao">
+
+                ${escapar(
+                    exercicio.explicacao
+                )}
+
+            </div>
+            `
+            :
+            ""
+        }
+
+    `;
+
+} else {
+
+    feedback.className =
+        "feedback mostrar incorreto";
+
+
+    feedback.innerHTML = `
+
+        <div class="feedback-titulo">
+            ✕ Resposta incorreta.
+        </div>
+
+        ${
+            exercicio.explicacao
+            ?
+            `
+            <div class="feedback-explicacao">
+
+                ${escapar(
+                    exercicio.explicacao
+                )}
+
+            </div>
+            `
+            :
+            ""
+        }
+
+    `;
+
+}
+
+
+/* =================================
+   BLOQUEAR RESPOSTA
+================================= */
+
+document
+    .querySelectorAll(
+        ".alternativa, .vf-botao"
+    )
+    .forEach(
+        (elemento) => {
+
+            elemento.disabled =
+                true;
+
+            elemento.style.cursor =
+                "default";
+
+        }
+    );
+
+
+const campo =
+    document.getElementById(
+        "respostaTexto"
+    );
+
+
+if (campo) {
+
+    campo.disabled =
+        true;
+
+}
+
+
+/*
+ * Mostrar próxima ação
+ */
+
+if (
+    exercicioAtual <
+    exercicios.length - 1
+) {
+
+    btn.textContent =
+        "Próximo exercício →";
+
+} else {
+
+    btn.textContent =
+        "Finalizar lição";
+
+}
+
+
+btn.onclick =
+    () => {
+
+        exercicioAtual++;
+
+        mostrarExercicio();
+
+    };
+```
+
+}
+
+/* =====================================
+RESULTADO
+===================================== */
+
+function mostrarResultado() {
+
+```
+const percentual =
+    exercicios.length > 0
+    ?
+    Math.round(
+        (pontuacaoTotal() /
+        pontosPossiveis()) * 100
+    )
+    :
+    0;
+
+
+let icone = "🎉";
+
+let titulo =
+    "Lição concluída!";
+
+
+if (percentual < 50) {
+
+    icone = "📚";
+
+    titulo =
+        "Continue praticando!";
+
+} else if (
+    percentual < 80
+) {
+
+    icone = "👏";
+
+    titulo =
+        "Muito bem!";
+
+}
+
+
+conteudo.innerHTML = `
+
+    <div class="resultado">
+
+        <div class="resultado-icone">
+            ${icone}
+        </div>
+
+
+        <h2>
+            ${titulo}
+        </h2>
+
+
+        <p>
+            Você terminou todos os exercícios desta lição.
+        </p>
+
+
+        <div class="resultado-pontos">
+
+            ${pontuacao} XP
+
+        </div>
+
+
+        <button
+            class="btn-final"
+            id="btnVoltarCursoResultado"
+        >
+            ← Voltar para o curso
+        </button>
+
+    </div>
+
+`;
+
+
+document
+    .getElementById(
+        "btnVoltarCursoResultado"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+
+        }
+    );
+```
+
+}
+
+/* =====================================
+PONTOS POSSÍVEIS
+===================================== */
+
+function pontosPossiveis() {
+
+```
+let total = 0;
+
+
+exercicios.forEach(
+    (exercicio) => {
+
+        total +=
+            Number(
+                exercicio.pontos
+            ) || 0;
+
+    }
+);
+
+
+return total || 1;
+```
+
+}
+
+/* =====================================
+PONTUAÇÃO
+===================================== */
+
+function pontuacaoTotal() {
+
+```
+return pontuacao;
+```
+
+}
+
+/* =====================================
+SEM EXERCÍCIOS
+===================================== */
+
+function mostrarSemExercicios() {
+
+```
+const area =
+    document.getElementById(
+        "areaExercicio"
+    );
+
+
+area.innerHTML = `
+
+    <div class="mensagem">
+
+        <h2>
+            Nenhum exercício disponível
+        </h2>
+
+        <p>
+            Esta lição ainda não possui
+            exercícios publicados.
+        </p>
+
+    </div>
+
+`;
+```
+
+}
+
+/* =====================================
+ERRO
+===================================== */
+
+function mostrarErro(
+titulo,
+texto
+) {
+
+```
+conteudo.innerHTML = `
+
+    <div class="mensagem erro">
+
+        <h2>
+            ${escapar(titulo)}
+        </h2>
+
+        <p>
+            ${escapar(texto)}
+        </p>
+
+
+        <button
+            onclick="
+                window.location.href =
+                'cursos.html'
+            "
+            style="
+                margin-top:20px;
+                padding:10px 18px;
+                border:none;
+                border-radius:8px;
+                background:#2563eb;
+                color:white;
+                cursor:pointer;
+                font-weight:bold;
+            "
+        >
+            Voltar para cursos
+        </button>
+
+    </div>
+
+`;
+```
+
+}
+
+/* =====================================
+VOLTAR
+===================================== */
+
+btnVoltar.addEventListener(
+"click",
+() => {
+
+```
+    if (cursoId) {
+
+        window.location.href =
+            `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+
+    } else {
+
+        window.location.href =
+            "cursos.html";
+
+    }
+
+}
+```
+
+);
+
+/* =====================================
+SAIR
+===================================== */
+
+btnSair.addEventListener(
+"click",
+async () => {
+
+```
+    try {
+
+        await signOut(auth);
+
+        window.location.href =
+            "index.html";
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao sair:",
+            erro
+        );
+
+        alert(
+            "Não foi possível sair da conta."
+        );
+
+    }
+
+}
+```
+
+);
+
+/* =====================================
+AUTENTICAÇÃO
+===================================== */
+
+onAuthStateChanged(
+auth,
+async (usuario) => {
+
+```
+    if (!usuario) {
+
+        window.location.href =
+            "index.html";
+
+        return;
+
+    }
+
+
+    await carregarPerfil(
+        usuario
+    );
+
+
+    await carregarLicao();
+
+}
+```
+
+);
+
+</script>
+
+</body>
+
+</html>
