@@ -1,0 +1,524 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel Administrativo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .header-left h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .header-left p {
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+        .btn-sair {
+            border: none;
+            background: #dc2626;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-sair:hover {
+            background: #b91c1c;
+        }
+
+        .container {
+            width: min(1200px, 94%);
+            margin: 30px auto;
+        }
+
+        .boas-vindas {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
+            margin-bottom: 25px;
+        }
+
+        .boas-vindas h2 {
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        .boas-vindas p {
+            color: #666;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
+            transition: .2s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #d1d5db;
+            box-shadow: 0 7px 18px rgba(0,0,0,.12);
+        }
+
+        .icone {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .status {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.08);
+        }
+
+        .status h3 {
+            margin-bottom: 12px;
+        }
+
+        .usuario-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .info {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .info strong {
+            display: block;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .info span {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .carregando {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .erro {
+            width: min(600px, 90%);
+            margin: 100px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,.1);
+        }
+
+        .erro h2 {
+            margin-bottom: 12px;
+            color: #dc2626;
+        }
+
+        .erro p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .erro button {
+            border: none;
+            background: #111827;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 15px;
+            }
+
+            .header-left h1 {
+                font-size: 18px;
+            }
+
+            .container {
+                margin-top: 20px;
+            }
+
+            .boas-vindas h2 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="carregando" class="carregando">
+        Verificando acesso administrativo...
+    </div>
+
+    <div id="conteudo" style="display:none;">
+
+        <header>
+            <div class="header-left">
+                <h1>⚙️ Painel Administrativo</h1>
+                <p>Área exclusiva para administradores</p>
+            </div>
+
+            <button class="btn-sair" id="btnSair">
+                Sair
+            </button>
+        </header>
+
+        <main class="container">
+
+            <section class="boas-vindas">
+                <h2 id="tituloBoasVindas">
+                    Olá, Administrador!
+                </h2>
+
+                <p>
+                    Gerencie cursos, conteúdos, alunos e pagamentos do sistema.
+                </p>
+            </section>
+
+            <section class="grid">
+
+                <div class="card" onclick="abrirPagina('cursos.html')">
+                    <div class="icone">🎓</div>
+                    <h3>Cursos</h3>
+                    <p>
+                        Criar, editar, ativar, desativar e excluir cursos.
+                    </p>
+                </div>
+
+                <div class="card" onclick="abrirPagina('modulos.html')">
+                    <div class="icone">📚</div>
+                    <h3>Módulos</h3>
+                    <p>
+                        Organizar os módulos de cada curso.
+                    </p>
+                </div>
+
+                <div class="card" onclick="abrirPagina('licoes.html')">
+                    <div class="icone">📖</div>
+                    <h3>Lições</h3>
+                    <p>
+                        Criar e organizar as lições dos módulos.
+                    </p>
+                </div>
+
+                <div class="card" onclick="abrirPagina('exercicios.html')">
+                    <div class="icone">✏️</div>
+                    <h3>Exercícios</h3>
+                    <p>
+                        Criar perguntas, alternativas e respostas.
+                    </p>
+                </div>
+
+                <div class="card" onclick="abrirPagina('pagamentos.html')">
+                    <div class="icone">💰</div>
+                    <h3>Pagamentos</h3>
+                    <p>
+                        Conferir pagamentos, aprovar compras e entregar produtos.
+                    </p>
+                </div>
+
+            </section>
+
+            <section class="status">
+
+                <h3>👤 Administrador conectado</h3>
+
+                <div class="usuario-info">
+
+                    <div class="info">
+                        <strong>NOME</strong>
+                        <span id="nomeAdmin">-</span>
+                    </div>
+
+                    <div class="info">
+                        <strong>E-MAIL</strong>
+                        <span id="emailAdmin">-</span>
+                    </div>
+
+                    <div class="info">
+                        <strong>TIPO DE CONTA</strong>
+                        <span id="tipoAdmin">-</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <div id="erro" class="erro" style="display:none;">
+
+        <h2>⛔ Acesso negado</h2>
+
+        <p>
+            Você não possui permissão para acessar a área administrativa.
+        </p>
+
+        <button onclick="window.location.href='../index.html'">
+            Voltar para o login
+        </button>
+
+    </div>
+
+
+    <script type="module">
+
+        import { initializeApp }
+            from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signOut
+        }
+        from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+        import {
+            getFirestore,
+            doc,
+            getDoc
+        }
+        from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+        // ============================================================
+        // FIREBASE
+        // ============================================================
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+            authDomain: "dezenas-1ed47.firebaseapp.com",
+            projectId: "dezenas-1ed47",
+            storageBucket: "dezenas-1ed47.firebasestorage.app",
+            messagingSenderId: "372788277555",
+            appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+            measurementId: "G-NMPP8PKPK3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+
+        // ============================================================
+        // ELEMENTOS
+        // ============================================================
+
+        const carregando = document.getElementById("carregando");
+        const conteudo = document.getElementById("conteudo");
+        const erro = document.getElementById("erro");
+
+        const nomeAdmin = document.getElementById("nomeAdmin");
+        const emailAdmin = document.getElementById("emailAdmin");
+        const tipoAdmin = document.getElementById("tipoAdmin");
+        const tituloBoasVindas = document.getElementById("tituloBoasVindas");
+
+        const btnSair = document.getElementById("btnSair");
+
+
+        // ============================================================
+        // ABRIR PÁGINA ADMINISTRATIVA
+        // ============================================================
+
+        window.abrirPagina = function(pagina) {
+
+            window.location.href = pagina;
+
+        };
+
+
+        // ============================================================
+        // VERIFICAR ADMINISTRADOR
+        // ============================================================
+
+        onAuthStateChanged(auth, async (user) => {
+
+            try {
+
+                // ----------------------------------------------------
+                // NÃO ESTÁ LOGADO
+                // ----------------------------------------------------
+
+                if (!user) {
+
+                    window.location.href = "../index.html";
+
+                    return;
+                }
+
+
+                // ----------------------------------------------------
+                // BUSCAR USUÁRIO NO FIRESTORE
+                // ----------------------------------------------------
+
+                const usuarioRef = doc(db, "usuarios", user.uid);
+
+                const usuarioSnap = await getDoc(usuarioRef);
+
+
+                // ----------------------------------------------------
+                // DOCUMENTO NÃO EXISTE
+                // ----------------------------------------------------
+
+                if (!usuarioSnap.exists()) {
+
+                    mostrarAcessoNegado();
+
+                    return;
+                }
+
+
+                const usuario = usuarioSnap.data();
+
+
+                // ----------------------------------------------------
+                // VERIFICAR TIPO
+                // ----------------------------------------------------
+
+                if (usuario.tipo !== "admin") {
+
+                    mostrarAcessoNegado();
+
+                    return;
+                }
+
+
+                // ----------------------------------------------------
+                // ADMINISTRADOR CONFIRMADO
+                // ----------------------------------------------------
+
+                nomeAdmin.textContent =
+                    usuario.nome || user.displayName || "Administrador";
+
+                emailAdmin.textContent =
+                    usuario.email || user.email || "-";
+
+                tipoAdmin.textContent = "Administrador";
+
+                tituloBoasVindas.textContent =
+                    "Olá, " + (usuario.nome || "Administrador") + "!";
+
+
+                carregando.style.display = "none";
+                erro.style.display = "none";
+                conteudo.style.display = "block";
+
+
+            } catch (error) {
+
+                console.error("Erro ao verificar administrador:", error);
+
+                mostrarAcessoNegado();
+
+            }
+
+        });
+
+
+        // ============================================================
+        // ACESSO NEGADO
+        // ============================================================
+
+        function mostrarAcessoNegado() {
+
+            carregando.style.display = "none";
+            conteudo.style.display = "none";
+            erro.style.display = "block";
+
+        }
+
+
+        // ============================================================
+        // LOGOUT
+        // ============================================================
+
+        btnSair.addEventListener("click", async () => {
+
+            try {
+
+                await signOut(auth);
+
+                window.location.href = "../index.html";
+
+            } catch (error) {
+
+                console.error("Erro ao sair:", error);
+
+                alert("Não foi possível sair. Tente novamente.");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+```
