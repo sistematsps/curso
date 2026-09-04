@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,10 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Certificado</title>
 
@@ -17,268 +14,164 @@
 
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
+    margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:#eef2f7;
+    background:#f3f4f6;
     color:#1f2937;
-    min-height:100vh;
 }
 
 header{
-    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    background:#111827;
     color:white;
-    padding:16px 20px;
+    padding:18px;
+    text-align:center;
 }
 
-.header{
-    max-width:1200px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-.header h1{
-    font-size:21px;
-}
-
-.acoes{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    border:none;
-    border-radius:10px;
-    padding:11px 16px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.btn-branco{
-    background:white;
-    color:#2563eb;
-}
-
-.btn-voltar{
-    background:#e5e7eb;
-    color:#374151;
+header h1{
+    margin:0;
 }
 
 .container{
-    max-width:1100px;
-    margin:30px auto;
-    padding:0 20px;
+    max-width:900px;
+    margin:25px auto;
+    padding:15px;
 }
 
-.carregando{
+.card{
     background:white;
     border-radius:18px;
-    padding:50px;
+    padding:30px;
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
+
+.certificado{
+    border:8px double #d4af37;
+    padding:45px 30px;
     text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,.07);
+    background:#fffdf5;
+}
+
+.certificado h1{
+    font-size:38px;
+    margin:10px 0 20px;
+    color:#8a6d1d;
+}
+
+.certificado h2{
+    font-size:30px;
+    margin:20px 0;
+}
+
+.nome{
+    font-size:28px;
+    font-weight:bold;
+    margin:25px 0;
+}
+
+.curso{
+    font-size:23px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.dados{
+    margin:25px 0;
+    line-height:1.8;
+}
+
+.codigo{
+    margin-top:30px;
+    font-size:13px;
+    color:#666;
+}
+
+.status{
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    line-height:1.6;
+}
+
+.sucesso{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.aviso{
+    background:#fef3c7;
+    color:#92400e;
 }
 
 .erro{
     background:#fee2e2;
     color:#991b1b;
-    border-radius:15px;
-    padding:25px;
-    text-align:center;
 }
 
-.erro h2{
-    margin-bottom:10px;
+.btns{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
 }
 
-.certificado{
-    background:white;
-    padding:18px;
-    box-shadow:0 8px 30px rgba(0,0,0,.12);
+button{
+    flex:1;
+    min-width:180px;
+    border:0;
     border-radius:10px;
-}
-
-.certificado-borda{
-    border:10px solid #1d4ed8;
-    padding:12px;
-}
-
-.certificado-interior{
-    border:2px solid #d4af37;
-    min-height:650px;
-    padding:55px 70px;
-    position:relative;
-    text-align:center;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.linha-decorativa{
-    width:130px;
-    height:4px;
-    background:#d4af37;
-    margin:18px auto;
-}
-
-.logo{
-    font-size:46px;
-    margin-bottom:8px;
-}
-
-.titulo{
-    font-family:Georgia,serif;
-    font-size:42px;
-    color:#1e3a8a;
-    letter-spacing:3px;
-    margin-bottom:12px;
-}
-
-.subtitulo{
-    font-size:17px;
-    color:#6b7280;
-    margin-bottom:30px;
-}
-
-.nome-aluno{
-    font-family:Georgia,serif;
-    font-size:38px;
-    color:#111827;
-    margin:15px 0;
+    padding:14px;
     font-weight:bold;
+    cursor:pointer;
 }
 
-.texto{
-    font-size:17px;
-    line-height:1.7;
-    max-width:800px;
-    margin:0 auto;
+.btn-principal{
+    background:#16a34a;
+    color:white;
 }
 
-.nome-curso{
-    font-family:Georgia,serif;
-    font-size:30px;
-    color:#1d4ed8;
-    font-weight:bold;
-    margin:20px 0;
-}
-
-.detalhes{
-    display:flex;
-    justify-content:center;
-    gap:70px;
-    margin-top:35px;
-    flex-wrap:wrap;
-}
-
-.detalhe{
-    min-width:150px;
-}
-
-.detalhe-label{
-    font-size:12px;
-    color:#6b7280;
-    text-transform:uppercase;
-    margin-bottom:5px;
-}
-
-.detalhe-valor{
-    font-weight:bold;
-}
-
-.assinaturas{
-    display:flex;
-    justify-content:center;
-    gap:100px;
-    margin-top:55px;
-    flex-wrap:wrap;
-}
-
-.assinatura{
-    width:240px;
-}
-
-.linha-assinatura{
-    border-top:1px solid #374151;
-    padding-top:8px;
-    font-size:13px;
-}
-
-.codigo{
-    position:absolute;
-    bottom:15px;
-    left:0;
-    right:0;
-    font-size:11px;
-    color:#6b7280;
-}
-
-.acoes-certificado{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin:25px 0;
-    flex-wrap:wrap;
-}
-
-.btn-imprimir{
+.btn-pagamento{
     background:#2563eb;
     color:white;
 }
 
-.btn-painel{
+.btn-voltar{
     background:#e5e7eb;
-    color:#374151;
+    color:#111827;
 }
 
-.info-conclusao{
-    background:#ecfdf5;
-    color:#166534;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:20px;
-    text-align:center;
+.oculto{
+    display:none;
 }
 
-@media(max-width:700px){
+@media(max-width:600px){
 
-    .header{
-        flex-direction:column;
-        align-items:flex-start;
+    .certificado{
+        padding:30px 15px;
     }
 
-    .container{
-        padding:0 10px;
-    }
-
-    .certificado-interior{
-        padding:40px 20px;
-        min-height:650px;
-    }
-
-    .titulo{
-        font-size:29px;
-    }
-
-    .nome-aluno{
+    .certificado h1{
         font-size:28px;
     }
 
-    .nome-curso{
+    .certificado h2{
+        font-size:22px;
+    }
+
+    .nome{
         font-size:23px;
     }
 
-    .assinaturas{
-        gap:40px;
+    .curso{
+        font-size:19px;
     }
 
 }
+
+
+/* IMPRESSÃO */
 
 @media print{
 
@@ -287,8 +180,8 @@ header{
     }
 
     header,
-    .acoes-certificado,
-    .info-conclusao{
+    .status,
+    .btns{
         display:none !important;
     }
 
@@ -298,18 +191,13 @@ header{
         padding:0;
     }
 
-    .certificado{
+    .card{
         box-shadow:none;
         padding:0;
-        border-radius:0;
     }
 
-    .certificado-borda{
-        border-width:8px;
-    }
-
-    .certificado-interior{
-        min-height:95vh;
+    .certificado{
+        min-height:90vh;
     }
 
 }
@@ -318,67 +206,192 @@ header{
 
 </head>
 
-
 <body>
-
 
 <header>
 
-    <div class="header">
-
-        <h1>
-            🏆 Certificado
-        </h1>
-
-        <div class="acoes">
-
-            <button
-                class="btn btn-branco"
-                onclick="abrirPainel()"
-            >
-                🏠 Painel
-            </button>
-
-            <button
-                class="btn btn-branco"
-                onclick="abrirCarteira()"
-            >
-                💰 Carteira
-            </button>
-
-            <button
-                class="btn btn-voltar"
-                onclick="voltarCurso()"
-            >
-                ← Curso
-            </button>
-
-        </div>
-
-    </div>
+<h1>🏆 Certificado</h1>
 
 </header>
 
 
-<main class="container">
+<div class="container">
 
-    <div id="areaPrincipal">
+    <div id="statusBox"
+         class="status aviso">
 
-        <div class="carregando">
-            Verificando conclusão do curso...
+        Verificando conclusão do curso...
+
+    </div>
+
+
+    <div
+        id="certificadoBox"
+        class="card oculto">
+
+        <div class="certificado">
+
+            <h1>
+                CERTIFICADO
+            </h1>
+
+            <div>
+
+                Certificamos que
+
+            </div>
+
+            <div
+                id="nomeAluno"
+                class="nome">
+
+            </div>
+
+            <div>
+
+                concluiu com êxito o curso
+
+            </div>
+
+            <div
+                id="nomeCurso"
+                class="curso">
+
+            </div>
+
+            <div
+                id="dadosCurso"
+                class="dados">
+
+            </div>
+
+            <div class="codigo">
+
+                Código de autenticidade:
+                <strong id="codigo">
+
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="btns">
+
+            <button
+                class="btn-principal"
+                onclick="window.print()">
+
+                🖨️ Imprimir / Salvar PDF
+
+            </button>
+
+            <button
+                class="btn-voltar"
+                onclick="voltarCurso()">
+
+                📚 Voltar ao curso
+
+            </button>
+
         </div>
 
     </div>
 
-</main>
+
+    <div
+        id="acoesPagamento"
+        class="card oculto">
+
+        <h2>
+            🎓 Seu certificado está pronto!
+        </h2>
+
+        <p>
+            Você concluiu 100% do curso.
+        </p>
+
+        <p>
+            Para este curso gratuito, a emissão do
+            certificado possui uma taxa de
+            <strong id="valorCertificado">
+                R$ 10,00
+            </strong>.
+        </p>
+
+        <div class="btns">
+
+            <button
+                class="btn-pagamento"
+                onclick="pagarCertificado()">
+
+                💳 Pagar certificado via PIX
+
+            </button>
+
+            <button
+                class="btn-voltar"
+                onclick="voltarCurso()">
+
+                ← Voltar ao curso
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="pagamentoPendente"
+        class="card oculto">
+
+        <h2>
+            ⏳ Pagamento aguardando confirmação
+        </h2>
+
+        <p>
+            Seu pedido de certificado já foi registrado.
+        </p>
+
+        <p>
+            Envie o comprovante pelo WhatsApp.
+            Após a confirmação, seu certificado será
+            liberado automaticamente.
+        </p>
+
+        <div id="codigoPagamento"
+             class="codigo">
+
+        </div>
+
+        <div class="btns">
+
+            <button
+                class="btn-pagamento"
+                onclick="abrirWhatsApp()">
+
+                📲 Enviar comprovante
+
+            </button>
+
+            <button
+                class="btn-voltar"
+                onclick="verificarPagamento()">
+
+                🔄 Verificar pagamento
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script type="module">
-
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 import {
     initializeApp
@@ -394,11 +407,17 @@ import {
     doc,
     getDoc,
     collection,
+    query,
+    where,
     getDocs,
-    setDoc,
+    addDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
+
+/* =========================================
+   FIREBASE
+========================================= */
 
 const firebaseConfig = {
 
@@ -436,448 +455,695 @@ const db =
     getFirestore(app);
 
 
-/* =====================================================
+/* =========================================
+   CONFIGURAÇÕES
+========================================= */
+
+const CHAVE_PIX =
+    "SUA-CHAVE-PIX-AQUI";
+
+const WHATSAPP =
+    "5588999999999";
+
+
+const VALOR_CERTIFICADO =
+    10;
+
+
+/* =========================================
    URL
-===================================================== */
+========================================= */
 
 const params =
     new URLSearchParams(
         window.location.search
     );
 
+
 const cursoId =
     params.get("cursoId");
 
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
-const areaPrincipal =
-    document.getElementById(
-        "areaPrincipal"
-    );
-
-
-/* =====================================================
+/* =========================================
    VARIÁVEIS
-===================================================== */
-
-let usuarioAtual = null;
+========================================= */
 
 let usuario = null;
 
 let curso = null;
 
-let licoes = [];
+let compraPendente = null;
 
-let progresso = [];
-
-
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
-
-function escapar(valor){
-
-    if(
-        valor === null ||
-        valor === undefined
-    ){
-        return "";
-    }
-
-    return String(valor)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
+let certificadoLiberado = false;
 
 
-/* =====================================================
-   DATA LOCAL
-===================================================== */
+/* =========================================
+   ELEMENTOS
+========================================= */
 
-function dataLocal(){
+const statusBox =
+    document.getElementById("statusBox");
 
-    const agora =
-        new Date();
+const certificadoBox =
+    document.getElementById("certificadoBox");
 
-    const ano =
-        agora.getFullYear();
+const acoesPagamento =
+    document.getElementById("acoesPagamento");
 
-    const mes =
-        String(
-            agora.getMonth() + 1
-        ).padStart(2,"0");
+const pagamentoPendente =
+    document.getElementById("pagamentoPendente");
 
-    const dia =
-        String(
-            agora.getDate()
-        ).padStart(2,"0");
 
-    return `${dia}/${mes}/${ano}`;
+/* =========================================
+   STATUS
+========================================= */
+
+function mostrarStatus(
+    texto,
+    classe
+){
+
+    statusBox.textContent =
+        texto;
+
+    statusBox.className =
+        "status " + classe;
 
 }
 
 
-/* =====================================================
-   CARREGAR USUÁRIO
-===================================================== */
+/* =========================================
+   GERAR CÓDIGO
+========================================= */
 
-async function carregarUsuario(){
+function gerarCodigo(){
 
-    const ref =
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        );
-
-    const snap =
-        await getDoc(ref);
-
-
-    if(!snap.exists()){
-
-        throw new Error(
-            "Dados do aluno não encontrados."
-        );
-
-    }
-
-
-    usuario =
-        snap.data();
+    return "CERT-" +
+        Math.random()
+        .toString(36)
+        .substring(2,10)
+        .toUpperCase();
 
 }
 
 
-/* =====================================================
-   CARREGAR CURSO
-===================================================== */
+/* =========================================
+   VERIFICAR
+========================================= */
 
-async function carregarCurso(){
+async function verificar(){
 
     if(!cursoId){
 
-        throw new Error(
-            "Curso não informado."
+        mostrarStatus(
+            "Curso não informado.",
+            "erro"
         );
+
+        return;
 
     }
 
 
-    const ref =
-        doc(
-            db,
-            "cursos",
-            cursoId
-        );
+    /* CURSO */
 
-    const snap =
-        await getDoc(ref);
-
-
-    if(!snap.exists()){
-
-        throw new Error(
-            "Curso não encontrado."
-        );
-
-    }
-
-
-    curso = {
-
-        id:snap.id,
-
-        ...snap.data()
-
-    };
-
-
-    if(curso.ativo !== true){
-
-        throw new Error(
-            "Este curso não está disponível."
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   CARREGAR LIÇÕES
-===================================================== */
-
-async function carregarLicoes(){
-
-    const snap =
-        await getDocs(
-            collection(
+    const cursoSnap =
+        await getDoc(
+            doc(
                 db,
-                "licoes"
+                "cursos",
+                cursoId
             )
         );
 
 
-    licoes = [];
+    if(!cursoSnap.exists()){
+
+        mostrarStatus(
+            "Curso não encontrado.",
+            "erro"
+        );
+
+        return;
+
+    }
 
 
-    snap.forEach(item => {
-
-        const dados = item.data();
-
-
-        if(
-            dados.ativo === true &&
-            dados.cursoId === cursoId
-        ){
-
-            licoes.push({
-
-                id:item.id,
-
-                ...dados
-
-            });
-
-        }
-
-    });
+    curso =
+        cursoSnap.data();
 
 
-    /*
-     * Ordena as lições pelo módulo
-     * e depois pela ordem.
-     */
+    /* LIÇÕES */
 
-    licoes.sort(
-        (a,b) => {
+    const qLicoes =
+        query(
+            collection(
+                db,
+                "licoes"
+            ),
+            where(
+                "cursoId",
+                "==",
+                cursoId
+            ),
+            where(
+                "ativo",
+                "==",
+                true
+            )
+        );
 
-            const moduloA =
-                String(
-                    a.moduloId || ""
-                );
 
-            const moduloB =
-                String(
-                    b.moduloId || ""
-                );
+    const licoesSnap =
+        await getDocs(qLicoes);
+
+
+    const totalLicoes =
+        licoesSnap.size;
+
+
+    /* PROGRESSO */
+
+    const qProgresso =
+        query(
+            collection(
+                db,
+                "progresso"
+            ),
+            where(
+                "usuarioId",
+                "==",
+                usuario.uid
+            ),
+            where(
+                "cursoId",
+                "==",
+                cursoId
+            ),
+            where(
+                "aprovado",
+                "==",
+                true
+            )
+        );
+
+
+    const progressoSnap =
+        await getDocs(qProgresso);
+
+
+    const aprovadas =
+        progressoSnap.size;
+
+
+    const percentual =
+        totalLicoes > 0
+            ? (aprovadas / totalLicoes) * 100
+            : 0;
+
+
+    if(
+        totalLicoes === 0 ||
+        percentual < 100
+    ){
+
+        mostrarStatus(
+
+            "Você ainda não concluiu 100% deste curso. " +
+            "Progresso atual: " +
+            Math.round(percentual) +
+            "%.",
+
+            "aviso"
+
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================
+       VERIFICAR COMPRA DO CERTIFICADO
+    ===================================== */
+
+    const qCompra =
+        query(
+
+            collection(
+                db,
+                "compras"
+            ),
+
+            where(
+                "usuarioId",
+                "==",
+                usuario.uid
+            ),
+
+            where(
+                "cursoId",
+                "==",
+                cursoId
+            ),
+
+            where(
+                "tipo",
+                "==",
+                "certificado"
+            )
+
+        );
+
+
+    const comprasSnap =
+        await getDocs(qCompra);
+
+
+    let compraPaga = null;
+
+    compraPendente = null;
+
+
+    comprasSnap.forEach(
+        documento => {
+
+            const dados =
+                documento.data();
 
 
             if(
-                moduloA !== moduloB
+                dados.status === "pago"
             ){
 
-                return moduloA.localeCompare(
-                    moduloB
-                );
+                compraPaga = {
+
+                    id:documento.id,
+
+                    ...dados
+
+                };
 
             }
 
 
-            return Number(a.ordem || 0) -
-                   Number(b.ordem || 0);
+            if(
+                dados.status === "pendente"
+            ){
+
+                compraPendente = {
+
+                    id:documento.id,
+
+                    ...dados
+
+                };
+
+            }
 
         }
     );
 
 
-    if(licoes.length === 0){
+    /* =====================================
+       CURSO PAGO
+       CERTIFICADO INCLUÍDO
+    ===================================== */
 
-        throw new Error(
-            "Este curso ainda não possui lições."
-        );
+    if(curso.tipo === "pago"){
 
-    }
+        /*
+           Para curso pago, a compra do curso
+           precisa estar confirmada.
+        */
 
-}
+        const qCurso =
+            query(
 
+                collection(
+                    db,
+                    "compras"
+                ),
 
-/* =====================================================
-   CARREGAR PROGRESSO
-===================================================== */
+                where(
+                    "usuarioId",
+                    "==",
+                    usuario.uid
+                ),
 
-async function carregarProgresso(){
+                where(
+                    "cursoId",
+                    "==",
+                    cursoId
+                ),
 
-    const snap =
-        await getDocs(
-            collection(
-                db,
-                "progresso"
-            )
-        );
+                where(
+                    "tipo",
+                    "==",
+                    "curso"
+                ),
 
+                where(
+                    "status",
+                    "==",
+                    "pago"
+                )
 
-    progresso = [];
-
-
-    snap.forEach(item => {
-
-        const dados =
-            item.data();
-
-
-        if(
-            dados.usuarioId ===
-            usuarioAtual.uid &&
-            dados.cursoId ===
-            cursoId
-        ){
-
-            progresso.push({
-
-                id:item.id,
-
-                ...dados
-
-            });
-
-        }
-
-    });
-
-}
-
-
-/* =====================================================
-   VERIFICAR CONCLUSÃO
-===================================================== */
-
-function verificarConclusao(){
-
-    const total =
-        licoes.length;
-
-
-    let aprovadas = 0;
-
-
-    licoes.forEach(licao => {
-
-        const registro =
-            progresso.find(
-                item =>
-                    item.licaoId ===
-                    licao.id
             );
 
 
-        if(
-            registro &&
-            registro.aprovado === true
-        ){
+        const compraCurso =
+            await getDocs(qCurso);
 
-            aprovadas++;
+
+        if(compraCurso.empty){
+
+            mostrarStatus(
+
+                "Seu curso foi concluído, mas a compra " +
+                "do curso ainda não foi confirmada.",
+
+                "aviso"
+
+            );
+
+            return;
 
         }
 
-    });
 
+        await emitirCertificado(
+            totalLicoes,
+            aprovadas,
+            percentual
+        );
 
-    const percentual =
-        total > 0
-        ?
-        Math.round(
-            (aprovadas / total) * 100
-        )
-        :
-        0;
-
-
-    return {
-
-        total,
-
-        aprovadas,
-
-        percentual,
-
-        concluido:
-            aprovadas >= total
-
-    };
-
-}
-
-
-/* =====================================================
-   GERAR CÓDIGO DO CERTIFICADO
-===================================================== */
-
-function gerarCodigo(){
-
-    /*
-     * Código determinístico baseado
-     * no usuário e curso.
-     *
-     * Assim o certificado mantém
-     * sempre o mesmo código.
-     */
-
-    const base =
-        `${usuarioAtual.uid}_${cursoId}`;
-
-
-    let hash = 0;
-
-
-    for(
-        let i = 0;
-        i < base.length;
-        i++
-    ){
-
-        hash =
-            (
-                (
-                    hash << 5
-                ) -
-                hash
-            ) +
-            base.charCodeAt(i);
-
-        hash |= 0;
+        return;
 
     }
 
 
-    const numero =
-        Math.abs(hash)
-            .toString(36)
-            .toUpperCase()
-            .padStart(8,"0")
-            .slice(0,8);
+    /* =====================================
+       CURSO GRATUITO
+    ===================================== */
+
+    if(compraPaga){
+
+        await emitirCertificado(
+            totalLicoes,
+            aprovadas,
+            percentual
+        );
+
+        return;
+
+    }
 
 
-    return `CERT-${numero}`;
+    if(compraPendente){
+
+        document.getElementById(
+            "codigoPagamento"
+        ).textContent =
+            "Código do pedido: " +
+            compraPendente.codigo;
+
+
+        document.getElementById(
+            "valorCertificado"
+        ).textContent =
+            formatarMoeda(
+                VALOR_CERTIFICADO
+            );
+
+
+        pagamentoPendente.classList.remove(
+            "oculto"
+        );
+
+
+        mostrarStatus(
+
+            "Seu pagamento está aguardando confirmação.",
+
+            "aviso"
+
+        );
+
+        return;
+
+    }
+
+
+    /* PAGAMENTO AINDA NÃO SOLICITADO */
+
+    document.getElementById(
+        "valorCertificado"
+    ).textContent =
+        formatarMoeda(
+            VALOR_CERTIFICADO
+        );
+
+
+    acoesPagamento.classList.remove(
+        "oculto"
+    );
+
+
+    mostrarStatus(
+
+        "Parabéns! Você concluiu 100% do curso. " +
+        "Agora pode solicitar seu certificado.",
+
+        "sucesso"
+
+    );
 
 }
 
 
-/* =====================================================
-   SALVAR CERTIFICADO
-===================================================== */
+/* =========================================
+   CRIAR PEDIDO CERTIFICADO
+========================================= */
 
-async function salvarCertificado(
-    dadosConclusao
+window.pagarCertificado =
+async function(){
+
+    try{
+
+        const codigo =
+            gerarCodigo();
+
+
+        const compra = {
+
+            usuarioId:
+                usuario.uid,
+
+            nomeUsuario:
+                usuario.nome || "",
+
+            emailUsuario:
+                usuario.email || "",
+
+            tipo:
+                "certificado",
+
+            produtoId:
+                cursoId,
+
+            produtoNome:
+                "Certificado - " +
+                curso.titulo,
+
+            cursoId:
+                cursoId,
+
+            valor:
+                VALOR_CERTIFICADO,
+
+            codigo:
+                codigo,
+
+            status:
+                "pendente",
+
+            criadoEm:
+                serverTimestamp(),
+
+            pagoEm:
+                null,
+
+            entregueEm:
+                null
+
+        };
+
+
+        const ref =
+            await addDoc(
+
+                collection(
+                    db,
+                    "compras"
+                ),
+
+                compra
+
+            );
+
+
+        compraPendente = {
+
+            id:ref.id,
+
+            ...compra
+
+        };
+
+
+        document.getElementById(
+            "codigoPagamento"
+        ).textContent =
+            "Código do pedido: " +
+            codigo;
+
+
+        acoesPagamento.classList.add(
+            "oculto"
+        );
+
+
+        pagamentoPendente.classList.remove(
+            "oculto"
+        );
+
+
+        mostrarStatus(
+
+            "Pedido criado. Agora realize o PIX e envie o comprovante.",
+
+            "sucesso"
+
+        );
+
+
+        abrirWhatsApp();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        mostrarStatus(
+
+            "Erro ao criar o pedido de certificado.",
+
+            "erro"
+
+        );
+
+    }
+
+};
+
+
+/* =========================================
+   WHATSAPP
+========================================= */
+
+window.abrirWhatsApp =
+function(){
+
+    if(!compraPendente){
+
+        return;
+
+    }
+
+
+    const texto =
+
+`Olá! Estou enviando o comprovante do pagamento do certificado.
+
+🏆 CERTIFICADO
+
+Código:
+${compraPendente.codigo}
+
+👤 Aluno:
+${usuario.nome || ""}
+
+📧 E-mail:
+${usuario.email || ""}
+
+📚 Curso:
+${curso.titulo}
+
+💰 Valor:
+${formatarMoeda(
+    compraPendente.valor
+)}
+
+🔑 PIX:
+${CHAVE_PIX}
+
+Segue o comprovante do pagamento.`;
+
+
+
+    const url =
+        "https://wa.me/" +
+        WHATSAPP +
+        "?text=" +
+        encodeURIComponent(
+            texto
+        );
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+};
+
+
+/* =========================================
+   VERIFICAR PAGAMENTO
+========================================= */
+
+window.verificarPagamento =
+async function(){
+
+    mostrarStatus(
+        "Verificando pagamento...",
+        "aviso"
+    );
+
+
+    await verificar();
+
+};
+
+
+/* =========================================
+   EMITIR CERTIFICADO
+========================================= */
+
+async function emitirCertificado(
+    totalLicoes,
+    aprovadas,
+    percentual
 ){
 
-    const codigo =
-        gerarCodigo();
-
-
     const certificadoId =
-        `${usuarioAtual.uid}_${cursoId}`;
+        usuario.uid +
+        "_" +
+        cursoId;
 
 
-    const ref =
+    const certificadoRef =
         doc(
             db,
             "certificados",
@@ -885,413 +1151,198 @@ async function salvarCertificado(
         );
 
 
-    const existente =
-        await getDoc(ref);
-
-
-    if(existente.exists()){
-
-        return {
-
-            codigo:
-                existente.data().codigo ||
-                codigo,
-
-            dataConclusao:
-                existente.data()
-                    .dataConclusao
-
-        };
-
-    }
-
-
-    const dados = {
-
-        usuarioId:
-            usuarioAtual.uid,
-
-        cursoId:
-            cursoId,
-
-        codigo:
-            codigo,
-
-        nomeAluno:
-            usuario.nome ||
-            "Aluno",
-
-        nomeCurso:
-            curso.titulo ||
-            "Curso",
-
-        totalLicoes:
-            dadosConclusao.total,
-
-        licoesAprovadas:
-            dadosConclusao.aprovadas,
-
-        aproveitamento:
-            dadosConclusao.percentual,
-
-        dataConclusao:
-            serverTimestamp(),
-
-        criadoEm:
-            serverTimestamp()
-
-    };
-
-
-    await setDoc(
-        ref,
-        dados
-    );
-
-
-    return {
-
-        codigo:codigo,
-
-        dataConclusao:null
-
-    };
-
-}
-
-
-/* =====================================================
-   MOSTRAR NÃO CONCLUÍDO
-===================================================== */
-
-function mostrarNaoConcluido(
-    dados
-){
-
-    areaPrincipal.innerHTML = `
-
-        <div class="erro">
-
-            <h2>
-                🔒 Certificado ainda não disponível
-            </h2>
-
-            <p style="margin-top:10px">
-
-                Você ainda não concluiu todas as
-                lições deste curso.
-
-            </p>
-
-            <p style="margin-top:10px">
-
-                Progresso atual:
-                <strong>
-                    ${dados.aprovadas}/${dados.total}
-                    lições
-                </strong>
-                (${dados.percentual}%)
-
-            </p>
-
-            <div style="margin-top:20px">
-
-                <button
-                    class="btn btn-voltar"
-                    onclick="voltarCurso()"
-                >
-                    ← Voltar para o curso
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-   MOSTRAR CERTIFICADO
-===================================================== */
-
-function mostrarCertificado(
-    certificado,
-    dadosConclusao
-){
-
-    const nomeAluno =
-        escapar(
-            usuario.nome ||
-            "Aluno"
+    const certificadoSnap =
+        await getDoc(
+            certificadoRef
         );
 
 
-    const nomeCurso =
-        escapar(
-            curso.titulo ||
-            "Curso"
-        );
+    let dadosCertificado;
 
 
-    const codigo =
-        escapar(
-            certificado.codigo
-        );
+    if(certificadoSnap.exists()){
 
-
-    areaPrincipal.innerHTML = `
-
-        <div class="info-conclusao">
-
-            🎉 Parabéns!
-            Você concluiu todas as lições deste curso.
-
-        </div>
-
-
-        <div class="acoes-certificado">
-
-            <button
-                class="btn btn-imprimir"
-                onclick="imprimirCertificado()"
-            >
-                🖨️ Imprimir / Salvar PDF
-            </button>
-
-
-            <button
-                class="btn btn-painel"
-                onclick="abrirPainel()"
-            >
-                🏠 Voltar ao painel
-            </button>
-
-        </div>
-
-
-        <div class="certificado">
-
-            <div class="certificado-borda">
-
-                <div class="certificado-interior">
-
-                    <div class="logo">
-                        🏆
-                    </div>
-
-
-                    <div class="titulo">
-                        CERTIFICADO
-                    </div>
-
-
-                    <div class="subtitulo">
-                        DE CONCLUSÃO
-                    </div>
-
-
-                    <div class="linha-decorativa"></div>
-
-
-                    <div class="texto">
-
-                        Certificamos que
-
-                    </div>
-
-
-                    <div class="nome-aluno">
-                        ${nomeAluno}
-                    </div>
-
-
-                    <div class="texto">
-
-                        concluiu com sucesso o curso
-
-                    </div>
-
-
-                    <div class="nome-curso">
-                        ${nomeCurso}
-                    </div>
-
-
-                    <div class="texto">
-
-                        demonstrando a conclusão de todas
-                        as lições disponíveis no curso.
-
-                    </div>
-
-
-                    <div class="detalhes">
-
-                        <div class="detalhe">
-
-                            <div class="detalhe-label">
-                                Lições concluídas
-                            </div>
-
-                            <div class="detalhe-valor">
-                                ${dadosConclusao.aprovadas}
-                                /
-                                ${dadosConclusao.total}
-                            </div>
-
-                        </div>
-
-
-                        <div class="detalhe">
-
-                            <div class="detalhe-label">
-                                Aproveitamento
-                            </div>
-
-                            <div class="detalhe-valor">
-                                ${dadosConclusao.percentual}%
-                            </div>
-
-                        </div>
-
-
-                        <div class="detalhe">
-
-                            <div class="detalhe-label">
-                                Data
-                            </div>
-
-                            <div class="detalhe-valor">
-                                ${dataLocal()}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="assinaturas">
-
-                        <div class="assinatura">
-
-                            <div
-                                class="linha-assinatura"
-                            >
-                                Plataforma de Ensino
-                            </div>
-
-                        </div>
-
-
-                        <div class="assinatura">
-
-                            <div
-                                class="linha-assinatura"
-                            >
-                                Certificação
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="codigo">
-
-                        Código de autenticidade:
-                        <strong>
-                            ${codigo}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-   IMPRESSÃO
-===================================================== */
-
-function imprimirCertificado(){
-
-    window.print();
-
-}
-
-
-/* =====================================================
-   NAVEGAÇÃO
-===================================================== */
-
-function abrirPainel(){
-
-    window.location.href =
-        "painel.html";
-
-}
-
-
-function abrirCarteira(){
-
-    window.location.href =
-        "carteira.html";
-
-}
-
-
-function voltarCurso(){
-
-    if(cursoId){
-
-        window.location.href =
-            `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+        dadosCertificado =
+            certificadoSnap.data();
 
     }else{
 
-        window.location.href =
-            "cursos.html";
+        /*
+           Para criação usamos addDoc
+           somente como fallback.
+           O documento principal usa
+           ID determinístico.
+        */
+
+        const codigo =
+            gerarCodigo();
+
+
+        const novoCertificado = {
+
+            usuarioId:
+                usuario.uid,
+
+            cursoId:
+                cursoId,
+
+            codigo:
+                codigo,
+
+            nomeAluno:
+                usuario.nome || "",
+
+            nomeCurso:
+                curso.titulo,
+
+            totalLicoes:
+                totalLicoes,
+
+            licoesAprovadas:
+                aprovadas,
+
+            aproveitamento:
+                Math.round(percentual),
+
+            dataConclusao:
+                new Date()
+                    .toLocaleDateString(
+                        "pt-BR"
+                    ),
+
+            criadoEm:
+                serverTimestamp()
+
+        };
+
+
+        /*
+           Importante:
+           usamos setDoc com ID fixo.
+        */
+
+        const {
+            setDoc
+        } = await import(
+            "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js"
+        );
+
+
+        await setDoc(
+            certificadoRef,
+            novoCertificado
+        );
+
+
+        dadosCertificado =
+            novoCertificado;
 
     }
+
+
+    certificadoLiberado = true;
+
+
+    document.getElementById(
+        "nomeAluno"
+    ).textContent =
+        dadosCertificado.nomeAluno;
+
+
+    document.getElementById(
+        "nomeCurso"
+    ).textContent =
+        dadosCertificado.nomeCurso;
+
+
+    document.getElementById(
+        "dadosCurso"
+    ).innerHTML =
+
+        "Conclusão de " +
+        dadosCertificado.licoesAprovadas +
+        " de " +
+        dadosCertificado.totalLicoes +
+        " lições.<br>" +
+
+        "Aproveitamento: " +
+        dadosCertificado.aproveitamento +
+        "%.<br>" +
+
+        "Data de conclusão: " +
+        dadosCertificado.dataConclusao;
+
+
+    document.getElementById(
+        "codigo"
+    ).textContent =
+        dadosCertificado.codigo;
+
+
+    acoesPagamento.classList.add(
+        "oculto"
+    );
+
+    pagamentoPendente.classList.add(
+        "oculto"
+    );
+
+
+    certificadoBox.classList.remove(
+        "oculto"
+    );
+
+
+    mostrarStatus(
+
+        "🎉 Certificado liberado com sucesso!",
+
+        "sucesso"
+
+    );
 
 }
 
 
-/* =====================================================
-   DISPONIBILIZAR FUNÇÕES
-===================================================== */
+/* =========================================
+   FORMATAÇÃO
+========================================= */
 
-window.imprimirCertificado =
-    imprimirCertificado;
+function formatarMoeda(valor){
 
-window.abrirPainel =
-    abrirPainel;
+    return Number(valor)
+        .toLocaleString(
+            "pt-BR",
+            {
+                style:"currency",
+                currency:"BRL"
+            }
+        );
 
-window.abrirCarteira =
-    abrirCarteira;
+}
+
+
+/* =========================================
+   VOLTAR
+========================================= */
 
 window.voltarCurso =
-    voltarCurso;
+function(){
+
+    window.location.href =
+        "curso.html?cursoId=" +
+        cursoId;
+
+};
 
 
-/* =====================================================
-   INICIALIZAÇÃO
-===================================================== */
+/* =========================================
+   AUTENTICAÇÃO
+========================================= */
 
 onAuthStateChanged(
-
     auth,
-
-    async (user) => {
+    async user => {
 
         if(!user){
 
@@ -1303,97 +1354,54 @@ onAuthStateChanged(
         }
 
 
-        usuarioAtual =
-            user;
+        usuario = user;
 
 
         try{
 
-            await carregarUsuario();
+            const snap =
+                await getDoc(
 
-            await carregarCurso();
+                    doc(
+                        db,
+                        "usuarios",
+                        user.uid
+                    )
 
-            await carregarLicoes();
-
-            await carregarProgresso();
-
-
-            const dadosConclusao =
-                verificarConclusao();
-
-
-            /*
-             * Só libera o certificado
-             * quando todas as lições
-             * estiverem aprovadas.
-             */
-
-            if(
-                !dadosConclusao.concluido
-            ){
-
-                mostrarNaoConcluido(
-                    dadosConclusao
                 );
 
-                return;
+
+            if(snap.exists()){
+
+                const dados =
+                    snap.data();
+
+
+                usuario.nome =
+                    dados.nome || "";
 
             }
 
 
-            const certificado =
-                await salvarCertificado(
-                    dadosConclusao
-                );
-
-
-            mostrarCertificado(
-                certificado,
-                dadosConclusao
-            );
+            await verificar();
 
 
         }catch(error){
 
-            console.error(
-                "Erro no certificado:",
-                error
+            console.error(error);
+
+            mostrarStatus(
+
+                "Erro ao verificar certificado: " +
+                error.message,
+
+                "erro"
+
             );
-
-
-            areaPrincipal.innerHTML = `
-
-                <div class="erro">
-
-                    <h2>
-                        Não foi possível carregar o certificado
-                    </h2>
-
-                    <p style="margin-top:10px">
-                        ${escapar(
-                            error.message
-                        )}
-                    </p>
-
-                    <div style="margin-top:20px">
-
-                        <button
-                            class="btn btn-voltar"
-                            onclick="voltarCurso()"
-                        >
-                            ← Voltar
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
 
         }
 
     }
-
 );
 
 </script>
