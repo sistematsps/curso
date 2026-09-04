@@ -1,0 +1,1309 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Módulos - Administração</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+header {
+    background: #1f2937;
+    color: white;
+    padding: 16px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+button,
+.btn-link {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-voltar {
+    background: #374151;
+    color: white;
+}
+
+.btn-sair {
+    background: #dc2626;
+    color: white;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 25px auto;
+    padding: 0 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #2563eb;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 15px;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.botoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-salvar {
+    background: #16a34a;
+    color: white;
+}
+
+.btn-cancelar {
+    background: #6b7280;
+    color: white;
+}
+
+.btn-novo {
+    background: #2563eb;
+    color: white;
+}
+
+.mensagem {
+    padding: 12px;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.sucesso {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.erro {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.info {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.curso-selecionado {
+    margin-top: 10px;
+    padding: 12px;
+    background: #eff6ff;
+    border-radius: 7px;
+    color: #1e40af;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background: #f9fafb;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-ativo {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-inativo {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.acoes {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.btn-editar {
+    background: #f59e0b;
+    color: white;
+}
+
+.btn-status {
+    background: #6366f1;
+    color: white;
+}
+
+.btn-excluir {
+    background: #dc2626;
+    color: white;
+}
+
+.vazio {
+    text-align: center;
+    padding: 30px;
+    color: #6b7280;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+}
+
+#formBox {
+    display: none;
+}
+
+@media (max-width: 700px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        min-width: 750px;
+    }
+
+    .tabela-container {
+        overflow-x: auto;
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>⚙️ Administração — Módulos</h1>
+
+    <div class="header-buttons">
+        <a href="admin.html" class="btn-link btn-voltar">
+            ← Cursos
+        </a>
+
+        <button class="btn-sair" id="btnSair">
+            Sair
+        </button>
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <div id="mensagem" class="mensagem"></div>
+
+
+    <!-- SELEÇÃO DO CURSO -->
+    <div class="card">
+
+        <h2>📚 Selecionar Curso</h2>
+
+        <div class="campo">
+
+            <label for="cursoSelect">
+                Curso
+            </label>
+
+            <select id="cursoSelect">
+
+                <option value="">
+                    Carregando cursos...
+                </option>
+
+            </select>
+
+        </div>
+
+        <div id="cursoSelecionado" class="curso-selecionado" style="display:none;"></div>
+
+    </div>
+
+
+    <!-- BOTÃO NOVO -->
+    <div class="card">
+
+        <button
+            id="btnNovo"
+            class="btn-novo"
+            disabled
+        >
+            + Novo módulo
+        </button>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+    <div class="card" id="formBox">
+
+        <h2 id="tituloFormulario">
+            Novo módulo
+        </h2>
+
+        <form id="formModulo">
+
+            <div class="campo">
+
+                <label for="titulo">
+                    Título do módulo
+                </label>
+
+                <input
+                    type="text"
+                    id="titulo"
+                    required
+                    placeholder="Ex.: Saudações e apresentações"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="descricao">
+                    Descrição
+                </label>
+
+                <textarea
+                    id="descricao"
+                    placeholder="Descrição do conteúdo deste módulo..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="campo">
+
+                    <label for="ordem">
+                        Ordem
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ordem"
+                        min="1"
+                        value="1"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="botoes">
+
+                <button
+                    type="submit"
+                    class="btn-salvar"
+                >
+                    💾 Salvar módulo
+                </button>
+
+                <button
+                    type="button"
+                    id="btnCancelar"
+                    class="btn-cancelar"
+                >
+                    Cancelar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- LISTA -->
+    <div class="card">
+
+        <h2>📦 Módulos do curso</h2>
+
+        <div id="loading" class="loading">
+            Selecione um curso para visualizar os módulos.
+        </div>
+
+        <div class="tabela-container">
+
+            <table id="tabela" style="display:none;">
+
+                <thead>
+
+                    <tr>
+                        <th>Ordem</th>
+                        <th>Módulo</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaModulos"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+// ======================================================
+// FIREBASE
+// ======================================================
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+    authDomain: "dezenas-1ed47.firebaseapp.com",
+    projectId: "dezenas-1ed47",
+    storageBucket: "dezenas-1ed47.firebasestorage.app",
+    messagingSenderId: "372788277555",
+    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+    measurementId: "G-NMPP8PKPK3"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+// ======================================================
+// ELEMENTOS
+// ======================================================
+
+const cursoSelect = document.getElementById("cursoSelect");
+
+const cursoSelecionado =
+    document.getElementById("cursoSelecionado");
+
+const btnNovo =
+    document.getElementById("btnNovo");
+
+const btnCancelar =
+    document.getElementById("btnCancelar");
+
+const btnSair =
+    document.getElementById("btnSair");
+
+const formBox =
+    document.getElementById("formBox");
+
+const formModulo =
+    document.getElementById("formModulo");
+
+const tituloFormulario =
+    document.getElementById("tituloFormulario");
+
+const titulo =
+    document.getElementById("titulo");
+
+const descricao =
+    document.getElementById("descricao");
+
+const ordem =
+    document.getElementById("ordem");
+
+const listaModulos =
+    document.getElementById("listaModulos");
+
+const tabela =
+    document.getElementById("tabela");
+
+const loading =
+    document.getElementById("loading");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+
+// ======================================================
+// VARIÁVEIS
+// ======================================================
+
+let cursos = [];
+
+let modulos = [];
+
+let moduloEditando = null;
+
+let usuarioAtual = null;
+
+
+// ======================================================
+// MENSAGEM
+// ======================================================
+
+function mostrarMensagem(texto, tipo = "sucesso") {
+
+    mensagem.textContent = texto;
+
+    mensagem.className = "mensagem " + tipo;
+
+    mensagem.style.display = "block";
+
+    setTimeout(() => {
+
+        mensagem.style.display = "none";
+
+    }, 4000);
+}
+
+
+// ======================================================
+// ESCAPAR HTML
+// ======================================================
+
+function escapar(valor) {
+
+    if (valor === null || valor === undefined) {
+        return "";
+    }
+
+    return String(valor)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+// ======================================================
+// AUTENTICAÇÃO
+// ======================================================
+
+onAuthStateChanged(auth, async (user) => {
+
+    if (!user) {
+
+        mostrarMensagem(
+            "Você precisa estar logado para acessar esta página.",
+            "erro"
+        );
+
+        setTimeout(() => {
+
+            window.location.href = "index.html";
+
+        }, 1500);
+
+        return;
+    }
+
+    usuarioAtual = user;
+
+    await carregarCursos();
+
+});
+
+
+// ======================================================
+// CARREGAR CURSOS
+// ======================================================
+
+async function carregarCursos() {
+
+    try {
+
+        const snapshot =
+            await getDocs(collection(db, "cursos"));
+
+        cursos = [];
+
+        snapshot.forEach((item) => {
+
+            cursos.push({
+                id: item.id,
+                ...item.data()
+            });
+
+        });
+
+
+        cursos.sort((a, b) => {
+
+            const nomeA =
+                (a.titulo || "").toLowerCase();
+
+            const nomeB =
+                (b.titulo || "").toLowerCase();
+
+            return nomeA.localeCompare(nomeB);
+
+        });
+
+
+        cursoSelect.innerHTML =
+            '<option value="">Selecione um curso...</option>';
+
+
+        cursos.forEach((curso) => {
+
+            const option =
+                document.createElement("option");
+
+            option.value = curso.id;
+
+            option.textContent =
+                (curso.titulo || "Curso sem título") +
+                (curso.ativo === false ? " — INATIVO" : "");
+
+            cursoSelect.appendChild(option);
+
+        });
+
+
+        if (cursos.length === 0) {
+
+            cursoSelect.innerHTML =
+                '<option value="">Nenhum curso cadastrado</option>';
+
+            loading.textContent =
+                "Cadastre primeiro um curso na página de Cursos.";
+
+            return;
+        }
+
+
+        loading.textContent =
+            "Selecione um curso para visualizar os módulos.";
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        mostrarMensagem(
+            "Erro ao carregar os cursos.",
+            "erro"
+        );
+
+        cursoSelect.innerHTML =
+            '<option value="">Erro ao carregar</option>';
+    }
+}
+
+
+// ======================================================
+// SELECIONAR CURSO
+// ======================================================
+
+cursoSelect.addEventListener("change", async () => {
+
+    const cursoId = cursoSelect.value;
+
+    limparFormulario();
+
+    if (!cursoId) {
+
+        cursoSelecionado.style.display = "none";
+
+        btnNovo.disabled = true;
+
+        tabela.style.display = "none";
+
+        loading.style.display = "block";
+
+        loading.textContent =
+            "Selecione um curso para visualizar os módulos.";
+
+        return;
+    }
+
+
+    const curso =
+        cursos.find(item => item.id === cursoId);
+
+
+    if (curso) {
+
+        cursoSelecionado.textContent =
+            "Curso selecionado: " +
+            (curso.titulo || "Sem título");
+
+        cursoSelecionado.style.display = "block";
+
+    }
+
+
+    btnNovo.disabled = false;
+
+    await carregarModulos(cursoId);
+
+});
+
+
+// ======================================================
+// CARREGAR MÓDULOS
+// ======================================================
+
+async function carregarModulos(cursoId) {
+
+    loading.style.display = "block";
+
+    loading.textContent =
+        "Carregando módulos...";
+
+    tabela.style.display = "none";
+
+    try {
+
+        const snapshot =
+            await getDocs(collection(db, "modulos"));
+
+        modulos = [];
+
+        snapshot.forEach((item) => {
+
+            const dados = item.data();
+
+            if (dados.cursoId === cursoId) {
+
+                modulos.push({
+                    id: item.id,
+                    ...dados
+                });
+
+            }
+
+        });
+
+
+        modulos.sort((a, b) => {
+
+            const ordemA =
+                Number(a.ordem || 0);
+
+            const ordemB =
+                Number(b.ordem || 0);
+
+            return ordemA - ordemB;
+
+        });
+
+
+        renderizarModulos();
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        mostrarMensagem(
+            "Erro ao carregar os módulos.",
+            "erro"
+        );
+
+        loading.textContent =
+            "Não foi possível carregar os módulos.";
+    }
+}
+
+
+// ======================================================
+// RENDERIZAR MÓDULOS
+// ======================================================
+
+function renderizarModulos() {
+
+    listaModulos.innerHTML = "";
+
+    loading.style.display = "none";
+
+
+    if (modulos.length === 0) {
+
+        tabela.style.display = "none";
+
+        loading.style.display = "block";
+
+        loading.textContent =
+            "Este curso ainda não possui módulos.";
+
+        return;
+    }
+
+
+    tabela.style.display = "table";
+
+
+    modulos.forEach((modulo) => {
+
+        const tr =
+            document.createElement("tr");
+
+
+        const status =
+            modulo.ativo !== false
+                ? '<span class="status status-ativo">ATIVO</span>'
+                : '<span class="status status-inativo">INATIVO</span>';
+
+
+        const botaoStatus =
+            modulo.ativo !== false
+                ? "Desativar"
+                : "Ativar";
+
+
+        tr.innerHTML = `
+
+            <td>
+                <strong>
+                    ${escapar(modulo.ordem || 0)}
+                </strong>
+            </td>
+
+            <td>
+                <strong>
+                    ${escapar(modulo.titulo)}
+                </strong>
+            </td>
+
+            <td>
+                ${escapar(modulo.descricao || "-")}
+            </td>
+
+            <td>
+                ${status}
+            </td>
+
+            <td>
+
+                <div class="acoes">
+
+                    <button
+                        class="btn-editar"
+                        data-acao="editar"
+                        data-id="${modulo.id}"
+                    >
+                        Editar
+                    </button>
+
+                    <button
+                        class="btn-status"
+                        data-acao="status"
+                        data-id="${modulo.id}"
+                    >
+                        ${botaoStatus}
+                    </button>
+
+                    <button
+                        class="btn-excluir"
+                        data-acao="excluir"
+                        data-id="${modulo.id}"
+                    >
+                        Excluir
+                    </button>
+
+                </div>
+
+            </td>
+        `;
+
+
+        listaModulos.appendChild(tr);
+
+    });
+
+}
+
+
+// ======================================================
+// NOVO MÓDULO
+// ======================================================
+
+btnNovo.addEventListener("click", () => {
+
+    if (!cursoSelect.value) {
+
+        mostrarMensagem(
+            "Selecione um curso primeiro.",
+            "erro"
+        );
+
+        return;
+    }
+
+
+    moduloEditando = null;
+
+    formModulo.reset();
+
+    ordem.value = modulos.length + 1;
+
+    tituloFormulario.textContent =
+        "Novo módulo";
+
+    formBox.style.display = "block";
+
+    titulo.focus();
+
+    window.scrollTo({
+        top: formBox.offsetTop - 20,
+        behavior: "smooth"
+    });
+
+});
+
+
+// ======================================================
+// CANCELAR
+// ======================================================
+
+btnCancelar.addEventListener("click", () => {
+
+    limparFormulario();
+
+});
+
+
+// ======================================================
+// LIMPAR FORMULÁRIO
+// ======================================================
+
+function limparFormulario() {
+
+    moduloEditando = null;
+
+    formModulo.reset();
+
+    ordem.value = 1;
+
+    tituloFormulario.textContent =
+        "Novo módulo";
+
+    formBox.style.display = "none";
+
+}
+
+
+// ======================================================
+// SALVAR
+// ======================================================
+
+formModulo.addEventListener("submit", async (evento) => {
+
+    evento.preventDefault();
+
+
+    const cursoId = cursoSelect.value;
+
+
+    if (!cursoId) {
+
+        mostrarMensagem(
+            "Selecione um curso.",
+            "erro"
+        );
+
+        return;
+    }
+
+
+    const dados = {
+
+        cursoId: cursoId,
+
+        titulo: titulo.value.trim(),
+
+        descricao: descricao.value.trim(),
+
+        ordem: Number(ordem.value),
+
+        atualizadoEm: serverTimestamp()
+
+    };
+
+
+    if (!dados.titulo) {
+
+        mostrarMensagem(
+            "Digite o título do módulo.",
+            "erro"
+        );
+
+        titulo.focus();
+
+        return;
+    }
+
+
+    if (!dados.ordem || dados.ordem < 1) {
+
+        mostrarMensagem(
+            "Informe uma ordem válida.",
+            "erro"
+        );
+
+        ordem.focus();
+
+        return;
+    }
+
+
+    try {
+
+        if (moduloEditando) {
+
+            await updateDoc(
+                doc(db, "modulos", moduloEditando),
+                dados
+            );
+
+            mostrarMensagem(
+                "Módulo atualizado com sucesso!"
+            );
+
+        } else {
+
+            await addDoc(
+                collection(db, "modulos"),
+                {
+                    ...dados,
+                    ativo: true,
+                    criadoEm: serverTimestamp()
+                }
+            );
+
+            mostrarMensagem(
+                "Módulo criado com sucesso!"
+            );
+        }
+
+
+        limparFormulario();
+
+        await carregarModulos(cursoId);
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        mostrarMensagem(
+            "Erro ao salvar o módulo: " + erro.message,
+            "erro"
+        );
+
+    }
+
+});
+
+
+// ======================================================
+// AÇÕES DA TABELA
+// ======================================================
+
+listaModulos.addEventListener("click", async (evento) => {
+
+    const botao =
+        evento.target.closest("button");
+
+
+    if (!botao) {
+        return;
+    }
+
+
+    const id =
+        botao.dataset.id;
+
+    const acao =
+        botao.dataset.acao;
+
+
+    const modulo =
+        modulos.find(item => item.id === id);
+
+
+    if (!modulo) {
+        return;
+    }
+
+
+    // EDITAR
+    if (acao === "editar") {
+
+        moduloEditando = id;
+
+        titulo.value =
+            modulo.titulo || "";
+
+        descricao.value =
+            modulo.descricao || "";
+
+        ordem.value =
+            modulo.ordem || 1;
+
+        tituloFormulario.textContent =
+            "Editar módulo";
+
+        formBox.style.display = "block";
+
+        titulo.focus();
+
+        window.scrollTo({
+            top: formBox.offsetTop - 20,
+            behavior: "smooth"
+        });
+
+        return;
+    }
+
+
+    // STATUS
+    if (acao === "status") {
+
+        const novoStatus =
+            modulo.ativo === false;
+
+        const confirmacao =
+            novoStatus
+                ? "Deseja ativar este módulo?"
+                : "Deseja desativar este módulo?";
+
+
+        if (!confirm(confirmacao)) {
+            return;
+        }
+
+
+        try {
+
+            await updateDoc(
+                doc(db, "modulos", id),
+                {
+                    ativo: novoStatus,
+                    atualizadoEm: serverTimestamp()
+                }
+            );
+
+
+            mostrarMensagem(
+                novoStatus
+                    ? "Módulo ativado!"
+                    : "Módulo desativado!"
+            );
+
+
+            await carregarModulos(
+                cursoSelect.value
+            );
+
+        } catch (erro) {
+
+            console.error(erro);
+
+            mostrarMensagem(
+                "Erro ao alterar o status.",
+                "erro"
+            );
+
+        }
+
+        return;
+    }
+
+
+    // EXCLUIR
+    if (acao === "excluir") {
+
+        const confirmacao =
+            confirm(
+                "Tem certeza que deseja excluir o módulo \"" +
+                (modulo.titulo || "") +
+                "\"?\n\nEsta ação não poderá ser desfeita."
+            );
+
+
+        if (!confirmacao) {
+            return;
+        }
+
+
+        try {
+
+            await deleteDoc(
+                doc(db, "modulos", id)
+            );
+
+
+            mostrarMensagem(
+                "Módulo excluído com sucesso!"
+            );
+
+
+            await carregarModulos(
+                cursoSelect.value
+            );
+
+        } catch (erro) {
+
+            console.error(erro);
+
+            mostrarMensagem(
+                "Erro ao excluir o módulo.",
+                "erro"
+            );
+
+        }
+
+    }
+
+});
+
+
+// ======================================================
+// LOGOUT
+// ======================================================
+
+btnSair.addEventListener("click", async () => {
+
+    try {
+
+        await signOut(auth);
+
+        window.location.href =
+            "index.html";
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        mostrarMensagem(
+            "Erro ao sair.",
+            "erro"
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+```
