@@ -1,133 +1,185 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Lição</title>
 
 <style>
+
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#f4f7fb;
     color:#1f2937;
 }
 
 header{
-    background:#ffffff;
-    border-bottom:1px solid #e5e7eb;
-    padding:15px 20px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:18px 20px;
+}
+
+.header{
+    max-width:1000px;
+    margin:auto;
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:15px;
-    flex-wrap:wrap;
 }
 
-.logo{
+.header h1{
     font-size:22px;
-    font-weight:bold;
 }
 
-.headerInfo{
+.header-info{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
 }
 
 .info{
-    background:#f3f4f6;
+    background:rgba(255,255,255,.15);
     padding:8px 12px;
     border-radius:20px;
-    font-weight:bold;
+    font-size:14px;
 }
 
-button{
-    border:0;
-    border-radius:10px;
-    padding:12px 18px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.btnVoltar{
-    background:#e5e7eb;
-}
-
-.btnSair{
-    background:#ef4444;
-    color:white;
-}
-
-main{
+.container{
     max-width:850px;
     margin:30px auto;
-    padding:0 15px;
+    padding:0 20px;
 }
 
-.card{
+.topo{
     background:white;
     border-radius:18px;
     padding:25px;
     box-shadow:0 5px 20px rgba(0,0,0,.07);
+    margin-bottom:20px;
 }
 
-h1{
-    margin-top:0;
+.topo h2{
+    font-size:26px;
+    margin-bottom:8px;
 }
 
-.progresso{
-    width:100%;
+.topo p{
+    color:#6b7280;
+}
+
+.progresso-container{
+    margin-top:20px;
+}
+
+.progresso-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:14px;
+}
+
+.barra{
     height:10px;
     background:#e5e7eb;
-    border-radius:10px;
+    border-radius:20px;
     overflow:hidden;
-    margin:20px 0;
 }
 
-.progressoBarra{
+.barra div{
     height:100%;
-    width:0%;
-    background:#22c55e;
+    background:linear-gradient(90deg,#2563eb,#4f46e5);
     transition:.3s;
 }
 
-.pergunta{
-    font-size:22px;
+.questao{
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.numero{
+    color:#2563eb;
     font-weight:bold;
-    margin:25px 0;
+    margin-bottom:15px;
+}
+
+.pergunta{
+    font-size:23px;
+    line-height:1.4;
+    margin-bottom:25px;
 }
 
 .alternativas{
-    display:grid;
+    display:flex;
+    flex-direction:column;
     gap:12px;
 }
 
 .alternativa{
     width:100%;
-    text-align:left;
-    background:#f8fafc;
+    padding:16px;
     border:2px solid #e5e7eb;
+    background:white;
+    border-radius:12px;
+    text-align:left;
+    cursor:pointer;
+    font-size:16px;
+    transition:.2s;
 }
 
 .alternativa:hover{
     border-color:#2563eb;
+    background:#eff6ff;
 }
 
 .alternativa.selecionada{
     border-color:#2563eb;
-    background:#eff6ff;
+    background:#dbeafe;
+}
+
+.alternativa.correta{
+    border-color:#16a34a;
+    background:#dcfce7;
+}
+
+.alternativa.errada{
+    border-color:#dc2626;
+    background:#fee2e2;
+}
+
+textarea{
+    width:100%;
+    min-height:130px;
+    resize:vertical;
+    border:2px solid #e5e7eb;
+    border-radius:12px;
+    padding:15px;
+    font-size:16px;
+    outline:none;
+}
+
+textarea:focus{
+    border-color:#2563eb;
 }
 
 .feedback{
     margin-top:20px;
-    padding:15px;
+    padding:18px;
     border-radius:12px;
     display:none;
 }
@@ -144,120 +196,156 @@ h1{
     color:#991b1b;
 }
 
-.explicacao{
-    margin-top:10px;
-    font-size:14px;
+.feedback strong{
+    display:block;
+    margin-bottom:8px;
 }
 
-.areaAcao{
+.acoes{
     display:flex;
-    justify-content:flex-end;
+    justify-content:space-between;
+    gap:12px;
     margin-top:25px;
 }
 
-.btnPrincipal{
+.btn{
+    border:none;
+    border-radius:10px;
+    padding:13px 20px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.btn-principal{
     background:#2563eb;
     color:white;
 }
 
-.btnPrincipal:disabled{
+.btn-principal:hover{
+    background:#1d4ed8;
+}
+
+.btn-secundario{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.btn-secundario:hover{
+    background:#d1d5db;
+}
+
+.btn:disabled{
     opacity:.5;
     cursor:not-allowed;
 }
 
 .carregando{
-    text-align:center;
+    background:white;
     padding:40px;
+    text-align:center;
+    border-radius:18px;
 }
 
-.oculto{
-    display:none;
-}
-
-.mensagem{
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:15px;
-    display:none;
-}
-
-.mensagem.erro{
-    display:block;
+.erro{
     background:#fee2e2;
     color:#991b1b;
+    padding:18px;
+    border-radius:12px;
 }
 
 @media(max-width:600px){
-    .pergunta{
-        font-size:19px;
+
+    .container{
+        margin:20px auto;
+        padding:0 12px;
     }
 
-    .card{
-        padding:18px;
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
     }
+
+    .pergunta{
+        font-size:20px;
+    }
+
+    .questao{
+        padding:20px;
+    }
+
+    .acoes{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header>
 
-    <div class="logo">📚 Lição</div>
+    <div class="header">
 
-    <div class="headerInfo">
-        <div class="info">❤️ <span id="vidas">0</span></div>
-        <div class="info">🪙 <span id="moedas">0</span></div>
-        <div class="info">⭐ <span id="xp">0</span> XP</div>
-    </div>
+        <h1 id="tituloHeader">
+            📚 Lição
+        </h1>
 
-    <div>
-        <button class="btnVoltar" id="btnVoltar">← Voltar</button>
-        <button class="btnSair" id="btnSair">Sair</button>
+        <div class="header-info">
+
+            <div class="info">
+                ❤️ <span id="vidas">-</span>
+            </div>
+
+            <div class="info">
+                🪙 <span id="moedas">-</span>
+            </div>
+
+            <div class="info">
+                ⭐ <span id="xp">-</span>
+            </div>
+
+            <div class="info">
+                🔥 <span id="sequencia">-</span>
+            </div>
+
+        </div>
+
     </div>
 
 </header>
 
-<main>
 
-    <div id="carregando" class="card carregando">
-        Carregando lição...
-    </div>
+<main class="container">
 
-    <div id="mensagem" class="mensagem"></div>
 
-    <div id="conteudo" class="card oculto">
+    <div id="areaPrincipal">
 
-        <h1 id="tituloLicao">Lição</h1>
-
-        <div id="descricaoLicao"></div>
-
-        <div class="progresso">
-            <div id="progressoBarra" class="progressoBarra"></div>
-        </div>
-
-        <div id="contador"></div>
-
-        <div id="pergunta" class="pergunta"></div>
-
-        <div id="alternativas" class="alternativas"></div>
-
-        <div id="feedback" class="feedback">
-            <strong id="feedbackTitulo"></strong>
-            <div id="explicacao" class="explicacao"></div>
-        </div>
-
-        <div class="areaAcao">
-            <button id="btnResponder" class="btnPrincipal" disabled>
-                Responder
-            </button>
+        <div class="carregando">
+            Carregando lição...
         </div>
 
     </div>
+
 
 </main>
 
+
 <script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
     initializeApp
@@ -265,8 +353,7 @@ import {
 
 import {
     getAuth,
-    onAuthStateChanged,
-    signOut
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
@@ -276,315 +363,509 @@ import {
     collection,
     getDocs,
     setDoc,
-    updateDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
-    authDomain: "dezenas-1ed47.firebaseapp.com",
-    projectId: "dezenas-1ed47",
-    storageBucket: "dezenas-1ed47.firebasestorage.app",
-    messagingSenderId: "372788277555",
-    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
-    measurementId: "G-NMPP8PKPK3"
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
 };
 
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
 
 
-/* CONFIGURAÇÕES */
+/* =====================================================
+   CONFIGURAÇÕES
+===================================================== */
 
 const MAX_VIDAS = 6;
+
 const MINIMO_APROVACAO = 60;
+
 const MOEDAS_DIARIAS = 50;
+
 const MOEDAS_POR_LICAO = 10;
+
 const MINUTOS_RECUPERACAO = 10;
 
 
-/* ELEMENTOS */
+/* =====================================================
+   URL
+===================================================== */
 
-const carregando = document.getElementById("carregando");
-const conteudo = document.getElementById("conteudo");
-const mensagem = document.getElementById("mensagem");
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
 
-const tituloLicao = document.getElementById("tituloLicao");
-const descricaoLicao = document.getElementById("descricaoLicao");
+const cursoId =
+    params.get("cursoId");
 
-const vidasEl = document.getElementById("vidas");
-const moedasEl = document.getElementById("moedas");
-const xpEl = document.getElementById("xp");
+const moduloId =
+    params.get("moduloId");
 
-const progressoBarra = document.getElementById("progressoBarra");
-const contador = document.getElementById("contador");
-const pergunta = document.getElementById("pergunta");
-const alternativas = document.getElementById("alternativas");
-
-const feedback = document.getElementById("feedback");
-const feedbackTitulo = document.getElementById("feedbackTitulo");
-const explicacao = document.getElementById("explicacao");
-
-const btnResponder = document.getElementById("btnResponder");
-const btnVoltar = document.getElementById("btnVoltar");
-const btnSair = document.getElementById("btnSair");
+const licaoId =
+    params.get("licaoId");
 
 
-/* URL */
+/* =====================================================
+   ELEMENTOS
+===================================================== */
 
-const params = new URLSearchParams(window.location.search);
+const areaPrincipal =
+    document.getElementById(
+        "areaPrincipal"
+    );
 
-const cursoId = params.get("cursoId");
-const moduloId = params.get("moduloId");
-const licaoId = params.get("licaoId");
+const vidasEl =
+    document.getElementById(
+        "vidas"
+    );
+
+const moedasEl =
+    document.getElementById(
+        "moedas"
+    );
+
+const xpEl =
+    document.getElementById(
+        "xp"
+    );
+
+const sequenciaEl =
+    document.getElementById(
+        "sequencia"
+    );
+
+const tituloHeader =
+    document.getElementById(
+        "tituloHeader"
+    );
 
 
-/* ESTADO */
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
 
 let usuarioAtual = null;
-let usuarioDados = null;
+
+let dadosUsuario = {};
+
+let curso = null;
 
 let licao = null;
+
 let exercicios = [];
 
 let indiceAtual = 0;
-let respostaSelecionada = null;
+
+let respostas = [];
+
 let respondeu = false;
 
 let acertos = 0;
+
 let erros = 0;
+
 let pontuacao = 0;
 
 
-/* ============================= */
-/* UTILITÁRIOS */
-/* ============================= */
-
-function mostrarErro(texto){
-
-    mensagem.textContent = texto;
-    mensagem.className = "mensagem erro";
-
-    carregando.classList.add("oculto");
-    conteudo.classList.add("oculto");
-}
-
+/* =====================================================
+   DATA LOCAL
+===================================================== */
 
 function dataLocal(){
 
-    const agora = new Date();
+    const agora =
+        new Date();
 
-    const ano = agora.getFullYear();
-    const mes = String(agora.getMonth()+1).padStart(2,"0");
-    const dia = String(agora.getDate()).padStart(2,"0");
+    const ano =
+        agora.getFullYear();
+
+    const mes =
+        String(
+            agora.getMonth() + 1
+        ).padStart(2,"0");
+
+    const dia =
+        String(
+            agora.getDate()
+        ).padStart(2,"0");
 
     return `${ano}-${mes}-${dia}`;
+
 }
 
 
-/* ============================= */
-/* VIDAS */
-/* ============================= */
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
 
-function calcularVidas(dados){
+function escapar(valor){
 
-    let vidas = Number(dados.vidas ?? 6);
-
-    if(vidas >= MAX_VIDAS){
-        return MAX_VIDAS;
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+        return "";
     }
 
-    if(!dados.vidasUltimaAtualizacao){
-        return vidas;
-    }
+    return String(valor)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
-    let ultima;
-
-    if(dados.vidasUltimaAtualizacao.toDate){
-        ultima = dados.vidasUltimaAtualizacao.toDate();
-    }else{
-        ultima = new Date(dados.vidasUltimaAtualizacao);
-    }
-
-    const agora = new Date();
-
-    const minutos = Math.floor(
-        (agora - ultima) / 60000
-    );
-
-    const recuperadas = Math.floor(
-        minutos / MINUTOS_RECUPERACAO
-    );
-
-    if(recuperadas <= 0){
-        return vidas;
-    }
-
-    return Math.min(
-        MAX_VIDAS,
-        vidas + recuperadas
-    );
 }
 
 
-/* ============================= */
-/* ATUALIZAR USUÁRIO */
-/* ============================= */
+/* =====================================================
+   CARREGAR USUÁRIO
+===================================================== */
 
-async function atualizarUsuario(){
+async function carregarUsuario(){
 
-    const ref = doc(db,"usuarios",usuarioAtual.uid);
+    const ref =
+        doc(
+            db,
+            "usuarios",
+            usuarioAtual.uid
+        );
 
-    const snap = await getDoc(ref);
+    const snap =
+        await getDoc(ref);
+
 
     if(!snap.exists()){
-        throw new Error("Perfil do usuário não encontrado.");
-    }
 
-    usuarioDados = snap.data();
+        dadosUsuario = {
 
-    let vidas = calcularVidas(usuarioDados);
+            nome:"Aluno",
 
-    let moedas = Number(usuarioDados.moedas ?? 0);
-    let xp = Number(usuarioDados.xp ?? 0);
+            vidas:MAX_VIDAS,
 
-    let moedasDiariasData =
-        usuarioDados.moedasDiariasData || "";
+            moedas:0,
 
-    const hoje = dataLocal();
+            xp:0,
 
-    if(moedasDiariasData !== hoje){
+            sequencia:0
 
-        moedas += MOEDAS_DIARIAS;
-
-        moedasDiariasData = hoje;
-
-        await updateDoc(ref,{
-            moedas: moedas,
-            moedasDiariasData: hoje,
-            vidas: vidas,
-            atualizadoEm: serverTimestamp()
-        });
+        };
 
     }else{
 
-        await updateDoc(ref,{
-            vidas: vidas,
-            atualizadoEm: serverTimestamp()
-        });
+        dadosUsuario =
+            snap.data();
+
     }
 
-    usuarioDados = {
-        ...usuarioDados,
-        vidas,
-        moedas,
-        xp,
-        moedasDiariasData
-    };
+
+    /*
+     * Recuperação automática das vidas.
+     */
+
+    let vidas =
+        Number(
+            dadosUsuario.vidas ?? MAX_VIDAS
+        );
+
+    const ultima =
+        dadosUsuario
+            .vidasUltimaAtualizacao;
+
+
+    if(
+        ultima &&
+        vidas < MAX_VIDAS
+    ){
+
+        let dataUltima;
+
+        if(
+            typeof ultima.toDate ===
+            "function"
+        ){
+
+            dataUltima =
+                ultima.toDate();
+
+        }else{
+
+            dataUltima =
+                new Date(ultima);
+
+        }
+
+
+        const agora =
+            new Date();
+
+        const diferenca =
+            agora.getTime() -
+            dataUltima.getTime();
+
+        const minutos =
+            Math.floor(
+                diferenca /
+                60000
+            );
+
+        const vidasRecuperadas =
+            Math.floor(
+                minutos /
+                MINUTOS_RECUPERACAO
+            );
+
+
+        if(vidasRecuperadas > 0){
+
+            vidas =
+                Math.min(
+                    MAX_VIDAS,
+                    vidas + vidasRecuperadas
+                );
+
+
+            dadosUsuario.vidas =
+                vidas;
+
+
+            dadosUsuario
+                .vidasUltimaAtualizacao =
+                serverTimestamp();
+
+
+            await setDoc(
+
+                ref,
+
+                {
+
+                    vidas:vidas,
+
+                    vidasUltimaAtualizacao:
+                        serverTimestamp(),
+
+                    atualizadoEm:
+                        serverTimestamp()
+
+                },
+
+                {
+                    merge:true
+                }
+
+            );
+
+        }
+
+    }
+
+
+    dadosUsuario.vidas =
+        vidas;
+
 
     atualizarHeader();
+
 }
 
 
-/* ============================= */
-/* HEADER */
-/* ============================= */
+/* =====================================================
+   HEADER
+===================================================== */
 
 function atualizarHeader(){
 
     vidasEl.textContent =
-        usuarioDados?.vidas ?? 0;
+        dadosUsuario.vidas ??
+        MAX_VIDAS;
 
     moedasEl.textContent =
-        usuarioDados?.moedas ?? 0;
+        dadosUsuario.moedas ??
+        0;
 
     xpEl.textContent =
-        usuarioDados?.xp ?? 0;
+        dadosUsuario.xp ??
+        0;
+
+    sequenciaEl.textContent =
+        dadosUsuario.sequencia ??
+        0;
+
 }
 
 
-/* ============================= */
-/* CARREGAR LIÇÃO */
-/* ============================= */
+/* =====================================================
+   CARREGAR CURSO
+===================================================== */
 
-async function carregarLicao(){
+async function carregarCurso(){
 
-    if(!cursoId || !moduloId || !licaoId){
-
-        mostrarErro(
-            "Dados da lição não encontrados."
+    if(!cursoId){
+        throw new Error(
+            "Curso não informado."
         );
-
-        return;
     }
 
 
-    const licaoRef =
-        doc(db,"licoes",licaoId);
-
-    const licaoSnap =
-        await getDoc(licaoRef);
-
-
-    if(!licaoSnap.exists()){
-
-        mostrarErro(
-            "Esta lição não existe."
+    const ref =
+        doc(
+            db,
+            "cursos",
+            cursoId
         );
 
-        return;
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+        throw new Error(
+            "Curso não encontrado."
+        );
+    }
+
+
+    curso = {
+        id:snap.id,
+        ...snap.data()
+    };
+
+
+    if(curso.ativo !== true){
+
+        throw new Error(
+            "Este curso não está disponível."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CARREGAR LIÇÃO
+===================================================== */
+
+async function carregarLicao(){
+
+    if(!licaoId){
+
+        throw new Error(
+            "Lição não informada."
+        );
+
+    }
+
+
+    const ref =
+        doc(
+            db,
+            "licoes",
+            licaoId
+        );
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Lição não encontrada."
+        );
+
     }
 
 
     licao = {
-        id: licaoSnap.id,
-        ...licaoSnap.data()
+
+        id:snap.id,
+
+        ...snap.data()
+
     };
 
 
-    if(licao.ativo === false){
+    if(licao.ativo !== true){
 
-        mostrarErro(
-            "Esta lição está indisponível."
+        throw new Error(
+            "Esta lição não está disponível."
         );
 
-        return;
     }
 
-
-    tituloLicao.textContent =
-        licao.titulo || "Lição";
+}
 
 
-    descricaoLicao.textContent =
-        licao.descricao || "";
+/* =====================================================
+   CARREGAR EXERCÍCIOS
+===================================================== */
 
+async function carregarExercicios(){
 
-    const exerciciosSnap =
+    const snap =
         await getDocs(
-            collection(db,"exercicios")
+            collection(
+                db,
+                "exercicios"
+            )
         );
 
 
     exercicios = [];
 
 
-    exerciciosSnap.forEach(docSnap => {
+    snap.forEach(item => {
 
-        const dados = docSnap.data();
+        const exercicio = {
+
+            id:item.id,
+
+            ...item.data()
+
+        };
+
 
         if(
-            dados.licaoId === licaoId &&
-            dados.ativo !== false
+            exercicio.ativo === true &&
+            exercicio.licaoId === licaoId
         ){
 
-            exercicios.push({
-                id: docSnap.id,
-                ...dados
-            });
+            exercicios.push(
+                exercicio
+            );
+
         }
 
     });
@@ -592,253 +873,149 @@ async function carregarLicao(){
 
     exercicios.sort(
         (a,b) =>
-        Number(a.ordem ?? 0) -
-        Number(b.ordem ?? 0)
+            Number(a.ordem || 0) -
+            Number(b.ordem || 0)
     );
 
 
     if(exercicios.length === 0){
 
-        mostrarErro(
+        throw new Error(
             "Esta lição ainda não possui exercícios."
         );
 
-        return;
     }
 
-
-    carregando.classList.add("oculto");
-    conteudo.classList.remove("oculto");
-
-    mostrarExercicio();
 }
 
 
-/* ============================= */
-/* MOSTRAR EXERCÍCIO */
-/* ============================= */
+/* =====================================================
+   MOSTRAR LIÇÃO
+===================================================== */
 
-function mostrarExercicio(){
+function mostrarLicao(){
+
+    tituloHeader.textContent =
+        `📚 ${licao.titulo || "Lição"}`;
+
+
+    renderizarQuestao();
+
+}
+
+
+/* =====================================================
+   RENDERIZAR QUESTÃO
+===================================================== */
+
+function renderizarQuestao(){
+
+    respondeu = false;
+
 
     const exercicio =
         exercicios[indiceAtual];
 
-
-    respostaSelecionada = null;
-    respondeu = false;
-
-    feedback.className = "feedback";
-    feedbackTitulo.textContent = "";
-    explicacao.textContent = "";
-
-    btnResponder.disabled = true;
-    btnResponder.textContent = "Responder";
-
-
-    const numero =
-        indiceAtual + 1;
 
     const total =
         exercicios.length;
 
 
-    contador.textContent =
-        `Questão ${numero} de ${total}`;
+    const numero =
+        indiceAtual + 1;
 
 
     const percentual =
-        (numero / total) * 100;
-
-    progressoBarra.style.width =
-        `${percentual}%`;
-
-
-    pergunta.textContent =
-        exercicio.pergunta || "";
-
-
-    alternativas.innerHTML = "";
-
-
-    if(exercicio.tipo === "multipla_escolha"){
-
-        const lista =
-            Array.isArray(exercicio.alternativas)
-            ? exercicio.alternativas
-            : [];
-
-
-        lista.forEach((alt,index) => {
-
-            const botao =
-                document.createElement("button");
-
-            botao.className =
-                "alternativa";
-
-            botao.textContent =
-                `${alt.letra || String.fromCharCode(65+index)}) ${alt.texto || ""}`;
-
-
-            botao.addEventListener(
-                "click",
-                () => selecionarResposta(index)
-            );
-
-
-            alternativas.appendChild(botao);
-
-        });
-
-    }
-
-
-    else if(
-        exercicio.tipo === "verdadeiro_falso"
-    ){
-
-        ["Verdadeiro","Falso"]
-        .forEach((texto,index) => {
-
-            const botao =
-                document.createElement("button");
-
-            botao.className =
-                "alternativa";
-
-            botao.textContent =
-                texto;
-
-
-            botao.dataset.valor =
-                index === 0
-                ? "verdadeiro"
-                : "falso";
-
-
-            botao.addEventListener(
-                "click",
-                () => selecionarResposta(
-                    botao.dataset.valor
-                )
-            );
-
-
-            alternativas.appendChild(botao);
-
-        });
-
-    }
-
-
-    else if(
-        exercicio.tipo === "resposta_texto"
-    ){
-
-        const input =
-            document.createElement("input");
-
-        input.type = "text";
-
-        input.placeholder =
-            "Digite sua resposta";
-
-        input.style.width = "100%";
-        input.style.padding = "14px";
-        input.style.border = "2px solid #e5e7eb";
-        input.style.borderRadius = "10px";
-        input.style.fontSize = "16px";
-
-
-        input.addEventListener(
-            "input",
-            () => {
-
-                respostaSelecionada =
-                    input.value.trim();
-
-                btnResponder.disabled =
-                    !respostaSelecionada;
-            }
+        Math.round(
+            (indiceAtual / total) * 100
         );
 
 
-        alternativas.appendChild(input);
-    }
-}
+    areaPrincipal.innerHTML = `
+
+        <section class="topo">
+
+            <h2>
+                ${escapar(licao.titulo)}
+            </h2>
+
+            <p>
+                ${escapar(
+                    licao.descricao ||
+                    "Responda às questões para concluir a lição."
+                )}
+            </p>
 
 
-/* ============================= */
-/* SELECIONAR RESPOSTA */
-/* ============================= */
+            <div class="progresso-container">
 
-function selecionarResposta(valor){
+                <div class="progresso-info">
 
-    if(respondeu){
-        return;
-    }
+                    <span>
+                        Questão ${numero} de ${total}
+                    </span>
 
-    respostaSelecionada = valor;
+                    <strong>
+                        ${percentual}%
+                    </strong>
 
-    document
-        .querySelectorAll(".alternativa")
-        .forEach(btn => {
-
-            btn.classList.remove(
-                "selecionada"
-            );
-        });
+                </div>
 
 
-    if(
-        typeof valor === "number"
-    ){
+                <div class="barra">
 
-        const botoes =
-            document.querySelectorAll(
-                ".alternativa"
-            );
+                    <div
+                        style="width:${percentual}%"
+                    ></div>
 
-        if(botoes[valor]){
-            botoes[valor]
-                .classList.add(
-                    "selecionada"
-                );
-        }
+                </div>
 
-    }else{
+            </div>
 
-        document
-            .querySelectorAll(".alternativa")
-            .forEach(btn => {
-
-                if(
-                    btn.dataset.valor === valor
-                ){
-                    btn.classList.add(
-                        "selecionada"
-                    );
-                }
-
-            });
-    }
+        </section>
 
 
-    btnResponder.disabled = false;
-}
+        <section class="questao">
+
+            <div class="numero">
+                QUESTÃO ${numero}
+            </div>
 
 
-/* ============================= */
-/* VERIFICAR RESPOSTA */
-/* ============================= */
-
-function verificarResposta(){
-
-    const exercicio =
-        exercicios[indiceAtual];
+            <div class="pergunta">
+                ${escapar(exercicio.pergunta)}
+            </div>
 
 
-    let correta = false;
+            <div id="areaResposta"></div>
+
+
+            <div
+                id="feedback"
+                class="feedback"
+            ></div>
+
+
+            <div class="acoes">
+
+                <button
+                    id="btnResponder"
+                    class="btn btn-principal"
+                >
+                    Responder
+                </button>
+
+            </div>
+
+        </section>
+
+    `;
+
+
+    const areaResposta =
+        document.getElementById(
+            "areaResposta"
+        );
 
 
     if(
@@ -846,18 +1023,11 @@ function verificarResposta(){
         "multipla_escolha"
     ){
 
-        const lista =
-            Array.isArray(exercicio.alternativas)
-            ? exercicio.alternativas
-            : [];
+        renderizarMultiplaEscolha(
+            areaResposta,
+            exercicio
+        );
 
-
-        const alternativa =
-            lista[respostaSelecionada];
-
-
-        correta =
-            alternativa?.correta === true;
     }
 
 
@@ -866,19 +1036,11 @@ function verificarResposta(){
         "verdadeiro_falso"
     ){
 
-        let respostaCorreta =
-            String(
-                exercicio.respostaTexto ?? ""
-            )
-            .trim()
-            .toLowerCase();
+        renderizarVerdadeiroFalso(
+            areaResposta,
+            exercicio
+        );
 
-
-        correta =
-            String(respostaSelecionada)
-                .trim()
-                .toLowerCase()
-            === respostaCorreta;
     }
 
 
@@ -887,83 +1049,777 @@ function verificarResposta(){
         "resposta_texto"
     ){
 
-        const respostaUsuario =
+        renderizarRespostaTexto(
+            areaResposta,
+            exercicio
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "btnResponder"
+        )
+        .addEventListener(
+            "click",
+            responder
+        );
+
+}
+
+
+/* =====================================================
+   MULTIPLA ESCOLHA
+===================================================== */
+
+function renderizarMultiplaEscolha(
+    area,
+    exercicio
+){
+
+    const alternativas =
+        Array.isArray(
+            exercicio.alternativas
+        )
+        ? exercicio.alternativas
+        : [];
+
+
+    area.innerHTML = `
+        <div class="alternativas">
+
+            ${alternativas.map(
+                (alt,index) => `
+
+                    <button
+                        type="button"
+                        class="alternativa"
+                        data-index="${index}"
+                    >
+
+                        <strong>
+                            ${escapar(
+                                alt.letra ||
+                                String.fromCharCode(
+                                    65 + index
+                                )
+                            )}
+                        .
+                        </strong>
+
+                        ${escapar(
+                            alt.texto || ""
+                        )}
+
+                    </button>
+
+                `
+            ).join("")}
+
+        </div>
+    `;
+
+
+    const botoes =
+        area.querySelectorAll(
+            ".alternativa"
+        );
+
+
+    botoes.forEach(botao => {
+
+        botao.addEventListener(
+            "click",
+            () => {
+
+                if(respondeu){
+                    return;
+                }
+
+
+                botoes.forEach(
+                    item =>
+                        item.classList.remove(
+                            "selecionada"
+                        )
+                );
+
+
+                botao.classList.add(
+                    "selecionada"
+                );
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   VERDADEIRO / FALSO
+===================================================== */
+
+function renderizarVerdadeiroFalso(
+    area,
+    exercicio
+){
+
+    area.innerHTML = `
+
+        <div class="alternativas">
+
+            <button
+                type="button"
+                class="alternativa"
+                data-valor="true"
+            >
+                ✅ Verdadeiro
+            </button>
+
+
+            <button
+                type="button"
+                class="alternativa"
+                data-valor="false"
+            >
+                ❌ Falso
+            </button>
+
+        </div>
+
+    `;
+
+
+    const botoes =
+        area.querySelectorAll(
+            ".alternativa"
+        );
+
+
+    botoes.forEach(botao => {
+
+        botao.addEventListener(
+            "click",
+            () => {
+
+                if(respondeu){
+                    return;
+                }
+
+
+                botoes.forEach(
+                    item =>
+                        item.classList.remove(
+                            "selecionada"
+                        )
+                );
+
+
+                botao.classList.add(
+                    "selecionada"
+                );
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   RESPOSTA TEXTO
+===================================================== */
+
+function renderizarRespostaTexto(
+    area,
+    exercicio
+){
+
+    area.innerHTML = `
+
+        <textarea
+            id="respostaTexto"
+            placeholder="Digite sua resposta..."
+        ></textarea>
+
+    `;
+
+}
+
+
+/* =====================================================
+   OBTER RESPOSTA
+===================================================== */
+
+function obterResposta(){
+
+    const exercicio =
+        exercicios[indiceAtual];
+
+
+    if(
+        exercicio.tipo ===
+        "multipla_escolha"
+    ){
+
+        const selecionada =
+            document.querySelector(
+                ".alternativa.selecionada"
+            );
+
+
+        if(!selecionada){
+            return null;
+        }
+
+
+        const index =
+            Number(
+                selecionada.dataset.index
+            );
+
+
+        return {
+            tipo:"multipla_escolha",
+            index:index
+        };
+
+    }
+
+
+    if(
+        exercicio.tipo ===
+        "verdadeiro_falso"
+    ){
+
+        const selecionada =
+            document.querySelector(
+                ".alternativa.selecionada"
+            );
+
+
+        if(!selecionada){
+            return null;
+        }
+
+
+        return {
+
+            tipo:"verdadeiro_falso",
+
+            valor:
+                selecionada.dataset.valor ===
+                "true"
+
+        };
+
+    }
+
+
+    if(
+        exercicio.tipo ===
+        "resposta_texto"
+    ){
+
+        const campo =
+            document.getElementById(
+                "respostaTexto"
+            );
+
+
+        if(!campo){
+            return null;
+        }
+
+
+        const texto =
+            campo.value.trim();
+
+
+        if(!texto){
+            return null;
+        }
+
+
+        return {
+
+            tipo:"resposta_texto",
+
+            texto:texto
+
+        };
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
+   VERIFICAR RESPOSTA
+===================================================== */
+
+function verificarResposta(
+    exercicio,
+    resposta
+){
+
+    if(
+        exercicio.tipo ===
+        "multipla_escolha"
+    ){
+
+        const alternativas =
+            Array.isArray(
+                exercicio.alternativas
+            )
+            ? exercicio.alternativas
+            : [];
+
+
+        const alternativa =
+            alternativas[
+                resposta.index
+            ];
+
+
+        return alternativa &&
+            alternativa.correta === true;
+
+    }
+
+
+    if(
+        exercicio.tipo ===
+        "verdadeiro_falso"
+    ){
+
+        const correta =
             String(
-                respostaSelecionada ?? ""
+                exercicio.respostaTexto
+            )
+            .toLowerCase()
+            .trim();
+
+
+        const valorCorreto =
+            correta === "true" ||
+            correta === "verdadeiro";
+
+
+        return resposta.valor ===
+            valorCorreto;
+
+    }
+
+
+    if(
+        exercicio.tipo ===
+        "resposta_texto"
+    ){
+
+        const correta =
+            String(
+                exercicio.respostaTexto ||
+                ""
             )
             .trim()
             .toLowerCase();
 
 
-        const respostaCorreta =
+        const enviada =
             String(
-                exercicio.respostaTexto ?? ""
+                resposta.texto ||
+                ""
             )
             .trim()
             .toLowerCase();
 
 
-        correta =
-            respostaUsuario === respostaCorreta;
+        return enviada === correta;
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+function mostrarFeedback(
+    correto,
+    exercicio
+){
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    if(correto){
+
+        feedback.className =
+            "feedback correto";
+
+        feedback.innerHTML = `
+
+            <strong>
+                ✅ Resposta correta!
+            </strong>
+
+            <div>
+                +${Number(
+                    exercicio.pontos || 0
+                )} XP
+            </div>
+
+            ${
+                exercicio.explicacao
+                ?
+                `<p style="margin-top:8px">
+                    ${escapar(
+                        exercicio.explicacao
+                    )}
+                </p>`
+                :
+                ""
+            }
+
+        `;
+
+    }else{
+
+        feedback.className =
+            "feedback errado";
+
+        feedback.innerHTML = `
+
+            <strong>
+                ❌ Resposta incorreta.
+            </strong>
+
+            ${
+                exercicio.explicacao
+                ?
+                `<p>
+                    ${escapar(
+                        exercicio.explicacao
+                    )}
+                </p>`
+                :
+                ""
+            }
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   DESTACAR ALTERNATIVAS
+===================================================== */
+
+function destacarResposta(
+    exercicio,
+    correta
+){
+
+    if(
+        exercicio.tipo ===
+        "multipla_escolha"
+    ){
+
+        const alternativas =
+            Array.isArray(
+                exercicio.alternativas
+            )
+            ? exercicio.alternativas
+            : [];
+
+
+        const botoes =
+            document.querySelectorAll(
+                ".alternativa"
+            );
+
+
+        botoes.forEach(
+            (botao,index) => {
+
+                const alt =
+                    alternativas[index];
+
+
+                if(
+                    alt &&
+                    alt.correta === true
+                ){
+
+                    botao.classList.add(
+                        "correta"
+                    );
+
+                }
+
+
+                const selecionada =
+                    botao.classList.contains(
+                        "selecionada"
+                    );
+
+
+                if(
+                    selecionada &&
+                    !correta
+                ){
+
+                    botao.classList.add(
+                        "errada"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONDER
+===================================================== */
+
+function responder(){
+
+    if(respondeu){
+        return;
+    }
+
+
+    const exercicio =
+        exercicios[indiceAtual];
+
+
+    const resposta =
+        obterResposta();
+
+
+    if(!resposta){
+
+        alert(
+            "Selecione ou informe uma resposta."
+        );
+
+        return;
+
     }
 
 
     respondeu = true;
 
 
-    if(correta){
+    const correto =
+        verificarResposta(
+            exercicio,
+            resposta
+        );
+
+
+    respostas.push({
+
+        exercicioId:
+            exercicio.id,
+
+        resposta:
+            resposta,
+
+        correto:
+            correto
+
+    });
+
+
+    if(correto){
 
         acertos++;
 
         pontuacao +=
-            Number(exercicio.pontos ?? 0);
-
-
-        feedback.className =
-            "feedback correto";
-
-        feedbackTitulo.textContent =
-            "✅ Resposta correta!";
+            Number(
+                exercicio.pontos || 0
+            );
 
     }else{
 
         erros++;
 
-        feedback.className =
-            "feedback errado";
-
-        feedbackTitulo.textContent =
-            "❌ Resposta incorreta!";
     }
 
 
-    explicacao.textContent =
-        exercicio.explicacao || "";
+    mostrarFeedback(
+        correto,
+        exercicio
+    );
 
 
-    btnResponder.textContent =
+    destacarResposta(
+        exercicio,
+        correto
+    );
+
+
+    const botao =
+        document.getElementById(
+            "btnResponder"
+        );
+
+
+    if(
         indiceAtual <
         exercicios.length - 1
-        ? "Próxima questão"
-        : "Finalizar lição";
+    ){
 
+        botao.textContent =
+            "Próxima questão";
 
-    btnResponder.disabled =
-        false;
+        botao.onclick =
+            proximaQuestao;
+
+    }else{
+
+        botao.textContent =
+            "Finalizar lição";
+
+        botao.onclick =
+            finalizarLicao;
+
+    }
+
 }
 
 
-/* ============================= */
-/* FINALIZAR LIÇÃO */
-/* ============================= */
+/* =====================================================
+   PRÓXIMA QUESTÃO
+===================================================== */
+
+function proximaQuestao(){
+
+    indiceAtual++;
+
+    renderizarQuestao();
+
+}
+
+
+/* =====================================================
+   ATUALIZAR SEQUÊNCIA
+===================================================== */
+
+function calcularNovaSequencia(){
+
+    /*
+     * A sequência só é alterada quando
+     * o aluno conclui uma lição aprovada.
+     *
+     * Uma segunda lição no mesmo dia
+     * não aumenta novamente.
+     */
+
+
+    const hoje =
+        dataLocal();
+
+
+    const ultimaData =
+        dadosUsuario
+            .ultimaAtividadeData;
+
+
+    let sequencia =
+        Number(
+            dadosUsuario.sequencia || 0
+        );
+
+
+    if(!ultimaData){
+
+        sequencia = 1;
+
+    }
+
+    else if(
+        ultimaData === hoje
+    ){
+
+        /*
+         * Já estudou hoje.
+         */
+
+        return sequencia;
+
+    }
+
+    else{
+
+        const ultima =
+            new Date(
+                `${ultimaData}T00:00:00`
+            );
+
+
+        const atual =
+            new Date(
+                `${hoje}T00:00:00`
+            );
+
+
+        const diferenca =
+            Math.round(
+                (
+                    atual.getTime() -
+                    ultima.getTime()
+                ) /
+                86400000
+            );
+
+
+        if(diferenca === 1){
+
+            sequencia++;
+
+        }else{
+
+            sequencia = 1;
+
+        }
+
+    }
+
+
+    return sequencia;
+
+}
+
+
+/* =====================================================
+   FINALIZAR LIÇÃO
+===================================================== */
 
 async function finalizarLicao(){
-
-    btnResponder.disabled = true;
-
-    btnResponder.textContent =
-        "Salvando resultado...";
-
 
     const totalQuestoes =
         exercicios.length;
@@ -971,10 +1827,15 @@ async function finalizarLicao(){
 
     const aproveitamento =
         totalQuestoes > 0
-        ? Math.round(
-            (acertos / totalQuestoes) * 100
+        ?
+        Math.round(
+            (
+                acertos /
+                totalQuestoes
+            ) * 100
         )
-        : 0;
+        :
+        0;
 
 
     const aprovado =
@@ -982,318 +1843,432 @@ async function finalizarLicao(){
         MINIMO_APROVACAO;
 
 
-    const xpGanho =
-        aprovado
-        ? pontuacao
-        : 0;
+    let xpGanho = 0;
 
+    let moedasGanhas = 0;
 
-    const moedasGanhas =
-        aprovado
-        ? MOEDAS_POR_LICAO
-        : 0;
-
-
-    let vidas =
-        Number(usuarioDados.vidas ?? 0);
-
-
-    let moedas =
-        Number(usuarioDados.moedas ?? 0);
-
-
-    let xp =
-        Number(usuarioDados.xp ?? 0);
+    let novaSequencia =
+        Number(
+            dadosUsuario.sequencia || 0
+        );
 
 
     /*
-     * Se não passar, perde uma vida.
-     */
-
-    if(!aprovado){
-
-        vidas =
-            Math.max(0, vidas - 1);
-    }
-
-
-    /*
-     * Se passar, recebe moedas e XP.
+     * Se aprovado:
+     *
+     * XP = pontuação
+     * moedas = 10
+     * sequência é atualizada
      */
 
     if(aprovado){
 
-        moedas += moedasGanhas;
+        xpGanho =
+            pontuacao;
 
-        xp += xpGanho;
+        moedasGanhas =
+            MOEDAS_POR_LICAO;
+
+
+        novaSequencia =
+            calcularNovaSequencia();
+
     }
 
 
     /*
-     * Salvar usuário.
+     * Se reprovado:
+     * perde 1 vida.
      */
 
-    const usuarioRef =
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        );
-
-
-    await updateDoc(
-        usuarioRef,
-        {
-            vidas: vidas,
-            moedas: moedas,
-            xp: xp,
-            vidasUltimaAtualizacao:
-                serverTimestamp(),
-            atualizadoEm:
-                serverTimestamp()
-        }
-    );
-
-
-    /*
-     * Salvar progresso.
-     */
-
-    const progressoRef =
-        doc(
-            db,
-            "progresso",
-            `${usuarioAtual.uid}_${licaoId}`
-        );
-
-
-    const progressoSnap =
-        await getDoc(progressoRef);
-
-
-    const dadosAnteriores =
-        progressoSnap.exists()
-        ? progressoSnap.data()
-        : {};
-
-
-    const tentativas =
+    let novasVidas =
         Number(
-            dadosAnteriores.tentativas ?? 0
-        ) + 1;
+            dadosUsuario.vidas ??
+            MAX_VIDAS
+        );
 
 
-    await setDoc(
-        progressoRef,
-        {
-            usuarioId:
-                usuarioAtual.uid,
+    if(!aprovado){
 
-            cursoId:
-                cursoId,
+        novasVidas =
+            Math.max(
+                0,
+                novasVidas - 1
+            );
 
-            moduloId:
-                moduloId,
+    }
 
-            licaoId:
-                licaoId,
 
-            concluida:
-                aprovado,
+    /*
+     * Atualização das moedas e XP.
+     */
 
-            aprovado:
-                aprovado,
+    const moedasAtuais =
+        Number(
+            dadosUsuario.moedas || 0
+        );
 
-            aproveitamento:
-                aproveitamento,
 
-            pontuacao:
-                pontuacao,
+    const xpAtual =
+        Number(
+            dadosUsuario.xp || 0
+        );
 
-            acertos:
-                acertos,
 
-            erros:
-                erros,
+    const novoSaldoMoedas =
+        moedasAtuais +
+        moedasGanhas;
 
-            totalQuestoes:
-                totalQuestoes,
 
-            xpGanho:
-                xpGanho,
+    const novoXP =
+        xpAtual +
+        xpGanho;
 
-            moedasGanhas:
-                moedasGanhas,
 
-            tentativas:
-                tentativas,
+    /*
+     * Se aprovou, atualizamos a data
+     * da atividade.
+     */
 
-            ultimaTentativa:
-                serverTimestamp(),
+    const dadosUsuarioAtualizar = {
 
-            concluidaEm:
-                aprovado
-                ? serverTimestamp()
-                : (dadosAnteriores.concluidaEm ?? null),
+        vidas:
+            novasVidas,
 
-            atualizadoEm:
-                serverTimestamp()
-        },
-        {
-            merge:true
+        moedas:
+            novoSaldoMoedas,
+
+        xp:
+            novoXP,
+
+        atualizadoEm:
+            serverTimestamp()
+
+    };
+
+
+    if(aprovado){
+
+        dadosUsuarioAtualizar.sequencia =
+            novaSequencia;
+
+        dadosUsuarioAtualizar
+            .ultimaAtividadeData =
+                dataLocal();
+
+    }
+
+
+    /*
+     * Mantemos o momento usado
+     * para recuperação de vidas.
+     */
+
+    dadosUsuarioAtualizar
+        .vidasUltimaAtualizacao =
+            serverTimestamp();
+
+
+    try{
+
+        /*
+         * Atualiza usuário.
+         */
+
+        await setDoc(
+
+            doc(
+                db,
+                "usuarios",
+                usuarioAtual.uid
+            ),
+
+            dadosUsuarioAtualizar,
+
+            {
+                merge:true
+            }
+
+        );
+
+
+        /*
+         * Salva progresso da lição.
+         */
+
+        const progressoId =
+            `${usuarioAtual.uid}_${licaoId}`;
+
+
+        const progressoRef =
+            doc(
+                db,
+                "progresso",
+                progressoId
+            );
+
+
+        const progressoAnterior =
+            await getDoc(
+                progressoRef
+            );
+
+
+        let tentativas = 0;
+
+
+        if(
+            progressoAnterior.exists()
+        ){
+
+            tentativas =
+                Number(
+                    progressoAnterior.data()
+                        .tentativas || 0
+                );
+
         }
-    );
 
 
-    /*
-     * Atualizar estado local.
-     */
-
-    usuarioDados.vidas =
-        vidas;
-
-    usuarioDados.moedas =
-        moedas;
-
-    usuarioDados.xp =
-        xp;
+        tentativas++;
 
 
-    /*
-     * Ir para resultado.
-     */
+        await setDoc(
 
-    window.location.href =
-        `resultado.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
+            progressoRef,
+
+            {
+
+                usuarioId:
+                    usuarioAtual.uid,
+
+                cursoId:
+                    cursoId,
+
+                moduloId:
+                    moduloId,
+
+                licaoId:
+                    licaoId,
+
+                concluida:
+                    aprovado,
+
+                aprovado:
+                    aprovado,
+
+                aproveitamento:
+                    aproveitamento,
+
+                pontuacao:
+                    pontuacao,
+
+                acertos:
+                    acertos,
+
+                erros:
+                    erros,
+
+                totalQuestoes:
+                    totalQuestoes,
+
+                xpGanho:
+                    xpGanho,
+
+                moedasGanhas:
+                    moedasGanhas,
+
+                tentativas:
+                    tentativas,
+
+                ultimaTentativa:
+                    serverTimestamp(),
+
+                concluidaEm:
+                    aprovado
+                    ? serverTimestamp()
+                    : null,
+
+                atualizadoEm:
+                    serverTimestamp()
+
+            },
+
+            {
+                merge:true
+            }
+
+        );
+
+
+        /*
+         * Guarda as respostas desta tentativa.
+         */
+
+        const respostaRef =
+            doc(
+                db,
+                "respostas",
+                `${usuarioAtual.uid}_${licaoId}_${Date.now()}`
+            );
+
+
+        await setDoc(
+
+            respostaRef,
+
+            {
+
+                usuarioId:
+                    usuarioAtual.uid,
+
+                cursoId:
+                    cursoId,
+
+                moduloId:
+                    moduloId,
+
+                licaoId:
+                    licaoId,
+
+                respostas:
+                    respostas,
+
+                acertos:
+                    acertos,
+
+                erros:
+                    erros,
+
+                totalQuestoes:
+                    totalQuestoes,
+
+                aproveitamento:
+                    aproveitamento,
+
+                criadoEm:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        /*
+         * Vai para a página de resultado.
+         */
+
+        window.location.href =
+            `resultado.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
+
+
+    }catch(error){
+
+        console.error(
+            "Erro ao finalizar lição:",
+            error
+        );
+
+
+        alert(
+            "Não foi possível salvar o resultado da lição. Verifique sua conexão e tente novamente."
+        );
+
+    }
+
 }
 
 
-/* ============================= */
-/* BOTÃO RESPONDER */
-/* ============================= */
-
-btnResponder.addEventListener(
-    "click",
-    async () => {
-
-        try{
-
-            if(!respondeu){
-
-                verificarResposta();
-
-                return;
-            }
-
-
-            if(
-                indiceAtual <
-                exercicios.length - 1
-            ){
-
-                indiceAtual++;
-
-                mostrarExercicio();
-
-                return;
-            }
-
-
-            await finalizarLicao();
-
-        }catch(error){
-
-            console.error(error);
-
-            mensagem.textContent =
-                "Erro ao salvar o resultado. Tente novamente.";
-
-            mensagem.className =
-                "mensagem erro";
-
-            btnResponder.disabled =
-                false;
-
-            btnResponder.textContent =
-                "Tentar novamente";
-        }
-
-    }
-);
-
-
-/* ============================= */
-/* VOLTAR */
-/* ============================= */
-
-btnVoltar.addEventListener(
-    "click",
-    () => {
-
-        window.location.href =
-            `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
-
-    }
-);
-
-
-/* ============================= */
-/* SAIR */
-/* ============================= */
-
-btnSair.addEventListener(
-    "click",
-    async () => {
-
-        await signOut(auth);
-
-        window.location.href =
-            "index.html";
-    }
-);
-
-
-/* ============================= */
-/* AUTENTICAÇÃO */
-/* ============================= */
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
 
 onAuthStateChanged(
-    auth,
-    async usuario => {
 
-        if(!usuario){
+    auth,
+
+    async (user) => {
+
+        if(!user){
 
             window.location.href =
                 "index.html";
 
             return;
+
         }
 
 
-        usuarioAtual = usuario;
+        usuarioAtual =
+            user;
+
+
+        if(
+            !cursoId ||
+            !moduloId ||
+            !licaoId
+        ){
+
+            areaPrincipal.innerHTML = `
+
+                <div class="erro">
+
+                    Não foi possível abrir esta lição.
+                    Os dados da lição não foram informados.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
 
 
         try{
 
-            await atualizarUsuario();
+            await carregarUsuario();
+
+            await carregarCurso();
 
             await carregarLicao();
+
+            await carregarExercicios();
+
+            mostrarLicao();
 
         }catch(error){
 
             console.error(error);
 
-            mostrarErro(
-                error.message ||
-                "Não foi possível carregar a lição."
-            );
+
+            areaPrincipal.innerHTML = `
+
+                <div class="erro">
+
+                    <strong>
+                        Não foi possível carregar a lição.
+                    </strong>
+
+                    <br><br>
+
+                    ${escapar(
+                        error.message
+                    )}
+
+                </div>
+
+            `;
+
         }
 
     }
+
 );
 
 </script>
 
 </body>
+
 </html>
 ```
