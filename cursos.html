@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Meus Cursos</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f6f8;
+        color: #222;
+        min-height: 100vh;
+    }
+
+    header {
+        background: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .logo span {
+        color: #2563eb;
+    }
+
+    .usuario-area {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .usuario-info {
+        text-align: right;
+    }
+
+    .usuario-nome {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .usuario-email {
+        font-size: 12px;
+        color: #777;
+    }
+
+    .btn-sair {
+        border: none;
+        background: #ef4444;
+        color: white;
+        padding: 9px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-sair:hover {
+        background: #dc2626;
+    }
+
+    main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 35px 20px 50px;
+    }
+
+    .cabecalho {
+        margin-bottom: 30px;
+    }
+
+    .cabecalho h1 {
+        font-size: 30px;
+        margin-bottom: 8px;
+    }
+
+    .cabecalho p {
+        color: #666;
+        font-size: 16px;
+    }
+
+    .mensagem {
+        text-align: center;
+        padding: 40px 20px;
+        color: #666;
+        font-size: 16px;
+    }
+
+    .mensagem.erro {
+        color: #dc2626;
+    }
+
+    .cursos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 22px;
+    }
+
+    .curso-card {
+        background: #ffffff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+        border: 1px solid #e5e7eb;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .curso-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+    }
+
+    .curso-imagem {
+        width: 100%;
+        height: 180px;
+        background: #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .curso-imagem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .sem-imagem {
+        font-size: 50px;
+        color: #9ca3af;
+    }
+
+    .curso-conteudo {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .curso-nivel {
+        display: inline-block;
+        width: fit-content;
+        background: #eff6ff;
+        color: #2563eb;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+    .curso-titulo {
+        font-size: 20px;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+
+    .curso-descricao {
+        color: #666;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        flex: 1;
+    }
+
+    .btn-acessar {
+        width: 100%;
+        border: none;
+        background: #2563eb;
+        color: white;
+        padding: 12px;
+        border-radius: 9px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+    .btn-acessar:hover {
+        background: #1d4ed8;
+    }
+
+    .sem-cursos {
+        background: white;
+        border-radius: 15px;
+        padding: 50px 20px;
+        text-align: center;
+        border: 1px solid #e5e7eb;
+    }
+
+    .sem-cursos-icon {
+        font-size: 55px;
+        margin-bottom: 15px;
+    }
+
+    .sem-cursos h2 {
+        margin-bottom: 8px;
+    }
+
+    .sem-cursos p {
+        color: #777;
+    }
+
+    .carregando {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 50px;
+        color: #666;
+    }
+
+    .spinner {
+        width: 22px;
+        height: 22px;
+        border: 3px solid #ddd;
+        border-top-color: #2563eb;
+        border-radius: 50%;
+        animation: girar 0.8s linear infinite;
+    }
+
+    @keyframes girar {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @media (max-width: 650px) {
+
+        header {
+            padding: 12px 15px;
+        }
+
+        .logo {
+            font-size: 18px;
+        }
+
+        .usuario-info {
+            display: none;
+        }
+
+        main {
+            padding: 25px 15px 40px;
+        }
+
+        .cabecalho h1 {
+            font-size: 25px;
+        }
+
+        .cursos-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .curso-imagem {
+            height: 160px;
+        }
+    }
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+```
+<div class="logo">
+    Plataforma<span> Cursos</span>
+</div>
+
+<div class="usuario-area">
+
+    <div class="usuario-info">
+        <div class="usuario-nome" id="usuarioNome">
+            Carregando...
+        </div>
+
+        <div class="usuario-email" id="usuarioEmail">
+            ...
+        </div>
+    </div>
+
+    <button class="btn-sair" id="btnSair">
+        Sair
+    </button>
+
+</div>
+```
+
+</header>
+
+<main>
+
+```
+<div class="cabecalho">
+
+    <h1>Meus Cursos</h1>
+
+    <p>
+        Escolha um curso para começar seus estudos.
+    </p>
+
+</div>
+
+
+<div id="conteudo">
+
+    <div class="carregando">
+
+        <div class="spinner"></div>
+
+        <span>Carregando cursos...</span>
+
+    </div>
+
+</div>
+```
+
+</main>
+
+<script type="module">
+
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    getDoc
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* ==============================
+   FIREBASE
+================================ */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+    authDomain: "dezenas-1ed47.firebaseapp.com",
+    projectId: "dezenas-1ed47",
+    storageBucket: "dezenas-1ed47.firebasestorage.app",
+    messagingSenderId: "372788277555",
+    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+    measurementId: "G-NMPP8PKPK3"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* ==============================
+   ELEMENTOS
+================================ */
+
+const conteudo = document.getElementById("conteudo");
+
+const usuarioNome = document.getElementById("usuarioNome");
+
+const usuarioEmail = document.getElementById("usuarioEmail");
+
+const btnSair = document.getElementById("btnSair");
+
+
+/* ==============================
+   ESCAPAR HTML
+================================ */
+
+function escapar(valor) {
+
+    if (valor === null || valor === undefined) {
+        return "";
+    }
+
+    return String(valor)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* ==============================
+   CARREGAR PERFIL
+================================ */
+
+async function carregarPerfil(usuario) {
+
+    try {
+
+        usuarioEmail.textContent = usuario.email || "";
+
+        const perfilRef = doc(db, "usuarios", usuario.uid);
+
+        const perfilSnap = await getDoc(perfilRef);
+
+        if (perfilSnap.exists()) {
+
+            const dados = perfilSnap.data();
+
+            usuarioNome.textContent =
+                dados.nome ||
+                usuario.email ||
+                "Aluno";
+
+        } else {
+
+            usuarioNome.textContent =
+                usuario.email ||
+                "Aluno";
+
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao carregar perfil:", erro);
+
+        usuarioNome.textContent =
+            usuario.email ||
+            "Aluno";
+    }
+}
+
+
+/* ==============================
+   CARREGAR CURSOS
+================================ */
+
+async function carregarCursos() {
+
+    try {
+
+        conteudo.innerHTML = `
+            <div class="carregando">
+                <div class="spinner"></div>
+                <span>Carregando cursos...</span>
+            </div>
+        `;
+
+
+        const snapshot =
+            await getDocs(collection(db, "cursos"));
+
+
+        const cursos = [];
+
+
+        snapshot.forEach((documento) => {
+
+            const dados = documento.data();
+
+
+            /*
+             * Somente cursos ativos.
+             *
+             * Caso o campo ativo não exista,
+             * consideramos o curso ativo.
+             */
+
+            if (dados.ativo !== false) {
+
+                cursos.push({
+                    id: documento.id,
+                    ...dados
+                });
+
+            }
+
+        });
+
+
+        /*
+         * Ordenação pelo título
+         */
+
+        cursos.sort((a, b) => {
+
+            const tituloA =
+                (a.titulo || "").toLowerCase();
+
+            const tituloB =
+                (b.titulo || "").toLowerCase();
+
+            return tituloA.localeCompare(tituloB);
+
+        });
+
+
+        renderizarCursos(cursos);
+
+
+    } catch (erro) {
+
+        console.error("Erro ao carregar cursos:", erro);
+
+        conteudo.innerHTML = `
+            <div class="mensagem erro">
+
+                <h3>
+                    Não foi possível carregar os cursos.
+                </h3>
+
+                <p style="margin-top:8px;">
+                    Verifique sua conexão e tente novamente.
+                </p>
+
+                <button
+                    onclick="location.reload()"
+                    style="
+                        margin-top:20px;
+                        padding:10px 18px;
+                        border:none;
+                        border-radius:8px;
+                        background:#2563eb;
+                        color:white;
+                        cursor:pointer;
+                        font-weight:bold;
+                    "
+                >
+                    Tentar novamente
+                </button>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* ==============================
+   RENDERIZAR CURSOS
+================================ */
+
+function renderizarCursos(cursos) {
+
+    if (cursos.length === 0) {
+
+        conteudo.innerHTML = `
+            <div class="sem-cursos">
+
+                <div class="sem-cursos-icon">
+                    📚
+                </div>
+
+                <h2>
+                    Nenhum curso disponível
+                </h2>
+
+                <p>
+                    No momento não existem cursos disponíveis
+                    para você.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    const grid =
+        document.createElement("div");
+
+    grid.className = "cursos-grid";
+
+
+    cursos.forEach((curso) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "curso-card";
+
+
+        /*
+         * Imagem
+         */
+
+        let imagemHTML = `
+            <div class="curso-imagem">
+                <div class="sem-imagem">
+                    📚
+                </div>
+            </div>
+        `;
+
+
+        if (curso.imagem && curso.imagem.trim() !== "") {
+
+            imagemHTML = `
+                <div class="curso-imagem">
+
+                    <img
+                        src="${escapar(curso.imagem)}"
+                        alt="${escapar(curso.titulo || "Curso")}"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.innerHTML='<div class=&quot;sem-imagem&quot;>📚</div>';
+                        "
+                    >
+
+                </div>
+            `;
+
+        }
+
+
+        /*
+         * Nível
+         */
+
+        const nivel =
+            curso.nivel ||
+            "Iniciante";
+
+
+        /*
+         * Descrição
+         */
+
+        const descricao =
+            curso.descricao ||
+            "Comece agora seus estudos neste curso.";
+
+
+        card.innerHTML = `
+
+            ${imagemHTML}
+
+            <div class="curso-conteudo">
+
+                <div class="curso-nivel">
+                    ${escapar(nivel)}
+                </div>
+
+                <h2 class="curso-titulo">
+                    ${escapar(curso.titulo || "Curso sem título")}
+                </h2>
+
+                <p class="curso-descricao">
+                    ${escapar(descricao)}
+                </p>
+
+                <button
+                    class="btn-acessar"
+                    data-curso-id="${escapar(curso.id)}"
+                >
+                    Acessar curso →
+                </button>
+
+            </div>
+
+        `;
+
+
+        const botao =
+            card.querySelector(".btn-acessar");
+
+
+        botao.addEventListener("click", () => {
+
+            const cursoId =
+                botao.dataset.cursoId;
+
+
+            if (!cursoId) {
+
+                console.error(
+                    "ID do curso não encontrado."
+                );
+
+                return;
+            }
+
+
+            window.location.href =
+                `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+
+        });
+
+
+        grid.appendChild(card);
+
+    });
+
+
+    conteudo.innerHTML = "";
+
+    conteudo.appendChild(grid);
+
+}
+
+
+/* ==============================
+   LOGOUT
+================================ */
+
+btnSair.addEventListener("click", async () => {
+
+    try {
+
+        await signOut(auth);
+
+        window.location.href = "index.html";
+
+    } catch (erro) {
+
+        console.error("Erro ao sair:", erro);
+
+        alert("Não foi possível sair da conta.");
+
+    }
+
+});
+
+
+/* ==============================
+   AUTENTICAÇÃO
+================================ */
+
+onAuthStateChanged(auth, async (usuario) => {
+
+    if (!usuario) {
+
+        window.location.href = "index.html";
+
+        return;
+    }
+
+
+    /*
+     * Usuário autenticado
+     */
+
+    await carregarPerfil(usuario);
+
+    await carregarCursos();
+
+});
+
+</script>
+
+</body>
+</html>
