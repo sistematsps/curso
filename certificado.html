@@ -1,0 +1,1404 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Certificado</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef2f7;
+    color:#1f2937;
+    min-height:100vh;
+}
+
+header{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:16px 20px;
+}
+
+.header{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.header h1{
+    font-size:21px;
+}
+
+.acoes{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:none;
+    border-radius:10px;
+    padding:11px 16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-branco{
+    background:white;
+    color:#2563eb;
+}
+
+.btn-voltar{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.container{
+    max-width:1100px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.carregando{
+    background:white;
+    border-radius:18px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.erro{
+    background:#fee2e2;
+    color:#991b1b;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+}
+
+.erro h2{
+    margin-bottom:10px;
+}
+
+.certificado{
+    background:white;
+    padding:18px;
+    box-shadow:0 8px 30px rgba(0,0,0,.12);
+    border-radius:10px;
+}
+
+.certificado-borda{
+    border:10px solid #1d4ed8;
+    padding:12px;
+}
+
+.certificado-interior{
+    border:2px solid #d4af37;
+    min-height:650px;
+    padding:55px 70px;
+    position:relative;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.linha-decorativa{
+    width:130px;
+    height:4px;
+    background:#d4af37;
+    margin:18px auto;
+}
+
+.logo{
+    font-size:46px;
+    margin-bottom:8px;
+}
+
+.titulo{
+    font-family:Georgia,serif;
+    font-size:42px;
+    color:#1e3a8a;
+    letter-spacing:3px;
+    margin-bottom:12px;
+}
+
+.subtitulo{
+    font-size:17px;
+    color:#6b7280;
+    margin-bottom:30px;
+}
+
+.nome-aluno{
+    font-family:Georgia,serif;
+    font-size:38px;
+    color:#111827;
+    margin:15px 0;
+    font-weight:bold;
+}
+
+.texto{
+    font-size:17px;
+    line-height:1.7;
+    max-width:800px;
+    margin:0 auto;
+}
+
+.nome-curso{
+    font-family:Georgia,serif;
+    font-size:30px;
+    color:#1d4ed8;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.detalhes{
+    display:flex;
+    justify-content:center;
+    gap:70px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.detalhe{
+    min-width:150px;
+}
+
+.detalhe-label{
+    font-size:12px;
+    color:#6b7280;
+    text-transform:uppercase;
+    margin-bottom:5px;
+}
+
+.detalhe-valor{
+    font-weight:bold;
+}
+
+.assinaturas{
+    display:flex;
+    justify-content:center;
+    gap:100px;
+    margin-top:55px;
+    flex-wrap:wrap;
+}
+
+.assinatura{
+    width:240px;
+}
+
+.linha-assinatura{
+    border-top:1px solid #374151;
+    padding-top:8px;
+    font-size:13px;
+}
+
+.codigo{
+    position:absolute;
+    bottom:15px;
+    left:0;
+    right:0;
+    font-size:11px;
+    color:#6b7280;
+}
+
+.acoes-certificado{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:25px 0;
+    flex-wrap:wrap;
+}
+
+.btn-imprimir{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-painel{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.info-conclusao{
+    background:#ecfdf5;
+    color:#166534;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+@media(max-width:700px){
+
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .container{
+        padding:0 10px;
+    }
+
+    .certificado-interior{
+        padding:40px 20px;
+        min-height:650px;
+    }
+
+    .titulo{
+        font-size:29px;
+    }
+
+    .nome-aluno{
+        font-size:28px;
+    }
+
+    .nome-curso{
+        font-size:23px;
+    }
+
+    .assinaturas{
+        gap:40px;
+    }
+
+}
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    header,
+    .acoes-certificado,
+    .info-conclusao{
+        display:none !important;
+    }
+
+    .container{
+        max-width:none;
+        margin:0;
+        padding:0;
+    }
+
+    .certificado{
+        box-shadow:none;
+        padding:0;
+        border-radius:0;
+    }
+
+    .certificado-borda{
+        border-width:8px;
+    }
+
+    .certificado-interior{
+        min-height:95vh;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header">
+
+        <h1>
+            🏆 Certificado
+        </h1>
+
+        <div class="acoes">
+
+            <button
+                class="btn btn-branco"
+                onclick="abrirPainel()"
+            >
+                🏠 Painel
+            </button>
+
+            <button
+                class="btn btn-branco"
+                onclick="abrirCarteira()"
+            >
+                💰 Carteira
+            </button>
+
+            <button
+                class="btn btn-voltar"
+                onclick="voltarCurso()"
+            >
+                ← Curso
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div id="areaPrincipal">
+
+        <div class="carregando">
+            Verificando conclusão do curso...
+        </div>
+
+    </div>
+
+</main>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    collection,
+    getDocs,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* =====================================================
+   URL
+===================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const cursoId =
+    params.get("cursoId");
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const areaPrincipal =
+    document.getElementById(
+        "areaPrincipal"
+    );
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+let usuarioAtual = null;
+
+let usuario = null;
+
+let curso = null;
+
+let licoes = [];
+
+let progresso = [];
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escapar(valor){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+        return "";
+    }
+
+    return String(valor)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   DATA LOCAL
+===================================================== */
+
+function dataLocal(){
+
+    const agora =
+        new Date();
+
+    const ano =
+        agora.getFullYear();
+
+    const mes =
+        String(
+            agora.getMonth() + 1
+        ).padStart(2,"0");
+
+    const dia =
+        String(
+            agora.getDate()
+        ).padStart(2,"0");
+
+    return `${dia}/${mes}/${ano}`;
+
+}
+
+
+/* =====================================================
+   CARREGAR USUÁRIO
+===================================================== */
+
+async function carregarUsuario(){
+
+    const ref =
+        doc(
+            db,
+            "usuarios",
+            usuarioAtual.uid
+        );
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Dados do aluno não encontrados."
+        );
+
+    }
+
+
+    usuario =
+        snap.data();
+
+}
+
+
+/* =====================================================
+   CARREGAR CURSO
+===================================================== */
+
+async function carregarCurso(){
+
+    if(!cursoId){
+
+        throw new Error(
+            "Curso não informado."
+        );
+
+    }
+
+
+    const ref =
+        doc(
+            db,
+            "cursos",
+            cursoId
+        );
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Curso não encontrado."
+        );
+
+    }
+
+
+    curso = {
+
+        id:snap.id,
+
+        ...snap.data()
+
+    };
+
+
+    if(curso.ativo !== true){
+
+        throw new Error(
+            "Este curso não está disponível."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CARREGAR LIÇÕES
+===================================================== */
+
+async function carregarLicoes(){
+
+    const snap =
+        await getDocs(
+            collection(
+                db,
+                "licoes"
+            )
+        );
+
+
+    licoes = [];
+
+
+    snap.forEach(item => {
+
+        const dados = item.data();
+
+
+        if(
+            dados.ativo === true &&
+            dados.cursoId === cursoId
+        ){
+
+            licoes.push({
+
+                id:item.id,
+
+                ...dados
+
+            });
+
+        }
+
+    });
+
+
+    /*
+     * Ordena as lições pelo módulo
+     * e depois pela ordem.
+     */
+
+    licoes.sort(
+        (a,b) => {
+
+            const moduloA =
+                String(
+                    a.moduloId || ""
+                );
+
+            const moduloB =
+                String(
+                    b.moduloId || ""
+                );
+
+
+            if(
+                moduloA !== moduloB
+            ){
+
+                return moduloA.localeCompare(
+                    moduloB
+                );
+
+            }
+
+
+            return Number(a.ordem || 0) -
+                   Number(b.ordem || 0);
+
+        }
+    );
+
+
+    if(licoes.length === 0){
+
+        throw new Error(
+            "Este curso ainda não possui lições."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CARREGAR PROGRESSO
+===================================================== */
+
+async function carregarProgresso(){
+
+    const snap =
+        await getDocs(
+            collection(
+                db,
+                "progresso"
+            )
+        );
+
+
+    progresso = [];
+
+
+    snap.forEach(item => {
+
+        const dados =
+            item.data();
+
+
+        if(
+            dados.usuarioId ===
+            usuarioAtual.uid &&
+            dados.cursoId ===
+            cursoId
+        ){
+
+            progresso.push({
+
+                id:item.id,
+
+                ...dados
+
+            });
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   VERIFICAR CONCLUSÃO
+===================================================== */
+
+function verificarConclusao(){
+
+    const total =
+        licoes.length;
+
+
+    let aprovadas = 0;
+
+
+    licoes.forEach(licao => {
+
+        const registro =
+            progresso.find(
+                item =>
+                    item.licaoId ===
+                    licao.id
+            );
+
+
+        if(
+            registro &&
+            registro.aprovado === true
+        ){
+
+            aprovadas++;
+
+        }
+
+    });
+
+
+    const percentual =
+        total > 0
+        ?
+        Math.round(
+            (aprovadas / total) * 100
+        )
+        :
+        0;
+
+
+    return {
+
+        total,
+
+        aprovadas,
+
+        percentual,
+
+        concluido:
+            aprovadas >= total
+
+    };
+
+}
+
+
+/* =====================================================
+   GERAR CÓDIGO DO CERTIFICADO
+===================================================== */
+
+function gerarCodigo(){
+
+    /*
+     * Código determinístico baseado
+     * no usuário e curso.
+     *
+     * Assim o certificado mantém
+     * sempre o mesmo código.
+     */
+
+    const base =
+        `${usuarioAtual.uid}_${cursoId}`;
+
+
+    let hash = 0;
+
+
+    for(
+        let i = 0;
+        i < base.length;
+        i++
+    ){
+
+        hash =
+            (
+                (
+                    hash << 5
+                ) -
+                hash
+            ) +
+            base.charCodeAt(i);
+
+        hash |= 0;
+
+    }
+
+
+    const numero =
+        Math.abs(hash)
+            .toString(36)
+            .toUpperCase()
+            .padStart(8,"0")
+            .slice(0,8);
+
+
+    return `CERT-${numero}`;
+
+}
+
+
+/* =====================================================
+   SALVAR CERTIFICADO
+===================================================== */
+
+async function salvarCertificado(
+    dadosConclusao
+){
+
+    const codigo =
+        gerarCodigo();
+
+
+    const certificadoId =
+        `${usuarioAtual.uid}_${cursoId}`;
+
+
+    const ref =
+        doc(
+            db,
+            "certificados",
+            certificadoId
+        );
+
+
+    const existente =
+        await getDoc(ref);
+
+
+    if(existente.exists()){
+
+        return {
+
+            codigo:
+                existente.data().codigo ||
+                codigo,
+
+            dataConclusao:
+                existente.data()
+                    .dataConclusao
+
+        };
+
+    }
+
+
+    const dados = {
+
+        usuarioId:
+            usuarioAtual.uid,
+
+        cursoId:
+            cursoId,
+
+        codigo:
+            codigo,
+
+        nomeAluno:
+            usuario.nome ||
+            "Aluno",
+
+        nomeCurso:
+            curso.titulo ||
+            "Curso",
+
+        totalLicoes:
+            dadosConclusao.total,
+
+        licoesAprovadas:
+            dadosConclusao.aprovadas,
+
+        aproveitamento:
+            dadosConclusao.percentual,
+
+        dataConclusao:
+            serverTimestamp(),
+
+        criadoEm:
+            serverTimestamp()
+
+    };
+
+
+    await setDoc(
+        ref,
+        dados
+    );
+
+
+    return {
+
+        codigo:codigo,
+
+        dataConclusao:null
+
+    };
+
+}
+
+
+/* =====================================================
+   MOSTRAR NÃO CONCLUÍDO
+===================================================== */
+
+function mostrarNaoConcluido(
+    dados
+){
+
+    areaPrincipal.innerHTML = `
+
+        <div class="erro">
+
+            <h2>
+                🔒 Certificado ainda não disponível
+            </h2>
+
+            <p style="margin-top:10px">
+
+                Você ainda não concluiu todas as
+                lições deste curso.
+
+            </p>
+
+            <p style="margin-top:10px">
+
+                Progresso atual:
+                <strong>
+                    ${dados.aprovadas}/${dados.total}
+                    lições
+                </strong>
+                (${dados.percentual}%)
+
+            </p>
+
+            <div style="margin-top:20px">
+
+                <button
+                    class="btn btn-voltar"
+                    onclick="voltarCurso()"
+                >
+                    ← Voltar para o curso
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   MOSTRAR CERTIFICADO
+===================================================== */
+
+function mostrarCertificado(
+    certificado,
+    dadosConclusao
+){
+
+    const nomeAluno =
+        escapar(
+            usuario.nome ||
+            "Aluno"
+        );
+
+
+    const nomeCurso =
+        escapar(
+            curso.titulo ||
+            "Curso"
+        );
+
+
+    const codigo =
+        escapar(
+            certificado.codigo
+        );
+
+
+    areaPrincipal.innerHTML = `
+
+        <div class="info-conclusao">
+
+            🎉 Parabéns!
+            Você concluiu todas as lições deste curso.
+
+        </div>
+
+
+        <div class="acoes-certificado">
+
+            <button
+                class="btn btn-imprimir"
+                onclick="imprimirCertificado()"
+            >
+                🖨️ Imprimir / Salvar PDF
+            </button>
+
+
+            <button
+                class="btn btn-painel"
+                onclick="abrirPainel()"
+            >
+                🏠 Voltar ao painel
+            </button>
+
+        </div>
+
+
+        <div class="certificado">
+
+            <div class="certificado-borda">
+
+                <div class="certificado-interior">
+
+                    <div class="logo">
+                        🏆
+                    </div>
+
+
+                    <div class="titulo">
+                        CERTIFICADO
+                    </div>
+
+
+                    <div class="subtitulo">
+                        DE CONCLUSÃO
+                    </div>
+
+
+                    <div class="linha-decorativa"></div>
+
+
+                    <div class="texto">
+
+                        Certificamos que
+
+                    </div>
+
+
+                    <div class="nome-aluno">
+                        ${nomeAluno}
+                    </div>
+
+
+                    <div class="texto">
+
+                        concluiu com sucesso o curso
+
+                    </div>
+
+
+                    <div class="nome-curso">
+                        ${nomeCurso}
+                    </div>
+
+
+                    <div class="texto">
+
+                        demonstrando a conclusão de todas
+                        as lições disponíveis no curso.
+
+                    </div>
+
+
+                    <div class="detalhes">
+
+                        <div class="detalhe">
+
+                            <div class="detalhe-label">
+                                Lições concluídas
+                            </div>
+
+                            <div class="detalhe-valor">
+                                ${dadosConclusao.aprovadas}
+                                /
+                                ${dadosConclusao.total}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detalhe">
+
+                            <div class="detalhe-label">
+                                Aproveitamento
+                            </div>
+
+                            <div class="detalhe-valor">
+                                ${dadosConclusao.percentual}%
+                            </div>
+
+                        </div>
+
+
+                        <div class="detalhe">
+
+                            <div class="detalhe-label">
+                                Data
+                            </div>
+
+                            <div class="detalhe-valor">
+                                ${dataLocal()}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="assinaturas">
+
+                        <div class="assinatura">
+
+                            <div
+                                class="linha-assinatura"
+                            >
+                                Plataforma de Ensino
+                            </div>
+
+                        </div>
+
+
+                        <div class="assinatura">
+
+                            <div
+                                class="linha-assinatura"
+                            >
+                                Certificação
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="codigo">
+
+                        Código de autenticidade:
+                        <strong>
+                            ${codigo}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   IMPRESSÃO
+===================================================== */
+
+function imprimirCertificado(){
+
+    window.print();
+
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO
+===================================================== */
+
+function abrirPainel(){
+
+    window.location.href =
+        "painel.html";
+
+}
+
+
+function abrirCarteira(){
+
+    window.location.href =
+        "carteira.html";
+
+}
+
+
+function voltarCurso(){
+
+    if(cursoId){
+
+        window.location.href =
+            `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+
+    }else{
+
+        window.location.href =
+            "cursos.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   DISPONIBILIZAR FUNÇÕES
+===================================================== */
+
+window.imprimirCertificado =
+    imprimirCertificado;
+
+window.abrirPainel =
+    abrirPainel;
+
+window.abrirCarteira =
+    abrirCarteira;
+
+window.voltarCurso =
+    voltarCurso;
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async (user) => {
+
+        if(!user){
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        usuarioAtual =
+            user;
+
+
+        try{
+
+            await carregarUsuario();
+
+            await carregarCurso();
+
+            await carregarLicoes();
+
+            await carregarProgresso();
+
+
+            const dadosConclusao =
+                verificarConclusao();
+
+
+            /*
+             * Só libera o certificado
+             * quando todas as lições
+             * estiverem aprovadas.
+             */
+
+            if(
+                !dadosConclusao.concluido
+            ){
+
+                mostrarNaoConcluido(
+                    dadosConclusao
+                );
+
+                return;
+
+            }
+
+
+            const certificado =
+                await salvarCertificado(
+                    dadosConclusao
+                );
+
+
+            mostrarCertificado(
+                certificado,
+                dadosConclusao
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "Erro no certificado:",
+                error
+            );
+
+
+            areaPrincipal.innerHTML = `
+
+                <div class="erro">
+
+                    <h2>
+                        Não foi possível carregar o certificado
+                    </h2>
+
+                    <p style="margin-top:10px">
+                        ${escapar(
+                            error.message
+                        )}
+                    </p>
+
+                    <div style="margin-top:20px">
+
+                        <button
+                            class="btn btn-voltar"
+                            onclick="voltarCurso()"
+                        >
+                            ← Voltar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+);
+
+</script>
+
+</body>
+
+</html>
+```
