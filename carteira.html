@@ -1,0 +1,1508 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Minha Carteira</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #f4f7fb;
+
+    color: #222;
+
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+header {
+
+    background: white;
+
+    padding: 15px 20px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.08);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.logo {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+}
+
+
+.header-acoes {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+}
+
+
+button {
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 11px 16px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+}
+
+
+.btn-voltar {
+
+    background: #e9ecef;
+
+}
+
+
+.btn-sair {
+
+    background: #dc3545;
+
+    color: white;
+
+}
+
+
+/* ================================
+   CONTAINER
+================================ */
+
+main {
+
+    max-width: 1000px;
+
+    margin: 30px auto;
+
+    padding: 0 15px;
+
+}
+
+
+.titulo {
+
+    margin-bottom: 25px;
+
+}
+
+
+.titulo h1 {
+
+    margin: 0 0 8px 0;
+
+}
+
+
+.titulo p {
+
+    color: #666;
+
+}
+
+
+/* ================================
+   CARDS
+================================ */
+
+.grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px, 1fr)
+        );
+
+    gap: 18px;
+
+}
+
+
+.card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.08);
+
+}
+
+
+.recurso {
+
+    text-align: center;
+
+}
+
+
+.icone {
+
+    font-size: 42px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.valor {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+
+}
+
+
+.nome {
+
+    color: #666;
+
+}
+
+
+/* ================================
+   VIDA
+================================ */
+
+.vida-info {
+
+    margin-top: 15px;
+
+}
+
+
+.barra-vida {
+
+    width: 100%;
+
+    height: 10px;
+
+    background: #e9ecef;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+
+.barra-vida-preenchida {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: #dc3545;
+
+    transition: width .3s;
+
+}
+
+
+.recuperacao {
+
+    margin-top: 10px;
+
+    font-size: 13px;
+
+    color: #666;
+
+}
+
+
+/* ================================
+   MOEDAS
+================================ */
+
+.moedas-info {
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background: #fff8dc;
+
+    border-radius: 10px;
+
+}
+
+
+.moedas-info strong {
+
+    font-size: 18px;
+
+}
+
+
+/* ================================
+   LOJA
+================================ */
+
+.loja {
+
+    margin-top: 25px;
+
+}
+
+
+.loja h2 {
+
+    margin-top: 0;
+
+}
+
+
+.produtos {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px, 1fr)
+        );
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+}
+
+
+.produto {
+
+    border: 1px solid #e3e3e3;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+}
+
+
+.produto h3 {
+
+    margin-top: 0;
+
+}
+
+
+.produto p {
+
+    color: #666;
+
+    line-height: 1.5;
+
+}
+
+
+.btn-loja {
+
+    width: 100%;
+
+    background: #007bff;
+
+    color: white;
+
+}
+
+
+.btn-loja:disabled {
+
+    background: #adb5bd;
+
+    cursor: not-allowed;
+
+}
+
+
+/* ================================
+   ESTATÍSTICAS
+================================ */
+
+.estatisticas {
+
+    margin-top: 25px;
+
+}
+
+
+.linha {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 14px 0;
+
+    border-bottom:
+        1px solid #eee;
+
+}
+
+
+.linha:last-child {
+
+    border-bottom: none;
+
+}
+
+
+/* ================================
+   CARREGANDO
+================================ */
+
+.carregando {
+
+    text-align: center;
+
+    padding: 50px;
+
+}
+
+
+.escondido {
+
+    display: none !important;
+
+}
+
+
+/* ================================
+   RESPONSIVO
+================================ */
+
+@media (max-width: 600px) {
+
+    header {
+
+        align-items: flex-start;
+
+    }
+
+    .logo {
+
+        width: 100%;
+
+    }
+
+    .header-acoes {
+
+        width: 100%;
+
+    }
+
+    .header-acoes button {
+
+        flex: 1;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        📚 Minha Plataforma
+    </div>
+
+
+    <div class="header-acoes">
+
+        <button
+            class="btn-voltar"
+            id="btnVoltar">
+
+            ← Voltar
+
+        </button>
+
+
+        <button
+            class="btn-sair"
+            id="btnSair">
+
+            Sair
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+    <div
+        id="carregando"
+        class="card carregando">
+
+        Carregando sua carteira...
+
+    </div>
+
+
+
+    <div
+        id="conteudo"
+        class="escondido">
+
+
+        <div class="titulo">
+
+            <h1>
+                💰 Minha Carteira
+            </h1>
+
+            <p>
+                Aqui você acompanha suas
+                vidas, moedas, XP e progresso.
+            </p>
+
+        </div>
+
+
+
+        <!-- RECURSOS -->
+
+        <div class="grid">
+
+
+            <!-- VIDAS -->
+
+            <div class="card recurso">
+
+                <div class="icone">
+                    ❤️
+                </div>
+
+                <div
+                    class="valor"
+                    id="vidas">
+
+                    0
+
+                </div>
+
+                <div class="nome">
+                    Vidas
+                </div>
+
+
+                <div class="vida-info">
+
+                    <div class="barra-vida">
+
+                        <div
+                            id="barraVida"
+                            class="barra-vida-preenchida">
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="recuperacao"
+                        class="recuperacao">
+
+                        Verificando recuperação...
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MOEDAS -->
+
+            <div class="card recurso">
+
+                <div class="icone">
+                    🪙
+                </div>
+
+                <div
+                    class="valor"
+                    id="moedas">
+
+                    0
+
+                </div>
+
+                <div class="nome">
+                    Moedas
+                </div>
+
+            </div>
+
+
+
+            <!-- XP -->
+
+            <div class="card recurso">
+
+                <div class="icone">
+                    ⭐
+                </div>
+
+                <div
+                    class="valor"
+                    id="xp">
+
+                    0
+
+                </div>
+
+                <div class="nome">
+                    XP
+                </div>
+
+            </div>
+
+
+
+            <!-- SEQUÊNCIA -->
+
+            <div class="card recurso">
+
+                <div class="icone">
+                    🔥
+                </div>
+
+                <div
+                    class="valor"
+                    id="sequencia">
+
+                    0
+
+                </div>
+
+                <div class="nome">
+                    Dias de sequência
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- MOEDAS DIÁRIAS -->
+
+        <div class="card"
+             style="margin-top:20px;">
+
+            <h2>
+                🎁 Recompensa diária
+            </h2>
+
+
+            <div class="moedas-info">
+
+                <strong>
+                    🪙 +50 moedas
+                </strong>
+
+                <p>
+                    Você recebe 50 moedas
+                    gratuitamente uma vez
+                    por dia.
+                </p>
+
+                <div id="statusDiario">
+
+                    Verificando...
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ESTATÍSTICAS -->
+
+        <div class="card estatisticas">
+
+            <h2>
+                📊 Meu progresso
+            </h2>
+
+
+            <div class="linha">
+
+                <span>
+                    Lições concluídas
+                </span>
+
+                <strong id="licoesConcluidas">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="linha">
+
+                <span>
+                    Melhor aproveitamento
+                </span>
+
+                <strong id="melhorAproveitamento">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="linha">
+
+                <span>
+                    Total de tentativas
+                </span>
+
+                <strong id="totalTentativas">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- LOJA -->
+
+        <div class="card loja">
+
+            <h2>
+                🛒 Loja
+            </h2>
+
+            <p>
+                Em breve você poderá utilizar
+                dinheiro real para adquirir
+                moedas, XP e vidas.
+            </p>
+
+
+            <div class="produtos">
+
+
+                <div class="produto">
+
+                    <h3>
+                        🪙 Pacotes de moedas
+                    </h3>
+
+                    <p>
+                        Compre moedas para
+                        utilizar dentro da
+                        plataforma.
+                    </p>
+
+                    <button
+                        class="btn-loja"
+                        disabled>
+
+                        Em breve
+
+                    </button>
+
+                </div>
+
+
+
+                <div class="produto">
+
+                    <h3>
+                        ⭐ Pacotes de XP
+                    </h3>
+
+                    <p>
+                        Troque ou compre XP
+                        para acelerar seu
+                        progresso.
+                    </p>
+
+                    <button
+                        class="btn-loja"
+                        disabled>
+
+                        Em breve
+
+                    </button>
+
+                </div>
+
+
+
+                <div class="produto">
+
+                    <h3>
+                        ❤️ Pacotes de vidas
+                    </h3>
+
+                    <p>
+                        Recupere suas vidas
+                        imediatamente.
+                    </p>
+
+                    <button
+                        class="btn-loja"
+                        disabled>
+
+                        Em breve
+
+                    </button>
+
+                </div>
+
+
+
+                <div class="produto">
+
+                    <h3>
+                        ♾️ Vida infinita
+                    </h3>
+
+                    <p>
+                        Ative vidas infinitas
+                        por um período
+                        determinado.
+                    </p>
+
+                    <button
+                        class="btn-loja"
+                        disabled>
+
+                        Em breve
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<script type="module">
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    collection,
+    getDocs
+} from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+
+/* =========================================================
+   CONFIGURAÇÕES
+========================================================= */
+
+const MAX_VIDAS = 6;
+
+const MINUTOS_RECUPERACAO = 10;
+
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+let usuarioAtual = null;
+
+let dadosUsuario = null;
+
+let timerRecuperacao = null;
+
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const carregando =
+    document.getElementById(
+        "carregando"
+    );
+
+
+const conteudo =
+    document.getElementById(
+        "conteudo"
+    );
+
+
+const vidasElemento =
+    document.getElementById(
+        "vidas"
+    );
+
+
+const moedasElemento =
+    document.getElementById(
+        "moedas"
+    );
+
+
+const xpElemento =
+    document.getElementById(
+        "xp"
+    );
+
+
+const sequenciaElemento =
+    document.getElementById(
+        "sequencia"
+    );
+
+
+const barraVida =
+    document.getElementById(
+        "barraVida"
+    );
+
+
+const recuperacao =
+    document.getElementById(
+        "recuperacao"
+    );
+
+
+const statusDiario =
+    document.getElementById(
+        "statusDiario"
+    );
+
+
+const licoesConcluidas =
+    document.getElementById(
+        "licoesConcluidas"
+    );
+
+
+const melhorAproveitamento =
+    document.getElementById(
+        "melhorAproveitamento"
+    );
+
+
+const totalTentativas =
+    document.getElementById(
+        "totalTentativas"
+    );
+
+
+
+/* =========================================================
+   CARREGAR USUÁRIO
+========================================================= */
+
+async function carregarUsuario() {
+
+    const referencia =
+        doc(
+            db,
+            "usuarios",
+            usuarioAtual.uid
+        );
+
+
+    const snapshot =
+        await getDoc(
+            referencia
+        );
+
+
+    if (!snapshot.exists()) {
+
+        throw new Error(
+            "Perfil do usuário não encontrado."
+        );
+
+    }
+
+
+    dadosUsuario =
+        snapshot.data();
+
+
+    const vidas =
+        Number(
+            dadosUsuario.vidas ?? 6
+        );
+
+
+    const moedas =
+        Number(
+            dadosUsuario.moedas ?? 0
+        );
+
+
+    const xp =
+        Number(
+            dadosUsuario.xp ?? 0
+        );
+
+
+    const sequencia =
+        Number(
+            dadosUsuario.sequencia ?? 0
+        );
+
+
+    vidasElemento.textContent =
+        vidas;
+
+
+    moedasElemento.textContent =
+        moedas;
+
+
+    xpElemento.textContent =
+        xp;
+
+
+    sequenciaElemento.textContent =
+        sequencia;
+
+
+    const percentualVida =
+        (
+            vidas /
+            MAX_VIDAS
+        ) * 100;
+
+
+    barraVida.style.width =
+        percentualVida + "%";
+
+
+    mostrarStatusDiario();
+
+
+    iniciarContadorVida(
+        vidas
+    );
+
+}
+
+
+
+/* =========================================================
+   STATUS DAS MOEDAS DIÁRIAS
+========================================================= */
+
+function mostrarStatusDiario() {
+
+    const hoje =
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+
+    const ultima =
+        dadosUsuario.moedasDiariasData ||
+        "";
+
+
+    if (ultima === hoje) {
+
+        statusDiario.textContent =
+            "✅ As 50 moedas de hoje já foram recebidas.";
+
+    }
+
+    else {
+
+        statusDiario.textContent =
+            "🎁 As 50 moedas diárias ainda serão liberadas.";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   CONTADOR DE VIDA
+========================================================= */
+
+function iniciarContadorVida(
+    vidas
+) {
+
+    if (timerRecuperacao) {
+
+        clearInterval(
+            timerRecuperacao
+        );
+
+    }
+
+
+    if (vidas >= MAX_VIDAS) {
+
+        recuperacao.textContent =
+            "❤️ Você está com todas as vidas.";
+
+        return;
+
+    }
+
+
+    atualizarContador();
+
+
+    timerRecuperacao =
+        setInterval(
+            atualizarContador,
+            1000
+        );
+
+}
+
+
+
+/* =========================================================
+   ATUALIZAR CONTADOR
+========================================================= */
+
+function atualizarContador() {
+
+    const ultima =
+        converterData(
+            dadosUsuario
+                .vidasUltimaAtualizacao
+        );
+
+
+    if (!ultima) {
+
+        recuperacao.textContent =
+            "❤️ Aguardando recuperação.";
+
+        return;
+
+    }
+
+
+    const agora =
+        new Date();
+
+
+    const diferenca =
+        agora.getTime() -
+        ultima.getTime();
+
+
+    const intervalo =
+        MINUTOS_RECUPERACAO *
+        60 *
+        1000;
+
+
+    const restante =
+        intervalo -
+        (
+            diferenca %
+            intervalo
+        );
+
+
+    const minutos =
+        Math.floor(
+            restante /
+            60000
+        );
+
+
+    const segundos =
+        Math.floor(
+            (
+                restante %
+                60000
+            ) / 1000
+        );
+
+
+    recuperacao.textContent =
+        "❤️ Próxima vida em " +
+        minutos +
+        "m " +
+        String(
+            segundos
+        ).padStart(
+            2,
+            "0"
+        ) +
+        "s";
+
+}
+
+
+
+/* =========================================================
+   CONVERTER DATA
+========================================================= */
+
+function converterData(data) {
+
+    if (!data) {
+        return null;
+    }
+
+
+    if (data.toDate) {
+        return data.toDate();
+    }
+
+
+    if (data instanceof Date) {
+        return data;
+    }
+
+
+    return new Date(data);
+
+}
+
+
+
+/* =========================================================
+   CARREGAR ESTATÍSTICAS
+========================================================= */
+
+async function carregarEstatisticas() {
+
+    const snapshot =
+        await getDocs(
+            collection(
+                db,
+                "progresso"
+            )
+        );
+
+
+    let concluidas = 0;
+
+    let melhor = 0;
+
+    let tentativas = 0;
+
+
+    snapshot.forEach(
+        docSnap => {
+
+            const dados =
+                docSnap.data();
+
+
+            if (
+                dados.usuarioId !==
+                usuarioAtual.uid
+            ) {
+
+                return;
+
+            }
+
+
+            tentativas +=
+                Number(
+                    dados.tentativas ||
+                    0
+                );
+
+
+            if (
+                dados.concluida ===
+                true
+            ) {
+
+                concluidas++;
+
+            }
+
+
+            const aproveitamento =
+                Number(
+                    dados.aproveitamento ||
+                    0
+                );
+
+
+            if (
+                aproveitamento >
+                melhor
+            ) {
+
+                melhor =
+                    aproveitamento;
+
+            }
+
+        }
+    );
+
+
+    licoesConcluidas.textContent =
+        concluidas;
+
+
+    melhorAproveitamento.textContent =
+        Math.round(melhor) +
+        "%";
+
+
+    totalTentativas.textContent =
+        tentativas;
+
+}
+
+
+
+/* =========================================================
+   VOLTAR
+========================================================= */
+
+document
+    .getElementById(
+        "btnVoltar"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                "index.html";
+
+        }
+    );
+
+
+
+/* =========================================================
+   SAIR
+========================================================= */
+
+document
+    .getElementById(
+        "btnSair"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            await signOut(
+                auth
+            );
+
+
+            window.location.href =
+                "index.html";
+
+        }
+    );
+
+
+
+/* =========================================================
+   AUTENTICAÇÃO
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async usuario => {
+
+        if (!usuario) {
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        usuarioAtual =
+            usuario;
+
+
+        try {
+
+            await carregarUsuario();
+
+            await carregarEstatisticas();
+
+
+            carregando.classList.add(
+                "escondido"
+            );
+
+
+            conteudo.classList.remove(
+                "escondido"
+            );
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                erro
+            );
+
+
+            carregando.textContent =
+                erro.message ||
+                "Erro ao carregar carteira.";
+
+        }
+
+    }
+);
+
+
+</script>
+
+</body>
+
+</html>
+```
