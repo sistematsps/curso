@@ -24,14 +24,9 @@ body {
     min-height: 100vh;
 }
 
-/* =====================================
-   HEADER
-===================================== */
-
 header {
-    background: #ffffff;
+    background: #fff;
     border-bottom: 1px solid #e5e7eb;
-
     padding: 14px 25px;
 
     display: flex;
@@ -42,7 +37,6 @@ header {
 
     position: sticky;
     top: 0;
-
     z-index: 100;
 }
 
@@ -75,18 +69,18 @@ header {
     font-size: 12px;
 }
 
-.btn-voltar {
+.btn-voltar,
+.btn-sair {
     border: none;
+    padding: 9px 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-voltar {
     background: #eef2ff;
     color: #2563eb;
-
-    padding: 9px 13px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-weight: bold;
 }
 
 .btn-voltar:hover {
@@ -94,79 +88,46 @@ header {
 }
 
 .btn-sair {
-    border: none;
     background: #ef4444;
     color: white;
-
-    padding: 9px 13px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-weight: bold;
 }
 
 .btn-sair:hover {
     background: #dc2626;
 }
 
-/* =====================================
-   CONTAINER
-===================================== */
-
 main {
     width: 100%;
     max-width: 850px;
-
     margin: 0 auto;
-
     padding: 30px 20px 60px;
 }
 
-/* =====================================
-   TOPO DA LIÇÃO
-===================================== */
-
 .licao-topo {
     background: white;
-
     border: 1px solid #e5e7eb;
-
     border-radius: 16px;
-
     padding: 22px;
-
     margin-bottom: 20px;
-
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .breadcrumb {
     color: #2563eb;
-
     font-size: 13px;
-
     margin-bottom: 10px;
 }
 
 .licao-titulo {
     font-size: 28px;
-
     margin-bottom: 8px;
 }
 
 .licao-descricao {
     color: #666;
-
     font-size: 15px;
-
     line-height: 1.5;
 }
-
-/* =====================================
-   PROGRESSO
-===================================== */
 
 .progresso-area {
     margin-top: 20px;
@@ -174,162 +135,109 @@ main {
 
 .progresso-texto {
     display: flex;
-
     justify-content: space-between;
-
     font-size: 13px;
-
     color: #666;
-
     margin-bottom: 7px;
 }
 
 .progresso-barra {
     width: 100%;
-
     height: 9px;
-
     background: #e5e7eb;
-
     border-radius: 20px;
-
     overflow: hidden;
 }
 
 .progresso-preenchimento {
     height: 100%;
-
     width: 0%;
-
     background: #2563eb;
-
     transition: width 0.3s ease;
 }
 
-/* =====================================
-   EXERCÍCIO
-===================================== */
-
 .exercicio {
     background: white;
-
     border: 1px solid #e5e7eb;
-
     border-radius: 16px;
-
     padding: 28px;
-
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .exercicio-numero {
     color: #2563eb;
-
     font-weight: bold;
-
     font-size: 14px;
-
     margin-bottom: 14px;
 }
 
 .pergunta {
     font-size: 23px;
-
     line-height: 1.4;
-
     margin-bottom: 25px;
 }
 
-/* =====================================
-   ALTERNATIVAS
-===================================== */
-
 .alternativas {
     display: flex;
-
     flex-direction: column;
-
     gap: 12px;
 }
 
 .alternativa {
     width: 100%;
-
     background: white;
-
     border: 2px solid #e5e7eb;
-
     border-radius: 11px;
-
     padding: 15px;
-
     text-align: left;
-
     cursor: pointer;
 
     display: flex;
-
     align-items: center;
-
     gap: 13px;
 
     font-size: 15px;
-
-    transition: 0.2s;
 }
 
 .alternativa:hover {
     border-color: #93c5fd;
-
     background: #f8fbff;
 }
 
-.alternativa.lecionada {
+.alternativa.selecionada {
     border-color: #2563eb;
-
     background: #eff6ff;
 }
 
 .alternativa.correta {
     border-color: #16a34a;
-
     background: #f0fdf4;
 }
 
 .alternativa.incorreta {
     border-color: #dc2626;
-
     background: #fef2f2;
 }
 
 .letra {
     width: 32px;
     height: 32px;
-
     min-width: 32px;
 
     border-radius: 50%;
 
     background: #eef2ff;
-
     color: #3730a3;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
     font-weight: bold;
 }
 
-/* =====================================
-   VERDADEIRO / FALSO
-===================================== */
-
 .vf-area {
     display: flex;
-
     gap: 12px;
 }
 
@@ -337,7 +245,6 @@ main {
     flex: 1;
 
     border: 2px solid #e5e7eb;
-
     background: white;
 
     border-radius: 11px;
@@ -347,7 +254,6 @@ main {
     cursor: pointer;
 
     font-size: 16px;
-
     font-weight: bold;
 }
 
@@ -357,41 +263,31 @@ main {
 
 .vf-botao.selecionado {
     border-color: #2563eb;
-
     background: #eff6ff;
 }
 
 .vf-botao.correto {
     border-color: #16a34a;
-
     background: #f0fdf4;
 }
 
 .vf-botao.incorreto {
     border-color: #dc2626;
-
     background: #fef2f2;
 }
 
-/* =====================================
-   RESPOSTA TEXTO
-===================================== */
-
 .resposta-texto {
     width: 100%;
-
     min-height: 130px;
 
     resize: vertical;
 
     border: 2px solid #e5e7eb;
-
     border-radius: 11px;
 
     padding: 15px;
 
     font-family: inherit;
-
     font-size: 16px;
 
     outline: none;
@@ -401,15 +297,10 @@ main {
     border-color: #2563eb;
 }
 
-/* =====================================
-   FEEDBACK
-===================================== */
-
 .feedback {
     display: none;
 
     margin-top: 20px;
-
     padding: 17px;
 
     border-radius: 11px;
@@ -423,33 +314,24 @@ main {
 
 .feedback.correto {
     background: #f0fdf4;
-
     border: 1px solid #86efac;
-
     color: #166534;
 }
 
 .feedback.incorreto {
     background: #fef2f2;
-
     border: 1px solid #fca5a5;
-
     color: #991b1b;
 }
 
 .feedback-titulo {
     font-weight: bold;
-
     margin-bottom: 5px;
 }
 
 .feedback-explicacao {
     margin-top: 8px;
 }
-
-/* =====================================
-   BOTÃO
-===================================== */
 
 .acoes {
     margin-top: 25px;
@@ -461,7 +343,6 @@ main {
     border: none;
 
     background: #2563eb;
-
     color: white;
 
     padding: 15px;
@@ -471,7 +352,6 @@ main {
     cursor: pointer;
 
     font-size: 16px;
-
     font-weight: bold;
 }
 
@@ -481,13 +361,8 @@ main {
 
 .btn-principal:disabled {
     background: #9ca3af;
-
     cursor: not-allowed;
 }
-
-/* =====================================
-   RESULTADO
-===================================== */
 
 .resultado {
     background: white;
@@ -505,37 +380,29 @@ main {
 
 .resultado-icone {
     font-size: 65px;
-
     margin-bottom: 15px;
 }
 
 .resultado h2 {
     font-size: 28px;
-
     margin-bottom: 10px;
 }
 
 .resultado p {
     color: #666;
-
     margin-bottom: 20px;
 }
 
 .resultado-pontos {
     font-size: 22px;
-
     font-weight: bold;
-
     color: #2563eb;
-
     margin-bottom: 25px;
 }
 
 .btn-final {
     border: none;
-
     background: #2563eb;
-
     color: white;
 
     padding: 13px 22px;
@@ -547,19 +414,9 @@ main {
     font-weight: bold;
 }
 
-.btn-final:hover {
-    background: #1d4ed8;
-}
-
-/* =====================================
-   CARREGANDO / ERRO
-===================================== */
-
 .carregando {
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
     gap: 10px;
@@ -574,7 +431,6 @@ main {
     height: 23px;
 
     border: 3px solid #ddd;
-
     border-top-color: #2563eb;
 
     border-radius: 50%;
@@ -614,10 +470,6 @@ main {
     color: #dc2626;
 }
 
-/* =====================================
-   MOBILE
-===================================== */
-
 @media (max-width: 650px) {
 
     header {
@@ -639,7 +491,6 @@ main {
     .btn-voltar,
     .btn-sair {
         padding: 8px 10px;
-
         font-size: 12px;
     }
 
@@ -673,7 +524,7 @@ main {
 
 <header>
 
-
+```
 <div class="logo">
     Plataforma<span> Cursos</span>
 </div>
@@ -701,6 +552,7 @@ main {
 
 
     <button
+        type="button"
         class="btn-voltar"
         id="btnVoltar"
     >
@@ -709,6 +561,7 @@ main {
 
 
     <button
+        type="button"
         class="btn-sair"
         id="btnSair"
     >
@@ -716,13 +569,13 @@ main {
     </button>
 
 </div>
-
+```
 
 </header>
 
 <main>
 
-
+```
 <div id="conteudo">
 
     <div class="carregando">
@@ -736,30 +589,21 @@ main {
     </div>
 
 </div>
-
+```
 
 </main>
 
 <script type="module">
 
-
-/* =====================================
-   FIREBASE
-===================================== */
-
 import {
     initializeApp
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged,
     signOut
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
     getFirestore,
@@ -767,85 +611,58 @@ import {
     getDoc,
     collection,
     getDocs
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
+
+/* =====================================
+   FIREBASE
+===================================== */
 
 const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
-
-    authDomain:
-        "dezenas-1ed47.firebaseapp.com",
-
-    projectId:
-        "dezenas-1ed47",
-
-    storageBucket:
-        "dezenas-1ed47.firebasestorage.app",
-
-    messagingSenderId:
-        "372788277555",
-
-    appId:
-        "1:372788277555:web:1c1a6a80adee1722b54e46",
-
-    measurementId:
-        "G-NMPP8PKPK3"
+    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+    authDomain: "dezenas-1ed47.firebaseapp.com",
+    projectId: "dezenas-1ed47",
+    storageBucket: "dezenas-1ed47.firebasestorage.app",
+    messagingSenderId: "372788277555",
+    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+    measurementId: "G-NMPP8PKPK3"
 };
 
+const app = initializeApp(firebaseConfig);
 
-const app =
-    initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-
-const auth =
-    getAuth(app);
-
-
-const db =
-    getFirestore(app);
+const db = getFirestore(app);
 
 
 /* =====================================
    ELEMENTOS
 ===================================== */
 
-const conteudo =
-    document.getElementById("conteudo");
+const conteudo = document.getElementById("conteudo");
 
-const usuarioNome =
-    document.getElementById("usuarioNome");
+const usuarioNome = document.getElementById("usuarioNome");
 
-const usuarioEmail =
-    document.getElementById("usuarioEmail");
+const usuarioEmail = document.getElementById("usuarioEmail");
 
-const btnVoltar =
-    document.getElementById("btnVoltar");
+const btnVoltar = document.getElementById("btnVoltar");
 
-const btnSair =
-    document.getElementById("btnSair");
+const btnSair = document.getElementById("btnSair");
 
 
 /* =====================================
-   PARÂMETROS
+   PARÂMETROS DA URL
 ===================================== */
 
-const parametros =
-    new URLSearchParams(
-        window.location.search
-    );
+const parametros = new URLSearchParams(
+    window.location.search
+);
 
+const cursoId = parametros.get("cursoId");
 
-const cursoId =
-    parametros.get("cursoId");
+const moduloId = parametros.get("moduloId");
 
-const moduloId =
-    parametros.get("moduloId");
-
-const licaoId =
-    parametros.get("licaoId");
+const licaoId = parametros.get("licaoId");
 
 
 /* =====================================
@@ -860,6 +677,8 @@ let respostas = {};
 
 let pontuacao = 0;
 
+let respostaVerificada = false;
+
 
 /* =====================================
    ESCAPAR HTML
@@ -867,27 +686,16 @@ let pontuacao = 0;
 
 function escapar(valor) {
 
-    if (
-        valor === null ||
-        valor === undefined
-    ) {
-
+    if (valor === null || valor === undefined) {
         return "";
-
     }
 
     return String(valor)
-
         .replace(/&/g, "&amp;")
-
         .replace(/</g, "&lt;")
-
         .replace(/>/g, "&gt;")
-
         .replace(/"/g, "&quot;")
-
         .replace(/'/g, "&#039;");
-
 }
 
 
@@ -899,27 +707,19 @@ async function carregarPerfil(usuario) {
 
     try {
 
-        usuarioEmail.textContent =
-            usuario.email || "";
+        usuarioEmail.textContent = usuario.email || "";
 
+        const referencia = doc(
+            db,
+            "usuarios",
+            usuario.uid
+        );
 
-        const referencia =
-            doc(
-                db,
-                "usuarios",
-                usuario.uid
-            );
-
-
-        const snapshot =
-            await getDoc(referencia);
-
+        const snapshot = await getDoc(referencia);
 
         if (snapshot.exists()) {
 
-            const dados =
-                snapshot.data();
-
+            const dados = snapshot.data();
 
             usuarioNome.textContent =
                 dados.nome ||
@@ -931,7 +731,6 @@ async function carregarPerfil(usuario) {
             usuarioNome.textContent =
                 usuario.email ||
                 "Aluno";
-
         }
 
     } catch (erro) {
@@ -941,13 +740,10 @@ async function carregarPerfil(usuario) {
             erro
         );
 
-
         usuarioNome.textContent =
             usuario.email ||
             "Aluno";
-
     }
-
 }
 
 
@@ -957,15 +753,11 @@ async function carregarPerfil(usuario) {
 
 async function carregarLicao() {
 
-    if (
-        !cursoId ||
-        !moduloId ||
-        !licaoId
-    ) {
+    if (!cursoId || !moduloId || !licaoId) {
 
         mostrarErro(
             "Lição não informada.",
-            "O endereço da página não contém todas as informações necessárias."
+            "O endereço da página não possui todas as informações necessárias."
         );
 
         return;
@@ -974,23 +766,17 @@ async function carregarLicao() {
 
     try {
 
-        /* ==============================
-           LIÇÃO
-        ============================== */
+        const licaoReferencia = doc(
+            db,
+            "licoes",
+            licaoId
+        );
 
-        const licaoRef =
-            doc(
-                db,
-                "licoes",
-                licaoId
-            );
+        const licaoSnapshot =
+            await getDoc(licaoReferencia);
 
 
-        const licaoSnap =
-            await getDoc(licaoRef);
-
-
-        if (!licaoSnap.exists()) {
+        if (!licaoSnapshot.exists()) {
 
             mostrarErro(
                 "Lição não encontrada.",
@@ -1001,8 +787,7 @@ async function carregarLicao() {
         }
 
 
-        const licao =
-            licaoSnap.data();
+        const licao = licaoSnapshot.data();
 
 
         if (licao.ativo === false) {
@@ -1016,11 +801,7 @@ async function carregarLicao() {
         }
 
 
-        /* ==============================
-           EXERCÍCIOS
-        ============================== */
-
-        const exerciciosSnap =
+        const exerciciosSnapshot =
             await getDocs(
                 collection(
                     db,
@@ -1032,7 +813,7 @@ async function carregarLicao() {
         exercicios = [];
 
 
-        exerciciosSnap.forEach(
+        exerciciosSnapshot.forEach(
             (documento) => {
 
                 const dados =
@@ -1045,11 +826,8 @@ async function carregarLicao() {
                 ) {
 
                     exercicios.push({
-
                         id: documento.id,
-
                         ...dados
-
                     });
 
                 }
@@ -1057,10 +835,6 @@ async function carregarLicao() {
             }
         );
 
-
-        /* ==============================
-           ORDENAR
-        ============================== */
 
         exercicios.sort(
             (a, b) => {
@@ -1072,19 +846,14 @@ async function carregarLicao() {
                     Number(b.ordem) || 0;
 
                 return ordemA - ordemB;
-
             }
         );
 
 
-        renderizarTopo(
-            licao
-        );
+        renderizarTopo(licao);
 
 
-        if (
-            exercicios.length === 0
-        ) {
+        if (exercicios.length === 0) {
 
             mostrarSemExercicios();
 
@@ -1101,63 +870,76 @@ async function carregarLicao() {
             erro
         );
 
-
         mostrarErro(
             "Erro ao carregar a lição.",
             "Verifique sua conexão e tente novamente."
         );
-
     }
-
 }
 
 
 /* =====================================
-   TOPO DA LIÇÃO
+   TOPO
 ===================================== */
 
 function renderizarTopo(licao) {
 
-    conteudo.innerHTML = `
+    conteudo.innerHTML = "";
 
-        <section class="licao-topo">
+    const topo = document.createElement("section");
 
-            <div class="breadcrumb">
-                Lição
-            </div>
+    topo.className = "licao-topo";
 
-            <h1 class="licao-titulo">
-                ${escapar(
-                    licao.titulo ||
-                    "Lição"
-                )}
-            </h1>
 
-            ${
-                licao.descricao
-                ?
-                `
-                <p class="licao-descricao">
-                    ${escapar(
-                        licao.descricao
-                    )}
-                </p>
-                `
-                :
-                ""
-            }
+    const breadcrumb = document.createElement("div");
 
-        </section>
+    breadcrumb.className = "breadcrumb";
 
-        <div id="areaExercicio"></div>
+    breadcrumb.textContent = "Lição";
 
-    `;
 
+    const titulo = document.createElement("h1");
+
+    titulo.className = "licao-titulo";
+
+    titulo.textContent =
+        licao.titulo || "Lição";
+
+
+    topo.appendChild(breadcrumb);
+
+    topo.appendChild(titulo);
+
+
+    if (licao.descricao) {
+
+        const descricao =
+            document.createElement("p");
+
+        descricao.className =
+            "licao-descricao";
+
+        descricao.textContent =
+            licao.descricao;
+
+        topo.appendChild(descricao);
+    }
+
+
+    conteudo.appendChild(topo);
+
+
+    const area =
+        document.createElement("div");
+
+    area.id = "areaExercicio";
+
+    conteudo.appendChild(area);
 }
 
 
 /* =====================================
-   EXERCÍCIO ATUAL
+   MOSTRAR EXERCÍCIO
 ===================================== */
 
 function mostrarExercicio() {
@@ -1168,13 +950,15 @@ function mostrarExercicio() {
         );
 
 
-    const exercicio =
-        exercicios[
-            exercicioAtual
-        ];
+    if (!area) {
+        return;
+    }
 
 
-    if (!exercicio) {
+    if (
+        exercicioAtual >=
+        exercicios.length
+    ) {
 
         mostrarResultado();
 
@@ -1182,19 +966,53 @@ function mostrarExercicio() {
     }
 
 
-    const total =
-        exercicios.length;
+    respostaVerificada = false;
+
+
+    const exercicio =
+        exercicios[exercicioAtual];
 
 
     const numero =
         exercicioAtual + 1;
 
 
-    const percentual =
-        ((numero - 1) / total) * 100;
+    const total =
+        exercicios.length;
 
 
-    let conteudoResposta = "";
+    area.innerHTML = "";
+
+
+    const card =
+        document.createElement("section");
+
+    card.className = "exercicio";
+
+
+    const numeroElemento =
+        document.createElement("div");
+
+    numeroElemento.className =
+        "exercicio-numero";
+
+    numeroElemento.textContent =
+        `Exercício ${numero} de ${total}`;
+
+
+    const pergunta =
+        document.createElement("div");
+
+    pergunta.className = "pergunta";
+
+    pergunta.textContent =
+        exercicio.pergunta ||
+        "Pergunta";
+
+
+    card.appendChild(numeroElemento);
+
+    card.appendChild(pergunta);
 
 
     /* =================================
@@ -1210,54 +1028,97 @@ function mostrarExercicio() {
             Array.isArray(
                 exercicio.alternativas
             )
-            ?
-            exercicio.alternativas
-            :
-            [];
+            ? exercicio.alternativas
+            : [];
 
 
-        conteudoResposta = `
+        const container =
+            document.createElement("div");
 
-            <div
-                class="alternativas"
-                id="alternativas"
-            >
+        container.className =
+            "alternativas";
 
-                ${
-                    alternativas
-                    .map(
-                        (alternativa) => `
 
-                        <button
-                            class="alternativa"
-                            data-letra="${escapar(
-                                alternativa.letra
-                            )}"
-                        >
+        alternativas.forEach(
+            (alternativa) => {
 
-                            <span class="letra">
-                                ${escapar(
-                                    alternativa.letra
-                                )}
-                            </span>
+                const botao =
+                    document.createElement("button");
 
-                            <span>
-                                ${escapar(
-                                    alternativa.texto
-                                )}
-                            </span>
+                botao.type = "button";
 
-                        </button>
+                botao.className =
+                    "alternativa";
 
-                    `
-                    )
-                    .join("")
-                }
 
-            </div>
+                const letra =
+                    document.createElement("span");
 
-        `;
+                letra.className = "letra";
 
+                letra.textContent =
+                    alternativa.letra || "";
+
+
+                const texto =
+                    document.createElement("span");
+
+                texto.textContent =
+                    alternativa.texto || "";
+
+
+                botao.appendChild(letra);
+
+                botao.appendChild(texto);
+
+
+                botao.addEventListener(
+                    "click",
+                    () => {
+
+                        if (respostaVerificada) {
+                            return;
+                        }
+
+
+                        container
+                            .querySelectorAll(
+                                ".alternativa"
+                            )
+                            .forEach(
+                                (item) => {
+
+                                    item.classList.remove(
+                                        "selecionada"
+                                    );
+
+                                }
+                            );
+
+
+                        botao.classList.add(
+                            "selecionada"
+                        );
+
+
+                        respostas[
+                            exercicio.id
+                        ] =
+                            alternativa.letra;
+
+                    }
+                );
+
+
+                container.appendChild(
+                    botao
+                );
+
+            }
+        );
+
+
+        card.appendChild(container);
     }
 
 
@@ -1270,31 +1131,77 @@ function mostrarExercicio() {
         "verdadeiro_falso"
     ) {
 
-        conteudoResposta = `
+        const container =
+            document.createElement("div");
 
-            <div
-                class="vf-area"
-                id="verdadeiroFalso"
-            >
+        container.className =
+            "vf-area";
 
-                <button
-                    class="vf-botao"
-                    data-valor="verdadeiro"
-                >
-                    ✓ Verdadeiro
-                </button>
 
-                <button
-                    class="vf-botao"
-                    data-valor="falso"
-                >
-                    ✕ Falso
-                </button>
+        ["verdadeiro", "falso"].forEach(
+            (valor) => {
 
-            </div>
+                const botao =
+                    document.createElement("button");
 
-        `;
+                botao.type = "button";
 
+                botao.className =
+                    "vf-botao";
+
+
+                botao.textContent =
+                    valor === "verdadeiro"
+                    ? "✓ Verdadeiro"
+                    : "✕ Falso";
+
+
+                botao.addEventListener(
+                    "click",
+                    () => {
+
+                        if (respostaVerificada) {
+                            return;
+                        }
+
+
+                        container
+                            .querySelectorAll(
+                                ".vf-botao"
+                            )
+                            .forEach(
+                                (item) => {
+
+                                    item.classList.remove(
+                                        "selecionado"
+                                    );
+
+                                }
+                            );
+
+
+                        botao.classList.add(
+                            "selecionado"
+                        );
+
+
+                        respostas[
+                            exercicio.id
+                        ] = valor;
+
+                    }
+                );
+
+
+                container.appendChild(
+                    botao
+                );
+
+            }
+        );
+
+
+        card.appendChild(container);
     }
 
 
@@ -1307,740 +1214,723 @@ function mostrarExercicio() {
         "resposta_texto"
     ) {
 
-        conteudoResposta = `
+        const campo =
+            document.createElement("textarea");
 
-            <textarea
-                id="respostaTexto"
-                class="resposta-texto"
-                placeholder="Digite sua resposta..."
-            ></textarea>
+        campo.className =
+            "resposta-texto";
+
+        campo.placeholder =
+            "Digite sua resposta...";
 
 
-    `;
+        campo.addEventListener(
+            "input",
+            () => {
 
+                if (!respostaVerificada) {
+
+                    respostas[
+                        exercicio.id
+                    ] =
+                        campo.value.trim();
+
+                }
+
+            }
+        );
+
+
+        card.appendChild(campo);
+    }
+
+
+    /* =================================
+       FEEDBACK
+    ================================= */
+
+    const feedback =
+        document.createElement("div");
+
+    feedback.id = "feedback";
+
+    feedback.className = "feedback";
+
+
+    card.appendChild(feedback);
+
+
+    /* =================================
+       AÇÕES
+    ================================= */
+
+    const acoes =
+        document.createElement("div");
+
+    acoes.className = "acoes";
+
+
+    const botao =
+        document.createElement("button");
+
+    botao.type = "button";
+
+    botao.id = "btnResponder";
+
+    botao.className =
+        "btn-principal";
+
+    botao.textContent =
+        "Verificar resposta";
+
+
+    botao.addEventListener(
+        "click",
+        () => {
+
+            if (respostaVerificada) {
+
+                exercicioAtual++;
+
+                mostrarExercicio();
+
+                return;
+            }
+
+
+            verificarResposta(
+                exercicio,
+                card
+            );
+
+        }
+    );
+
+
+    acoes.appendChild(botao);
+
+    card.appendChild(acoes);
+
+
+    area.appendChild(card);
+
+
+    /* =================================
+       PROGRESSO
+    ================================= */
+
+    atualizarProgresso(
+        numero,
+        total
+    );
 }
 
-
-area.innerHTML = `
-
-    <section class="exercicio">
-
-        <div class="exercicio-numero">
-
-            Exercício ${numero}
-            de ${total}
-
-        </div>
-
-
-        <div class="pergunta">
-
-            ${escapar(
-                exercicio.pergunta ||
-                "Pergunta"
-            )}
-
-        </div>
-
-
-        ${conteudoResposta}
-
-
-        <div
-            id="feedback"
-            class="feedback"
-        ></div>
-
-
-        <div class="acoes">
-
-            <button
-                id="btnResponder"
-                class="btn-principal"
-            >
-                Verificar resposta
-            </button>
-
-        </div>
-
-    </section>
-
-`;
-
-
-atualizarProgresso(
-    percentual,
-    numero,
-    total
-);
-
-
-configurarResposta(
-    exercicio
-);
-
-
-}
 
 /* =====================================
-BARRA DE PROGRESSO
+   PROGRESSO
 ===================================== */
 
 function atualizarProgresso(
-percentual,
-numero,
-total
+    numero,
+    total
 ) {
 
-
-const topo =
-    document.querySelector(
-        ".licao-topo"
-    );
-
-
-let areaProgresso =
-    document.querySelector(
-        ".progresso-area"
-    );
-
-
-if (!areaProgresso) {
-
-    areaProgresso =
-        document.createElement(
-            "div"
-        );
-
-    areaProgresso.className =
-        "progresso-area";
-
-
-    areaProgresso.innerHTML = `
-
-        <div class="progresso-texto">
-
-            <span>
-                Progresso da lição
-            </span>
-
-            <span id="progressoNumero">
-                1/${total}
-            </span>
-
-        </div>
-
-        <div class="progresso-barra">
-
-            <div
-                class="progresso-preenchimento"
-                id="progressoPreenchimento"
-            ></div>
-
-        </div>
-
-    `;
-
-
-    topo.appendChild(
-        areaProgresso
-    );
-
-}
-
-
-const preenchimento =
-    document.getElementById(
-        "progressoPreenchimento"
-    );
-
-
-const numeroElemento =
-    document.getElementById(
-        "progressoNumero"
-    );
-
-
-if (preenchimento) {
-
-    preenchimento.style.width =
-        percentual + "%";
-
-}
-
-
-if (numeroElemento) {
-
-    numeroElemento.textContent =
-        `${numero}/${total}`;
-
-}
-
-
-}
-
-/* =====================================
-CONFIGURAR RESPOSTA
-===================================== */
-
-function configurarResposta(
-exercicio
-) {
-
-
-const btn =
-    document.getElementById(
-        "btnResponder"
-    );
-
-
-/* ==============================
-   MÚLTIPLA ESCOLHA
-============================== */
-
-if (
-    exercicio.tipo ===
-    "multipla_escolha"
-) {
-
-    const botoes =
-        document.querySelectorAll(
-            ".alternativa"
+    const topo =
+        document.querySelector(
+            ".licao-topo"
         );
 
 
-    botoes.forEach(
-        (botao) => {
-
-            botao.addEventListener(
-                "click",
-                () => {
-
-                    botoes.forEach(
-                        (b) => {
-
-                            b.classList.remove(
-                                "lecionada"
-                            );
-
-                        }
-                    );
+    if (!topo) {
+        return;
+    }
 
 
-                    botao.classList.add(
-                        "lecionada"
-                    );
-
-
-                    respostas[
-                        exercicio.id
-                    ] =
-                        botao.dataset.letra;
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-/* ==============================
-   VERDADEIRO / FALSO
-============================== */
-
-else if (
-    exercicio.tipo ===
-    "verdadeiro_falso"
-) {
-
-    const botoes =
-        document.querySelectorAll(
-            ".vf-botao"
+    let area =
+        document.querySelector(
+            ".progresso-area"
         );
 
 
-    botoes.forEach(
-        (botao) => {
+    if (!area) {
 
-            botao.addEventListener(
-                "click",
-                () => {
+        area =
+            document.createElement("div");
 
-                    botoes.forEach(
-                        (b) => {
-
-                            b.classList.remove(
-                                "selecionado"
-                            );
-
-                        }
-                    );
+        area.className =
+            "progresso-area";
 
 
-                    botao.classList.add(
-                        "selecionado"
-                    );
+        const texto =
+            document.createElement("div");
+
+        texto.className =
+            "progresso-texto";
 
 
-                    respostas[
-                        exercicio.id
-                    ] =
-                        botao.dataset.valor;
+        const esquerda =
+            document.createElement("span");
 
-                }
-            );
-
-        }
-    );
-
-}
+        esquerda.textContent =
+            "Progresso da lição";
 
 
-/* ==============================
-   TEXTO
-============================== */
+        const direita =
+            document.createElement("span");
 
-else if (
-    exercicio.tipo ===
-    "resposta_texto"
-) {
+        direita.id =
+            "progressoNumero";
 
-    const campo =
+
+        texto.appendChild(
+            esquerda
+        );
+
+        texto.appendChild(
+            direita
+        );
+
+
+        const barra =
+            document.createElement("div");
+
+        barra.className =
+            "progresso-barra";
+
+
+        const preenchimento =
+            document.createElement("div");
+
+        preenchimento.id =
+            "progressoPreenchimento";
+
+        preenchimento.className =
+            "progresso-preenchimento";
+
+
+        barra.appendChild(
+            preenchimento
+        );
+
+
+        area.appendChild(texto);
+
+        area.appendChild(barra);
+
+        topo.appendChild(area);
+    }
+
+
+    const numeroElemento =
         document.getElementById(
-            "respostaTexto"
+            "progressoNumero"
+        );
+
+    const preenchimento =
+        document.getElementById(
+            "progressoPreenchimento"
         );
 
 
-    campo.addEventListener(
-        "input",
-        () => {
+    if (numeroElemento) {
 
-            respostas[
-                exercicio.id
-            ] =
-                campo.value.trim();
-
-        }
-    );
-
-}
-
-
-btn.addEventListener(
-    "click",
-    () => {
-
-        verificarResposta(
-            exercicio
-        );
+        numeroElemento.textContent =
+            `${numero}/${total}`;
 
     }
-);
 
 
+    if (preenchimento) {
+
+        const percentual =
+            ((numero - 1) / total) * 100;
+
+        preenchimento.style.width =
+            `${percentual}%`;
+    }
 }
 
+
 /* =====================================
-VERIFICAR RESPOSTA
+   VERIFICAR
 ===================================== */
 
 function verificarResposta(
-exercicio
+    exercicio,
+    card
 ) {
 
+    const resposta =
+        respostas[
+            exercicio.id
+        ];
 
-const resposta =
-    respostas[
-        exercicio.id
-    ];
+
+    if (
+        resposta === undefined ||
+        resposta === ""
+    ) {
+
+        alert(
+            "Selecione ou digite uma resposta antes de continuar."
+        );
+
+        return;
+    }
 
 
-if (
-    resposta === undefined ||
-    resposta === ""
-) {
+    let correta = false;
 
-    alert(
-        "Selecione ou digite uma resposta antes de continuar."
+
+    /* =================================
+       MÚLTIPLA ESCOLHA
+    ================================= */
+
+    if (
+        exercicio.tipo ===
+        "multipla_escolha"
+    ) {
+
+        const alternativas =
+            Array.isArray(
+                exercicio.alternativas
+            )
+            ? exercicio.alternativas
+            : [];
+
+
+        const corretaObjeto =
+            alternativas.find(
+                (item) =>
+                    item.correta === true
+            );
+
+
+        if (
+            corretaObjeto &&
+            resposta ===
+            corretaObjeto.letra
+        ) {
+
+            correta = true;
+
+        }
+
+
+        const botoes =
+            card.querySelectorAll(
+                ".alternativa"
+            );
+
+
+        botoes.forEach(
+            (botao) => {
+
+                const letra =
+                    botao.querySelector(
+                        ".letra"
+                    );
+
+
+                if (!letra) {
+                    return;
+                }
+
+
+                if (
+                    corretaObjeto &&
+                    letra.textContent ===
+                    corretaObjeto.letra
+                ) {
+
+                    botao.classList.add(
+                        "correta"
+                    );
+
+                }
+
+
+                if (
+                    letra.textContent ===
+                    resposta &&
+                    !correta
+                ) {
+
+                    botao.classList.add(
+                        "incorreta"
+                    );
+
+                }
+
+            }
+        );
+    }
+
+
+    /* =================================
+       VERDADEIRO / FALSO
+    ================================= */
+
+    else if (
+        exercicio.tipo ===
+        "verdadeiro_falso"
+    ) {
+
+        const respostaCorreta =
+            String(
+                exercicio.respostaTexto || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        if (
+            String(resposta)
+                .trim()
+                .toLowerCase() ===
+            respostaCorreta
+        ) {
+
+            correta = true;
+
+        }
+
+
+        const botoes =
+            card.querySelectorAll(
+                ".vf-botao"
+            );
+
+
+        botoes.forEach(
+            (botao) => {
+
+                const valor =
+                    botao.textContent
+                        .toLowerCase()
+                        .includes(
+                            "verdadeiro"
+                        )
+                    ? "verdadeiro"
+                    : "falso";
+
+
+                if (
+                    valor ===
+                    respostaCorreta
+                ) {
+
+                    botao.classList.add(
+                        "correto"
+                    );
+
+                }
+
+
+                if (
+                    valor === resposta &&
+                    !correta
+                ) {
+
+                    botao.classList.add(
+                        "incorreto"
+                    );
+
+                }
+
+            }
+        );
+    }
+
+
+    /* =================================
+       RESPOSTA TEXTO
+    ================================= */
+
+    else if (
+        exercicio.tipo ===
+        "resposta_texto"
+    ) {
+
+        const respostaCorreta =
+            String(
+                exercicio.respostaTexto || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        const respostaAluno =
+            String(
+                resposta
+            )
+            .trim()
+            .toLowerCase();
+
+
+        if (
+            respostaAluno ===
+            respostaCorreta
+        ) {
+
+            correta = true;
+
+        }
+
+
+        const campo =
+            card.querySelector(
+                ".resposta-texto"
+            );
+
+
+        if (campo) {
+
+            campo.disabled = true;
+
+        }
+    }
+
+
+    /* =================================
+       PONTOS
+    ================================= */
+
+    if (correta) {
+
+        pontuacao +=
+            Number(
+                exercicio.pontos
+            ) || 0;
+
+    }
+
+
+    mostrarFeedback(
+        exercicio,
+        correta,
+        card
     );
-
-    return;
 }
 
 
-let correta = false;
+/* =====================================
+   FEEDBACK
+===================================== */
 
-
-/* ==============================
-   MÚLTIPLA ESCOLHA
-============================== */
-
-if (
-    exercicio.tipo ===
-    "multipla_escolha"
+function mostrarFeedback(
+    exercicio,
+    correta,
+    card
 ) {
 
-    const alternativas =
-        Array.isArray(
-            exercicio.alternativas
+    respostaVerificada = true;
+
+
+    const feedback =
+        card.querySelector(
+            "#feedback"
+        );
+
+
+    const botao =
+        card.querySelector(
+            "#btnResponder"
+        );
+
+
+    if (correta) {
+
+        feedback.className =
+            "feedback mostrar correto";
+
+
+        feedback.innerHTML = "";
+
+
+        const titulo =
+            document.createElement("div");
+
+        titulo.className =
+            "feedback-titulo";
+
+        titulo.textContent =
+            "✓ Resposta correta!";
+
+
+        feedback.appendChild(
+            titulo
+        );
+
+
+    } else {
+
+        feedback.className =
+            "feedback mostrar incorreto";
+
+
+        feedback.innerHTML = "";
+
+
+        const titulo =
+            document.createElement("div");
+
+        titulo.className =
+            "feedback-titulo";
+
+        titulo.textContent =
+            "✕ Resposta incorreta.";
+
+
+        feedback.appendChild(
+            titulo
+        );
+
+    }
+
+
+    if (exercicio.explicacao) {
+
+        const explicacao =
+            document.createElement("div");
+
+        explicacao.className =
+            "feedback-explicacao";
+
+        explicacao.textContent =
+            exercicio.explicacao;
+
+
+        feedback.appendChild(
+            explicacao
+        );
+    }
+
+
+    card
+        .querySelectorAll(
+            ".alternativa, .vf-botao"
         )
-        ?
-        exercicio.alternativas
-        :
-        [];
+        .forEach(
+            (elemento) => {
 
+                elemento.disabled = true;
 
-    const alternativaCorreta =
-        alternativas.find(
-            (alternativa) =>
-                alternativa.correta === true
+            }
         );
 
 
     if (
-        alternativaCorreta &&
-        resposta === alternativaCorreta.letra
+        exercicioAtual <
+        exercicios.length - 1
     ) {
 
-        correta = true;
+        botao.textContent =
+            "Próximo exercício →";
+
+    } else {
+
+        botao.textContent =
+            "Finalizar lição";
 
     }
-
 }
 
-
-/* ==============================
-   VERDADEIRO / FALSO
-============================== */
-
-else if (
-    exercicio.tipo ===
-    "verdadeiro_falso"
-) {
-
-    const respostaCorreta =
-        String(
-            exercicio.respostaTexto ||
-            ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    if (
-        resposta.toLowerCase() ===
-        respostaCorreta
-    ) {
-
-        correta = true;
-
-    }
-
-}
-
-
-/* ==============================
-   RESPOSTA TEXTO
-============================== */
-
-else if (
-    exercicio.tipo ===
-    "resposta_texto"
-) {
-
-    const respostaCorreta =
-        String(
-            exercicio.respostaTexto ||
-            ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    const respostaAluno =
-        String(
-            resposta
-        )
-        .trim()
-        .toLowerCase();
-
-
-    /*
-     * Nesta primeira versão,
-     * a resposta precisa coincidir
-     * com a resposta cadastrada.
-     */
-
-    if (
-        respostaAluno ===
-        respostaCorreta
-    ) {
-
-        correta = true;
-
-    }
-
-}
-
-
-if (correta) {
-
-    pontuacao +=
-        Number(
-            exercicio.pontos
-        ) || 0;
-
-}
-
-
-mostrarFeedback(
-    exercicio,
-    correta
-);
-
-
-}
 
 /* =====================================
-FEEDBACK
-===================================== */
-
-function mostrarFeedback(
-exercicio,
-correta
-) {
-
-
-const feedback =
-    document.getElementById(
-        "feedback"
-    );
-
-
-const btn =
-    document.getElementById(
-        "btnResponder"
-    );
-
-
-if (correta) {
-
-    feedback.className =
-        "feedback mostrar correto";
-
-
-    feedback.innerHTML = `
-
-        <div class="feedback-titulo">
-            ✓ Resposta correta!
-        </div>
-
-        ${
-            exercicio.explicacao
-            ?
-            `
-            <div class="feedback-explicacao">
-
-                ${escapar(
-                    exercicio.explicacao
-                )}
-
-            </div>
-            `
-            :
-            ""
-        }
-
-    `;
-
-} else {
-
-    feedback.className =
-        "feedback mostrar incorreto";
-
-
-    feedback.innerHTML = `
-
-        <div class="feedback-titulo">
-            ✕ Resposta incorreta.
-        </div>
-
-        ${
-            exercicio.explicacao
-            ?
-            `
-            <div class="feedback-explicacao">
-
-                ${escapar(
-                    exercicio.explicacao
-                )}
-
-            </div>
-            `
-            :
-            ""
-        }
-
-    `;
-
-}
-
-
-/* =================================
-   BLOQUEAR RESPOSTA
-================================= */
-
-document
-    .querySelectorAll(
-        ".alternativa, .vf-botao"
-    )
-    .forEach(
-        (elemento) => {
-
-            elemento.disabled =
-                true;
-
-            elemento.style.cursor =
-                "default";
-
-        }
-    );
-
-
-const campo =
-    document.getElementById(
-        "respostaTexto"
-    );
-
-
-if (campo) {
-
-    campo.disabled =
-        true;
-
-}
-
-
-/*
- * Mostrar próxima ação
- */
-
-if (
-    exercicioAtual <
-    exercicios.length - 1
-) {
-
-    btn.textContent =
-        "Próximo exercício →";
-
-} else {
-
-    btn.textContent =
-        "Finalizar lição";
-
-}
-
-
-btn.onclick =
-    () => {
-
-        exercicioAtual++;
-
-        mostrarExercicio();
-
-    };
-
-
-}
-
-/* =====================================
-RESULTADO
+   RESULTADO
 ===================================== */
 
 function mostrarResultado() {
 
+    const totalPossivel =
+        exercicios.reduce(
+            (total, exercicio) => {
 
-const percentual =
-    exercicios.length > 0
-    ?
-    Math.round(
-        (pontuacaoTotal() /
-        pontosPossiveis()) * 100
-    )
-    :
-    0;
+                return total +
+                    (Number(
+                        exercicio.pontos
+                    ) || 0);
 
-
-let icone = "🎉";
-
-let titulo =
-    "Lição concluída!";
+            },
+            0
+        );
 
 
-if (percentual < 50) {
-
-    icone = "📚";
-
-    titulo =
-        "Continue praticando!";
-
-} else if (
-    percentual < 80
-) {
-
-    icone = "👏";
-
-    titulo =
-        "Muito bem!";
-
-}
+    const percentual =
+        totalPossivel > 0
+        ?
+        Math.round(
+            (pontuacao /
+            totalPossivel) * 100
+        )
+        :
+        0;
 
 
-conteudo.innerHTML = `
+    let icone = "🎉";
 
-    <div class="resultado">
+    let titulo =
+        "Lição concluída!";
 
-        <div class="resultado-icone">
-            ${icone}
+
+    if (percentual < 50) {
+
+        icone = "📚";
+
+        titulo =
+            "Continue praticando!";
+
+    } else if (percentual < 80) {
+
+        icone = "👏";
+
+        titulo =
+            "Muito bem!";
+
+    }
+
+
+    conteudo.innerHTML = `
+
+        <div class="resultado">
+
+            <div class="resultado-icone">
+                ${icone}
+            </div>
+
+            <h2>
+                ${titulo}
+            </h2>
+
+            <p>
+                Você terminou todos os exercícios desta lição.
+            </p>
+
+            <div class="resultado-pontos">
+                ${pontuacao} XP
+            </div>
+
+            <button
+                type="button"
+                class="btn-final"
+                id="btnVoltarCursoResultado"
+            >
+                ← Voltar para o curso
+            </button>
+
         </div>
 
-
-        <h2>
-            ${titulo}
-        </h2>
+    `;
 
 
-        <p>
-            Você terminou todos os exercícios desta lição.
-        </p>
+    const botao =
+        document.getElementById(
+            "btnVoltarCursoResultado"
+        );
 
 
-        <div class="resultado-pontos">
-
-            ${pontuacao} XP
-
-        </div>
-
-
-        <button
-            class="btn-final"
-            id="btnVoltarCursoResultado"
-        >
-            ← Voltar para o curso
-        </button>
-
-    </div>
-
-`;
-
-
-document
-    .getElementById(
-        "btnVoltarCursoResultado"
-    )
-    .addEventListener(
+    botao.addEventListener(
         "click",
         () => {
 
@@ -2049,220 +1939,208 @@ document
 
         }
     );
-
-
 }
 
-/* =====================================
-PONTOS POSSÍVEIS
-===================================== */
-
-function pontosPossiveis() {
-
-
-let total = 0;
-
-
-exercicios.forEach(
-    (exercicio) => {
-
-        total +=
-            Number(
-                exercicio.pontos
-            ) || 0;
-
-    }
-);
-
-
-return total || 1;
-
-
-}
 
 /* =====================================
-PONTUAÇÃO
-===================================== */
-
-function pontuacaoTotal() {
-
-
-return pontuacao;
-
-
-}
-
-/* =====================================
-SEM EXERCÍCIOS
+   SEM EXERCÍCIOS
 ===================================== */
 
 function mostrarSemExercicios() {
 
-
-const area =
-    document.getElementById(
-        "areaExercicio"
-    );
-
-
-area.innerHTML = `
-
-    <div class="mensagem">
-
-        <h2>
-            Nenhum exercício disponível
-        </h2>
-
-        <p>
-            Esta lição ainda não possui
-            exercícios publicados.
-        </p>
-
-    </div>
-
-`;
+    const area =
+        document.getElementById(
+            "areaExercicio"
+        );
 
 
+    area.innerHTML = `
+
+        <div class="mensagem">
+
+            <h2>
+                Nenhum exercício disponível
+            </h2>
+
+            <p>
+                Esta lição ainda não possui exercícios publicados.
+            </p>
+
+        </div>
+
+    `;
 }
 
+
 /* =====================================
-ERRO
+   ERRO
 ===================================== */
 
 function mostrarErro(
-titulo,
-texto
+    titulo,
+    texto
 ) {
 
-
-conteudo.innerHTML = `
-
-    <div class="mensagem erro">
-
-        <h2>
-            ${escapar(titulo)}
-        </h2>
-
-        <p>
-            ${escapar(texto)}
-        </p>
+    conteudo.innerHTML = "";
 
 
-        <button
-            onclick="
-                window.location.href =
-                'cursos.html'
-            "
-            style="
-                margin-top:20px;
-                padding:10px 18px;
-                border:none;
-                border-radius:8px;
-                background:#2563eb;
-                color:white;
-                cursor:pointer;
-                font-weight:bold;
-            "
-        >
-            Voltar para cursos
-        </button>
+    const div =
+        document.createElement("div");
 
-    </div>
-
-`;
+    div.className =
+        "mensagem erro";
 
 
-}
+    const h2 =
+        document.createElement("h2");
 
-/* =====================================
-VOLTAR
-===================================== */
-
-btnVoltar.addEventListener(
-"click",
-() => {
+    h2.textContent =
+        titulo;
 
 
-    if (cursoId) {
+    const p =
+        document.createElement("p");
 
-        window.location.href =
-            `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
-
-    } else {
-
-        window.location.href =
-            "cursos.html";
-
-    }
-
-}
+    p.textContent =
+        texto;
 
 
-);
+    const botao =
+        document.createElement("button");
 
-/* =====================================
-SAIR
-===================================== */
+    botao.type = "button";
 
-btnSair.addEventListener(
-"click",
-async () => {
+    botao.textContent =
+        "Voltar para cursos";
 
 
-    try {
+    botao.style.marginTop =
+        "20px";
 
-        await signOut(auth);
+    botao.style.padding =
+        "10px 18px";
 
-        window.location.href =
-            "index.html";
+    botao.style.border =
+        "none";
 
-    } catch (erro) {
+    botao.style.borderRadius =
+        "8px";
 
-        console.error(
-            "Erro ao sair:",
-            erro
-        );
+    botao.style.background =
+        "#2563eb";
 
-        alert(
-            "Não foi possível sair da conta."
-        );
+    botao.style.color =
+        "white";
 
-    }
+    botao.style.cursor =
+        "pointer";
 
-}
-
-
-);
-
-/* =====================================
-AUTENTICAÇÃO
-===================================== */
-
-onAuthStateChanged(
-auth,
-async (usuario) => {
+    botao.style.fontWeight =
+        "bold";
 
 
-    if (!usuario) {
+    botao.addEventListener(
+        "click",
+        () => {
 
-        window.location.href =
-            "index.html";
+            window.location.href =
+                "cursos.html";
 
-        return;
-
-    }
-
-
-    await carregarPerfil(
-        usuario
+        }
     );
 
 
-    await carregarLicao();
+    div.appendChild(h2);
 
+    div.appendChild(p);
+
+    div.appendChild(botao);
+
+    conteudo.appendChild(div);
 }
 
 
+/* =====================================
+   VOLTAR
+===================================== */
+
+btnVoltar.addEventListener(
+    "click",
+    () => {
+
+        if (cursoId) {
+
+            window.location.href =
+                `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+
+        } else {
+
+            window.location.href =
+                "cursos.html";
+
+        }
+
+    }
+);
+
+
+/* =====================================
+   SAIR
+===================================== */
+
+btnSair.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await signOut(auth);
+
+            window.location.href =
+                "index.html";
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao sair:",
+                erro
+            );
+
+            alert(
+                "Não foi possível sair da conta."
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================
+   AUTENTICAÇÃO
+===================================== */
+
+onAuthStateChanged(
+    auth,
+    async (usuario) => {
+
+        if (!usuario) {
+
+            window.location.href =
+                "index.html";
+
+            return;
+        }
+
+
+        await carregarPerfil(
+            usuario
+        );
+
+
+        await carregarLicao();
+
+    }
 );
 
 </script>
