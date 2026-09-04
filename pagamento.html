@@ -1,0 +1,1098 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Pagamento</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f8;
+    color:#222;
+}
+
+header{
+    background:#111827;
+    color:white;
+    padding:18px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:22px;
+}
+
+.container{
+    max-width:700px;
+    margin:30px auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.titulo{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.descricao{
+    color:#666;
+    line-height:1.5;
+}
+
+.valor{
+    font-size:32px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.pix-box{
+    background:#f0fdf4;
+    border:2px dashed #16a34a;
+    border-radius:12px;
+    padding:20px;
+    margin-top:20px;
+}
+
+.pix-titulo{
+    font-weight:bold;
+    color:#15803d;
+    font-size:18px;
+}
+
+.pix-chave{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    margin-top:10px;
+    word-break:break-all;
+    font-weight:bold;
+    text-align:center;
+}
+
+.btn{
+    width:100%;
+    border:none;
+    border-radius:10px;
+    padding:15px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+.btn-pix{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-whatsapp{
+    background:#25D366;
+    color:white;
+}
+
+.btn-voltar{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.info{
+    background:#eff6ff;
+    border-radius:10px;
+    padding:15px;
+    margin-top:15px;
+    line-height:1.5;
+}
+
+.codigo{
+    background:#f3f4f6;
+    border-radius:8px;
+    padding:12px;
+    text-align:center;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.status{
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    display:none;
+}
+
+.status.sucesso{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status.erro{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.usuario{
+    font-size:14px;
+    color:#666;
+    margin-top:5px;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+}
+
+.item:last-child{
+    border-bottom:none;
+}
+
+@media(max-width:600px){
+
+    .container{
+        margin:10px auto;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .valor{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>💳 Pagamento</h1>
+
+</header>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="titulo" id="tituloProduto">
+            Carregando...
+        </div>
+
+        <div class="descricao" id="descricaoProduto">
+            Aguarde...
+        </div>
+
+        <div class="usuario" id="usuarioInfo"></div>
+
+        <div class="valor" id="valorProduto">
+            R$ 0,00
+        </div>
+
+
+        <div class="info">
+
+            <strong>Como funciona:</strong>
+
+            <ol>
+                <li>Copie a chave PIX.</li>
+                <li>Realize o pagamento.</li>
+                <li>Clique em "Enviar comprovante pelo WhatsApp".</li>
+                <li>Envie o comprovante.</li>
+                <li>Após a confirmação, sua compra será liberada.</li>
+            </ol>
+
+        </div>
+
+
+        <div class="pix-box">
+
+            <div class="pix-titulo">
+                🔑 Chave PIX
+            </div>
+
+            <div class="pix-chave" id="pixChave">
+                Carregando...
+            </div>
+
+            <button
+                class="btn btn-pix"
+                onclick="copiarPix()">
+
+                📋 Copiar chave PIX
+
+            </button>
+
+        </div>
+
+
+        <div class="codigo" id="codigoCompra">
+
+            Código da compra: aguardando...
+
+        </div>
+
+
+        <div
+            id="mensagem"
+            class="status">
+        </div>
+
+
+        <button
+            id="btnPagamento"
+            class="btn btn-whatsapp"
+            onclick="realizarPagamento()"
+            disabled>
+
+            📲 Realizar pagamento / Enviar comprovante
+
+        </button>
+
+
+        <button
+            class="btn btn-voltar"
+            onclick="voltar()">
+
+            ← Voltar
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    addDoc,
+    collection,
+    query,
+    where,
+    getDocs,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain: "dezenas-1ed47.firebaseapp.com",
+
+    projectId: "dezenas-1ed47",
+
+    storageBucket: "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId: "372788277555",
+
+    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId: "G-NMPP8PKPK3"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =====================================================
+   CONFIGURAÇÕES DO PAGAMENTO
+===================================================== */
+
+/*
+   ALTERE AQUI
+*/
+
+const CHAVE_PIX = "SUA-CHAVE-PIX-AQUI";
+
+
+/*
+   Coloque aqui o número que receberá os comprovantes.
+
+   Formato:
+   55 + DDD + número
+
+   Exemplo:
+   5588999999999
+
+*/
+
+const WHATSAPP = "5588999999999";
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+let usuarioAtual = null;
+
+let produto = null;
+
+let compraCriada = null;
+
+
+/* =====================================================
+   URL
+===================================================== */
+
+const params = new URLSearchParams(
+    window.location.search
+);
+
+const cursoId = params.get("cursoId");
+
+const tipo = params.get("tipo");
+
+const produtoId = params.get("produtoId");
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const tituloProduto =
+    document.getElementById("tituloProduto");
+
+const descricaoProduto =
+    document.getElementById("descricaoProduto");
+
+const valorProduto =
+    document.getElementById("valorProduto");
+
+const pixChave =
+    document.getElementById("pixChave");
+
+const usuarioInfo =
+    document.getElementById("usuarioInfo");
+
+const codigoCompra =
+    document.getElementById("codigoCompra");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+const btnPagamento =
+    document.getElementById("btnPagamento");
+
+
+pixChave.textContent = CHAVE_PIX;
+
+
+/* =====================================================
+   FORMATAÇÃO
+===================================================== */
+
+function formatarMoeda(valor){
+
+    return Number(valor || 0).toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(texto, tipoMensagem){
+
+    mensagem.textContent = texto;
+
+    mensagem.className =
+        "status " + tipoMensagem;
+
+}
+
+
+/* =====================================================
+   GERAR CÓDIGO
+===================================================== */
+
+function gerarCodigo(){
+
+    const parte =
+        Math.random()
+        .toString(36)
+        .substring(2,8)
+        .toUpperCase();
+
+    return "PED-" + parte;
+
+}
+
+
+/* =====================================================
+   CARREGAR CURSO
+===================================================== */
+
+async function carregarCurso(){
+
+    if(!cursoId){
+
+        throw new Error(
+            "Curso não informado."
+        );
+
+    }
+
+
+    const snap = await getDoc(
+        doc(db,"cursos",cursoId)
+    );
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Curso não encontrado."
+        );
+
+    }
+
+
+    const curso = snap.data();
+
+
+    produto = {
+
+        id: cursoId,
+
+        nome: curso.titulo,
+
+        descricao: curso.descricao ||
+                   "Compra do curso.",
+
+        valor: Number(curso.valor || 0),
+
+        tipo: "curso"
+
+    };
+
+
+    preencherProduto();
+
+}
+
+
+/* =====================================================
+   CARREGAR CERTIFICADO
+===================================================== */
+
+async function carregarCertificado(){
+
+    if(!cursoId){
+
+        throw new Error(
+            "Curso não informado."
+        );
+
+    }
+
+
+    const snap = await getDoc(
+        doc(db,"cursos",cursoId)
+    );
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Curso não encontrado."
+        );
+
+    }
+
+
+    const curso = snap.data();
+
+
+    produto = {
+
+        id: cursoId,
+
+        nome:
+            "Certificado - " +
+            (curso.titulo || ""),
+
+        descricao:
+            "Emissão do certificado após conclusão de 100% do curso.",
+
+        valor: Number(
+            curso.valorCertificado || 10
+        ),
+
+        tipo:"certificado"
+
+    };
+
+
+    preencherProduto();
+
+}
+
+
+/* =====================================================
+   CARREGAR PRODUTO DA LOJA
+===================================================== */
+
+async function carregarProdutoLoja(){
+
+    if(!produtoId){
+
+        throw new Error(
+            "Produto não informado."
+        );
+
+    }
+
+
+    /*
+       Produtos da loja ficarão na coleção:
+
+       produtos
+    */
+
+    const snap = await getDoc(
+        doc(db,"produtos",produtoId)
+    );
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Produto não encontrado."
+        );
+
+    }
+
+
+    const dados = snap.data();
+
+
+    produto = {
+
+        id: produtoId,
+
+        nome: dados.nome,
+
+        descricao:
+            dados.descricao ||
+            "Produto da loja.",
+
+        valor: Number(dados.valor || 0),
+
+        tipo:
+            dados.tipo || "produto"
+
+    };
+
+
+    preencherProduto();
+
+}
+
+
+/* =====================================================
+   PREENCHER PRODUTO
+===================================================== */
+
+function preencherProduto(){
+
+    tituloProduto.textContent =
+        produto.nome;
+
+
+    descricaoProduto.textContent =
+        produto.descricao;
+
+
+    valorProduto.textContent =
+        formatarMoeda(produto.valor);
+
+
+    btnPagamento.disabled = false;
+
+}
+
+
+/* =====================================================
+   COPIAR PIX
+===================================================== */
+
+window.copiarPix = async function(){
+
+    try{
+
+        await navigator.clipboard.writeText(
+            CHAVE_PIX
+        );
+
+
+        mostrarMensagem(
+            "Chave PIX copiada com sucesso!",
+            "sucesso"
+        );
+
+    }catch(e){
+
+        mostrarMensagem(
+            "Não foi possível copiar automaticamente. Copie a chave manualmente.",
+            "erro"
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   CRIAR COMPRA
+===================================================== */
+
+async function criarCompra(){
+
+    /*
+       Antes de criar outra compra,
+       verifica se já existe uma pendente
+       para o mesmo produto.
+    */
+
+
+    const q = query(
+
+        collection(db,"compras"),
+
+        where(
+            "usuarioId",
+            "==",
+            usuarioAtual.uid
+        ),
+
+        where(
+            "produtoId",
+            "==",
+            produto.id
+        ),
+
+        where(
+            "tipo",
+            "==",
+            produto.tipo
+        ),
+
+        where(
+            "status",
+            "==",
+            "pendente"
+        )
+
+    );
+
+
+    const resultado =
+        await getDocs(q);
+
+
+    if(!resultado.empty){
+
+        return {
+
+            id:
+                resultado.docs[0].id,
+
+            ...resultado.docs[0].data()
+
+        };
+
+    }
+
+
+    const codigo =
+        gerarCodigo();
+
+
+    const dadosCompra = {
+
+        usuarioId:
+            usuarioAtual.uid,
+
+        nomeUsuario:
+            usuarioAtual.nome || "",
+
+        emailUsuario:
+            usuarioAtual.email || "",
+
+        tipo:
+            produto.tipo,
+
+        produtoId:
+            produto.id,
+
+        produtoNome:
+            produto.nome,
+
+        cursoId:
+            cursoId || null,
+
+        valor:
+            produto.valor,
+
+        codigo:
+
+            codigo,
+
+        status:
+            "pendente",
+
+        criadoEm:
+            serverTimestamp(),
+
+        pagoEm:
+            null,
+
+        entregueEm:
+            null
+
+    };
+
+
+    const ref = await addDoc(
+
+        collection(db,"compras"),
+
+        dadosCompra
+
+    );
+
+
+    return {
+
+        id: ref.id,
+
+        ...dadosCompra
+
+    };
+
+}
+
+
+/* =====================================================
+   REALIZAR PAGAMENTO
+===================================================== */
+
+window.realizarPagamento = async function(){
+
+    if(!usuarioAtual){
+
+        mostrarMensagem(
+            "Você precisa estar logado.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    if(!produto){
+
+        mostrarMensagem(
+            "Produto não carregado.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        btnPagamento.disabled = true;
+
+        btnPagamento.textContent =
+            "⏳ Preparando pedido...";
+
+
+        compraCriada =
+            await criarCompra();
+
+
+        codigoCompra.textContent =
+            "Código da compra: " +
+            compraCriada.codigo;
+
+
+        const mensagemWhatsApp =
+
+`Olá! Gostaria de realizar o pagamento.
+
+📋 PEDIDO
+
+Código: ${compraCriada.codigo}
+
+👤 Aluno:
+${usuarioAtual.nome || "Não informado"}
+
+📧 E-mail:
+${usuarioAtual.email || "Não informado"}
+
+🛒 Produto:
+${produto.nome}
+
+💰 Valor:
+${formatarMoeda(produto.valor)}
+
+🔑 Chave PIX:
+${CHAVE_PIX}
+
+Realizarei o pagamento e enviarei o comprovante nesta conversa.
+
+Aguardo a confirmação.`;
+
+
+
+        const url =
+
+            "https://wa.me/" +
+            WHATSAPP +
+            "?text=" +
+            encodeURIComponent(
+                mensagemWhatsApp
+            );
+
+
+        mostrarMensagem(
+            "Pedido criado! Agora envie o comprovante pelo WhatsApp.",
+            "sucesso"
+        );
+
+
+        btnPagamento.textContent =
+            "📲 Abrir WhatsApp";
+
+
+        btnPagamento.disabled = false;
+
+
+        window.open(
+            url,
+            "_blank"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        mostrarMensagem(
+            "Erro ao criar o pedido: " +
+            error.message,
+            "erro"
+        );
+
+
+        btnPagamento.textContent =
+            "📲 Realizar pagamento / Enviar comprovante";
+
+
+        btnPagamento.disabled = false;
+
+    }
+
+};
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+window.voltar = function(){
+
+    if(cursoId){
+
+        window.location.href =
+            "curso.html?cursoId=" +
+            cursoId;
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "carteira.html";
+
+};
+
+
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+    auth,
+    async (user)=>{
+
+        if(!user){
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        try{
+
+            usuarioAtual = user;
+
+
+            const usuarioSnap =
+                await getDoc(
+                    doc(
+                        db,
+                        "usuarios",
+                        user.uid
+                    )
+                );
+
+
+            let nome =
+                user.displayName || "";
+
+
+            if(usuarioSnap.exists()){
+
+                const dados =
+                    usuarioSnap.data();
+
+                nome =
+                    dados.nome ||
+                    nome;
+
+            }
+
+
+            usuarioAtual.nome =
+                nome;
+
+
+            usuarioInfo.textContent =
+                "Aluno: " +
+                (nome || "Usuário");
+
+
+            /*
+               Define o que está sendo comprado.
+            */
+
+
+            if(tipo === "certificado"){
+
+                await carregarCertificado();
+
+            }else if(tipo === "produto"){
+
+                await carregarProdutoLoja();
+
+            }else{
+
+                await carregarCurso();
+
+            }
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            tituloProduto.textContent =
+                "Erro";
+
+
+            descricaoProduto.textContent =
+                error.message;
+
+
+            mostrarMensagem(
+                error.message,
+                "erro"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
+```
