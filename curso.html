@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,13 +10,12 @@
 <style>
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
+    margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:#f4f7fb;
+    background:#f5f7fb;
     color:#1f2937;
 }
 
@@ -31,99 +31,102 @@ header{
 }
 
 header h1{
+    margin:0;
     font-size:22px;
 }
 
-.header-direita{
+.header-right{
     display:flex;
-    align-items:center;
     gap:10px;
+    align-items:center;
     flex-wrap:wrap;
 }
 
-.saldo{
-    background:rgba(255,255,255,.15);
-    padding:9px 13px;
-    border-radius:10px;
-    font-weight:bold;
+.badge{
+    background:rgba(255,255,255,.18);
+    padding:8px 12px;
+    border-radius:20px;
+    font-size:14px;
 }
 
-.btn{
+button{
     border:0;
     border-radius:10px;
-    padding:10px 15px;
-    font-weight:bold;
+    padding:11px 15px;
     cursor:pointer;
+    font-weight:bold;
 }
 
-.btn-voltar{
+.btn-white{
     background:white;
     color:#4f46e5;
 }
 
-.btn-carteira{
-    background:#eef2ff;
-    color:#4338ca;
-}
-
-.btn-sair{
-    background:#ef4444;
+.btn-primary{
+    background:#4f46e5;
     color:white;
 }
 
-.container{
-    width:100%;
-    max-width:1050px;
-    margin:auto;
-    padding:25px 15px 60px;
+.btn-success{
+    background:#16a34a;
+    color:white;
 }
 
-/* CURSO */
+.btn-secondary{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.container{
+    width:min(1100px,94%);
+    margin:25px auto;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
 
 .curso-topo{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 5px 18px rgba(0,0,0,.07);
-    margin-bottom:25px;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:22px;
+    align-items:center;
+}
+
+.curso-imagem{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:14px;
+    background:#e5e7eb;
 }
 
 .curso-topo h2{
-    font-size:30px;
+    margin-top:0;
     margin-bottom:10px;
 }
 
-.curso-descricao{
-    color:#6b7280;
-    line-height:1.6;
-    margin-bottom:20px;
-}
-
-.curso-info{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.tag{
+.nivel{
+    display:inline-block;
     background:#eef2ff;
     color:#4338ca;
-    padding:7px 12px;
-    border-radius:9px;
+    padding:6px 10px;
+    border-radius:20px;
     font-size:13px;
     font-weight:bold;
 }
 
-/* PROGRESSO */
-
-.progresso{
-    margin-top:20px;
+.progresso-area{
+    margin-top:18px;
 }
 
-.progresso-topo{
+.progresso-info{
     display:flex;
     justify-content:space-between;
-    gap:10px;
     margin-bottom:8px;
     font-weight:bold;
 }
@@ -136,182 +139,166 @@ header h1{
     overflow:hidden;
 }
 
-.barra-interna{
+.barra-progresso{
     height:100%;
     width:0%;
-    background:#22c55e;
+    background:#16a34a;
+    border-radius:20px;
     transition:.3s;
 }
 
-/* MÓDULOS */
+.certificado-box{
+    display:none;
+    border:2px solid #f59e0b;
+    background:#fffbeb;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
+}
 
-.titulo-secao{
-    font-size:25px;
-    margin-bottom:18px;
+.certificado-box h3{
+    margin-top:0;
+    color:#92400e;
+}
+
+.certificado-box p{
+    margin-bottom:15px;
+}
+
+.certificado-bloqueado{
+    display:none;
+    border:1px solid #d1d5db;
+    background:#f9fafb;
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:20px;
+    color:#6b7280;
 }
 
 .modulo{
-    background:white;
-    border-radius:18px;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
     margin-bottom:18px;
     overflow:hidden;
-    box-shadow:0 5px 18px rgba(0,0,0,.07);
 }
 
-.modulo-cabecalho{
-    padding:20px;
-    background:#fafafa;
-    border-bottom:1px solid #eee;
+.modulo-header{
+    background:#f9fafb;
+    padding:16px 18px;
+    border-bottom:1px solid #e5e7eb;
 }
 
-.modulo-cabecalho h3{
-    font-size:20px;
-    margin-bottom:7px;
+.modulo-header h3{
+    margin:0 0 5px;
 }
 
-.modulo-cabecalho p{
+.modulo-header p{
+    margin:0;
     color:#6b7280;
     font-size:14px;
-    line-height:1.5;
 }
 
 .licoes{
-    padding:8px;
+    padding:10px;
 }
 
 .licao{
     display:flex;
     align-items:center;
+    justify-content:space-between;
     gap:15px;
     padding:15px;
-    border-radius:12px;
-    cursor:pointer;
+    border-radius:10px;
+    margin-bottom:7px;
+    background:white;
+    border:1px solid transparent;
     transition:.2s;
 }
 
 .licao:hover{
-    background:#f5f7ff;
+    background:#f9fafb;
+    border-color:#e5e7eb;
 }
 
-.icone-licao{
-    width:44px;
-    height:44px;
-    min-width:44px;
+.licao:last-child{
+    margin-bottom:0;
+}
+
+.licao-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+}
+
+.numero{
+    width:36px;
+    height:36px;
+    min-width:36px;
     border-radius:50%;
     background:#eef2ff;
     color:#4f46e5;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:20px;
     font-weight:bold;
 }
 
-.licao.concluida .icone-licao{
-    background:#dcfce7;
-    color:#16a34a;
+.licao-info strong{
+    display:block;
 }
 
-.licao-info{
-    flex:1;
-}
-
-.licao-info h4{
-    font-size:16px;
-    margin-bottom:5px;
-}
-
-.licao-info p{
-    color:#6b7280;
+.licao-status{
     font-size:13px;
+    color:#6b7280;
+    margin-top:4px;
 }
 
-.status{
-    font-size:12px;
+.aprovada{
+    color:#16a34a;
     font-weight:bold;
-    padding:6px 9px;
-    border-radius:8px;
-    white-space:nowrap;
 }
 
-.status-pendente{
-    background:#f3f4f6;
+.reprovada{
+    color:#dc2626;
+}
+
+.vazia{
+    padding:30px;
+    text-align:center;
     color:#6b7280;
 }
-
-.status-aprovada{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.status-tentativa{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.seta{
-    font-size:20px;
-    color:#9ca3af;
-}
-
-/* ESTADOS */
 
 .loading{
     text-align:center;
-    padding:50px 20px;
+    padding:40px;
     color:#6b7280;
 }
 
-.erro{
-    background:#fee2e2;
-    color:#991b1b;
-    padding:18px;
-    border-radius:12px;
-    margin-bottom:20px;
+.acoes{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
 }
-
-.vazio{
-    background:white;
-    padding:45px 20px;
-    text-align:center;
-    border-radius:16px;
-    color:#6b7280;
-}
-
-/* MOBILE */
 
 @media(max-width:700px){
 
-    header{
-        align-items:flex-start;
-    }
-
-    .header-direita{
-        width:100%;
-    }
-
-    .saldo{
-        flex:1;
-    }
-
     .curso-topo{
-        padding:20px;
+        grid-template-columns:1fr;
     }
 
-    .curso-topo h2{
-        font-size:25px;
+    .curso-imagem{
+        height:200px;
     }
 
     .licao{
-        gap:10px;
+        align-items:flex-start;
+        flex-direction:column;
     }
 
-    .status{
-        display:none;
-    }
-
-    .seta{
-        font-size:18px;
+    .licao button{
+        width:100%;
     }
 }
 </style>
@@ -321,27 +308,27 @@ header h1{
 
 <header>
 
-    <h1>🎓 Área do Aluno</h1>
+    <h1>📚 Curso</h1>
 
-    <div class="header-direita">
+    <div class="header-right">
 
-        <div class="saldo">
-            ❤️ <span id="vidas">-</span>
-            &nbsp;&nbsp;
-            🪙 <span id="moedas">-</span>
-            &nbsp;&nbsp;
-            ⭐ <span id="xp">-</span>
+        <div class="badge">
+            ❤️ <span id="vidas">0</span>
         </div>
 
-        <button
-            class="btn btn-carteira"
-            onclick="abrirCarteira()">
+        <div class="badge">
+            🪙 <span id="moedas">0</span>
+        </div>
+
+        <div class="badge">
+            ⭐ <span id="xp">0</span> XP
+        </div>
+
+        <button class="btn-white" id="btnCarteira">
             💰 Carteira
         </button>
 
-        <button
-            class="btn btn-sair"
-            onclick="sair()">
+        <button class="btn-white" id="btnSair">
             Sair
         </button>
 
@@ -349,8 +336,7 @@ header h1{
 
 </header>
 
-
-<div class="container">
+<main class="container">
 
     <div id="loading" class="loading">
         Carregando curso...
@@ -360,79 +346,138 @@ header h1{
 
         <!-- INFORMAÇÕES DO CURSO -->
 
-        <section class="curso-topo">
+        <section class="card">
 
-            <h2 id="tituloCurso">
-                Curso
-            </h2>
+            <div class="curso-topo">
 
-            <p
-                id="descricaoCurso"
-                class="curso-descricao">
-            </p>
+                <img
+                    id="cursoImagem"
+                    class="curso-imagem"
+                    src=""
+                    alt="Imagem do curso"
+                >
 
-            <div class="curso-info">
+                <div>
 
-                <span
-                    id="nivelCurso"
-                    class="tag">
-                    📚 Iniciante
-                </span>
-
-                <span
-                    id="totalModulos"
-                    class="tag">
-                    📖 0 módulos
-                </span>
-
-                <span
-                    id="totalLicoes"
-                    class="tag">
-                    📝 0 lições
-                </span>
-
-            </div>
-
-
-            <div class="progresso">
-
-                <div class="progresso-topo">
-
-                    <span>
-                        Seu progresso
+                    <span id="cursoNivel" class="nivel">
+                        Curso
                     </span>
 
-                    <span id="porcentagem">
-                        0%
-                    </span>
+                    <h2 id="cursoTitulo">
+                        -
+                    </h2>
 
-                </div>
+                    <p id="cursoDescricao">
+                        -
+                    </p>
 
-                <div class="barra">
+                    <div class="progresso-area">
 
-                    <div
-                        id="barraProgresso"
-                        class="barra-interna">
+                        <div class="progresso-info">
+
+                            <span>Seu progresso</span>
+
+                            <span id="progressoTexto">
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="barra">
+
+                            <div
+                                id="barraProgresso"
+                                class="barra-progresso"
+                            ></div>
+
+                        </div>
+
+                        <p id="progressoDetalhes">
+                            0 de 0 lições concluídas
+                        </p>
+
                     </div>
 
                 </div>
 
             </div>
 
+            <div class="acoes">
+
+                <button
+                    class="btn-secondary"
+                    id="btnVoltar"
+                >
+                    ← Voltar aos cursos
+                </button>
+
+            </div>
+
         </section>
 
 
-        <!-- MÓDULOS -->
+        <!-- CERTIFICADO DISPONÍVEL -->
 
-        <h2 class="titulo-secao">
-            📚 Conteúdo do curso
-        </h2>
+        <section
+            id="certificadoBox"
+            class="certificado-box"
+        >
 
-        <div id="listaModulos"></div>
+            <h3>
+                🏆 Parabéns! Curso concluído!
+            </h3>
+
+            <p>
+                Você concluiu e foi aprovado em todas as lições deste curso.
+                Seu certificado está disponível.
+            </p>
+
+            <button
+                class="btn-success"
+                id="btnCertificado"
+            >
+                🏆 Emitir certificado
+            </button>
+
+        </section>
+
+
+        <!-- CERTIFICADO BLOQUEADO -->
+
+        <section
+            id="certificadoBloqueado"
+            class="certificado-bloqueado"
+        >
+
+            🔒 <strong>Certificado bloqueado</strong>
+
+            <p>
+                Conclua e seja aprovado em todas as lições do curso para
+                liberar seu certificado.
+            </p>
+
+        </section>
+
+
+        <!-- LISTA DE MÓDULOS -->
+
+        <section class="card">
+
+            <h2>
+                📖 Conteúdo do curso
+            </h2>
+
+            <div id="listaModulos">
+                <div class="loading">
+                    Carregando módulos...
+                </div>
+            </div>
+
+        </section>
 
     </div>
 
-</div>
+</main>
 
 
 <script type="module">
@@ -449,21 +494,35 @@ import {
 
 import {
     getFirestore,
+    doc,
+    getDoc,
     collection,
     getDocs,
-    doc,
-    getDoc
+    query,
+    where
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
+/* =========================================================
+   FIREBASE
+========================================================= */
+
 const firebaseConfig = {
+
     apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
     authDomain: "dezenas-1ed47.firebaseapp.com",
+
     projectId: "dezenas-1ed47",
+
     storageBucket: "dezenas-1ed47.firebasestorage.app",
+
     messagingSenderId: "372788277555",
+
     appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+
     measurementId: "G-NMPP8PKPK3"
+
 };
 
 
@@ -475,18 +534,65 @@ const db = getFirestore(app);
 
 
 /* =========================================================
-   VARIÁVEIS
+   ELEMENTOS
 ========================================================= */
 
-let usuarioAtual = null;
+const loading =
+    document.getElementById("loading");
 
-let curso = null;
+const conteudo =
+    document.getElementById("conteudo");
 
-let modulos = [];
+const cursoTitulo =
+    document.getElementById("cursoTitulo");
 
-let licoes = [];
+const cursoDescricao =
+    document.getElementById("cursoDescricao");
 
-let progresso = [];
+const cursoImagem =
+    document.getElementById("cursoImagem");
+
+const cursoNivel =
+    document.getElementById("cursoNivel");
+
+const listaModulos =
+    document.getElementById("listaModulos");
+
+const progressoTexto =
+    document.getElementById("progressoTexto");
+
+const barraProgresso =
+    document.getElementById("barraProgresso");
+
+const progressoDetalhes =
+    document.getElementById("progressoDetalhes");
+
+const vidas =
+    document.getElementById("vidas");
+
+const moedas =
+    document.getElementById("moedas");
+
+const xp =
+    document.getElementById("xp");
+
+const certificadoBox =
+    document.getElementById("certificadoBox");
+
+const certificadoBloqueado =
+    document.getElementById("certificadoBloqueado");
+
+const btnCertificado =
+    document.getElementById("btnCertificado");
+
+const btnVoltar =
+    document.getElementById("btnVoltar");
+
+const btnCarteira =
+    document.getElementById("btnCarteira");
+
+const btnSair =
+    document.getElementById("btnSair");
 
 
 /* =========================================================
@@ -494,29 +600,701 @@ let progresso = [];
 ========================================================= */
 
 const parametros =
-    new URLSearchParams(
-        window.location.search
-    );
+    new URLSearchParams(window.location.search);
 
 const cursoId =
     parametros.get("cursoId");
 
 
-if(!cursoId){
+/* =========================================================
+   DADOS
+========================================================= */
 
-    document.getElementById(
-        "loading"
-    ).innerHTML = `
-        <div class="erro">
-            Curso não informado.
-        </div>
-    `;
+let usuarioAtual = null;
 
+let cursoAtual = null;
+
+let modulos = [];
+
+let licoes = [];
+
+let progressos = [];
+
+let progressoPorLicao = {};
+
+
+/* =========================================================
+   ESCAPAR HTML
+========================================================= */
+
+function escapar(valor){
+
+    if(valor === null || valor === undefined){
+        return "";
+    }
+
+    return String(valor)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
 /* =========================================================
-   AUTENTICAÇÃO
+   CARREGAR USUÁRIO
+========================================================= */
+
+async function carregarUsuario(uid){
+
+    const ref =
+        doc(db, "usuarios", uid);
+
+    const snap =
+        await getDoc(ref);
+
+    if(!snap.exists()){
+
+        vidas.textContent = "0";
+        moedas.textContent = "0";
+        xp.textContent = "0";
+
+        return;
+    }
+
+    usuarioAtual = {
+        id: snap.id,
+        ...snap.data()
+    };
+
+    vidas.textContent =
+        usuarioAtual.vidas ?? 0;
+
+    moedas.textContent =
+        usuarioAtual.moedas ?? 0;
+
+    xp.textContent =
+        usuarioAtual.xp ?? 0;
+}
+
+
+/* =========================================================
+   CARREGAR CURSO
+========================================================= */
+
+async function carregarCurso(){
+
+    if(!cursoId){
+
+        throw new Error(
+            "Curso não informado."
+        );
+    }
+
+    const ref =
+        doc(db, "cursos", cursoId);
+
+    const snap =
+        await getDoc(ref);
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Curso não encontrado."
+        );
+    }
+
+    cursoAtual = {
+        id: snap.id,
+        ...snap.data()
+    };
+
+
+    cursoTitulo.textContent =
+        cursoAtual.titulo || "Curso";
+
+
+    cursoDescricao.textContent =
+        cursoAtual.descricao ||
+        "Nenhuma descrição informada.";
+
+
+    cursoNivel.textContent =
+        cursoAtual.nivel ||
+        "Curso";
+
+
+    if(cursoAtual.imagem){
+
+        cursoImagem.src =
+            cursoAtual.imagem;
+
+    }else{
+
+        cursoImagem.style.display =
+            "none";
+    }
+}
+
+
+/* =========================================================
+   CARREGAR MÓDULOS
+========================================================= */
+
+async function carregarModulos(){
+
+    const ref =
+        collection(db, "modulos");
+
+    const q =
+        query(
+            ref,
+            where("cursoId", "==", cursoId)
+        );
+
+    const snap =
+        await getDocs(q);
+
+    modulos = [];
+
+    snap.forEach(item => {
+
+        const dados = item.data();
+
+        if(dados.ativo !== false){
+
+            modulos.push({
+
+                id: item.id,
+
+                ...dados
+
+            });
+
+        }
+
+    });
+
+
+    modulos.sort((a,b) =>
+        Number(a.ordem || 0) -
+        Number(b.ordem || 0)
+    );
+}
+
+
+/* =========================================================
+   CARREGAR LIÇÕES
+========================================================= */
+
+async function carregarLicoes(){
+
+    const ref =
+        collection(db, "licoes");
+
+    const q =
+        query(
+            ref,
+            where("cursoId", "==", cursoId)
+        );
+
+    const snap =
+        await getDocs(q);
+
+    licoes = [];
+
+    snap.forEach(item => {
+
+        const dados = item.data();
+
+        if(dados.ativo !== false){
+
+            licoes.push({
+
+                id: item.id,
+
+                ...dados
+
+            });
+
+        }
+
+    });
+
+
+    licoes.sort((a,b) =>
+        Number(a.ordem || 0) -
+        Number(b.ordem || 0)
+    );
+}
+
+
+/* =========================================================
+   CARREGAR PROGRESSO
+========================================================= */
+
+async function carregarProgresso(){
+
+    progressos = [];
+
+    progressoPorLicao = {};
+
+
+    if(!usuarioAtual){
+
+        return;
+    }
+
+
+    const ref =
+        collection(db, "progresso");
+
+    const q =
+        query(
+            ref,
+            where(
+                "usuarioId",
+                "==",
+                usuarioAtual.id
+            )
+        );
+
+    const snap =
+        await getDocs(q);
+
+
+    snap.forEach(item => {
+
+        const dados =
+            item.data();
+
+        if(
+            dados.cursoId === cursoId
+        ){
+
+            const progresso = {
+
+                id: item.id,
+
+                ...dados
+
+            };
+
+            progressos.push(
+                progresso
+            );
+
+            progressoPorLicao[
+                dados.licaoId
+            ] = progresso;
+
+        }
+
+    });
+}
+
+
+/* =========================================================
+   ATUALIZAR PROGRESSO
+========================================================= */
+
+function atualizarProgressoCurso(){
+
+    const total =
+        licoes.length;
+
+    let aprovadas = 0;
+
+
+    licoes.forEach(licao => {
+
+        const progresso =
+            progressoPorLicao[
+                licao.id
+            ];
+
+        if(
+            progresso &&
+            progresso.aprovado === true
+        ){
+
+            aprovadas++;
+
+        }
+
+    });
+
+
+    let percentual = 0;
+
+    if(total > 0){
+
+        percentual =
+            Math.round(
+                (aprovadas / total) * 100
+            );
+
+    }
+
+
+    progressoTexto.textContent =
+        percentual + "%";
+
+
+    barraProgresso.style.width =
+        percentual + "%";
+
+
+    progressoDetalhes.textContent =
+        `${aprovadas} de ${total} lições concluídas`;
+
+
+    /* =====================================================
+       CERTIFICADO
+    ===================================================== */
+
+    if(
+        total > 0 &&
+        aprovadas === total
+    ){
+
+        certificadoBox.style.display =
+            "block";
+
+        certificadoBloqueado.style.display =
+            "none";
+
+    }else{
+
+        certificadoBox.style.display =
+            "none";
+
+        certificadoBloqueado.style.display =
+            "block";
+
+    }
+}
+
+
+/* =========================================================
+   RENDERIZAR MÓDULOS
+========================================================= */
+
+function renderizarModulos(){
+
+    listaModulos.innerHTML = "";
+
+
+    if(modulos.length === 0){
+
+        listaModulos.innerHTML = `
+            <div class="vazia">
+                Nenhum módulo disponível neste curso.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    modulos.forEach((modulo, indice) => {
+
+        const licoesModulo =
+            licoes
+                .filter(
+                    licao =>
+                        licao.moduloId === modulo.id
+                )
+                .sort(
+                    (a,b) =>
+                        Number(a.ordem || 0) -
+                        Number(b.ordem || 0)
+                );
+
+
+        const moduloDiv =
+            document.createElement("div");
+
+        moduloDiv.className =
+            "modulo";
+
+
+        let html = `
+
+            <div class="modulo-header">
+
+                <h3>
+                    Módulo ${indice + 1}:
+                    ${escapar(modulo.titulo)}
+                </h3>
+
+                ${
+                    modulo.descricao
+                    ?
+                    `<p>${escapar(modulo.descricao)}</p>`
+                    :
+                    ""
+                }
+
+            </div>
+
+            <div class="licoes">
+        `;
+
+
+        if(licoesModulo.length === 0){
+
+            html += `
+                <div class="vazia">
+                    Nenhuma lição disponível neste módulo.
+                </div>
+            `;
+
+        }else{
+
+            licoesModulo.forEach(
+                (licao, indiceLicao) => {
+
+                    const progresso =
+                        progressoPorLicao[
+                            licao.id
+                        ];
+
+
+                    let status =
+                        "Não iniciada";
+
+                    let classeStatus = "";
+
+
+                    if(
+                        progresso &&
+                        progresso.aprovado === true
+                    ){
+
+                        status =
+                            `✓ Aprovada${
+                                progresso.aproveitamento !== undefined
+                                ?
+                                ` • ${progresso.aproveitamento}%`
+                                :
+                                ""
+                            }`;
+
+                        classeStatus =
+                            "aprovada";
+
+                    }else if(
+                        progresso
+                    ){
+
+                        status =
+                            `Tentativa anterior${
+                                progresso.aproveitamento !== undefined
+                                ?
+                                ` • ${progresso.aproveitamento}%`
+                                :
+                                ""
+                            }`;
+
+                        classeStatus =
+                            "reprovada";
+
+                    }
+
+
+                    html += `
+
+                        <div class="licao">
+
+                            <div class="licao-info">
+
+                                <div class="numero">
+                                    ${
+                                        progresso &&
+                                        progresso.aprovado === true
+                                        ?
+                                        "✓"
+                                        :
+                                        indiceLicao + 1
+                                    }
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        ${escapar(licao.titulo)}
+                                    </strong>
+
+                                    <div
+                                        class="licao-status ${classeStatus}"
+                                    >
+                                        ${status}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <button
+                                class="btn-primary"
+                                data-licao="${licao.id}"
+                                data-modulo="${modulo.id}"
+                            >
+                                ${
+                                    progresso
+                                    ?
+                                    "Continuar"
+                                    :
+                                    "Começar"
+                                }
+                            </button>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+        }
+
+
+        html += `
+            </div>
+        `;
+
+
+        moduloDiv.innerHTML =
+            html;
+
+
+        listaModulos.appendChild(
+            moduloDiv
+        );
+
+    });
+
+
+    /* =====================================================
+       EVENTOS DAS LIÇÕES
+    ===================================================== */
+
+    document
+        .querySelectorAll("[data-licao]")
+        .forEach(botao => {
+
+            botao.addEventListener(
+                "click",
+                () => {
+
+                    const licaoId =
+                        botao.dataset.licao;
+
+                    const moduloId =
+                        botao.dataset.modulo;
+
+
+                    window.location.href =
+                        `licao.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
+
+                }
+            );
+
+        });
+}
+
+
+/* =========================================================
+   BOTÃO CERTIFICADO
+========================================================= */
+
+btnCertificado.addEventListener(
+    "click",
+    () => {
+
+        if(!cursoId){
+
+            alert(
+                "Não foi possível identificar o curso."
+            );
+
+            return;
+        }
+
+
+        window.location.href =
+            `certificado.html?cursoId=${encodeURIComponent(cursoId)}`;
+
+    }
+);
+
+
+/* =========================================================
+   VOLTAR
+========================================================= */
+
+btnVoltar.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "cursos.html";
+
+    }
+);
+
+
+/* =========================================================
+   CARTEIRA
+========================================================= */
+
+btnCarteira.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "carteira.html";
+
+    }
+);
+
+
+/* =========================================================
+   SAIR
+========================================================= */
+
+btnSair.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "index.html";
+
+        }catch(erro){
+
+            console.error(
+                "Erro ao sair:",
+                erro
+            );
+
+            alert(
+                "Não foi possível sair."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CARREGAMENTO PRINCIPAL
 ========================================================= */
 
 onAuthStateChanged(
@@ -532,17 +1310,18 @@ onAuthStateChanged(
         }
 
 
-        usuarioAtual = usuario;
-
-
-        if(!cursoId){
-            return;
-        }
-
-
         try{
 
-            await carregarUsuario();
+            loading.style.display =
+                "block";
+
+            conteudo.style.display =
+                "none";
+
+
+            await carregarUsuario(
+                usuario.uid
+            );
 
             await carregarCurso();
 
@@ -552,776 +1331,60 @@ onAuthStateChanged(
 
             await carregarProgresso();
 
-            renderizar();
+
+            atualizarProgressoCurso();
+
+            renderizarModulos();
+
+
+            loading.style.display =
+                "none";
+
+            conteudo.style.display =
+                "block";
+
 
         }catch(erro){
 
-            console.error(erro);
+            console.error(
+                "Erro ao carregar curso:",
+                erro
+            );
 
-            document.getElementById(
-                "loading"
-            ).innerHTML = `
-                <div class="erro">
-                    Não foi possível carregar o curso.
-                    <br><br>
-                    Verifique sua conexão e tente novamente.
+
+            loading.innerHTML = `
+
+                <div
+                    style="
+                        background:white;
+                        padding:25px;
+                        border-radius:15px;
+                    "
+                >
+
+                    <h2>
+                        ⚠️ Não foi possível carregar o curso
+                    </h2>
+
+                    <p>
+                        ${escapar(erro.message)}
+                    </p>
+
+                    <button
+                        class="btn-secondary"
+                        onclick="history.back()"
+                    >
+                        ← Voltar
+                    </button>
+
                 </div>
+
             `;
 
         }
 
     }
 );
-
-
-/* =========================================================
-   USUÁRIO
-========================================================= */
-
-async function carregarUsuario(){
-
-    const referencia =
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        );
-
-
-    const snap =
-        await getDoc(referencia);
-
-
-    if(!snap.exists()){
-        return;
-    }
-
-
-    const dados =
-        snap.data();
-
-
-    document.getElementById(
-        "vidas"
-    ).textContent =
-        Number(
-            dados.vidas ?? 0
-        );
-
-
-    document.getElementById(
-        "moedas"
-    ).textContent =
-        Number(
-            dados.moedas ?? 0
-        );
-
-
-    document.getElementById(
-        "xp"
-    ).textContent =
-        Number(
-            dados.xp ?? 0
-        );
-
-}
-
-
-/* =========================================================
-   CURSO
-========================================================= */
-
-async function carregarCurso(){
-
-    const referencia =
-        doc(
-            db,
-            "cursos",
-            cursoId
-        );
-
-
-    const snap =
-        await getDoc(referencia);
-
-
-    if(!snap.exists()){
-
-        throw new Error(
-            "Curso não encontrado."
-        );
-
-    }
-
-
-    curso = {
-        id:snap.id,
-        ...snap.data()
-    };
-
-
-    if(curso.ativo !== true){
-
-        throw new Error(
-            "Este curso está indisponível."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   MÓDULOS
-========================================================= */
-
-async function carregarModulos(){
-
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "modulos"
-            )
-        );
-
-
-    modulos = [];
-
-
-    snapshot.forEach(item => {
-
-        const dados =
-            item.data();
-
-
-        if(
-            dados.ativo === true &&
-            dados.cursoId === cursoId
-        ){
-
-            modulos.push({
-                id:item.id,
-                ...dados
-            });
-
-        }
-
-    });
-
-
-    modulos.sort(
-        (a,b) =>
-            Number(a.ordem ?? 0) -
-            Number(b.ordem ?? 0)
-    );
-
-}
-
-
-/* =========================================================
-   LIÇÕES
-========================================================= */
-
-async function carregarLicoes(){
-
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "licoes"
-            )
-        );
-
-
-    licoes = [];
-
-
-    snapshot.forEach(item => {
-
-        const dados =
-            item.data();
-
-
-        if(
-            dados.ativo === true &&
-            dados.cursoId === cursoId
-        ){
-
-            licoes.push({
-                id:item.id,
-                ...dados
-            });
-
-        }
-
-    });
-
-
-    licoes.sort(
-        (a,b) =>
-            Number(a.ordem ?? 0) -
-            Number(b.ordem ?? 0)
-    );
-
-}
-
-
-/* =========================================================
-   PROGRESSO
-========================================================= */
-
-async function carregarProgresso(){
-
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "progresso"
-            )
-        );
-
-
-    progresso = [];
-
-
-    snapshot.forEach(item => {
-
-        const dados =
-            item.data();
-
-
-        if(
-            dados.usuarioId ===
-            usuarioAtual.uid
-        ){
-
-            progresso.push({
-                id:item.id,
-                ...dados
-            });
-
-        }
-
-    });
-
-}
-
-
-/* =========================================================
-   RENDERIZAR
-========================================================= */
-
-function renderizar(){
-
-    document.getElementById(
-        "loading"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "conteudo"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "tituloCurso"
-    ).textContent =
-        curso.titulo ||
-        "Curso";
-
-
-    document.getElementById(
-        "descricaoCurso"
-    ).textContent =
-        curso.descricao ||
-        "Comece seus estudos e avance pelas lições.";
-
-
-    document.getElementById(
-        "nivelCurso"
-    ).textContent =
-        "📚 " +
-        (curso.nivel || "Iniciante");
-
-
-    document.getElementById(
-        "totalModulos"
-    ).textContent =
-        "📖 " +
-        modulos.length +
-        (modulos.length === 1
-            ? " módulo"
-            : " módulos");
-
-
-    document.getElementById(
-        "totalLicoes"
-    ).textContent =
-        "📝 " +
-        licoes.length +
-        (licoes.length === 1
-            ? " lição"
-            : " lições");
-
-
-    renderizarModulos();
-
-    atualizarProgresso();
-
-}
-
-
-/* =========================================================
-   MÓDULOS
-========================================================= */
-
-function renderizarModulos(){
-
-    const container =
-        document.getElementById(
-            "listaModulos"
-        );
-
-
-    if(modulos.length === 0){
-
-        container.innerHTML = `
-            <div class="vazio">
-
-                <div style="font-size:50px;">
-                    📚
-                </div>
-
-                <h3 style="margin:15px 0 8px;">
-                    Este curso ainda não possui módulos
-                </h3>
-
-                <p>
-                    O conteúdo será disponibilizado em breve.
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML =
-        modulos.map(
-            (modulo,index) =>
-                criarModuloHTML(
-                    modulo,
-                    index
-                )
-        ).join("");
-
-
-    document
-        .querySelectorAll(
-            "[data-licao]"
-        )
-        .forEach(elemento => {
-
-            elemento.addEventListener(
-                "click",
-                () => {
-
-                    const licaoId =
-                        elemento.dataset.licao;
-
-                    const moduloId =
-                        elemento.dataset.modulo;
-
-                    abrirLicao(
-                        moduloId,
-                        licaoId
-                    );
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   HTML DO MÓDULO
-========================================================= */
-
-function criarModuloHTML(
-    modulo,
-    indice
-){
-
-    const titulo =
-        escapar(
-            modulo.titulo ||
-            `Módulo ${indice + 1}`
-        );
-
-
-    const descricao =
-        escapar(
-            modulo.descricao ||
-            "Conteúdo deste módulo."
-        );
-
-
-    const licoesModulo =
-        licoes.filter(
-            licao =>
-                licao.moduloId ===
-                modulo.id
-        );
-
-
-    const numero =
-        indice + 1;
-
-
-    let licoesHTML;
-
-
-    if(licoesModulo.length === 0){
-
-        licoesHTML = `
-            <div
-                style="
-                    padding:20px;
-                    color:#6b7280;
-                    text-align:center;
-                ">
-                Nenhuma lição disponível neste módulo.
-            </div>
-        `;
-
-    }else{
-
-        licoesHTML =
-            licoesModulo.map(
-                (licao,index) =>
-                    criarLicaoHTML(
-                        licao,
-                        index,
-                        modulo.id
-                    )
-            ).join("");
-
-    }
-
-
-    return `
-        <section class="modulo">
-
-            <div class="modulo-cabecalho">
-
-                <h3>
-                    ${numero}. ${titulo}
-                </h3>
-
-                <p>
-                    ${descricao}
-                </p>
-
-            </div>
-
-            <div class="licoes">
-                ${licoesHTML}
-            </div>
-
-        </section>
-    `;
-
-}
-
-
-/* =========================================================
-   HTML DA LIÇÃO
-========================================================= */
-
-function criarLicaoHTML(
-    licao,
-    indice,
-    moduloId
-){
-
-    const titulo =
-        escapar(
-            licao.titulo ||
-            `Lição ${indice + 1}`
-        );
-
-
-    const descricao =
-        escapar(
-            licao.descricao ||
-            "Clique para iniciar esta lição."
-        );
-
-
-    const registro =
-        encontrarProgresso(
-            licao.id
-        );
-
-
-    let classe =
-        "";
-
-
-    let statusHTML =
-        `
-        <span class="status status-pendente">
-            Disponível
-        </span>
-        `;
-
-
-    let icone =
-        indice + 1;
-
-
-    if(
-        registro &&
-        registro.aprovado === true
-    ){
-
-        classe =
-            "concluida";
-
-
-        icone =
-            "✓";
-
-
-        statusHTML =
-            `
-            <span class="status status-aprovada">
-                ✓ Aprovada
-            </span>
-            `;
-
-    }else if(
-        registro &&
-        registro.aproveitamento != null
-    ){
-
-        statusHTML =
-            `
-            <span class="status status-tentativa">
-                ${Math.round(
-                    Number(
-                        registro.aproveitamento
-                    )
-                )}% na última tentativa
-            </span>
-            `;
-
-    }
-
-
-    return `
-        <div
-            class="licao ${classe}"
-            data-licao="${licao.id}"
-            data-modulo="${moduloId}">
-
-            <div class="icone-licao">
-                ${icone}
-            </div>
-
-            <div class="licao-info">
-
-                <h4>
-                    ${titulo}
-                </h4>
-
-                <p>
-                    ${descricao}
-                </p>
-
-            </div>
-
-            ${statusHTML}
-
-            <div class="seta">
-                →
-            </div>
-
-        </div>
-    `;
-
-}
-
-
-/* =========================================================
-   ENCONTRAR PROGRESSO
-========================================================= */
-
-function encontrarProgresso(licaoId){
-
-    return progresso.find(
-        item =>
-            item.licaoId === licaoId
-    );
-
-}
-
-
-/* =========================================================
-   PROGRESSO GERAL
-========================================================= */
-
-function atualizarProgresso(){
-
-    if(licoes.length === 0){
-
-        document.getElementById(
-            "porcentagem"
-        ).textContent = "0%";
-
-        return;
-    }
-
-
-    let concluidas = 0;
-
-
-    licoes.forEach(licao => {
-
-        const registro =
-            encontrarProgresso(
-                licao.id
-            );
-
-
-        if(
-            registro &&
-            registro.aprovado === true
-        ){
-
-            concluidas++;
-
-        }
-
-    });
-
-
-    const percentual =
-        Math.round(
-            (concluidas /
-            licoes.length) *
-            100
-        );
-
-
-    document.getElementById(
-        "porcentagem"
-    ).textContent =
-        percentual + "%";
-
-
-    document.getElementById(
-        "barraProgresso"
-    ).style.width =
-        percentual + "%";
-
-}
-
-
-/* =========================================================
-   ABRIR LIÇÃO
-========================================================= */
-
-function abrirLicao(
-    moduloId,
-    licaoId
-){
-
-    window.location.href =
-        "licao.html?" +
-        "cursoId=" +
-        encodeURIComponent(cursoId) +
-        "&moduloId=" +
-        encodeURIComponent(moduloId) +
-        "&licaoId=" +
-        encodeURIComponent(licaoId);
-
-}
-
-
-/* =========================================================
-   CARTEIRA
-========================================================= */
-
-window.abrirCarteira =
-    function(){
-
-        window.location.href =
-            "carteira.html";
-
-    };
-
-
-/* =========================================================
-   VOLTAR
-========================================================= */
-
-window.voltar =
-    function(){
-
-        window.location.href =
-            "cursos.html";
-
-    };
-
-
-/* =========================================================
-   SAIR
-========================================================= */
-
-window.sair =
-    async function(){
-
-        try{
-
-            await signOut(auth);
-
-            window.location.href =
-                "index.html";
-
-        }catch(erro){
-
-            console.error(
-                erro
-            );
-
-            alert(
-                "Não foi possível sair."
-            );
-
-        }
-
-    };
-
-
-/* =========================================================
-   ESCAPAR HTML
-========================================================= */
-
-function escapar(valor){
-
-    return String(valor)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
 
 </script>
 
