@@ -1,1040 +1,1048 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Minha Carteira</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-
-    margin: 0;
-
-    font-family: Arial, sans-serif;
-
-    background: #f4f7fb;
-
-    color: #222;
-
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
 }
 
-
-/* ================================
-   HEADER
-================================ */
-
-header {
-
-    background: white;
-
-    padding: 15px 20px;
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,.08);
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 15px;
-
-    flex-wrap: wrap;
-
+header{
+    background:#4f46e5;
+    color:white;
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
-
-.logo {
-
-    font-size: 22px;
-
-    font-weight: bold;
-
+header h1{
+    font-size:22px;
 }
 
-
-.header-acoes {
-
-    display: flex;
-
-    gap: 10px;
-
-    flex-wrap: wrap;
-
+.header-buttons{
+    display:flex;
+    gap:8px;
 }
 
-
-button {
-
-    border: none;
-
-    border-radius: 9px;
-
-    padding: 11px 16px;
-
-    cursor: pointer;
-
-    font-weight: bold;
-
+button{
+    border:0;
+    border-radius:10px;
+    padding:11px 16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-
-.btn-voltar {
-
-    background: #e9ecef;
-
+.btn-voltar{
+    background:white;
+    color:#4f46e5;
 }
 
-
-.btn-sair {
-
-    background: #dc3545;
-
-    color: white;
-
+.btn-sair{
+    background:#ef4444;
+    color:white;
 }
 
-
-/* ================================
-   CONTAINER
-================================ */
-
-main {
-
-    max-width: 1000px;
-
-    margin: 30px auto;
-
-    padding: 0 15px;
-
+.container{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:25px 15px 50px;
 }
 
-
-.titulo {
-
-    margin-bottom: 25px;
-
+.resumo{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
 }
 
-
-.titulo h1 {
-
-    margin: 0 0 8px 0;
-
+.card{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
 
-
-.titulo p {
-
-    color: #666;
-
+.card h3{
+    font-size:14px;
+    color:#6b7280;
+    margin-bottom:10px;
 }
 
-
-/* ================================
-   CARDS
-================================ */
-
-.grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(200px, 1fr)
-        );
-
-    gap: 18px;
-
+.valor{
+    font-size:30px;
+    font-weight:bold;
 }
 
-
-.card {
-
-    background: white;
-
-    border-radius: 16px;
-
-    padding: 25px;
-
-    box-shadow:
-        0 4px 15px rgba(0,0,0,.08);
-
+.vida{
+    color:#ef4444;
 }
 
-
-.recurso {
-
-    text-align: center;
-
+.moeda{
+    color:#d97706;
 }
 
-
-.icone {
-
-    font-size: 42px;
-
-    margin-bottom: 10px;
-
+.xp{
+    color:#7c3aed;
 }
 
-
-.valor {
-
-    font-size: 32px;
-
-    font-weight: bold;
-
-    margin-bottom: 5px;
-
+.fogo{
+    color:#ea580c;
 }
 
-
-.nome {
-
-    color: #666;
-
+.progresso-card{
+    margin-bottom:25px;
 }
 
-
-/* ================================
-   VIDA
-================================ */
-
-.vida-info {
-
-    margin-top: 15px;
-
+.barra{
+    width:100%;
+    height:15px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:12px;
 }
 
-
-.barra-vida {
-
-    width: 100%;
-
-    height: 10px;
-
-    background: #e9ecef;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-
+.barra-interna{
+    height:100%;
+    width:0%;
+    background:#4f46e5;
+    transition:.3s;
 }
 
-
-.barra-vida-preenchida {
-
-    height: 100%;
-
-    width: 0%;
-
-    background: #dc3545;
-
-    transition: width .3s;
-
+.info{
+    margin-top:10px;
+    color:#6b7280;
+    font-size:14px;
 }
 
-
-.recuperacao {
-
-    margin-top: 10px;
-
-    font-size: 13px;
-
-    color: #666;
-
+.secao{
+    margin-top:25px;
 }
 
-
-/* ================================
-   MOEDAS
-================================ */
-
-.moedas-info {
-
-    margin-top: 20px;
-
-    padding: 15px;
-
-    background: #fff8dc;
-
-    border-radius: 10px;
-
+.secao h2{
+    margin-bottom:15px;
 }
 
-
-.moedas-info strong {
-
-    font-size: 18px;
-
+.loja{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
 }
 
-
-/* ================================
-   LOJA
-================================ */
-
-.loja {
-
-    margin-top: 25px;
-
+.item-loja{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
 
-
-.loja h2 {
-
-    margin-top: 0;
-
+.item-loja h3{
+    margin-bottom:8px;
 }
 
-
-.produtos {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px, 1fr)
-        );
-
-    gap: 15px;
-
-    margin-top: 20px;
-
+.item-loja p{
+    color:#6b7280;
+    margin-bottom:15px;
 }
 
-
-.produto {
-
-    border: 1px solid #e3e3e3;
-
-    border-radius: 12px;
-
-    padding: 20px;
-
+.btn-troca{
+    width:100%;
+    background:#4f46e5;
+    color:white;
 }
 
-
-.produto h3 {
-
-    margin-top: 0;
-
+.btn-troca:hover{
+    opacity:.9;
 }
 
-
-.produto p {
-
-    color: #666;
-
-    line-height: 1.5;
-
+.btn-troca:disabled{
+    background:#9ca3af;
+    cursor:not-allowed;
 }
 
-
-.btn-loja {
-
-    width: 100%;
-
-    background: #007bff;
-
-    color: white;
-
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-
-.btn-loja:disabled {
-
-    background: #adb5bd;
-
-    cursor: not-allowed;
-
+.stat{
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
 }
 
-
-/* ================================
-   ESTATÍSTICAS
-================================ */
-
-.estatisticas {
-
-    margin-top: 25px;
-
+.stat strong{
+    display:block;
+    font-size:24px;
+    margin-top:6px;
 }
 
-
-.linha {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    padding: 14px 0;
-
-    border-bottom:
-        1px solid #eee;
-
+.mensagem{
+    display:none;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-weight:bold;
 }
 
-
-.linha:last-child {
-
-    border-bottom: none;
-
+.sucesso{
+    background:#dcfce7;
+    color:#166534;
 }
 
-
-/* ================================
-   CARREGANDO
-================================ */
-
-.carregando {
-
-    text-align: center;
-
-    padding: 50px;
-
+.erro{
+    background:#fee2e2;
+    color:#991b1b;
 }
 
-
-.escondido {
-
-    display: none !important;
-
+.aviso{
+    background:#fef3c7;
+    color:#92400e;
 }
 
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#6b7280;
+}
 
-/* ================================
-   RESPONSIVO
-================================ */
-
-@media (max-width: 600px) {
-
-    header {
-
-        align-items: flex-start;
-
+@media(max-width:800px){
+    .resumo{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .logo {
-
-        width: 100%;
-
+    .loja{
+        grid-template-columns:1fr;
     }
 
-    .header-acoes {
-
-        width: 100%;
-
+    .stats{
+        grid-template-columns:1fr;
     }
-
-    .header-acoes button {
-
-        flex: 1;
-
-    }
-
 }
 
+@media(max-width:500px){
+    .resumo{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .valor{
+        font-size:24px;
+    }
+}
 </style>
-
 </head>
-
 
 <body>
 
-
 <header>
+    <h1>💰 Minha Carteira</h1>
 
-    <div class="logo">
-        📚 Minha Plataforma
+    <div class="header-buttons">
+        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <button class="btn-sair" onclick="sair()">Sair</button>
     </div>
-
-
-    <div class="header-acoes">
-
-        <button
-            class="btn-voltar"
-            id="btnVoltar">
-
-            ← Voltar
-
-        </button>
-
-
-        <button
-            class="btn-sair"
-            id="btnSair">
-
-            Sair
-
-        </button>
-
-    </div>
-
 </header>
 
+<div class="container">
 
+    <div id="mensagem" class="mensagem"></div>
 
-<main>
-
-
-    <div
-        id="carregando"
-        class="card carregando">
-
+    <div id="loading" class="loading">
         Carregando sua carteira...
-
     </div>
 
+    <div id="conteudo" style="display:none;">
 
+        <!-- RESUMO -->
+        <div class="resumo">
 
-    <div
-        id="conteudo"
-        class="escondido">
+            <div class="card">
+                <h3>❤️ Vidas</h3>
+                <div class="valor vida" id="vidas">0</div>
+            </div>
 
+            <div class="card">
+                <h3>🪙 Moedas</h3>
+                <div class="valor moeda" id="moedas">0</div>
+            </div>
 
-        <div class="titulo">
+            <div class="card">
+                <h3>⭐ XP</h3>
+                <div class="valor xp" id="xp">0</div>
+            </div>
 
-            <h1>
-                💰 Minha Carteira
-            </h1>
-
-            <p>
-                Aqui você acompanha suas
-                vidas, moedas, XP e progresso.
-            </p>
+            <div class="card">
+                <h3>🔥 Sequência</h3>
+                <div class="valor fogo" id="sequencia">0</div>
+            </div>
 
         </div>
 
+        <!-- VIDAS -->
+        <div class="card progresso-card">
 
+            <h2>❤️ Suas vidas</h2>
 
-        <!-- RECURSOS -->
-
-        <div class="grid">
-
-
-            <!-- VIDAS -->
-
-            <div class="card recurso">
-
-                <div class="icone">
-                    ❤️
-                </div>
-
-                <div
-                    class="valor"
-                    id="vidas">
-
-                    0
-
-                </div>
-
-                <div class="nome">
-                    Vidas
-                </div>
-
-
-                <div class="vida-info">
-
-                    <div class="barra-vida">
-
-                        <div
-                            id="barraVida"
-                            class="barra-vida-preenchida">
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        id="recuperacao"
-                        class="recuperacao">
-
-                        Verificando recuperação...
-
-                    </div>
-
-                </div>
-
+            <div class="info">
+                <span id="textoVidas">0 de 6 vidas</span>
             </div>
 
-
-
-            <!-- MOEDAS -->
-
-            <div class="card recurso">
-
-                <div class="icone">
-                    🪙
-                </div>
-
-                <div
-                    class="valor"
-                    id="moedas">
-
-                    0
-
-                </div>
-
-                <div class="nome">
-                    Moedas
-                </div>
-
+            <div class="barra">
+                <div id="barraVidas" class="barra-interna"></div>
             </div>
 
-
-
-            <!-- XP -->
-
-            <div class="card recurso">
-
-                <div class="icone">
-                    ⭐
-                </div>
-
-                <div
-                    class="valor"
-                    id="xp">
-
-                    0
-
-                </div>
-
-                <div class="nome">
-                    XP
-                </div>
-
+            <div class="info" id="recuperacao">
+                Calculando recuperação...
             </div>
-
-
-
-            <!-- SEQUÊNCIA -->
-
-            <div class="card recurso">
-
-                <div class="icone">
-                    🔥
-                </div>
-
-                <div
-                    class="valor"
-                    id="sequencia">
-
-                    0
-
-                </div>
-
-                <div class="nome">
-                    Dias de sequência
-                </div>
-
-            </div>
-
 
         </div>
-
-
 
         <!-- MOEDAS DIÁRIAS -->
+        <div class="card progresso-card">
 
-        <div class="card"
-             style="margin-top:20px;">
+            <h2>🎁 Bônus diário</h2>
 
-            <h2>
-                🎁 Recompensa diária
-            </h2>
-
-
-            <div class="moedas-info">
-
-                <strong>
-                    🪙 +50 moedas
-                </strong>
-
-                <p>
-                    Você recebe 50 moedas
-                    gratuitamente uma vez
-                    por dia.
-                </p>
-
-                <div id="statusDiario">
-
-                    Verificando...
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ESTATÍSTICAS -->
-
-        <div class="card estatisticas">
-
-            <h2>
-                📊 Meu progresso
-            </h2>
-
-
-            <div class="linha">
-
-                <span>
-                    Lições concluídas
-                </span>
-
-                <strong id="licoesConcluidas">
-                    0
-                </strong>
-
-            </div>
-
-
-            <div class="linha">
-
-                <span>
-                    Melhor aproveitamento
-                </span>
-
-                <strong id="melhorAproveitamento">
-                    0%
-                </strong>
-
-            </div>
-
-
-            <div class="linha">
-
-                <span>
-                    Total de tentativas
-                </span>
-
-                <strong id="totalTentativas">
-                    0
-                </strong>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- LOJA -->
-
-        <div class="card loja">
-
-            <h2>
-                🛒 Loja
-            </h2>
-
-            <p>
-                Em breve você poderá utilizar
-                dinheiro real para adquirir
-                moedas, XP e vidas.
+            <p class="info" id="bonusDiario">
+                Verificando bônus...
             </p>
 
+        </div>
 
-            <div class="produtos">
+        <!-- TROCAS -->
+        <div class="secao">
 
+            <h2>🛒 Trocar moedas</h2>
 
-                <div class="produto">
+            <div class="loja">
 
-                    <h3>
-                        🪙 Pacotes de moedas
-                    </h3>
+                <div class="item-loja">
+
+                    <h3>⭐ Trocar por XP</h3>
 
                     <p>
-                        Compre moedas para
-                        utilizar dentro da
-                        plataforma.
+                        Cada moeda vale <strong>1 XP</strong>.
                     </p>
 
                     <button
-                        class="btn-loja"
-                        disabled>
-
-                        Em breve
-
+                        class="btn-troca"
+                        onclick="trocarXP(10)"
+                        id="btnXP10">
+                        🪙 10 moedas → ⭐ 10 XP
                     </button>
 
                 </div>
 
+                <div class="item-loja">
 
-
-                <div class="produto">
-
-                    <h3>
-                        ⭐ Pacotes de XP
-                    </h3>
+                    <h3>❤️ Comprar 1 vida</h3>
 
                     <p>
-                        Troque ou compre XP
-                        para acelerar seu
-                        progresso.
+                        50 moedas = 1 vida.
+                        Máximo de 6 vidas.
                     </p>
 
                     <button
-                        class="btn-loja"
-                        disabled>
-
-                        Em breve
-
+                        class="btn-troca"
+                        onclick="trocarVida()"
+                        id="btnVida">
+                        🪙 50 moedas → ❤️ 1 vida
                     </button>
 
                 </div>
-
-
-
-                <div class="produto">
-
-                    <h3>
-                        ❤️ Pacotes de vidas
-                    </h3>
-
-                    <p>
-                        Recupere suas vidas
-                        imediatamente.
-                    </p>
-
-                    <button
-                        class="btn-loja"
-                        disabled>
-
-                        Em breve
-
-                    </button>
-
-                </div>
-
-
-
-                <div class="produto">
-
-                    <h3>
-                        ♾️ Vida infinita
-                    </h3>
-
-                    <p>
-                        Ative vidas infinitas
-                        por um período
-                        determinado.
-                    </p>
-
-                    <button
-                        class="btn-loja"
-                        disabled>
-
-                        Em breve
-
-                    </button>
-
-                </div>
-
 
             </div>
 
         </div>
 
+        <!-- ESTATÍSTICAS -->
+        <div class="secao">
+
+            <h2>📊 Meu desempenho</h2>
+
+            <div class="stats">
+
+                <div class="stat">
+                    Lições concluídas
+                    <strong id="licoesConcluidas">0</strong>
+                </div>
+
+                <div class="stat">
+                    Lições aprovadas
+                    <strong id="licoesAprovadas">0</strong>
+                </div>
+
+                <div class="stat">
+                    Aproveitamento médio
+                    <strong id="media">0%</strong>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
-</main>
-
-
+</div>
 
 <script type="module">
 
-
-/* =========================================================
-   FIREBASE
-========================================================= */
-
 import {
     initializeApp
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged,
     signOut
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
     getFirestore,
     doc,
     getDoc,
+    setDoc,
     collection,
-    getDocs
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
+    getDocs,
+    runTransaction,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
-
-    authDomain:
-        "dezenas-1ed47.firebaseapp.com",
-
-    projectId:
-        "dezenas-1ed47",
-
-    storageBucket:
-        "dezenas-1ed47.firebasestorage.app",
-
-    messagingSenderId:
-        "372788277555",
-
-    appId:
-        "1:372788277555:web:1c1a6a80adee1722b54e46",
-
-    measurementId:
-        "G-NMPP8PKPK3"
-
+    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+    authDomain: "dezenas-1ed47.firebaseapp.com",
+    projectId: "dezenas-1ed47",
+    storageBucket: "dezenas-1ed47.firebasestorage.app",
+    messagingSenderId: "372788277555",
+    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+    measurementId: "G-NMPP8PKPK3"
 };
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const app =
-    initializeApp(
-        firebaseConfig
-    );
-
-
-const auth =
-    getAuth(app);
-
-
-const db =
-    getFirestore(app);
-
-
-
-/* =========================================================
-   CONFIGURAÇÕES
-========================================================= */
 
 const MAX_VIDAS = 6;
-
+const CUSTO_VIDA = 50;
 const MINUTOS_RECUPERACAO = 10;
+const MOEDAS_DIARIAS = 50;
 
-
-
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
 
 let usuarioAtual = null;
-
 let dadosUsuario = null;
-
-let timerRecuperacao = null;
-
+let intervalo = null;
 
 
-/* =========================================================
-   ELEMENTOS
-========================================================= */
+function mostrarMensagem(texto, tipo="sucesso"){
 
-const carregando =
-    document.getElementById(
-        "carregando"
-    );
+    const elemento = document.getElementById("mensagem");
 
+    elemento.textContent = texto;
+    elemento.className = "mensagem " + tipo;
+    elemento.style.display = "block";
 
-const conteudo =
-    document.getElementById(
-        "conteudo"
-    );
+    setTimeout(() => {
+        elemento.style.display = "none";
+    }, 3500);
+}
 
 
-const vidasElemento =
-    document.getElementById(
-        "vidas"
-    );
+function dataLocal(){
+
+    const agora = new Date();
+
+    const ano = agora.getFullYear();
+    const mes = String(agora.getMonth()+1).padStart(2,"0");
+    const dia = String(agora.getDate()).padStart(2,"0");
+
+    return `${ano}-${mes}-${dia}`;
+}
 
 
-const moedasElemento =
+function atualizarVidas(){
+
+    if(!dadosUsuario) return;
+
+    let vidas = Number(dadosUsuario.vidas ?? MAX_VIDAS);
+
+    const ultima =
+        dadosUsuario.vidasUltimaAtualizacao?.toDate
+        ? dadosUsuario.vidasUltimaAtualizacao.toDate()
+        : null;
+
+    if(vidas < MAX_VIDAS && ultima){
+
+        const agora = new Date();
+
+        const diferenca =
+            Math.floor((agora - ultima) / 60000);
+
+        const recuperadas =
+            Math.floor(diferenca / MINUTOS_RECUPERACAO);
+
+        if(recuperadas > 0){
+
+            vidas = Math.min(
+                MAX_VIDAS,
+                vidas + recuperadas
+            );
+
+            if(vidas >= MAX_VIDAS){
+
+                dadosUsuario.vidasUltimaAtualizacao =
+                    new Date();
+
+            }else{
+
+                const novaData =
+                    new Date(
+                        ultima.getTime() +
+                        recuperadas *
+                        MINUTOS_RECUPERACAO *
+                        60000
+                    );
+
+                dadosUsuario.vidasUltimaAtualizacao =
+                    novaData;
+            }
+
+            salvarRecuperacao(vidas);
+        }
+    }
+
+    dadosUsuario.vidas = vidas;
+
+    document.getElementById("vidas").textContent = vidas;
+
+    document.getElementById("textoVidas").textContent =
+        `${vidas} de ${MAX_VIDAS} vidas`;
+
+    const porcentagem =
+        (vidas / MAX_VIDAS) * 100;
+
+    document.getElementById("barraVidas").style.width =
+        porcentagem + "%";
+
+
+    const recuperacao =
+        document.getElementById("recuperacao");
+
+
+    if(vidas >= MAX_VIDAS){
+
+        recuperacao.textContent =
+            "❤️ Você está com todas as vidas!";
+
+    }else if(dadosUsuario.vidasUltimaAtualizacao){
+
+        const ultimaData =
+            dadosUsuario.vidasUltimaAtualizacao instanceof Date
+            ? dadosUsuario.vidasUltimaAtualizacao
+            : dadosUsuario.vidasUltimaAtualizacao.toDate();
+
+        const agora = new Date();
+
+        const decorrido =
+            Math.floor(
+                (agora - ultimaData) / 60000
+            );
+
+        let restante =
+            MINUTOS_RECUPERACAO -
+            (decorrido % MINUTOS_RECUPERACAO);
+
+        if(restante === MINUTOS_RECUPERACAO){
+            restante = 0;
+        }
+
+        recuperacao.textContent =
+            `⏱️ Próxima vida em aproximadamente ${restante} minuto(s).`;
+
+    }else{
+
+        recuperacao.textContent =
+            "⏱️ Recuperação automática ativada.";
+    }
+
+
+    atualizarBotoes();
+}
+
+
+async function salvarRecuperacao(vidas){
+
+    if(!usuarioAtual) return;
+
+    try{
+
+        await setDoc(
+            doc(db,"usuarios",usuarioAtual.uid),
+            {
+                vidas: vidas,
+                vidasUltimaAtualizacao:
+                    dadosUsuario.vidasUltimaAtualizacao instanceof Date
+                    ? dadosUsuario.vidasUltimaAtualizacao
+                    : serverTimestamp(),
+
+                atualizadoEm: serverTimestamp()
+            },
+            {merge:true}
+        );
+
+    }catch(erro){
+
+        console.error(
+            "Erro ao salvar recuperação:",
+            erro
+        );
+    }
+}
+
+
+function atualizarBotoes(){
+
+    const botaoVida =
+        document.getElementById("btnVida");
+
+    const botaoXP =
+        document.getElementById("btnXP10");
+
+
+    if(!dadosUsuario){
+
+        botaoVida.disabled = true;
+        botaoXP.disabled = true;
+
+        return;
+    }
+
+
+    const moedas =
+        Number(dadosUsuario.moedas ?? 0);
+
+    const vidas =
+        Number(dadosUsuario.vidas ?? 0);
+
+
+    botaoVida.disabled =
+        moedas < CUSTO_VIDA ||
+        vidas >= MAX_VIDAS;
+
+    botaoXP.disabled =
+        moedas < 10;
+}
+
+
+async function trocarXP(quantidade){
+
+    if(!usuarioAtual) return;
+
+    try{
+
+        await runTransaction(
+            db,
+            async transaction => {
+
+                const ref =
+                    doc(
+                        db,
+                        "usuarios",
+                        usuarioAtual.uid
+                    );
+
+                const snap =
+                    await transaction.get(ref);
+
+                if(!snap.exists()){
+
+                    throw new Error(
+                        "Perfil do usuário não encontrado."
+                    );
+                }
+
+                const dados = snap.data();
+
+                const moedas =
+                    Number(dados.moedas ?? 0);
+
+                if(moedas < quantidade){
+
+                    throw new Error(
+                        "Você não possui moedas suficientes."
+                    );
+                }
+
+                const xp =
+                    Number(dados.xp ?? 0);
+
+                transaction.update(
+                    ref,
+                    {
+                        moedas:
+                            moedas - quantidade,
+
+                        xp:
+                            xp + quantidade,
+
+                        atualizadoEm:
+                            serverTimestamp()
+                    }
+                );
+            }
+        );
+
+
+        await registrarTransacao(
+            "troca_moedas_xp",
+            quantidade,
+            `Troca de ${quantidade} moedas por ${quantidade} XP`
+        );
+
+
+        dadosUsuario.moedas =
+            Number(dadosUsuario.moedas ?? 0) -
+            quantidade;
+
+        dadosUsuario.xp =
+            Number(dadosUsuario.xp ?? 0) +
+            quantidade;
+
+
+        atualizarTela();
+
+        mostrarMensagem(
+            `⭐ ${quantidade} XP adicionados com sucesso!`
+        );
+
+
+    }catch(erro){
+
+        console.error(erro);
+
+        mostrarMensagem(
+            erro.message ||
+            "Não foi possível realizar a troca.",
+            "erro"
+        );
+    }
+}
+
+
+async function trocarVida(){
+
+    if(!usuarioAtual) return;
+
+
+    try{
+
+        await runTransaction(
+            db,
+            async transaction => {
+
+                const ref =
+                    doc(
+                        db,
+                        "usuarios",
+                        usuarioAtual.uid
+                    );
+
+                const snap =
+                    await transaction.get(ref);
+
+                if(!snap.exists()){
+
+                    throw new Error(
+                        "Perfil do usuário não encontrado."
+                    );
+                }
+
+                const dados =
+                    snap.data();
+
+                const moedas =
+                    Number(dados.moedas ?? 0);
+
+                const vidas =
+                    Number(dados.vidas ?? 0);
+
+
+                if(moedas < CUSTO_VIDA){
+
+                    throw new Error(
+                        "Você não possui 50 moedas."
+                    );
+                }
+
+
+                if(vidas >= MAX_VIDAS){
+
+                    throw new Error(
+                        "Você já possui 6 vidas."
+                    );
+                }
+
+
+                transaction.update(
+                    ref,
+                    {
+                        moedas:
+                            moedas - CUSTO_VIDA,
+
+                        vidas:
+                            vidas + 1,
+
+                        atualizadoEm:
+                            serverTimestamp()
+                    }
+                );
+
+            }
+        );
+
+
+        await registrarTransacao(
+            "compra_vida_moedas",
+            CUSTO_VIDA,
+            "Compra de 1 vida utilizando moedas"
+        );
+
+
+        dadosUsuario.moedas =
+            Number(dadosUsuario.moedas ?? 0) -
+            CUSTO_VIDA;
+
+        dadosUsuario.vidas =
+            Number(dadosUsuario.vidas ?? 0) +
+            1;
+
+
+        atualizarTela();
+
+        mostrarMensagem(
+            "❤️ Você ganhou 1 vida!"
+        );
+
+
+    }catch(erro){
+
+        console.error(erro);
+
+        mostrarMensagem(
+            erro.message ||
+            "Não foi possível comprar a vida.",
+            "erro"
+        );
+    }
+}
+
+
+async function registrarTransacao(
+    tipo,
+    quantidade,
+    descricao
+){
+
+    if(!usuarioAtual) return;
+
+    try{
+
+        await setDoc(
+            doc(
+                collection(db,"transacoes")
+            ),
+            {
+                usuarioId:
+                    usuarioAtual.uid,
+
+                tipo: tipo,
+
+                quantidade:
+                    quantidade,
+
+                descricao:
+                    descricao,
+
+                data:
+                    serverTimestamp()
+            }
+        );
+
+    }catch(erro){
+
+        console.error(
+            "Erro ao registrar transação:",
+            erro
+        );
+    }
+}
+
+
+async function carregarEstatisticas(){
+
+    if(!usuarioAtual) return;
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(db,"progresso")
+            );
+
+
+        let concluidas = 0;
+        let aprovadas = 0;
+        let soma = 0;
+
+
+        snapshot.forEach(item => {
+
+            const dados = item.data();
+
+            if(
+                dados.usuarioId ===
+                usuarioAtual.uid
+            ){
+
+                if(dados.concluida){
+
+                    concluidas++;
+
+                    soma +=
+                        Number(
+                            dados.aproveitamento ?? 0
+                        );
+                }
+
+                if(dados.aprovado){
+
+                    aprovadas++;
+                }
+            }
+        });
+
+
+        let media = 0;
+
+        if(concluidas > 0){
+
+            media =
+                Math.round(
+                    soma / concluidas
+                );
+        }
+
+
+        document.getElementById(
+            "licoesConcluidas"
+        ).textContent = concluidas;
+
+
+        document.getElementById(
+            "licoesAprovadas"
+        ).textContent = aprovadas;
+
+
+        document.getElementById(
+            "media"
+        ).textContent = media + "%";
+
+
+    }catch(erro){
+
+        console.error(
+            "Erro ao carregar estatísticas:",
+            erro
+        );
+    }
+}
+
+
+function atualizarBonusDiario(){
+
+    const elemento =
+        document.getElementById(
+            "bonusDiario"
+        );
+
+    const hoje = dataLocal();
+
+    const dataBonus =
+        dadosUsuario.moedasDiariasData || "";
+
+
+    if(dataBonus === hoje){
+
+        elemento.textContent =
+            "✅ Você já recebeu suas 50 moedas de hoje.";
+
+    }else{
+
+        elemento.textContent =
+            "🎁 Seu bônus diário de 50 moedas será liberado no próximo acesso.";
+    }
+}
+
+
+function atualizarTela(){
+
+    if(!dadosUsuario) return;
+
+
     document.getElementById(
         "moedas"
-    );
+    ).textContent =
+        Number(
+            dadosUsuario.moedas ?? 0
+        );
 
 
-const xpElemento =
     document.getElementById(
         "xp"
-    );
+    ).textContent =
+        Number(
+            dadosUsuario.xp ?? 0
+        );
 
 
-const sequenciaElemento =
     document.getElementById(
         "sequencia"
-    );
+    ).textContent =
+        Number(
+            dadosUsuario.sequencia ?? 0
+        );
 
 
-const barraVida =
-    document.getElementById(
-        "barraVida"
-    );
+    atualizarVidas();
+    atualizarBonusDiario();
+    atualizarBotoes();
+}
 
 
-const recuperacao =
-    document.getElementById(
-        "recuperacao"
-    );
-
-
-const statusDiario =
-    document.getElementById(
-        "statusDiario"
-    );
-
-
-const licoesConcluidas =
-    document.getElementById(
-        "licoesConcluidas"
-    );
-
-
-const melhorAproveitamento =
-    document.getElementById(
-        "melhorAproveitamento"
-    );
-
-
-const totalTentativas =
-    document.getElementById(
-        "totalTentativas"
-    );
-
-
-
-/* =========================================================
-   CARREGAR USUÁRIO
-========================================================= */
-
-async function carregarUsuario() {
+async function carregarUsuario(){
 
     const referencia =
         doc(
@@ -1043,466 +1051,147 @@ async function carregarUsuario() {
             usuarioAtual.uid
         );
 
-
     const snapshot =
-        await getDoc(
-            referencia
+        await getDoc(referencia);
+
+
+    if(!snapshot.exists()){
+
+        await setDoc(
+            referencia,
+            {
+                uid:
+                    usuarioAtual.uid,
+
+                nome:
+                    usuarioAtual.displayName || "",
+
+                email:
+                    usuarioAtual.email || "",
+
+                xp:0,
+                moedas:0,
+                vidas:MAX_VIDAS,
+                sequencia:0,
+
+                criadoEm:
+                    serverTimestamp(),
+
+                atualizadoEm:
+                    serverTimestamp()
+            },
+            {merge:true}
         );
 
 
-    if (!snapshot.exists()) {
+        const novoSnapshot =
+            await getDoc(referencia);
 
-        throw new Error(
-            "Perfil do usuário não encontrado."
-        );
+        dadosUsuario =
+            novoSnapshot.data();
 
+    }else{
+
+        dadosUsuario =
+            snapshot.data();
     }
 
 
-    dadosUsuario =
-        snapshot.data();
+    document.getElementById(
+        "loading"
+    ).style.display = "none";
 
 
-    const vidas =
-        Number(
-            dadosUsuario.vidas ?? 6
-        );
+    document.getElementById(
+        "conteudo"
+    ).style.display = "block";
 
 
-    const moedas =
-        Number(
-            dadosUsuario.moedas ?? 0
-        );
+    atualizarTela();
+
+    await carregarEstatisticas();
 
 
-    const xp =
-        Number(
-            dadosUsuario.xp ?? 0
-        );
+    if(intervalo){
 
-
-    const sequencia =
-        Number(
-            dadosUsuario.sequencia ?? 0
-        );
-
-
-    vidasElemento.textContent =
-        vidas;
-
-
-    moedasElemento.textContent =
-        moedas;
-
-
-    xpElemento.textContent =
-        xp;
-
-
-    sequenciaElemento.textContent =
-        sequencia;
-
-
-    const percentualVida =
-        (
-            vidas /
-            MAX_VIDAS
-        ) * 100;
-
-
-    barraVida.style.width =
-        percentualVida + "%";
-
-
-    mostrarStatusDiario();
-
-
-    iniciarContadorVida(
-        vidas
-    );
-
-}
-
-
-
-/* =========================================================
-   STATUS DAS MOEDAS DIÁRIAS
-========================================================= */
-
-function mostrarStatusDiario() {
-
-    const hoje =
-        new Date()
-            .toISOString()
-            .split("T")[0];
-
-
-    const ultima =
-        dadosUsuario.moedasDiariasData ||
-        "";
-
-
-    if (ultima === hoje) {
-
-        statusDiario.textContent =
-            "✅ As 50 moedas de hoje já foram recebidas.";
-
-    }
-
-    else {
-
-        statusDiario.textContent =
-            "🎁 As 50 moedas diárias ainda serão liberadas.";
-
-    }
-
-}
-
-
-
-/* =========================================================
-   CONTADOR DE VIDA
-========================================================= */
-
-function iniciarContadorVida(
-    vidas
-) {
-
-    if (timerRecuperacao) {
-
-        clearInterval(
-            timerRecuperacao
-        );
-
+        clearInterval(intervalo);
     }
 
 
-    if (vidas >= MAX_VIDAS) {
-
-        recuperacao.textContent =
-            "❤️ Você está com todas as vidas.";
-
-        return;
-
-    }
-
-
-    atualizarContador();
-
-
-    timerRecuperacao =
+    intervalo =
         setInterval(
-            atualizarContador,
+            atualizarVidas,
             1000
         );
-
 }
 
-
-
-/* =========================================================
-   ATUALIZAR CONTADOR
-========================================================= */
-
-function atualizarContador() {
-
-    const ultima =
-        converterData(
-            dadosUsuario
-                .vidasUltimaAtualizacao
-        );
-
-
-    if (!ultima) {
-
-        recuperacao.textContent =
-            "❤️ Aguardando recuperação.";
-
-        return;
-
-    }
-
-
-    const agora =
-        new Date();
-
-
-    const diferenca =
-        agora.getTime() -
-        ultima.getTime();
-
-
-    const intervalo =
-        MINUTOS_RECUPERACAO *
-        60 *
-        1000;
-
-
-    const restante =
-        intervalo -
-        (
-            diferenca %
-            intervalo
-        );
-
-
-    const minutos =
-        Math.floor(
-            restante /
-            60000
-        );
-
-
-    const segundos =
-        Math.floor(
-            (
-                restante %
-                60000
-            ) / 1000
-        );
-
-
-    recuperacao.textContent =
-        "❤️ Próxima vida em " +
-        minutos +
-        "m " +
-        String(
-            segundos
-        ).padStart(
-            2,
-            "0"
-        ) +
-        "s";
-
-}
-
-
-
-/* =========================================================
-   CONVERTER DATA
-========================================================= */
-
-function converterData(data) {
-
-    if (!data) {
-        return null;
-    }
-
-
-    if (data.toDate) {
-        return data.toDate();
-    }
-
-
-    if (data instanceof Date) {
-        return data;
-    }
-
-
-    return new Date(data);
-
-}
-
-
-
-/* =========================================================
-   CARREGAR ESTATÍSTICAS
-========================================================= */
-
-async function carregarEstatisticas() {
-
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "progresso"
-            )
-        );
-
-
-    let concluidas = 0;
-
-    let melhor = 0;
-
-    let tentativas = 0;
-
-
-    snapshot.forEach(
-        docSnap => {
-
-            const dados =
-                docSnap.data();
-
-
-            if (
-                dados.usuarioId !==
-                usuarioAtual.uid
-            ) {
-
-                return;
-
-            }
-
-
-            tentativas +=
-                Number(
-                    dados.tentativas ||
-                    0
-                );
-
-
-            if (
-                dados.concluida ===
-                true
-            ) {
-
-                concluidas++;
-
-            }
-
-
-            const aproveitamento =
-                Number(
-                    dados.aproveitamento ||
-                    0
-                );
-
-
-            if (
-                aproveitamento >
-                melhor
-            ) {
-
-                melhor =
-                    aproveitamento;
-
-            }
-
-        }
-    );
-
-
-    licoesConcluidas.textContent =
-        concluidas;
-
-
-    melhorAproveitamento.textContent =
-        Math.round(melhor) +
-        "%";
-
-
-    totalTentativas.textContent =
-        tentativas;
-
-}
-
-
-
-/* =========================================================
-   VOLTAR
-========================================================= */
-
-document
-    .getElementById(
-        "btnVoltar"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            window.location.href =
-                "index.html";
-
-        }
-    );
-
-
-
-/* =========================================================
-   SAIR
-========================================================= */
-
-document
-    .getElementById(
-        "btnSair"
-    )
-    .addEventListener(
-        "click",
-        async () => {
-
-            await signOut(
-                auth
-            );
-
-
-            window.location.href =
-                "index.html";
-
-        }
-    );
-
-
-
-/* =========================================================
-   AUTENTICAÇÃO
-========================================================= */
 
 onAuthStateChanged(
     auth,
     async usuario => {
 
-        if (!usuario) {
+        if(!usuario){
 
             window.location.href =
                 "index.html";
 
             return;
-
         }
 
 
-        usuarioAtual =
-            usuario;
+        usuarioAtual = usuario;
 
 
-        try {
+        try{
 
             await carregarUsuario();
 
-            await carregarEstatisticas();
+        }catch(erro){
 
+            console.error(erro);
 
-            carregando.classList.add(
-                "escondido"
-            );
-
-
-            conteudo.classList.remove(
-                "escondido"
-            );
-
-        }
-
-        catch (erro) {
-
-            console.error(
-                erro
-            );
-
-
-            carregando.textContent =
-                erro.message ||
-                "Erro ao carregar carteira.";
-
+            document.getElementById(
+                "loading"
+            ).textContent =
+                "Erro ao carregar sua carteira.";
         }
 
     }
 );
 
 
+window.trocarXP = trocarXP;
+window.trocarVida = trocarVida;
+
+
+window.voltar = function(){
+
+    window.history.back();
+};
+
+
+window.sair = async function(){
+
+    try{
+
+        await signOut(auth);
+
+        window.location.href =
+            "index.html";
+
+    }catch(erro){
+
+        console.error(erro);
+
+        mostrarMensagem(
+            "Não foi possível sair.",
+            "erro"
+        );
+    }
+};
+
 </script>
 
 </body>
-
 </html>
-```
+
