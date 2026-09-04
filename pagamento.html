@@ -1,15 +1,12 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Pagamento</title>
+<title>Pagamentos</title>
 
 <style>
 
@@ -20,175 +17,145 @@
 body{
     margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:#f4f6f8;
-    color:#222;
+    background:#f3f4f6;
+    color:#111827;
 }
 
 header{
     background:#111827;
     color:white;
-    padding:18px;
+    padding:20px;
     text-align:center;
 }
 
 header h1{
     margin:0;
-    font-size:22px;
 }
 
 .container{
-    max-width:700px;
-    margin:30px auto;
-    padding:15px;
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
 }
 
 .card{
     background:white;
-    border-radius:16px;
-    padding:25px;
-    box-shadow:0 4px 18px rgba(0,0,0,.08);
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
     margin-bottom:20px;
 }
 
-.titulo{
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:10px;
+.filtros{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-.descricao{
-    color:#666;
-    line-height:1.5;
-}
-
-.valor{
-    font-size:32px;
-    font-weight:bold;
-    margin:20px 0;
-}
-
-.pix-box{
-    background:#f0fdf4;
-    border:2px dashed #16a34a;
-    border-radius:12px;
-    padding:20px;
-    margin-top:20px;
-}
-
-.pix-titulo{
-    font-weight:bold;
-    color:#15803d;
-    font-size:18px;
-}
-
-.pix-chave{
-    background:white;
-    padding:15px;
+input,
+select{
+    padding:12px;
+    border:1px solid #d1d5db;
     border-radius:8px;
-    margin-top:10px;
-    word-break:break-all;
+    font-size:15px;
+}
+
+input{
+    flex:1;
+    min-width:220px;
+}
+
+.tabela{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+th,
+td{
+    padding:12px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+}
+
+th{
+    background:#f9fafb;
+}
+
+.badge{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
     font-weight:bold;
-    text-align:center;
+    display:inline-block;
+}
+
+.pendente{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.pago{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.cancelado{
+    background:#fee2e2;
+    color:#991b1b;
 }
 
 .btn{
-    width:100%;
-    border:none;
-    border-radius:10px;
-    padding:15px;
-    font-size:16px;
-    font-weight:bold;
+    border:0;
+    border-radius:7px;
+    padding:9px 12px;
     cursor:pointer;
-    margin-top:12px;
+    font-weight:bold;
+    margin:2px;
 }
 
-.btn-pix{
+.btn-pagar{
     background:#16a34a;
     color:white;
 }
 
-.btn-whatsapp{
-    background:#25D366;
+.btn-cancelar{
+    background:#dc2626;
     color:white;
 }
 
 .btn-voltar{
     background:#e5e7eb;
-    color:#111827;
 }
 
-.btn:disabled{
-    opacity:.5;
-    cursor:not-allowed;
-}
-
-.info{
-    background:#eff6ff;
-    border-radius:10px;
-    padding:15px;
-    margin-top:15px;
-    line-height:1.5;
-}
-
-.codigo{
-    background:#f3f4f6;
-    border-radius:8px;
-    padding:12px;
-    text-align:center;
-    font-weight:bold;
-    margin-top:15px;
-}
-
-.status{
-    padding:15px;
-    border-radius:10px;
-    margin-top:15px;
+.mensagem{
     display:none;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:20px;
 }
 
-.status.sucesso{
+.sucesso{
     display:block;
     background:#dcfce7;
     color:#166534;
 }
 
-.status.erro{
+.erro{
     display:block;
     background:#fee2e2;
     color:#991b1b;
 }
 
-.usuario{
-    font-size:14px;
-    color:#666;
-    margin-top:5px;
-}
-
-.item{
-    display:flex;
-    justify-content:space-between;
-    padding:8px 0;
-    border-bottom:1px solid #eee;
-}
-
-.item:last-child{
-    border-bottom:none;
-}
-
-@media(max-width:600px){
-
-    .container{
-        margin:10px auto;
-    }
-
-    .card{
-        padding:20px;
-    }
-
-    .valor{
-        font-size:28px;
-    }
-
+.vazio{
+    text-align:center;
+    padding:30px;
+    color:#6b7280;
 }
 
 </style>
@@ -199,7 +166,7 @@ header h1{
 
 <header>
 
-<h1>💳 Pagamento</h1>
+<h1>💳 Pagamentos</h1>
 
 </header>
 
@@ -208,90 +175,84 @@ header h1{
 
     <div class="card">
 
-        <div class="titulo" id="tituloProduto">
-            Carregando...
-        </div>
+        <div class="filtros">
 
-        <div class="descricao" id="descricaoProduto">
-            Aguarde...
-        </div>
+            <input
+                id="pesquisa"
+                placeholder="Pesquisar aluno, código ou produto...">
 
-        <div class="usuario" id="usuarioInfo"></div>
+            <select id="filtroStatus">
 
-        <div class="valor" id="valorProduto">
-            R$ 0,00
-        </div>
+                <option value="todos">
+                    Todos
+                </option>
 
+                <option value="pendente">
+                    Pendentes
+                </option>
 
-        <div class="info">
+                <option value="pago">
+                    Pagos
+                </option>
 
-            <strong>Como funciona:</strong>
+                <option value="cancelado">
+                    Cancelados
+                </option>
 
-            <ol>
-                <li>Copie a chave PIX.</li>
-                <li>Realize o pagamento.</li>
-                <li>Clique em "Enviar comprovante pelo WhatsApp".</li>
-                <li>Envie o comprovante.</li>
-                <li>Após a confirmação, sua compra será liberada.</li>
-            </ol>
-
-        </div>
-
-
-        <div class="pix-box">
-
-            <div class="pix-titulo">
-                🔑 Chave PIX
-            </div>
-
-            <div class="pix-chave" id="pixChave">
-                Carregando...
-            </div>
-
-            <button
-                class="btn btn-pix"
-                onclick="copiarPix()">
-
-                📋 Copiar chave PIX
-
-            </button>
+            </select>
 
         </div>
-
-
-        <div class="codigo" id="codigoCompra">
-
-            Código da compra: aguardando...
-
-        </div>
-
-
-        <div
-            id="mensagem"
-            class="status">
-        </div>
-
-
-        <button
-            id="btnPagamento"
-            class="btn btn-whatsapp"
-            onclick="realizarPagamento()"
-            disabled>
-
-            📲 Realizar pagamento / Enviar comprovante
-
-        </button>
-
-
-        <button
-            class="btn btn-voltar"
-            onclick="voltar()">
-
-            ← Voltar
-
-        </button>
 
     </div>
+
+
+    <div
+        id="mensagem"
+        class="mensagem">
+    </div>
+
+
+    <div class="card">
+
+        <div class="tabela">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Código</th>
+                        <th>Aluno</th>
+                        <th>Produto</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="lista">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="btn btn-voltar"
+        onclick="window.location.href='admin.html'">
+
+        ← Voltar para administração
+
+    </button>
 
 </div>
 
@@ -302,553 +263,408 @@ import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
-
 import {
     getAuth,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-
 import {
     getFirestore,
+    collection,
+    getDocs,
     doc,
     getDoc,
-    addDoc,
-    collection,
-    query,
-    where,
-    getDocs,
-    serverTimestamp
+    updateDoc,
+    increment,
+    serverTimestamp,
+    runTransaction
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* =====================================================
-   FIREBASE
-===================================================== */
-
 const firebaseConfig = {
 
-    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
 
-    authDomain: "dezenas-1ed47.firebaseapp.com",
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
 
-    projectId: "dezenas-1ed47",
+    projectId:
+        "dezenas-1ed47",
 
-    storageBucket: "dezenas-1ed47.firebasestorage.app",
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
 
-    messagingSenderId: "372788277555",
+    messagingSenderId:
+        "372788277555",
 
-    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
 
-    measurementId: "G-NMPP8PKPK3"
+    measurementId:
+        "G-NMPP8PKPK3"
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+    getAuth(app);
 
-const db = getFirestore(app);
-
-
-/* =====================================================
-   CONFIGURAÇÕES DO PAGAMENTO
-===================================================== */
-
-/*
-   ALTERE AQUI
-*/
-
-const CHAVE_PIX = "SUA-CHAVE-PIX-AQUI";
+const db =
+    getFirestore(app);
 
 
-/*
-   Coloque aqui o número que receberá os comprovantes.
-
-   Formato:
-   55 + DDD + número
-
-   Exemplo:
-   5588999999999
-
-*/
-
-const WHATSAPP = "5588999999999";
+let pagamentos = [];
 
 
-/* =====================================================
-   VARIÁVEIS
-===================================================== */
+const lista =
+    document.getElementById("lista");
 
-let usuarioAtual = null;
+const pesquisa =
+    document.getElementById("pesquisa");
 
-let produto = null;
-
-let compraCriada = null;
-
-
-/* =====================================================
-   URL
-===================================================== */
-
-const params = new URLSearchParams(
-    window.location.search
-);
-
-const cursoId = params.get("cursoId");
-
-const tipo = params.get("tipo");
-
-const produtoId = params.get("produtoId");
-
-
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
-const tituloProduto =
-    document.getElementById("tituloProduto");
-
-const descricaoProduto =
-    document.getElementById("descricaoProduto");
-
-const valorProduto =
-    document.getElementById("valorProduto");
-
-const pixChave =
-    document.getElementById("pixChave");
-
-const usuarioInfo =
-    document.getElementById("usuarioInfo");
-
-const codigoCompra =
-    document.getElementById("codigoCompra");
+const filtroStatus =
+    document.getElementById("filtroStatus");
 
 const mensagem =
     document.getElementById("mensagem");
 
-const btnPagamento =
-    document.getElementById("btnPagamento");
 
-
-pixChave.textContent = CHAVE_PIX;
-
-
-/* =====================================================
-   FORMATAÇÃO
-===================================================== */
-
-function formatarMoeda(valor){
-
-    return Number(valor || 0).toLocaleString(
-        "pt-BR",
-        {
-            style:"currency",
-            currency:"BRL"
-        }
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================
    MENSAGEM
-===================================================== */
+========================================= */
 
-function mostrarMensagem(texto, tipoMensagem){
+function mostrarMensagem(
+    texto,
+    tipo
+){
 
-    mensagem.textContent = texto;
+    mensagem.textContent =
+        texto;
 
     mensagem.className =
-        "status " + tipoMensagem;
+        "mensagem " + tipo;
 
 }
 
 
-/* =====================================================
-   GERAR CÓDIGO
-===================================================== */
+/* =========================================
+   MOEDA
+========================================= */
 
-function gerarCodigo(){
+function dinheiro(valor){
 
-    const parte =
-        Math.random()
-        .toString(36)
-        .substring(2,8)
-        .toUpperCase();
-
-    return "PED-" + parte;
+    return Number(valor || 0)
+        .toLocaleString(
+            "pt-BR",
+            {
+                style:"currency",
+                currency:"BRL"
+            }
+        );
 
 }
 
 
-/* =====================================================
-   CARREGAR CURSO
-===================================================== */
+/* =========================================
+   DATA
+========================================= */
 
-async function carregarCurso(){
+function dataFormatada(timestamp){
 
-    if(!cursoId){
+    if(!timestamp){
 
-        throw new Error(
-            "Curso não informado."
-        );
+        return "-";
 
     }
 
-
-    const snap = await getDoc(
-        doc(db,"cursos",cursoId)
-    );
-
-
-    if(!snap.exists()){
-
-        throw new Error(
-            "Curso não encontrado."
-        );
-
-    }
-
-
-    const curso = snap.data();
-
-
-    produto = {
-
-        id: cursoId,
-
-        nome: curso.titulo,
-
-        descricao: curso.descricao ||
-                   "Compra do curso.",
-
-        valor: Number(curso.valor || 0),
-
-        tipo: "curso"
-
-    };
-
-
-    preencherProduto();
-
-}
-
-
-/* =====================================================
-   CARREGAR CERTIFICADO
-===================================================== */
-
-async function carregarCertificado(){
-
-    if(!cursoId){
-
-        throw new Error(
-            "Curso não informado."
-        );
-
-    }
-
-
-    const snap = await getDoc(
-        doc(db,"cursos",cursoId)
-    );
-
-
-    if(!snap.exists()){
-
-        throw new Error(
-            "Curso não encontrado."
-        );
-
-    }
-
-
-    const curso = snap.data();
-
-
-    produto = {
-
-        id: cursoId,
-
-        nome:
-            "Certificado - " +
-            (curso.titulo || ""),
-
-        descricao:
-            "Emissão do certificado após conclusão de 100% do curso.",
-
-        valor: Number(
-            curso.valorCertificado || 10
-        ),
-
-        tipo:"certificado"
-
-    };
-
-
-    preencherProduto();
-
-}
-
-
-/* =====================================================
-   CARREGAR PRODUTO DA LOJA
-===================================================== */
-
-async function carregarProdutoLoja(){
-
-    if(!produtoId){
-
-        throw new Error(
-            "Produto não informado."
-        );
-
-    }
-
-
-    /*
-       Produtos da loja ficarão na coleção:
-
-       produtos
-    */
-
-    const snap = await getDoc(
-        doc(db,"produtos",produtoId)
-    );
-
-
-    if(!snap.exists()){
-
-        throw new Error(
-            "Produto não encontrado."
-        );
-
-    }
-
-
-    const dados = snap.data();
-
-
-    produto = {
-
-        id: produtoId,
-
-        nome: dados.nome,
-
-        descricao:
-            dados.descricao ||
-            "Produto da loja.",
-
-        valor: Number(dados.valor || 0),
-
-        tipo:
-            dados.tipo || "produto"
-
-    };
-
-
-    preencherProduto();
-
-}
-
-
-/* =====================================================
-   PREENCHER PRODUTO
-===================================================== */
-
-function preencherProduto(){
-
-    tituloProduto.textContent =
-        produto.nome;
-
-
-    descricaoProduto.textContent =
-        produto.descricao;
-
-
-    valorProduto.textContent =
-        formatarMoeda(produto.valor);
-
-
-    btnPagamento.disabled = false;
-
-}
-
-
-/* =====================================================
-   COPIAR PIX
-===================================================== */
-
-window.copiarPix = async function(){
 
     try{
 
-        await navigator.clipboard.writeText(
-            CHAVE_PIX
-        );
-
-
-        mostrarMensagem(
-            "Chave PIX copiada com sucesso!",
-            "sucesso"
-        );
+        return timestamp
+            .toDate()
+            .toLocaleString("pt-BR");
 
     }catch(e){
 
-        mostrarMensagem(
-            "Não foi possível copiar automaticamente. Copie a chave manualmente.",
-            "erro"
-        );
+        return "-";
 
     }
-
-};
-
-
-/* =====================================================
-   CRIAR COMPRA
-===================================================== */
-
-async function criarCompra(){
-
-    /*
-       Antes de criar outra compra,
-       verifica se já existe uma pendente
-       para o mesmo produto.
-    */
-
-
-    const q = query(
-
-        collection(db,"compras"),
-
-        where(
-            "usuarioId",
-            "==",
-            usuarioAtual.uid
-        ),
-
-        where(
-            "produtoId",
-            "==",
-            produto.id
-        ),
-
-        where(
-            "tipo",
-            "==",
-            produto.tipo
-        ),
-
-        where(
-            "status",
-            "==",
-            "pendente"
-        )
-
-    );
-
-
-    const resultado =
-        await getDocs(q);
-
-
-    if(!resultado.empty){
-
-        return {
-
-            id:
-                resultado.docs[0].id,
-
-            ...resultado.docs[0].data()
-
-        };
-
-    }
-
-
-    const codigo =
-        gerarCodigo();
-
-
-    const dadosCompra = {
-
-        usuarioId:
-            usuarioAtual.uid,
-
-        nomeUsuario:
-            usuarioAtual.nome || "",
-
-        emailUsuario:
-            usuarioAtual.email || "",
-
-        tipo:
-            produto.tipo,
-
-        produtoId:
-            produto.id,
-
-        produtoNome:
-            produto.nome,
-
-        cursoId:
-            cursoId || null,
-
-        valor:
-            produto.valor,
-
-        codigo:
-
-            codigo,
-
-        status:
-            "pendente",
-
-        criadoEm:
-            serverTimestamp(),
-
-        pagoEm:
-            null,
-
-        entregueEm:
-            null
-
-    };
-
-
-    const ref = await addDoc(
-
-        collection(db,"compras"),
-
-        dadosCompra
-
-    );
-
-
-    return {
-
-        id: ref.id,
-
-        ...dadosCompra
-
-    };
 
 }
 
 
-/* =====================================================
-   REALIZAR PAGAMENTO
-===================================================== */
+/* =========================================
+   ESCAPAR
+========================================= */
 
-window.realizarPagamento = async function(){
+function escapar(valor){
 
-    if(!usuarioAtual){
+    return String(valor ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
-        mostrarMensagem(
-            "Você precisa estar logado.",
-            "erro"
+}
+
+
+/* =========================================
+   CARREGAR
+========================================= */
+
+async function carregar(){
+
+    const snap =
+        await getDocs(
+            collection(
+                db,
+                "compras"
+            )
+        );
+
+
+    pagamentos =
+        snap.docs.map(
+            d => ({
+                id:d.id,
+                ...d.data()
+            })
+        );
+
+
+    pagamentos.sort(
+        (a,b)=>{
+
+            const da =
+                a.criadoEm?.toMillis?.() || 0;
+
+            const dbb =
+                b.criadoEm?.toMillis?.() || 0;
+
+            return dbb - da;
+
+        }
+    );
+
+
+    renderizar();
+
+}
+
+
+/* =========================================
+   RENDERIZAR
+========================================= */
+
+function renderizar(){
+
+    const texto =
+        pesquisa.value
+            .toLowerCase()
+            .trim();
+
+
+    const status =
+        filtroStatus.value;
+
+
+    const filtrados =
+        pagamentos.filter(p=>{
+
+            const correspondeTexto =
+
+                !texto ||
+
+                String(
+                    p.nomeUsuario || ""
+                )
+                .toLowerCase()
+                .includes(texto) ||
+
+                String(
+                    p.codigo || ""
+                )
+                .toLowerCase()
+                .includes(texto) ||
+
+                String(
+                    p.produtoNome || ""
+                )
+                .toLowerCase()
+                .includes(texto);
+
+
+            const correspondeStatus =
+
+                status === "todos" ||
+                p.status === status;
+
+
+            return
+                correspondeTexto &&
+                correspondeStatus;
+
+        });
+
+
+    if(!filtrados.length){
+
+        lista.innerHTML = `
+
+            <tr>
+
+                <td colspan="8"
+                    class="vazio">
+
+                    Nenhum pagamento encontrado.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    lista.innerHTML =
+        filtrados.map(p=>{
+
+            let acoes = "-";
+
+
+            if(
+                p.status === "pendente"
+            ){
+
+                acoes = `
+
+                    <button
+                        class="btn btn-pagar"
+                        onclick="confirmarPagamento('${p.id}')">
+
+                        ✅ Confirmar
+
+                    </button>
+
+                    <button
+                        class="btn btn-cancelar"
+                        onclick="cancelarPagamento('${p.id}')">
+
+                        ❌ Cancelar
+
+                    </button>
+
+                `;
+
+            }
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapar(p.codigo)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapar(
+                            p.nomeUsuario ||
+                            p.emailUsuario ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapar(
+                            p.produtoNome ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapar(
+                            p.tipo ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${dinheiro(p.valor)}
+                    </td>
+
+                    <td>
+
+                        <span class="badge ${
+                            p.status || "pendente"
+                        }">
+
+                            ${escapar(
+                                String(
+                                    p.status ||
+                                    ""
+                                ).toUpperCase()
+                            )}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${dataFormatada(
+                            p.criadoEm
+                        )}
+                    </td>
+
+                    <td>
+                        ${acoes}
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================
+   CONFIRMAR PAGAMENTO
+========================================= */
+
+window.confirmarPagamento =
+async function(id){
+
+    const pagamento =
+        pagamentos.find(
+            p => p.id === id
+        );
+
+
+    if(!pagamento){
+
+        return;
+
+    }
+
+
+    if(
+        pagamento.status !== "pendente"
+    ){
+
+        alert(
+            "Este pagamento não está pendente."
         );
 
         return;
@@ -856,12 +672,31 @@ window.realizarPagamento = async function(){
     }
 
 
-    if(!produto){
+    const confirmar =
+        confirm(
 
-        mostrarMensagem(
-            "Produto não carregado.",
-            "erro"
+            "CONFIRMAR PAGAMENTO?\n\n" +
+
+            "Aluno: " +
+            (
+                pagamento.nomeUsuario ||
+                pagamento.emailUsuario
+            ) +
+
+            "\nProduto: " +
+            pagamento.produtoNome +
+
+            "\nValor: " +
+            dinheiro(
+                pagamento.valor
+            ) +
+
+            "\n\nConfirme somente após verificar o comprovante."
+
         );
+
+
+    if(!confirmar){
 
         return;
 
@@ -870,77 +705,87 @@ window.realizarPagamento = async function(){
 
     try{
 
-        btnPagamento.disabled = true;
+        /*
+           Transação para impedir
+           processamento duplicado.
+        */
 
-        btnPagamento.textContent =
-            "⏳ Preparando pedido...";
+        await runTransaction(
+            db,
+            async transaction => {
 
-
-        compraCriada =
-            await criarCompra();
-
-
-        codigoCompra.textContent =
-            "Código da compra: " +
-            compraCriada.codigo;
-
-
-        const mensagemWhatsApp =
-
-`Olá! Gostaria de realizar o pagamento.
-
-📋 PEDIDO
-
-Código: ${compraCriada.codigo}
-
-👤 Aluno:
-${usuarioAtual.nome || "Não informado"}
-
-📧 E-mail:
-${usuarioAtual.email || "Não informado"}
-
-🛒 Produto:
-${produto.nome}
-
-💰 Valor:
-${formatarMoeda(produto.valor)}
-
-🔑 Chave PIX:
-${CHAVE_PIX}
-
-Realizarei o pagamento e enviarei o comprovante nesta conversa.
-
-Aguardo a confirmação.`;
+                const compraRef =
+                    doc(
+                        db,
+                        "compras",
+                        id
+                    );
 
 
+                const compraSnap =
+                    await transaction.get(
+                        compraRef
+                    );
 
-        const url =
 
-            "https://wa.me/" +
-            WHATSAPP +
-            "?text=" +
-            encodeURIComponent(
-                mensagemWhatsApp
-            );
+                if(!compraSnap.exists()){
+
+                    throw new Error(
+                        "Compra não encontrada."
+                    );
+
+                }
+
+
+                const dados =
+                    compraSnap.data();
+
+
+                if(
+                    dados.status !== "pendente"
+                ){
+
+                    throw new Error(
+                        "Esta compra já foi processada."
+                    );
+
+                }
+
+
+                transaction.update(
+                    compraRef,
+                    {
+
+                        status:
+                            "pago",
+
+                        pagoEm:
+                            serverTimestamp()
+
+                    }
+                );
+
+            }
+        );
+
+
+        /*
+           Depois da confirmação,
+           fazemos a entrega.
+        */
+
+        await entregarProduto(
+            pagamento
+        );
 
 
         mostrarMensagem(
-            "Pedido criado! Agora envie o comprovante pelo WhatsApp.",
+            "Pagamento confirmado e produto entregue.",
             "sucesso"
         );
 
 
-        btnPagamento.textContent =
-            "📲 Abrir WhatsApp";
-
-
-        btnPagamento.disabled = false;
-
-
-        window.open(
-            url,
-            "_blank"
-        );
+        await carregar();
 
 
     }catch(error){
@@ -949,53 +794,393 @@ Aguardo a confirmação.`;
 
 
         mostrarMensagem(
-            "Erro ao criar o pedido: " +
-            error.message,
+            error.message ||
+            "Erro ao confirmar pagamento.",
             "erro"
         );
 
 
-        btnPagamento.textContent =
-            "📲 Realizar pagamento / Enviar comprovante";
-
-
-        btnPagamento.disabled = false;
+        await carregar();
 
     }
 
 };
 
 
-/* =====================================================
-   VOLTAR
-===================================================== */
+/* =========================================
+   ENTREGA
+========================================= */
 
-window.voltar = function(){
+async function entregarProduto(
+    pagamento
+){
 
-    if(cursoId){
+    const compraRef =
+        doc(
+            db,
+            "compras",
+            pagamento.id
+        );
 
-        window.location.href =
-            "curso.html?cursoId=" +
-            cursoId;
+
+    const compraSnap =
+        await getDoc(
+            compraRef
+        );
+
+
+    if(!compraSnap.exists()){
+
+        throw new Error(
+            "Compra não encontrada."
+        );
+
+    }
+
+
+    const compraAtual =
+        compraSnap.data();
+
+
+    /*
+       PROTEÇÃO CONTRA DUPLICIDADE
+    */
+
+    if(compraAtual.entregueEm){
 
         return;
 
     }
 
 
-    window.location.href =
-        "carteira.html";
+    const usuarioRef =
+        doc(
+            db,
+            "usuarios",
+            pagamento.usuarioId
+        );
+
+
+    const usuarioSnap =
+        await getDoc(
+            usuarioRef
+        );
+
+
+    if(!usuarioSnap.exists()){
+
+        throw new Error(
+            "Usuário não encontrado."
+        );
+
+    }
+
+
+    const tipo =
+        pagamento.tipo;
+
+
+    /* =====================================
+       VIDAS INFINITAS
+    ===================================== */
+
+    if(
+        tipo === "vidas_infinitas"
+    ){
+
+        await updateDoc(
+
+            usuarioRef,
+
+            {
+
+                vidasInfinitas:
+                    true,
+
+                atualizadoEm:
+                    serverTimestamp()
+
+            }
+
+        );
+
+    }
+
+
+    /* =====================================
+       XP
+    ===================================== */
+
+    else if(
+        tipo === "xp"
+    ){
+
+        let quantidade = 0;
+
+
+        if(
+            pagamento.produtoNome
+                ?.includes("100 XP")
+        ){
+
+            quantidade = 100;
+
+        }
+
+        else if(
+            pagamento.produtoNome
+                ?.includes("500 XP")
+        ){
+
+            quantidade = 500;
+
+        }
+
+
+        if(quantidade > 0){
+
+            await updateDoc(
+
+                usuarioRef,
+
+                {
+
+                    xp:
+                        increment(
+                            quantidade
+                        ),
+
+                    atualizadoEm:
+                        serverTimestamp()
+
+                }
+
+            );
+
+        }
+
+    }
+
+
+    /* =====================================
+       MOEDAS
+    ===================================== */
+
+    else if(
+        tipo === "moedas"
+    ){
+
+        let quantidade = 0;
+
+
+        if(
+            pagamento.produtoNome
+                ?.includes("100 Moedas")
+        ){
+
+            quantidade = 100;
+
+        }
+
+        else if(
+            pagamento.produtoNome
+                ?.includes("500 Moedas")
+        ){
+
+            quantidade = 500;
+
+        }
+
+
+        if(quantidade > 0){
+
+            await updateDoc(
+
+                usuarioRef,
+
+                {
+
+                    moedas:
+                        increment(
+                            quantidade
+                        ),
+
+                    atualizadoEm:
+                        serverTimestamp()
+
+                }
+
+            );
+
+        }
+
+    }
+
+
+    /*
+       CURSO
+
+       A própria coleção compras
+       libera o acesso.
+    */
+
+    else if(
+        tipo === "curso"
+    ){
+
+        /*
+           Nenhuma alteração adicional.
+        */
+
+    }
+
+
+    /*
+       CERTIFICADO
+
+       A existência da compra
+       paga libera o certificado.
+    */
+
+    else if(
+        tipo === "certificado"
+    ){
+
+        /*
+           Nenhuma alteração adicional.
+        */
+
+    }
+
+
+    /*
+       MARCAR COMO ENTREGUE
+    */
+
+    await updateDoc(
+
+        compraRef,
+
+        {
+
+            entregueEm:
+                serverTimestamp()
+
+        }
+
+    );
+
+}
+
+
+/* =========================================
+   CANCELAR
+========================================= */
+
+window.cancelarPagamento =
+async function(id){
+
+    const pagamento =
+        pagamentos.find(
+            p => p.id === id
+        );
+
+
+    if(!pagamento){
+
+        return;
+
+    }
+
+
+    if(
+        pagamento.status !== "pendente"
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            "Deseja cancelar este pagamento?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "compras",
+                id
+            ),
+
+            {
+
+                status:
+                    "cancelado",
+
+                canceladoEm:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        mostrarMensagem(
+            "Pagamento cancelado.",
+            "sucesso"
+        );
+
+
+        await carregar();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        mostrarMensagem(
+            "Erro ao cancelar pagamento.",
+            "erro"
+        );
+
+    }
 
 };
 
 
-/* =====================================================
+/* =========================================
+   FILTROS
+========================================= */
+
+pesquisa.addEventListener(
+    "input",
+    renderizar
+);
+
+filtroStatus.addEventListener(
+    "change",
+    renderizar
+);
+
+
+/* =========================================
    AUTENTICAÇÃO
-===================================================== */
+========================================= */
 
 onAuthStateChanged(
     auth,
-    async (user)=>{
+    async user => {
 
         if(!user){
 
@@ -1007,85 +1192,7 @@ onAuthStateChanged(
         }
 
 
-        try{
-
-            usuarioAtual = user;
-
-
-            const usuarioSnap =
-                await getDoc(
-                    doc(
-                        db,
-                        "usuarios",
-                        user.uid
-                    )
-                );
-
-
-            let nome =
-                user.displayName || "";
-
-
-            if(usuarioSnap.exists()){
-
-                const dados =
-                    usuarioSnap.data();
-
-                nome =
-                    dados.nome ||
-                    nome;
-
-            }
-
-
-            usuarioAtual.nome =
-                nome;
-
-
-            usuarioInfo.textContent =
-                "Aluno: " +
-                (nome || "Usuário");
-
-
-            /*
-               Define o que está sendo comprado.
-            */
-
-
-            if(tipo === "certificado"){
-
-                await carregarCertificado();
-
-            }else if(tipo === "produto"){
-
-                await carregarProdutoLoja();
-
-            }else{
-
-                await carregarCurso();
-
-            }
-
-
-        }catch(error){
-
-            console.error(error);
-
-
-            tituloProduto.textContent =
-                "Erro";
-
-
-            descricaoProduto.textContent =
-                error.message;
-
-
-            mostrarMensagem(
-                error.message,
-                "erro"
-            );
-
-        }
+        await carregar();
 
     }
 );
