@@ -4,214 +4,244 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lição</title>
+<title>Resultado da Lição</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #222;
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+    min-height:100vh;
 }
 
-header {
-    background: #ffffff;
-    padding: 15px 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
+header{
+    background:#4f46e5;
+    color:white;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
-.logo {
-    font-size: 22px;
-    font-weight: bold;
+header h1{
+    font-size:22px;
 }
 
-.status {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
+.header-direita{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-.status-item {
-    background: #f1f3f6;
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
+.saldo{
+    background:rgba(255,255,255,.15);
+    padding:9px 13px;
+    border-radius:10px;
+    font-weight:bold;
 }
 
-button {
-    border: none;
-    border-radius: 8px;
-    padding: 11px 16px;
-    cursor: pointer;
-    font-weight: bold;
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:11px 16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.btn-voltar {
-    background: #e9ecef;
+.btn-carteira{
+    background:white;
+    color:#4f46e5;
 }
 
-.btn-sair {
-    background: #dc3545;
-    color: white;
+.btn-sair{
+    background:#ef4444;
+    color:white;
 }
 
-main {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 15px;
+.container{
+    width:100%;
+    max-width:800px;
+    margin:auto;
+    padding:30px 15px 60px;
 }
 
-.card {
-    background: white;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.08);
-    margin-bottom: 20px;
+.resultado{
+    background:white;
+    border-radius:22px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 6px 25px rgba(0,0,0,.08);
 }
 
-h1 {
-    margin-top: 0;
+.icone{
+    font-size:75px;
+    margin-bottom:15px;
 }
 
-.progresso-container {
-    margin: 20px 0;
+.titulo{
+    font-size:30px;
+    margin-bottom:10px;
 }
 
-.progresso-barra {
-    width: 100%;
-    height: 12px;
-    background: #e9ecef;
-    border-radius: 10px;
-    overflow: hidden;
+.subtitulo{
+    color:#6b7280;
+    line-height:1.5;
+    margin-bottom:25px;
 }
 
-.progresso {
-    height: 100%;
-    width: 0%;
-    background: #28a745;
-    transition: .3s;
+.aprovado{
+    color:#16a34a;
 }
 
-.questao {
-    margin-top: 25px;
+.reprovado{
+    color:#dc2626;
 }
 
-.alternativa {
-    display: block;
-    width: 100%;
-    text-align: left;
-    margin: 10px 0;
-    background: #f8f9fa;
-    border: 2px solid #dee2e6;
-    padding: 14px;
-    border-radius: 10px;
+.percentual{
+    font-size:58px;
+    font-weight:bold;
+    margin:15px 0;
 }
 
-.alternativa:hover {
-    background: #eef2f5;
+.nota{
+    color:#6b7280;
+    margin-bottom:25px;
 }
 
-.alternativa.selecionada {
-    border-color: #007bff;
-    background: #e7f1ff;
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:25px 0;
 }
 
-.feedback {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    display: none;
+.card{
+    background:#f8fafc;
+    border-radius:15px;
+    padding:18px 10px;
 }
 
-.feedback.correto {
-    background: #d4edda;
-    color: #155724;
+.card .emoji{
+    font-size:27px;
 }
 
-.feedback.incorreto {
-    background: #f8d7da;
-    color: #721c24;
+.card strong{
+    display:block;
+    font-size:24px;
+    margin-top:7px;
 }
 
-.acoes {
-    margin-top: 25px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    flex-wrap: wrap;
+.card span{
+    display:block;
+    font-size:12px;
+    color:#6b7280;
+    margin-top:4px;
 }
 
-.btn-principal {
-    background: #007bff;
-    color: white;
+.mensagem{
+    background:#eef2ff;
+    color:#3730a3;
+    border-radius:12px;
+    padding:14px;
+    margin:20px 0;
+    line-height:1.5;
 }
 
-.btn-principal:disabled {
-    background: #adb5bd;
-    cursor: not-allowed;
+.botoes{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:25px;
 }
 
-.btn-sucesso {
-    background: #28a745;
-    color: white;
+.btn-principal{
+    background:#4f46e5;
+    color:white;
+    min-width:180px;
 }
 
-.btn-perigo {
-    background: #dc3545;
-    color: white;
+.btn-secundario{
+    background:#e5e7eb;
+    color:#374151;
+    min-width:180px;
 }
 
-.resultado {
-    text-align: center;
+.btn-principal:hover,
+.btn-secundario:hover,
+.btn-carteira:hover,
+.btn-sair:hover{
+    opacity:.9;
 }
 
-.resultado .numero {
-    font-size: 48px;
-    font-weight: bold;
-    margin: 15px 0;
+.detalhes{
+    margin-top:25px;
+    text-align:left;
+    border-top:1px solid #eee;
+    padding-top:20px;
 }
 
-.recompensas {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin: 20px 0;
+.detalhes h3{
+    margin-bottom:12px;
 }
 
-.recompensa {
-    background: #f8f9fa;
-    padding: 15px 20px;
-    border-radius: 12px;
-    min-width: 130px;
+.detalhe{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:9px 0;
+    border-bottom:1px solid #f1f1f1;
+    color:#6b7280;
 }
 
-.aviso-vida {
-    background: #fff3cd;
-    color: #856404;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+.detalhe strong{
+    color:#1f2937;
 }
 
-.carregando {
-    text-align: center;
-    padding: 40px;
+.loading{
+    text-align:center;
+    padding:50px;
+    color:#6b7280;
 }
 
-.escondido {
-    display: none !important;
+.erro{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:18px;
+    border-radius:12px;
+}
+
+@media(max-width:600px){
+
+    .resultado{
+        padding:30px 18px;
+    }
+
+    .titulo{
+        font-size:25px;
+    }
+
+    .percentual{
+        font-size:48px;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .card:last-child{
+        grid-column:1 / -1;
+    }
+
 }
 </style>
 </head>
@@ -220,29 +250,27 @@ h1 {
 
 <header>
 
-    <div class="logo">
-        📚 Minha Plataforma
-    </div>
+    <h1>🎓 Área do Aluno</h1>
 
-    <div class="status">
+    <div class="header-direita">
 
-        <div class="status-item">
-            ❤️ <span id="vidas">0</span>/6
+        <div class="saldo">
+            ❤️ <span id="vidas">-</span>
+            &nbsp;&nbsp;
+            🪙 <span id="moedas">-</span>
+            &nbsp;&nbsp;
+            ⭐ <span id="xp">-</span>
         </div>
 
-        <div class="status-item">
-            🪙 <span id="moedas">0</span>
-        </div>
+        <button
+            class="btn btn-carteira"
+            onclick="abrirCarteira()">
+            💰 Carteira
+        </button>
 
-        <div class="status-item">
-            ⭐ <span id="xp">0</span> XP
-        </div>
-
-        <div class="status-item">
-            🔥 <span id="sequencia">0</span>
-        </div>
-
-        <button class="btn-sair" id="btnSair">
+        <button
+            class="btn btn-sair"
+            onclick="sair()">
             Sair
         </button>
 
@@ -250,84 +278,214 @@ h1 {
 
 </header>
 
-<main>
 
-    <div id="carregando" class="card carregando">
-        Carregando lição...
+<div class="container">
+
+    <div id="loading" class="loading">
+        Carregando resultado...
     </div>
 
-    <div id="conteudo" class="escondido">
 
-        <div class="card">
+    <div
+        id="resultado"
+        class="resultado"
+        style="display:none;">
 
-            <button class="btn-voltar" id="btnVoltar">
-                ← Voltar para o curso
+        <div
+            id="icone"
+            class="icone">
+            🏆
+        </div>
+
+
+        <h2
+            id="titulo"
+            class="titulo">
+            Lição concluída!
+        </h2>
+
+
+        <p
+            id="subtitulo"
+            class="subtitulo">
+        </p>
+
+
+        <div
+            id="percentual"
+            class="percentual">
+            0%
+        </div>
+
+
+        <div
+            id="nota"
+            class="nota">
+            0 de 0 questões corretas
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="emoji">
+                    ⭐
+                </div>
+
+                <strong id="xpGanho">
+                    +0
+                </strong>
+
+                <span>
+                    XP ganho
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="emoji">
+                    🪙
+                </div>
+
+                <strong id="moedasGanhas">
+                    +0
+                </strong>
+
+                <span>
+                    Moedas
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="emoji">
+                    ❤️
+                </div>
+
+                <strong id="vidasAtual">
+                    0
+                </strong>
+
+                <span>
+                    Vidas restantes
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="mensagem"
+            class="mensagem">
+        </div>
+
+
+        <div class="detalhes">
+
+            <h3>
+                📊 Detalhes
+            </h3>
+
+            <div class="detalhe">
+
+                <span>
+                    Curso
+                </span>
+
+                <strong id="cursoNome">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detalhe">
+
+                <span>
+                    Lição
+                </span>
+
+                <strong id="licaoNome">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detalhe">
+
+                <span>
+                    Acertos
+                </span>
+
+                <strong id="acertos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="detalhe">
+
+                <span>
+                    Erros
+                </span>
+
+                <strong id="erros">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="detalhe">
+
+                <span>
+                    Aproveitamento mínimo
+                </span>
+
+                <strong>
+                    60%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="botoes">
+
+            <button
+                id="btnContinuar"
+                class="btn btn-principal"
+                onclick="continuar()">
+                📚 Continuar curso
             </button>
 
-            <h1 id="tituloLicao">
-                Lição
-            </h1>
-
-            <p id="descricaoLicao"></p>
-
-            <div class="progresso-container">
-
-                <div>
-                    Questão
-                    <strong>
-                        <span id="numeroQuestao">1</span>
-                    </strong>
-                    de
-                    <strong>
-                        <span id="totalQuestoes">0</span>
-                    </strong>
-                </div>
-
-                <br>
-
-                <div class="progresso-barra">
-                    <div class="progresso" id="barraProgresso"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div id="areaQuestao" class="card">
-
-            <div class="questao">
-
-                <h2 id="pergunta"></h2>
-
-                <div id="alternativas"></div>
-
-                <div id="feedback" class="feedback"></div>
-
-                <div class="acoes">
-
-                    <button
-                        id="btnVerificar"
-                        class="btn-principal">
-                        Verificar
-                    </button>
-
-                    <button
-                        id="btnProxima"
-                        class="btn-sucesso escondido">
-                        Próxima →
-                    </button>
-
-                </div>
-
-            </div>
+            <button
+                class="btn btn-secundario"
+                onclick="refazer()">
+                🔄 Refazer lição
+            </button>
 
         </div>
 
     </div>
 
-    <div id="resultado" class="card resultado escondido"></div>
 
-</main>
+    <div
+        id="erro"
+        class="erro"
+        style="display:none;">
+    </div>
+
+</div>
 
 
 <script type="module">
@@ -345,18 +503,9 @@ import {
 import {
     getFirestore,
     doc,
-    getDoc,
-    setDoc,
-    updateDoc,
-    collection,
-    getDocs,
-    serverTimestamp
+    getDoc
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-
-/* =========================================================
-   FIREBASE
-========================================================= */
 
 const firebaseConfig = {
     apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
@@ -368,17 +517,26 @@ const firebaseConfig = {
     measurementId: "G-NMPP8PKPK3"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
 
 
 /* =========================================================
-   PARÂMETROS DA URL
+   PARÂMETROS
 ========================================================= */
 
 const parametros =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
+
 
 const cursoId =
     parametros.get("cursoId");
@@ -391,1833 +549,6 @@ const licaoId =
 
 
 /* =========================================================
-   REGRAS DO SISTEMA
-========================================================= */
-
-const MAX_VIDAS = 6;
-
-const MINIMO_APROVACAO = 60;
-
-const MOEDAS_DIARIAS = 50;
-
-const MOEDAS_POR_LICAO = 10;
-
-const MINUTOS_RECUPERACAO = 10;
-
-
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
-
-let usuarioAtual = null;
-
-let dadosUsuario = null;
-
-let licao = null;
-
-let exercicios = [];
-
-let exercicioAtual = 0;
-
-let respostas = {};
-
-let pontuacao = 0;
-
-let respostaVerificada = false;
-
-let vidasAtuais = 0;
-
-let moedasAtuais = 0;
-
-let xpAtual = 0;
-
-let sequenciaAtual = 0;
-
-let progressoExistente = null;
-
-
-/* =========================================================
-   ELEMENTOS
-========================================================= */
-
-const carregando =
-    document.getElementById("carregando");
-
-const conteudo =
-    document.getElementById("conteudo");
-
-const resultado =
-    document.getElementById("resultado");
-
-const tituloLicao =
-    document.getElementById("tituloLicao");
-
-const descricaoLicao =
-    document.getElementById("descricaoLicao");
-
-const pergunta =
-    document.getElementById("pergunta");
-
-const alternativas =
-    document.getElementById("alternativas");
-
-const feedback =
-    document.getElementById("feedback");
-
-const btnVerificar =
-    document.getElementById("btnVerificar");
-
-const btnProxima =
-    document.getElementById("btnProxima");
-
-const numeroQuestao =
-    document.getElementById("numeroQuestao");
-
-const totalQuestoes =
-    document.getElementById("totalQuestoes");
-
-const barraProgresso =
-    document.getElementById("barraProgresso");
-
-const vidasElemento =
-    document.getElementById("vidas");
-
-const moedasElemento =
-    document.getElementById("moedas");
-
-const xpElemento =
-    document.getElementById("xp");
-
-const sequenciaElemento =
-    document.getElementById("sequencia");
-
-
-/* =========================================================
-   ATUALIZAR STATUS
-========================================================= */
-
-function atualizarStatus() {
-
-    vidasElemento.textContent =
-        vidasAtuais;
-
-    moedasElemento.textContent =
-        moedasAtuais;
-
-    xpElemento.textContent =
-        xpAtual;
-
-    sequenciaElemento.textContent =
-        sequenciaAtual;
-
-}
-
-
-/* =========================================================
-   CONVERTER DATA
-========================================================= */
-
-function converterData(data) {
-
-    if (!data) {
-        return null;
-    }
-
-    if (data.toDate) {
-        return data.toDate();
-    }
-
-    if (data instanceof Date) {
-        return data;
-    }
-
-    return new Date(data);
-
-}
-
-
-/* =========================================================
-   RECUPERAR VIDAS
-========================================================= */
-
-async function recuperarVidas() {
-
-    if (!dadosUsuario) {
-        return;
-    }
-
-    vidasAtuais =
-        Number(
-            dadosUsuario.vidas ?? MAX_VIDAS
-        );
-
-
-    if (vidasAtuais >= MAX_VIDAS) {
-
-        vidasAtuais =
-            MAX_VIDAS;
-
-        return;
-    }
-
-
-    const ultima =
-        converterData(
-            dadosUsuario.vidasUltimaAtualizacao
-        );
-
-
-    if (!ultima) {
-
-        const agora =
-            new Date();
-
-        vidasAtuais =
-            Math.min(
-                MAX_VIDAS,
-                vidasAtuais
-            );
-
-        await updateDoc(
-            doc(
-                db,
-                "usuarios",
-                usuarioAtual.uid
-            ),
-            {
-                vidasUltimaAtualizacao:
-                    agora
-            }
-        );
-
-        return;
-    }
-
-
-    const agora =
-        new Date();
-
-
-    const diferencaMs =
-        agora.getTime() -
-        ultima.getTime();
-
-
-    const diferencaMinutos =
-        Math.floor(
-            diferencaMs /
-            (1000 * 60)
-        );
-
-
-    const recuperadas =
-        Math.floor(
-            diferencaMinutos /
-            MINUTOS_RECUPERACAO
-        );
-
-
-    if (recuperadas <= 0) {
-        return;
-    }
-
-
-    const novasVidas =
-        Math.min(
-            MAX_VIDAS,
-            vidasAtuais + recuperadas
-        );
-
-
-    let novaData;
-
-
-    if (novasVidas >= MAX_VIDAS) {
-
-        novaData =
-            agora;
-
-    } else {
-
-        novaData =
-            new Date(
-                ultima.getTime() +
-                recuperadas *
-                MINUTOS_RECUPERACAO *
-                60 *
-                1000
-            );
-
-    }
-
-
-    vidasAtuais =
-        novasVidas;
-
-
-    await updateDoc(
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        ),
-        {
-            vidas:
-                vidasAtuais,
-
-            vidasUltimaAtualizacao:
-                novaData,
-
-            atualizadoEm:
-                serverTimestamp()
-        }
-    );
-
-
-    dadosUsuario.vidas =
-        vidasAtuais;
-
-    dadosUsuario.vidasUltimaAtualizacao =
-        novaData;
-
-}
-
-
-/* =========================================================
-   MOEDAS DIÁRIAS
-========================================================= */
-
-async function verificarMoedasDiarias() {
-
-    const hoje =
-        new Date();
-
-    const hojeString =
-        hoje.toISOString()
-            .split("T")[0];
-
-
-    const ultimaData =
-        dadosUsuario.moedasDiariasData || "";
-
-
-    if (ultimaData === hojeString) {
-        return;
-    }
-
-
-    moedasAtuais +=
-        MOEDAS_DIARIAS;
-
-
-    await updateDoc(
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        ),
-        {
-            moedas:
-                moedasAtuais,
-
-            moedasDiariasData:
-                hojeString,
-
-            atualizadoEm:
-                serverTimestamp()
-        }
-    );
-
-
-    dadosUsuario.moedas =
-        moedasAtuais;
-
-    dadosUsuario.moedasDiariasData =
-        hojeString;
-
-}
-
-
-/* =========================================================
-   CARREGAR USUÁRIO
-========================================================= */
-
-async function carregarUsuario() {
-
-    const referencia =
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        );
-
-
-    const snapshot =
-        await getDoc(referencia);
-
-
-    if (!snapshot.exists()) {
-
-        throw new Error(
-            "Perfil do usuário não encontrado."
-        );
-
-    }
-
-
-    dadosUsuario =
-        snapshot.data();
-
-
-    vidasAtuais =
-        Number(
-            dadosUsuario.vidas ??
-            MAX_VIDAS
-        );
-
-
-    moedasAtuais =
-        Number(
-            dadosUsuario.moedas ??
-            0
-        );
-
-
-    xpAtual =
-        Number(
-            dadosUsuario.xp ??
-            0
-        );
-
-
-    sequenciaAtual =
-        Number(
-            dadosUsuario.sequencia ??
-            0
-        );
-
-
-    await recuperarVidas();
-
-    await verificarMoedasDiarias();
-
-    atualizarStatus();
-
-}
-
-
-/* =========================================================
-   CARREGAR PROGRESSO
-========================================================= */
-
-async function carregarProgresso() {
-
-    const progressoRef =
-        doc(
-            db,
-            "progresso",
-            usuarioAtual.uid +
-            "_" +
-            licaoId
-        );
-
-
-    const snapshot =
-        await getDoc(progressoRef);
-
-
-    if (snapshot.exists()) {
-
-        progressoExistente =
-            snapshot.data();
-
-    } else {
-
-        progressoExistente =
-            null;
-
-    }
-
-}
-
-
-/* =========================================================
-   CARREGAR LIÇÃO
-========================================================= */
-
-async function carregarLicao() {
-
-    if (!licaoId) {
-
-        throw new Error(
-            "ID da lição não informado."
-        );
-
-    }
-
-
-    const referencia =
-        doc(
-            db,
-            "licoes",
-            licaoId
-        );
-
-
-    const snapshot =
-        await getDoc(referencia);
-
-
-    if (!snapshot.exists()) {
-
-        throw new Error(
-            "Lição não encontrada."
-        );
-
-    }
-
-
-    licao = {
-        id: snapshot.id,
-        ...snapshot.data()
-    };
-
-
-    if (licao.ativo === false) {
-
-        throw new Error(
-            "Esta lição está inativa."
-        );
-
-    }
-
-
-    tituloLicao.textContent =
-        licao.titulo ||
-        "Lição";
-
-
-    descricaoLicao.textContent =
-        licao.descricao ||
-        "";
-
-
-    await carregarExercicios();
-
-}
-
-
-/* =========================================================
-   CARREGAR EXERCÍCIOS
-========================================================= */
-
-async function carregarExercicios() {
-
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "exercicios"
-            )
-        );
-
-
-    exercicios = [];
-
-
-    snapshot.forEach(
-        docSnap => {
-
-            const dados =
-                docSnap.data();
-
-
-            if (
-                dados.licaoId ===
-                    licaoId &&
-                dados.ativo !== false
-            ) {
-
-                exercicios.push({
-                    id: docSnap.id,
-                    ...dados
-                });
-
-            }
-
-        }
-    );
-
-
-    exercicios.sort(
-        (a, b) =>
-            Number(a.ordem || 0) -
-            Number(b.ordem || 0)
-    );
-
-
-    totalQuestoes.textContent =
-        exercicios.length;
-
-
-    if (
-        exercicios.length === 0
-    ) {
-
-        throw new Error(
-            "Esta lição ainda não possui exercícios."
-        );
-
-    }
-
-
-    mostrarExercicio();
-
-}
-
-
-/* =========================================================
-   MOSTRAR EXERCÍCIO
-========================================================= */
-
-function mostrarExercicio() {
-
-    respostaVerificada =
-        false;
-
-
-    btnVerificar.disabled =
-        false;
-
-
-    btnProxima.classList.add(
-        "escondido"
-    );
-
-
-    feedback.style.display =
-        "none";
-
-
-    feedback.className =
-        "feedback";
-
-
-    alternativas.innerHTML =
-        "";
-
-
-    const exercicio =
-        exercicios[
-            exercicioAtual
-        ];
-
-
-    numeroQuestao.textContent =
-        exercicioAtual + 1;
-
-
-    const percentual =
-        (
-            (exercicioAtual + 1) /
-            exercicios.length
-        ) * 100;
-
-
-    barraProgresso.style.width =
-        percentual + "%";
-
-
-    pergunta.textContent =
-        exercicio.pergunta || "";
-
-
-    if (
-        exercicio.tipo ===
-        "multipla_escolha"
-    ) {
-
-        mostrarMultiplaEscolha(
-            exercicio
-        );
-
-    }
-
-    else if (
-        exercicio.tipo ===
-        "verdadeiro_falso"
-    ) {
-
-        mostrarVerdadeiroFalso(
-            exercicio
-        );
-
-    }
-
-    else if (
-        exercicio.tipo ===
-        "resposta_texto"
-    ) {
-
-        mostrarRespostaTexto(
-            exercicio
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   MÚLTIPLA ESCOLHA
-========================================================= */
-
-function mostrarMultiplaEscolha(
-    exercicio
-) {
-
-    const lista =
-        exercicio.alternativas ||
-        [];
-
-
-    lista.forEach(
-        alternativa => {
-
-            const botao =
-                document.createElement(
-                    "button"
-                );
-
-
-            botao.type =
-                "button";
-
-
-            botao.className =
-                "alternativa";
-
-
-            botao.textContent =
-                alternativa.letra +
-                ") " +
-                alternativa.texto;
-
-
-            botao.addEventListener(
-                "click",
-                () => {
-
-                    if (
-                        respostaVerificada
-                    ) {
-                        return;
-                    }
-
-
-                    document
-                        .querySelectorAll(
-                            ".alternativa"
-                        )
-                        .forEach(
-                            btn => {
-
-                                btn.classList
-                                    .remove(
-                                        "selecionada"
-                                    );
-
-                            }
-                        );
-
-
-                    botao.classList.add(
-                        "selecionada"
-                    );
-
-
-                    respostas[
-                        exercicio.id
-                    ] =
-                        alternativa.letra;
-
-                }
-            );
-
-
-            alternativas.appendChild(
-                botao
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   VERDADEIRO / FALSO
-========================================================= */
-
-function mostrarVerdadeiroFalso(
-    exercicio
-) {
-
-    const opcoes = [
-        {
-            letra: "V",
-            texto: "Verdadeiro"
-        },
-        {
-            letra: "F",
-            texto: "Falso"
-        }
-    ];
-
-
-    opcoes.forEach(
-        opcao => {
-
-            const botao =
-                document.createElement(
-                    "button"
-                );
-
-
-            botao.type =
-                "button";
-
-
-            botao.className =
-                "alternativa";
-
-
-            botao.textContent =
-                opcao.texto;
-
-
-            botao.addEventListener(
-                "click",
-                () => {
-
-                    if (
-                        respostaVerificada
-                    ) {
-                        return;
-                    }
-
-
-                    document
-                        .querySelectorAll(
-                            ".alternativa"
-                        )
-                        .forEach(
-                            btn => {
-
-                                btn.classList
-                                    .remove(
-                                        "selecionada"
-                                    );
-
-                            }
-                        );
-
-
-                    botao.classList.add(
-                        "selecionada"
-                    );
-
-
-                    respostas[
-                        exercicio.id
-                    ] =
-                        opcao.letra;
-
-                }
-            );
-
-
-            alternativas.appendChild(
-                botao
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   RESPOSTA DE TEXTO
-========================================================= */
-
-function mostrarRespostaTexto(
-    exercicio
-) {
-
-    const campo =
-        document.createElement(
-            "input"
-        );
-
-
-    campo.type =
-        "text";
-
-
-    campo.placeholder =
-        "Digite sua resposta";
-
-
-    campo.style.width =
-        "100%";
-
-
-    campo.style.padding =
-        "14px";
-
-
-    campo.style.border =
-        "2px solid #dee2e6";
-
-
-    campo.style.borderRadius =
-        "10px";
-
-
-    campo.style.fontSize =
-        "16px";
-
-
-    campo.addEventListener(
-        "input",
-        () => {
-
-            respostas[
-                exercicio.id
-            ] =
-                campo.value.trim();
-
-        }
-    );
-
-
-    alternativas.appendChild(
-        campo
-    );
-
-}
-
-
-/* =========================================================
-   VERIFICAR RESPOSTA
-========================================================= */
-
-function verificarResposta() {
-
-    if (respostaVerificada) {
-        return;
-    }
-
-
-    const exercicio =
-        exercicios[
-            exercicioAtual
-        ];
-
-
-    const respostaUsuario =
-        respostas[
-            exercicio.id
-        ];
-
-
-    if (
-        respostaUsuario ===
-            undefined ||
-        respostaUsuario === ""
-    ) {
-
-        alert(
-            "Escolha ou informe uma resposta."
-        );
-
-        return;
-
-    }
-
-
-    let correta =
-        false;
-
-
-    if (
-        exercicio.tipo ===
-        "multipla_escolha"
-    ) {
-
-        const alternativaCorreta =
-            (
-                exercicio.alternativas ||
-                []
-            ).find(
-                item =>
-                    item.correta === true
-            );
-
-
-        if (
-            alternativaCorreta &&
-            respostaUsuario ===
-                alternativaCorreta.letra
-        ) {
-
-            correta =
-                true;
-
-        }
-
-    }
-
-    else if (
-        exercicio.tipo ===
-        "verdadeiro_falso"
-    ) {
-
-        const respostaCorreta =
-            (
-                exercicio.respostaTexto ||
-                ""
-            )
-            .toString()
-            .trim()
-            .toUpperCase();
-
-
-        correta =
-            respostaUsuario
-                .toUpperCase() ===
-            respostaCorreta;
-
-    }
-
-    else if (
-        exercicio.tipo ===
-        "resposta_texto"
-    ) {
-
-        const respostaCorreta =
-            (
-                exercicio.respostaTexto ||
-                ""
-            )
-            .toString()
-            .trim()
-            .toLowerCase();
-
-
-        correta =
-            respostaUsuario
-                .toString()
-                .trim()
-                .toLowerCase() ===
-            respostaCorreta;
-
-    }
-
-
-    respostaVerificada =
-        true;
-
-
-    btnVerificar.disabled =
-        true;
-
-
-    if (correta) {
-
-        pontuacao +=
-            Number(
-                exercicio.pontos || 0
-            );
-
-
-        feedback.className =
-            "feedback correto";
-
-
-        feedback.textContent =
-            "✅ Resposta correta!";
-
-    }
-
-    else {
-
-        feedback.className =
-            "feedback incorreto";
-
-
-        feedback.textContent =
-            "❌ Resposta incorreta.";
-
-    }
-
-
-    if (exercicio.explicacao) {
-
-        feedback.textContent +=
-            " " +
-            exercicio.explicacao;
-
-    }
-
-
-    feedback.style.display =
-        "block";
-
-
-    if (
-        exercicioAtual <
-        exercicios.length - 1
-    ) {
-
-        btnProxima.textContent =
-            "Próxima →";
-
-    }
-
-    else {
-
-        btnProxima.textContent =
-            "Finalizar lição";
-
-    }
-
-
-    btnProxima.classList.remove(
-        "escondido"
-    );
-
-}
-
-
-/* =========================================================
-   PRÓXIMO EXERCÍCIO
-========================================================= */
-
-function proximoExercicio() {
-
-    if (!respostaVerificada) {
-        return;
-    }
-
-
-    if (
-        exercicioAtual <
-        exercicios.length - 1
-    ) {
-
-        exercicioAtual++;
-
-        mostrarExercicio();
-
-    }
-
-    else {
-
-        finalizarLicao();
-
-    }
-
-}
-
-
-/* =========================================================
-   CALCULAR PONTOS MÁXIMOS
-========================================================= */
-
-function calcularPontosMaximos() {
-
-    let total =
-        0;
-
-
-    exercicios.forEach(
-        exercicio => {
-
-            total +=
-                Number(
-                    exercicio.pontos ||
-                    0
-                );
-
-        }
-    );
-
-
-    return total || 1;
-
-}
-
-
-/* =========================================================
-   FINALIZAR LIÇÃO
-========================================================= */
-
-async function finalizarLicao() {
-
-    btnProxima.disabled =
-        true;
-
-
-    const pontosMaximos =
-        calcularPontosMaximos();
-
-
-    const percentual =
-        (
-            pontuacao /
-            pontosMaximos
-        ) * 100;
-
-
-    const percentualFinal =
-        Math.round(
-            Math.min(
-                100,
-                percentual
-            )
-        );
-
-
-    const aprovado =
-        percentualFinal >=
-        MINIMO_APROVACAO;
-
-
-    try {
-
-        if (aprovado) {
-
-            await concluirLicao(
-                percentualFinal
-            );
-
-        }
-
-        else {
-
-            await reprovarLicao(
-                percentualFinal
-            );
-
-        }
-
-
-        mostrarResultado(
-            percentualFinal,
-            aprovado
-        );
-
-    }
-
-    catch (erro) {
-
-        console.error(
-            "Erro ao finalizar:",
-            erro
-        );
-
-
-        alert(
-            "Não foi possível salvar o resultado da lição."
-        );
-
-
-        btnProxima.disabled =
-            false;
-
-    }
-
-}
-
-
-/* =========================================================
-   SALVAR CONCLUSÃO DA LIÇÃO
-========================================================= */
-
-async function concluirLicao(
-    percentual
-) {
-
-    const progressoRef =
-        doc(
-            db,
-            "progresso",
-            usuarioAtual.uid +
-            "_" +
-            licaoId
-        );
-
-
-    const tentativasAnteriores =
-        progressoExistente
-            ? Number(
-                progressoExistente
-                    .tentativas || 0
-            )
-            : 0;
-
-
-    /*
-       IMPORTANTE:
-       setDoc cria o documento se ele
-       ainda não existir e atualiza
-       caso já exista.
-    */
-
-    await setDoc(
-        progressoRef,
-        {
-            usuarioId:
-                usuarioAtual.uid,
-
-            cursoId:
-                cursoId,
-
-            moduloId:
-                moduloId,
-
-            licaoId:
-                licaoId,
-
-            concluida:
-                true,
-
-            aprovado:
-                true,
-
-            aproveitamento:
-                percentual,
-
-            pontuacao:
-                pontuacao,
-
-            tentativas:
-                tentativasAnteriores + 1,
-
-            ultimaTentativa:
-                serverTimestamp(),
-
-            concluidaEm:
-                serverTimestamp(),
-
-            atualizadoEm:
-                serverTimestamp()
-        },
-        {
-            merge: true
-        }
-    );
-
-
-    /*
-       Recompensas
-    */
-
-    const moedasGanhar =
-        MOEDAS_POR_LICAO;
-
-
-    const xpGanhar =
-        pontuacao;
-
-
-    moedasAtuais +=
-        moedasGanhar;
-
-
-    xpAtual +=
-        xpGanhar;
-
-
-    await updateDoc(
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        ),
-        {
-            moedas:
-                moedasAtuais,
-
-            xp:
-                xpAtual,
-
-            atualizadoEm:
-                serverTimestamp()
-        }
-    );
-
-
-    dadosUsuario.moedas =
-        moedasAtuais;
-
-
-    dadosUsuario.xp =
-        xpAtual;
-
-
-    atualizarStatus();
-
-}
-
-
-/* =========================================================
-   SALVAR REPROVAÇÃO
-========================================================= */
-
-async function reprovarLicao(
-    percentual
-) {
-
-    vidasAtuais =
-        Math.max(
-            0,
-            vidasAtuais - 1
-        );
-
-
-    const agora =
-        new Date();
-
-
-    const progressoRef =
-        doc(
-            db,
-            "progresso",
-            usuarioAtual.uid +
-            "_" +
-            licaoId
-        );
-
-
-    const tentativasAnteriores =
-        progressoExistente
-            ? Number(
-                progressoExistente
-                    .tentativas || 0
-            )
-            : 0;
-
-
-    await setDoc(
-        progressoRef,
-        {
-            usuarioId:
-                usuarioAtual.uid,
-
-            cursoId:
-                cursoId,
-
-            moduloId:
-                moduloId,
-
-            licaoId:
-                licaoId,
-
-            concluida:
-                false,
-
-            aprovado:
-                false,
-
-            aproveitamento:
-                percentual,
-
-            pontuacao:
-                pontuacao,
-
-            tentativas:
-                tentativasAnteriores + 1,
-
-            ultimaTentativa:
-                serverTimestamp(),
-
-            atualizadoEm:
-                serverTimestamp()
-        },
-        {
-            merge: true
-        }
-    );
-
-
-    await updateDoc(
-        doc(
-            db,
-            "usuarios",
-            usuarioAtual.uid
-        ),
-        {
-            vidas:
-                vidasAtuais,
-
-            vidasUltimaAtualizacao:
-                agora,
-
-            atualizadoEm:
-                serverTimestamp()
-        }
-    );
-
-
-    dadosUsuario.vidas =
-        vidasAtuais;
-
-
-    dadosUsuario.vidasUltimaAtualizacao =
-        agora;
-
-
-    atualizarStatus();
-
-}
-
-
-/* =========================================================
-   MOSTRAR RESULTADO
-========================================================= */
-
-function mostrarResultado(
-    percentual,
-    aprovado
-) {
-
-    conteudo.classList.add(
-        "escondido"
-    );
-
-
-    resultado.classList.remove(
-        "escondido"
-    );
-
-
-    resultado.innerHTML =
-        "";
-
-
-    const titulo =
-        document.createElement(
-            "h1"
-        );
-
-
-    titulo.textContent =
-        aprovado
-            ? "🎉 Lição concluída!"
-            : "😔 Você ainda não passou";
-
-
-    resultado.appendChild(
-        titulo
-    );
-
-
-    const numero =
-        document.createElement(
-            "div"
-        );
-
-
-    numero.className =
-        "numero";
-
-
-    numero.textContent =
-        percentual + "%";
-
-
-    resultado.appendChild(
-        numero
-    );
-
-
-    const texto =
-        document.createElement(
-            "p"
-        );
-
-
-    if (aprovado) {
-
-        texto.textContent =
-            "Parabéns! Você atingiu o mínimo de " +
-            MINIMO_APROVACAO +
-            "% e concluiu a lição.";
-
-    }
-
-    else {
-
-        texto.textContent =
-            "Você precisa de pelo menos " +
-            MINIMO_APROVACAO +
-            "% para passar.";
-
-    }
-
-
-    resultado.appendChild(
-        texto
-    );
-
-
-    const recompensas =
-        document.createElement(
-            "div"
-        );
-
-
-    recompensas.className =
-        "recompensas";
-
-
-    if (aprovado) {
-
-        const moedas =
-            document.createElement(
-                "div"
-            );
-
-
-        moedas.className =
-            "recompensa";
-
-
-        moedas.innerHTML =
-            "🪙 <strong>+" +
-            MOEDAS_POR_LICAO +
-            "</strong><br>moedas";
-
-
-        recompensas.appendChild(
-            moedas
-        );
-
-
-        const xp =
-            document.createElement(
-                "div"
-            );
-
-
-        xp.className =
-            "recompensa";
-
-
-        xp.innerHTML =
-            "⭐ <strong>+" +
-            pontuacao +
-            "</strong><br>XP";
-
-
-        recompensas.appendChild(
-            xp
-        );
-
-    }
-
-    else {
-
-        const vida =
-            document.createElement(
-                "div"
-            );
-
-
-        vida.className =
-            "recompensa";
-
-
-        vida.innerHTML =
-            "❤️ <strong>-1</strong><br>vida";
-
-
-        recompensas.appendChild(
-            vida
-        );
-
-    }
-
-
-    resultado.appendChild(
-        recompensas
-    );
-
-
-    if (
-        !aprovado &&
-        vidasAtuais <= 0
-    ) {
-
-        const aviso =
-            document.createElement(
-                "div"
-            );
-
-
-        aviso.className =
-            "aviso-vida";
-
-
-        aviso.textContent =
-            "Você está sem vidas. " +
-            "Uma vida será recuperada " +
-            "a cada 10 minutos. " +
-            "Em breve você também poderá " +
-            "comprar vidas.";
-
-        resultado.appendChild(
-            aviso
-        );
-
-    }
-
-
-    const voltar =
-        document.createElement(
-            "button"
-        );
-
-
-    voltar.className =
-        "btn-principal";
-
-
-    voltar.textContent =
-        "← Voltar para o curso";
-
-
-    voltar.addEventListener(
-        "click",
-        voltarCurso
-    );
-
-
-    resultado.appendChild(
-        voltar
-    );
-
-
-    if (!aprovado) {
-
-        const tentar =
-            document.createElement(
-                "button"
-            );
-
-
-        tentar.className =
-            "btn-perigo";
-
-
-        tentar.textContent =
-            "Tentar novamente";
-
-
-        tentar.style.marginLeft =
-            "10px";
-
-
-        tentar.addEventListener(
-            "click",
-            () => {
-
-                if (
-                    vidasAtuais <= 0
-                ) {
-
-                    alert(
-                        "Você está sem vidas."
-                    );
-
-                    return;
-
-                }
-
-
-                window.location.reload();
-
-            }
-        );
-
-
-        resultado.appendChild(
-            tentar
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   VOLTAR PARA O CURSO
-========================================================= */
-
-function voltarCurso() {
-
-    window.location.href =
-        "curso.html?cursoId=" +
-        encodeURIComponent(
-            cursoId
-        );
-
-}
-
-
-/* =========================================================
-   EVENTOS
-========================================================= */
-
-btnVerificar.addEventListener(
-    "click",
-    verificarResposta
-);
-
-
-btnProxima.addEventListener(
-    "click",
-    proximoExercicio
-);
-
-
-document
-    .getElementById("btnVoltar")
-    .addEventListener(
-        "click",
-        voltarCurso
-    );
-
-
-document
-    .getElementById("btnSair")
-    .addEventListener(
-        "click",
-        async () => {
-
-            await signOut(auth);
-
-            window.location.href =
-                "index.html";
-
-        }
-    );
-
-
-/* =========================================================
    AUTENTICAÇÃO
 ========================================================= */
 
@@ -2225,55 +556,534 @@ onAuthStateChanged(
     auth,
     async usuario => {
 
-        if (!usuario) {
+        if(!usuario){
 
             window.location.href =
                 "index.html";
 
             return;
-
         }
 
 
-        usuarioAtual =
-            usuario;
+        try{
 
+            await carregarUsuario(usuario.uid);
 
-        try {
+            await carregarResultado(usuario.uid);
 
-            await carregarUsuario();
+        }catch(erro){
 
-            await carregarProgresso();
+            console.error(erro);
 
-            await carregarLicao();
-
-
-            carregando.classList.add(
-                "escondido"
+            mostrarErro(
+                "Não foi possível carregar o resultado."
             );
-
-
-            conteudo.classList.remove(
-                "escondido"
-            );
-
-        }
-
-        catch (erro) {
-
-            console.error(
-                erro
-            );
-
-
-            carregando.textContent =
-                erro.message ||
-                "Erro ao carregar a lição.";
 
         }
 
     }
 );
+
+
+/* =========================================================
+   USUÁRIO
+========================================================= */
+
+async function carregarUsuario(uid){
+
+    const referencia =
+        doc(
+            db,
+            "usuarios",
+            uid
+        );
+
+
+    const snap =
+        await getDoc(referencia);
+
+
+    if(!snap.exists()){
+        return;
+    }
+
+
+    const dados =
+        snap.data();
+
+
+    document.getElementById(
+        "vidas"
+    ).textContent =
+        Number(
+            dados.vidas ?? 0
+        );
+
+
+    document.getElementById(
+        "moedas"
+    ).textContent =
+        Number(
+            dados.moedas ?? 0
+        );
+
+
+    document.getElementById(
+        "xp"
+    ).textContent =
+        Number(
+            dados.xp ?? 0
+        );
+
+}
+
+
+/* =========================================================
+   RESULTADO
+========================================================= */
+
+async function carregarResultado(uid){
+
+    if(!licaoId){
+
+        throw new Error(
+            "Lição não informada."
+        );
+
+    }
+
+
+    const progressoId =
+        uid + "_" + licaoId;
+
+
+    const referencia =
+        doc(
+            db,
+            "progresso",
+            progressoId
+        );
+
+
+    const snap =
+        await getDoc(referencia);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Resultado da lição não encontrado."
+        );
+
+    }
+
+
+    const progresso =
+        snap.data();
+
+
+    let cursoNome =
+        "Curso";
+
+
+    let licaoNome =
+        "Lição";
+
+
+    if(cursoId){
+
+        const cursoSnap =
+            await getDoc(
+                doc(
+                    db,
+                    "cursos",
+                    cursoId
+                )
+            );
+
+
+        if(cursoSnap.exists()){
+
+            cursoNome =
+                cursoSnap.data().titulo ||
+                "Curso";
+
+        }
+
+    }
+
+
+    if(licaoId){
+
+        const licaoSnap =
+            await getDoc(
+                doc(
+                    db,
+                    "licoes",
+                    licaoId
+                )
+            );
+
+
+        if(licaoSnap.exists()){
+
+            licaoNome =
+                licaoSnap.data().titulo ||
+                "Lição";
+
+        }
+
+    }
+
+
+    const aproveitamento =
+        Number(
+            progresso.aproveitamento ?? 0
+        );
+
+
+    const aprovado =
+        progresso.aprovado === true;
+
+
+    const pontuacao =
+        Number(
+            progresso.pontuacao ?? 0
+        );
+
+
+    const total =
+        Number(
+            progresso.totalQuestoes ??
+            0
+        );
+
+
+    const acertos =
+        Number(
+            progresso.acertos ??
+            0
+        );
+
+
+    const erros =
+        Number(
+            progresso.erros ??
+            Math.max(
+                0,
+                total - acertos
+            )
+        );
+
+
+    /*
+       XP e moedas são mostrados
+       a partir do resultado salvo.
+       Se não existirem nos documentos
+       antigos, usamos 0.
+    */
+
+    const xpGanho =
+        Number(
+            progresso.xpGanho ?? 0
+        );
+
+
+    const moedasGanhas =
+        Number(
+            progresso.moedasGanhas ?? 0
+        );
+
+
+    document.getElementById(
+        "cursoNome"
+    ).textContent =
+        cursoNome;
+
+
+    document.getElementById(
+        "licaoNome"
+    ).textContent =
+        licaoNome;
+
+
+    document.getElementById(
+        "percentual"
+    ).textContent =
+        Math.round(
+            aproveitamento
+        ) + "%";
+
+
+    document.getElementById(
+        "nota"
+    ).textContent =
+        `${acertos} de ${total} questões corretas`;
+
+
+    document.getElementById(
+        "acertos"
+    ).textContent =
+        acertos;
+
+
+    document.getElementById(
+        "erros"
+    ).textContent =
+        erros;
+
+
+    document.getElementById(
+        "xpGanho"
+    ).textContent =
+        "+" + xpGanho;
+
+
+    document.getElementById(
+        "moedasGanhas"
+    ).textContent =
+        "+" + moedasGanhas;
+
+
+    if(aprovado){
+
+        document.getElementById(
+            "icone"
+        ).textContent =
+            "🏆";
+
+
+        document.getElementById(
+            "titulo"
+        ).textContent =
+            "Parabéns! Você foi aprovado!";
+
+
+        document.getElementById(
+            "titulo"
+        ).className =
+            "titulo aprovado";
+
+
+        document.getElementById(
+            "subtitulo"
+        ).textContent =
+            "Você concluiu esta lição com sucesso.";
+
+
+        document.getElementById(
+            "mensagem"
+        ).textContent =
+            "🎉 Continue assim! Cada lição concluída aumenta seu progresso no curso.";
+
+
+        document.getElementById(
+            "mensagem"
+        ).style.background =
+            "#dcfce7";
+
+
+        document.getElementById(
+            "mensagem"
+        ).style.color =
+            "#166534";
+
+
+        document.getElementById(
+            "btnContinuar"
+        ).textContent =
+            "📚 Continuar curso";
+
+
+    }else{
+
+        document.getElementById(
+            "icone"
+        ).textContent =
+            "💪";
+
+
+        document.getElementById(
+            "titulo"
+        ).textContent =
+            "Quase lá!";
+
+
+        document.getElementById(
+            "titulo"
+        ).className =
+            "titulo reprovado";
+
+
+        document.getElementById(
+            "subtitulo"
+        ).textContent =
+            "Você precisa de pelo menos 60% para concluir esta lição.";
+
+
+        document.getElementById(
+            "mensagem"
+        ).textContent =
+            "💡 Revise o conteúdo e tente novamente. Você consegue!";
+
+
+        document.getElementById(
+            "mensagem"
+        ).style.background =
+            "#fef3c7";
+
+
+        document.getElementById(
+            "mensagem"
+        ).style.color =
+            "#92400e";
+
+
+        document.getElementById(
+            "btnContinuar"
+        ).textContent =
+            "📚 Voltar ao curso";
+
+    }
+
+
+    document.getElementById(
+        "loading"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "resultado"
+    ).style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   CONTINUAR
+========================================================= */
+
+window.continuar =
+    function(){
+
+        if(cursoId){
+
+            window.location.href =
+                "curso.html?cursoId=" +
+                encodeURIComponent(
+                    cursoId
+                );
+
+        }else{
+
+            window.location.href =
+                "cursos.html";
+
+        }
+
+    };
+
+
+/* =========================================================
+   REFAZER
+========================================================= */
+
+window.refazer =
+    function(){
+
+        if(
+            cursoId &&
+            moduloId &&
+            licaoId
+        ){
+
+            window.location.href =
+                "licao.html?" +
+                "cursoId=" +
+                encodeURIComponent(cursoId) +
+                "&moduloId=" +
+                encodeURIComponent(moduloId) +
+                "&licaoId=" +
+                encodeURIComponent(licaoId);
+
+        }else{
+
+            window.location.href =
+                "cursos.html";
+
+        }
+
+    };
+
+
+/* =========================================================
+   CARTEIRA
+========================================================= */
+
+window.abrirCarteira =
+    function(){
+
+        window.location.href =
+            "carteira.html";
+
+    };
+
+
+/* =========================================================
+   SAIR
+========================================================= */
+
+window.sair =
+    async function(){
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "index.html";
+
+        }catch(erro){
+
+            console.error(erro);
+
+            alert(
+                "Não foi possível sair."
+            );
+
+        }
+
+    };
+
+
+/* =========================================================
+   ERRO
+========================================================= */
+
+function mostrarErro(texto){
+
+    document.getElementById(
+        "loading"
+    ).style.display =
+        "none";
+
+
+    const elemento =
+        document.getElementById(
+            "erro"
+        );
+
+
+    elemento.textContent =
+        texto;
+
+
+    elemento.style.display =
+        "block";
+
+}
 
 </script>
 
