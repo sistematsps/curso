@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,7 +27,7 @@ header{
     padding:20px;
 }
 
-header .topo{
+.topo{
     max-width:1200px;
     margin:auto;
     display:flex;
@@ -50,8 +51,8 @@ header h1{
     background:white;
     border-radius:12px;
     padding:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
     margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
 .filtros{
@@ -77,6 +78,10 @@ button{
     font-weight:bold;
 }
 
+button:hover{
+    opacity:.9;
+}
+
 .btn-voltar{
     background:#374151;
     color:white;
@@ -95,10 +100,6 @@ button{
 .btn-cancelar{
     background:#dc2626;
     color:white;
-}
-
-button:hover{
-    opacity:.9;
 }
 
 .tabela{
@@ -130,10 +131,11 @@ td{
 
 .status{
     display:inline-block;
-    padding:5px 9px;
+    padding:5px 10px;
     border-radius:20px;
     font-size:12px;
     font-weight:bold;
+    text-transform:capitalize;
 }
 
 .status-pendente{
@@ -164,7 +166,7 @@ td{
 }
 
 .erro{
-    color:#b91c1c;
+    color:#991b1b;
     background:#fee2e2;
     border:1px solid #fecaca;
     padding:15px;
@@ -192,10 +194,20 @@ td{
     border:1px solid #e5e7eb;
 }
 
+.resumo-box span{
+    display:block;
+    color:#6b7280;
+    font-size:14px;
+}
+
 .resumo-box strong{
     display:block;
     font-size:25px;
     margin-top:5px;
+}
+
+small{
+    color:#6b7280;
 }
 
 @media(max-width:700px){
@@ -208,7 +220,7 @@ td{
         grid-template-columns:repeat(2,1fr);
     }
 
-    header .topo{
+    .topo{
         flex-direction:column;
         align-items:flex-start;
     }
@@ -216,9 +228,11 @@ td{
 }
 
 </style>
+
 </head>
 
 <body>
+
 
 <header>
 
@@ -229,7 +243,9 @@ td{
         <button
             class="btn-voltar"
             onclick="window.location.href='dashboard.html'">
+
             ← Voltar
+
         </button>
 
     </div>
@@ -239,28 +255,54 @@ td{
 
 <div class="container">
 
+
+    <!-- RESUMO -->
+
     <div class="card">
 
         <div class="resumo">
 
             <div class="resumo-box">
-                Total
-                <strong id="totalCompras">0</strong>
+
+                <span>Total de pedidos</span>
+
+                <strong id="totalCompras">
+                    0
+                </strong>
+
             </div>
 
-            <div class="resumo-box">
-                Pendentes
-                <strong id="totalPendentes">0</strong>
-            </div>
 
             <div class="resumo-box">
-                Pagos
-                <strong id="totalPagos">0</strong>
+
+                <span>Pendentes</span>
+
+                <strong id="totalPendentes">
+                    0
+                </strong>
+
             </div>
 
+
             <div class="resumo-box">
-                Cancelados
-                <strong id="totalCancelados">0</strong>
+
+                <span>Pagos</span>
+
+                <strong id="totalPagos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-box">
+
+                <span>Cancelados</span>
+
+                <strong id="totalCancelados">
+                    0
+                </strong>
+
             </div>
 
         </div>
@@ -268,20 +310,26 @@ td{
     </div>
 
 
+
+    <!-- FILTROS -->
+
     <div class="card">
 
-        <h2>🔎 Pesquisar pagamentos</h2>
+        <h2>🔎 Pesquisar pedidos</h2>
 
         <div class="filtros">
 
             <input
                 type="text"
                 id="pesquisa"
-                placeholder="Nome, e-mail, produto ou código...">
+                placeholder="Nome, e-mail, produto, código ou tipo...">
+
 
             <select id="filtroStatus">
 
-                <option value="">Todos os status</option>
+                <option value="">
+                    Todos os status
+                </option>
 
                 <option value="pendente">
                     Pendentes
@@ -303,16 +351,28 @@ td{
 
         <button
             class="btn-atualizar"
-            onclick="carregar()">
+            id="btnAtualizar">
+
             🔄 Atualizar
+
         </button>
 
     </div>
 
 
-    <div class="card">
 
-        <div id="mensagem"></div>
+    <!-- MENSAGEM -->
+
+    <div
+        id="mensagem"
+        style="margin-bottom:15px;">
+    </div>
+
+
+
+    <!-- TABELA -->
+
+    <div class="card">
 
         <div class="tabela">
 
@@ -323,24 +383,38 @@ td{
                     <tr>
 
                         <th>Código</th>
+
                         <th>Aluno</th>
+
                         <th>Produto</th>
+
                         <th>Tipo</th>
+
                         <th>Valor</th>
+
                         <th>Status</th>
+
                         <th>Data</th>
+
                         <th>Ações</th>
 
                     </tr>
 
                 </thead>
 
+
                 <tbody id="lista">
 
                     <tr>
-                        <td colspan="8" class="vazio">
-                            Carregando pagamentos...
+
+                        <td
+                            colspan="8"
+                            class="vazio">
+
+                            ⏳ Carregando pedidos...
+
                         </td>
+
                     </tr>
 
                 </tbody>
@@ -351,19 +425,28 @@ td{
 
     </div>
 
+
 </div>
 
 
+
 <script type="module">
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
+
 import {
     getAuth,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
 
 import {
     getFirestore,
@@ -378,34 +461,44 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* =========================================================
-   FIREBASE
-========================================================= */
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
 
-    authDomain: "dezenas-1ed47.firebaseapp.com",
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
 
-    projectId: "dezenas-1ed47",
+    projectId:
+        "dezenas-1ed47",
 
-    storageBucket: "dezenas-1ed47.firebasestorage.app",
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
 
-    messagingSenderId: "372788277555",
+    messagingSenderId:
+        "372788277555",
 
-    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
 
-    measurementId: "G-NMPP8PKPK3"
+    measurementId:
+        "G-NMPP8PKPK3"
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
 
-const db = getFirestore(app);
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
 
 
 /* =========================================================
@@ -424,6 +517,10 @@ const filtroStatus =
 const mensagem =
     document.getElementById("mensagem");
 
+const btnAtualizar =
+    document.getElementById("btnAtualizar");
+
+
 const totalCompras =
     document.getElementById("totalCompras");
 
@@ -437,11 +534,13 @@ const totalCancelados =
     document.getElementById("totalCancelados");
 
 
+
 /* =========================================================
    VARIÁVEIS
 ========================================================= */
 
 let compras = [];
+
 
 
 /* =========================================================
@@ -450,17 +549,30 @@ let compras = [];
 
 function escapar(valor){
 
-    if(valor === null || valor === undefined){
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
         return "";
+
     }
 
+
     return String(valor)
+
         .replaceAll("&","&amp;")
+
         .replaceAll("<","&lt;")
+
         .replaceAll(">","&gt;")
+
         .replaceAll('"',"&quot;")
+
         .replaceAll("'","&#039;");
+
 }
+
 
 
 /* =========================================================
@@ -469,14 +581,20 @@ function escapar(valor){
 
 function formatarValor(valor){
 
-    const numero = Number(valor || 0);
+    const numero =
+        Number(valor || 0);
 
-    return numero.toLocaleString("pt-BR",{
-        style:"currency",
-        currency:"BRL"
-    });
+
+    return numero.toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
 
 }
+
 
 
 /* =========================================================
@@ -486,14 +604,17 @@ function formatarValor(valor){
 function formatarData(timestamp){
 
     if(!timestamp){
+
         return "-";
+
     }
+
 
     try{
 
-        const data = timestamp.toDate();
-
-        return data.toLocaleString("pt-BR");
+        return timestamp
+            .toDate()
+            .toLocaleString("pt-BR");
 
     }catch(error){
 
@@ -504,49 +625,75 @@ function formatarData(timestamp){
 }
 
 
+
 /* =========================================================
-   MOSTRAR MENSAGEM
+   MENSAGEM
 ========================================================= */
 
-function mostrarMensagem(texto,tipo="info"){
+function mostrarMensagem(
+    texto,
+    tipo="info"
+){
 
     mensagem.innerHTML = `
+
         <div class="${tipo}">
+
             ${texto}
+
         </div>
+
     `;
 
 }
 
 
+
 /* =========================================================
-   CARREGAR COMPRAS
+   CARREGAR
 ========================================================= */
 
 async function carregar(){
 
     lista.innerHTML = `
+
         <tr>
-            <td colspan="8" class="vazio">
-                ⏳ Carregando pagamentos...
+
+            <td
+                colspan="8"
+                class="vazio">
+
+                ⏳ Carregando pedidos...
+
             </td>
+
         </tr>
+
     `;
 
+
     mensagem.innerHTML = "";
+
 
     try{
 
         const snapshot =
-            await getDocs(collection(db,"compras"));
+            await getDocs(
+                collection(db,"compras")
+            );
+
 
         compras = [];
+
 
         snapshot.forEach(item => {
 
             compras.push({
+
                 id:item.id,
+
                 ...item.data()
+
             });
 
         });
@@ -558,13 +705,14 @@ async function carregar(){
         );
 
 
-        compras.sort((a,b)=>{
+        compras.sort((a,b) => {
 
             const dataA =
                 a.criadoEm?.toMillis?.() || 0;
 
             const dataB =
                 b.criadoEm?.toMillis?.() || 0;
+
 
             return dataB - dataA;
 
@@ -583,14 +731,17 @@ async function carregar(){
             error
         );
 
+
         lista.innerHTML = `
+
             <tr>
+
                 <td colspan="8">
 
                     <div class="erro">
 
                         <strong>
-                            ❌ Erro ao carregar os pagamentos
+                            ❌ Erro ao carregar os pedidos
                         </strong>
 
                         <br><br>
@@ -600,12 +751,15 @@ async function carregar(){
                     </div>
 
                 </td>
+
             </tr>
+
         `;
 
     }
 
 }
+
 
 
 /* =========================================================
@@ -616,17 +770,22 @@ function atualizarResumo(){
 
     const pendentes =
         compras.filter(
-            item => item.status === "pendente"
+            compra =>
+                compra.status === "pendente"
         ).length;
+
 
     const pagos =
         compras.filter(
-            item => item.status === "pago"
+            compra =>
+                compra.status === "pago"
         ).length;
+
 
     const cancelados =
         compras.filter(
-            item => item.status === "cancelado"
+            compra =>
+                compra.status === "cancelado"
         ).length;
 
 
@@ -645,6 +804,7 @@ function atualizarResumo(){
 }
 
 
+
 /* =========================================================
    RENDERIZAR
 ========================================================= */
@@ -656,6 +816,7 @@ function renderizar(){
             .trim()
             .toLowerCase();
 
+
     const status =
         filtroStatus.value;
 
@@ -664,49 +825,77 @@ function renderizar(){
         compras.filter(compra => {
 
             const nome =
-                String(compra.nomeUsuario || "")
-                .toLowerCase();
+                String(
+                    compra.nomeUsuario || ""
+                ).toLowerCase();
+
 
             const email =
-                String(compra.emailUsuario || "")
-                .toLowerCase();
+                String(
+                    compra.emailUsuario || ""
+                ).toLowerCase();
+
 
             const produto =
-                String(compra.produtoNome || "")
-                .toLowerCase();
+                String(
+                    compra.produtoNome || ""
+                ).toLowerCase();
+
 
             const codigo =
-                String(compra.codigo || "")
-                .toLowerCase();
+                String(
+                    compra.codigo || ""
+                ).toLowerCase();
+
+
+            const tipo =
+                String(
+                    compra.tipo || ""
+                ).toLowerCase();
+
 
             const correspondeTexto =
                 !texto ||
                 nome.includes(texto) ||
                 email.includes(texto) ||
                 produto.includes(texto) ||
-                codigo.includes(texto);
+                codigo.includes(texto) ||
+                tipo.includes(texto);
+
 
             const correspondeStatus =
                 !status ||
                 compra.status === status;
 
-            return
-                correspondeTexto &&
-                correspondeStatus;
+
+            /*
+             * IMPORTANTE:
+             * O return fica na mesma instrução.
+             */
+
+            return correspondeTexto &&
+                   correspondeStatus;
 
         });
+
 
 
     if(filtradas.length === 0){
 
         lista.innerHTML = `
-            <tr>
-                <td colspan="8" class="vazio">
 
-                    Nenhum pagamento encontrado.
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="vazio">
+
+                    Nenhum pedido encontrado.
 
                 </td>
+
             </tr>
+
         `;
 
         return;
@@ -714,8 +903,10 @@ function renderizar(){
     }
 
 
+
     lista.innerHTML =
         filtradas.map(compra => {
+
 
             const statusAtual =
                 compra.status || "pendente";
@@ -725,35 +916,49 @@ function renderizar(){
                 "status-pendente";
 
 
-            if(statusAtual === "pago"){
+            if(
+                statusAtual === "pago"
+            ){
+
                 classeStatus =
                     "status-pago";
+
             }
 
-            if(statusAtual === "cancelado"){
+
+            if(
+                statusAtual === "cancelado"
+            ){
+
                 classeStatus =
                     "status-cancelado";
+
             }
+
 
 
             let botoes = "";
 
 
-            if(statusAtual === "pendente"){
+
+            if(
+                statusAtual === "pendente"
+            ){
 
                 botoes = `
 
                     <button
                         class="btn-pagar"
-                        onclick="confirmarPagamento('${escapar(compra.id)}')">
+                        onclick="confirmarPagamento('${compra.id}')">
 
-                        ✓ Confirmar
+                        ✓ Aprovar
 
                     </button>
 
+
                     <button
                         class="btn-cancelar"
-                        onclick="cancelarPagamento('${escapar(compra.id)}')">
+                        onclick="cancelarPagamento('${compra.id}')">
 
                         ✕ Cancelar
 
@@ -763,64 +968,121 @@ function renderizar(){
 
             }else{
 
-                botoes = "-";
+                botoes = `
+
+                    <span style="color:#6b7280;">
+
+                        Processado
+
+                    </span>
+
+                `;
 
             }
+
 
 
             return `
 
                 <tr>
 
+
                     <td>
+
                         <strong>
-                            ${escapar(compra.codigo || compra.id)}
+
+                            ${escapar(
+                                compra.codigo ||
+                                compra.id
+                            )}
+
                         </strong>
+
                     </td>
 
 
+
                     <td>
 
-                        ${escapar(compra.nomeUsuario || "-")}
+                        <strong>
+
+                            ${escapar(
+                                compra.nomeUsuario ||
+                                "-"
+                            )}
+
+                        </strong>
 
                         <br>
 
                         <small>
-                            ${escapar(compra.emailUsuario || "")}
+
+                            ${escapar(
+                                compra.emailUsuario ||
+                                ""
+                            )}
+
                         </small>
 
                     </td>
 
 
+
                     <td>
-                        ${escapar(compra.produtoNome || "-")}
+
+                        ${escapar(
+                            compra.produtoNome ||
+                            "-"
+                        )}
+
                     </td>
 
 
+
                     <td>
-                        ${escapar(compra.tipo || "-")}
+
+                        ${escapar(
+                            compra.tipo ||
+                            "-"
+                        )}
+
                     </td>
 
 
+
                     <td>
-                        ${formatarValor(compra.valor)}
+
+                        ${formatarValor(
+                            compra.valor
+                        )}
+
                     </td>
 
 
+
                     <td>
 
-                        <span class="status ${classeStatus}">
+                        <span
+                            class="status ${classeStatus}">
 
-                            ${escapar(statusAtual)}
+                            ${escapar(
+                                statusAtual
+                            )}
 
                         </span>
 
                     </td>
 
 
+
                     <td>
-                        ${formatarData(compra.criadoEm)}
+
+                        ${formatarData(
+                            compra.criadoEm
+                        )}
+
                     </td>
+
 
 
                     <td>
@@ -833,6 +1095,7 @@ function renderizar(){
 
                     </td>
 
+
                 </tr>
 
             `;
@@ -840,6 +1103,7 @@ function renderizar(){
         }).join("");
 
 }
+
 
 
 /* =========================================================
@@ -850,7 +1114,9 @@ window.confirmarPagamento =
 async function(id){
 
     const compra =
-        compras.find(item => item.id === id);
+        compras.find(
+            item => item.id === id
+        );
 
 
     if(!compra){
@@ -864,10 +1130,12 @@ async function(id){
     }
 
 
-    if(compra.status !== "pendente"){
+    if(
+        compra.status !== "pendente"
+    ){
 
         alert(
-            "Este pagamento não está pendente."
+            "Este pagamento já foi processado."
         );
 
         return;
@@ -877,36 +1145,51 @@ async function(id){
 
     const confirmar =
         confirm(
-            `Confirmar pagamento?\n\n` +
-            `Aluno: ${compra.nomeUsuario || "-"}\n` +
-            `Produto: ${compra.produtoNome || "-"}\n` +
-            `Valor: ${formatarValor(compra.valor)}`
+
+            "Confirmar este pagamento?\n\n" +
+
+            "Aluno: " +
+            (compra.nomeUsuario || "-") +
+
+            "\nProduto: " +
+            (compra.produtoNome || "-") +
+
+            "\nValor: " +
+            formatarValor(compra.valor)
+
         );
 
 
     if(!confirmar){
+
         return;
+
     }
 
 
     try{
 
         const compraRef =
-            doc(db,"compras",id);
+            doc(
+                db,
+                "compras",
+                id
+            );
 
 
         /*
-         * Primeiro muda o status.
-         * A transação evita duas confirmações
-         * simultâneas do mesmo pagamento.
+         * Confirma o pagamento.
          */
 
         await runTransaction(
             db,
             async transaction => {
 
+
                 const snap =
-                    await transaction.get(compraRef);
+                    await transaction.get(
+                        compraRef
+                    );
 
 
                 if(!snap.exists()){
@@ -922,7 +1205,9 @@ async function(id){
                     snap.data();
 
 
-                if(dados.status !== "pendente"){
+                if(
+                    dados.status !== "pendente"
+                ){
 
                     throw new Error(
                         "Este pagamento já foi processado."
@@ -932,20 +1217,27 @@ async function(id){
 
 
                 transaction.update(
+
                     compraRef,
+
                     {
+
                         status:"pago",
-                        pagoEm:serverTimestamp()
+
+                        pagoEm:
+                            serverTimestamp()
+
                     }
+
                 );
 
             }
+
         );
 
 
         /*
-         * Depois do pagamento confirmado,
-         * entrega o produto.
+         * Entrega o produto.
          */
 
         await entregarProduto(
@@ -969,14 +1261,19 @@ async function(id){
             error
         );
 
+
         alert(
+
             "Erro ao confirmar pagamento:\n\n" +
+
             error.message
+
         );
 
     }
 
 };
+
 
 
 /* =========================================================
@@ -1006,31 +1303,48 @@ async function entregarProduto(
 
 
     const usuarioRef =
-        doc(db,"usuarios",usuarioId);
+        doc(
+            db,
+            "usuarios",
+            usuarioId
+        );
 
 
-    /*
-     * VIDAS INFINITAS
-     */
 
-    if(tipo === "vidas_infinitas"){
+    /* =====================================================
+       VIDAS INFINITAS
+    ===================================================== */
+
+    if(
+        tipo === "vidas_infinitas"
+    ){
 
         await updateDoc(
+
             usuarioRef,
+
             {
+
                 vidasInfinitas:true,
-                atualizadoEm:serverTimestamp()
+
+                atualizadoEm:
+                    serverTimestamp()
+
             }
+
         );
 
     }
 
 
-    /*
-     * XP
-     */
 
-    else if(tipo === "xp"){
+    /* =====================================================
+       XP
+    ===================================================== */
+
+    else if(
+        tipo === "xp"
+    ){
 
         const nomeProduto =
             String(
@@ -1051,21 +1365,32 @@ async function entregarProduto(
 
 
         await updateDoc(
+
             usuarioRef,
+
             {
-                xp:increment(quantidade),
-                atualizadoEm:serverTimestamp()
+
+                xp:
+                    increment(quantidade),
+
+                atualizadoEm:
+                    serverTimestamp()
+
             }
+
         );
 
     }
 
 
-    /*
-     * MOEDAS
-     */
 
-    else if(tipo === "moedas"){
+    /* =====================================================
+       MOEDAS
+    ===================================================== */
+
+    else if(
+        tipo === "moedas"
+    ){
 
         const nomeProduto =
             String(
@@ -1086,43 +1411,49 @@ async function entregarProduto(
 
 
         await updateDoc(
+
             usuarioRef,
+
             {
-                moedas:increment(quantidade),
-                atualizadoEm:serverTimestamp()
+
+                moedas:
+                    increment(quantidade),
+
+                atualizadoEm:
+                    serverTimestamp()
+
             }
+
         );
 
     }
 
 
-    /*
-     * CURSO
-     *
-     * Não precisa alterar o usuário.
-     * O acesso ao curso é verificado
-     * através da compra paga.
-     */
 
-    else if(tipo === "curso"){
+    /* =====================================================
+       CURSO
+    ===================================================== */
+
+    else if(
+        tipo === "curso"
+    ){
 
         console.log(
-            "Curso liberado pela compra:",
+            "Curso liberado:",
             compra.cursoId
         );
 
     }
 
 
-    /*
-     * CERTIFICADO
-     *
-     * Também não precisa alterar o usuário.
-     * A página do certificado verifica
-     * a compra paga.
-     */
 
-    else if(tipo === "certificado"){
+    /* =====================================================
+       CERTIFICADO
+    ===================================================== */
+
+    else if(
+        tipo === "certificado"
+    ){
 
         console.log(
             "Certificado liberado:",
@@ -1132,22 +1463,34 @@ async function entregarProduto(
     }
 
 
-    /*
-     * MARCAR COMO ENTREGUE
-     */
+
+    /* =====================================================
+       MARCAR ENTREGA
+    ===================================================== */
 
     const compraRef =
-        doc(db,"compras",compraId);
+        doc(
+            db,
+            "compras",
+            compraId
+        );
 
 
     await updateDoc(
+
         compraRef,
+
         {
-            entregueEm:serverTimestamp()
+
+            entregueEm:
+                serverTimestamp()
+
         }
+
     );
 
 }
+
 
 
 /* =========================================================
@@ -1158,7 +1501,9 @@ window.cancelarPagamento =
 async function(id){
 
     const compra =
-        compras.find(item => item.id === id);
+        compras.find(
+            item => item.id === id
+        );
 
 
     if(!compra){
@@ -1172,7 +1517,9 @@ async function(id){
     }
 
 
-    if(compra.status !== "pendente"){
+    if(
+        compra.status !== "pendente"
+    ){
 
         alert(
             "Este pagamento já foi processado."
@@ -1185,29 +1532,46 @@ async function(id){
 
     const confirmar =
         confirm(
-            `Cancelar este pagamento?\n\n` +
-            `Aluno: ${compra.nomeUsuario || "-"}\n` +
-            `Produto: ${compra.produtoNome || "-"}`
+
+            "Cancelar este pagamento?\n\n" +
+
+            "Aluno: " +
+            (compra.nomeUsuario || "-") +
+
+            "\nProduto: " +
+            (compra.produtoNome || "-")
+
         );
 
 
     if(!confirmar){
+
         return;
+
     }
 
 
     try{
 
         const compraRef =
-            doc(db,"compras",id);
+            doc(
+                db,
+                "compras",
+                id
+            );
 
 
         await runTransaction(
+
             db,
+
             async transaction => {
 
+
                 const snap =
-                    await transaction.get(compraRef);
+                    await transaction.get(
+                        compraRef
+                    );
 
 
                 if(!snap.exists()){
@@ -1223,7 +1587,9 @@ async function(id){
                     snap.data();
 
 
-                if(dados.status !== "pendente"){
+                if(
+                    dados.status !== "pendente"
+                ){
 
                     throw new Error(
                         "Este pagamento já foi processado."
@@ -1233,14 +1599,22 @@ async function(id){
 
 
                 transaction.update(
+
                     compraRef,
+
                     {
+
                         status:"cancelado",
-                        canceladoEm:serverTimestamp()
+
+                        canceladoEm:
+                            serverTimestamp()
+
                     }
+
                 );
 
             }
+
         );
 
 
@@ -1255,13 +1629,17 @@ async function(id){
     }catch(error){
 
         console.error(
-            "Erro ao cancelar:",
+            "Erro ao cancelar pagamento:",
             error
         );
 
+
         alert(
+
             "Erro ao cancelar pagamento:\n\n" +
+
             error.message
+
         );
 
     }
@@ -1269,8 +1647,9 @@ async function(id){
 };
 
 
+
 /* =========================================================
-   PESQUISA
+   EVENTOS
 ========================================================= */
 
 pesquisa.addEventListener(
@@ -1285,13 +1664,23 @@ filtroStatus.addEventListener(
 );
 
 
+btnAtualizar.addEventListener(
+    "click",
+    carregar
+);
+
+
+
 /* =========================================================
-   AUTENTICAÇÃO + ADMIN
+   AUTENTICAÇÃO
 ========================================================= */
 
 onAuthStateChanged(
+
     auth,
+
     async user => {
+
 
         if(!user){
 
@@ -1303,24 +1692,35 @@ onAuthStateChanged(
         }
 
 
+
         try{
 
             const usuarioRef =
-                doc(db,"usuarios",user.uid);
+                doc(
+                    db,
+                    "usuarios",
+                    user.uid
+                );
 
 
             const usuarioSnap =
-                await getDoc(usuarioRef);
+                await getDoc(
+                    usuarioRef
+                );
 
 
-            if(!usuarioSnap.exists()){
+            if(
+                !usuarioSnap.exists()
+            ){
 
                 alert(
                     "Perfil de usuário não encontrado."
                 );
 
+
                 window.location.href =
                     "../index.html";
+
 
                 return;
 
@@ -1331,14 +1731,18 @@ onAuthStateChanged(
                 usuarioSnap.data();
 
 
-            if(usuario.tipo !== "admin"){
+            if(
+                usuario.tipo !== "admin"
+            ){
 
                 alert(
                     "Acesso negado. Somente administradores."
                 );
 
+
                 window.location.href =
                     "../index.html";
+
 
                 return;
 
@@ -1371,12 +1775,17 @@ onAuthStateChanged(
                         <div class="erro">
 
                             <strong>
-                                ❌ Não foi possível verificar o acesso administrativo.
+
+                                ❌ Não foi possível verificar
+                                o acesso administrativo.
+
                             </strong>
 
                             <br><br>
 
-                            ${escapar(error.message)}
+                            ${escapar(
+                                error.message
+                            )}
 
                         </div>
 
@@ -1389,9 +1798,11 @@ onAuthStateChanged(
         }
 
     }
+
 );
 
 </script>
 
 </body>
-</html>
+
+    </html>
