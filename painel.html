@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Painel do Aluno</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -78,6 +81,7 @@ header{
     padding:0 20px;
 }
 
+
 /* =========================
    CARDS DE ESTATÍSTICAS
 ========================= */
@@ -117,6 +121,7 @@ header{
     font-weight:bold;
 }
 
+
 /* =========================
    TITULO
 ========================= */
@@ -136,6 +141,7 @@ header{
     color:#6b7280;
     font-size:14px;
 }
+
 
 /* =========================
    CURSOS
@@ -238,6 +244,7 @@ header{
     background:#1d4ed8;
 }
 
+
 /* =========================
    ESTADOS
 ========================= */
@@ -274,11 +281,13 @@ header{
     margin-bottom:20px;
 }
 
+
 /* =========================
    RESPONSIVO
 ========================= */
 
 @media(max-width:900px){
+
     .estatisticas{
         grid-template-columns:repeat(2,1fr);
     }
@@ -286,9 +295,11 @@ header{
     .cursos{
         grid-template-columns:1fr;
     }
+
 }
 
 @media(max-width:600px){
+
     header{
         padding:18px;
     }
@@ -336,32 +347,56 @@ header{
     .btn-curso{
         width:100%;
     }
+
 }
+
 </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
     <div class="header-container">
 
         <div class="usuario-info">
-            <h1 id="nomeUsuario">Olá!</h1>
-            <p>Continue sua jornada de aprendizado 🚀</p>
+
+            <h1 id="nomeUsuario">
+                Olá!
+            </h1>
+
+            <p>
+                Continue sua jornada de aprendizado 🚀
+            </p>
+
         </div>
+
 
         <div class="header-acoes">
 
-            <button class="btn btn-branco" onclick="abrirCarteira()">
+            <button
+                class="btn btn-branco"
+                onclick="abrirCarteira()"
+            >
                 💰 Carteira
             </button>
 
-            <button class="btn btn-branco" onclick="abrirCursos()">
+
+            <button
+                class="btn btn-branco"
+                onclick="abrirCursos()"
+            >
                 📚 Cursos
             </button>
 
-            <button class="btn btn-sair" onclick="sair()">
+
+            <button
+                class="btn btn-sair"
+                onclick="sair()"
+            >
                 Sair
             </button>
 
@@ -372,9 +407,12 @@ header{
 </header>
 
 
+
 <main class="container">
 
+
     <div id="mensagem"></div>
+
 
     <!-- =========================
          ESTATÍSTICAS
@@ -382,62 +420,129 @@ header{
 
     <section class="estatisticas">
 
+
+        <!-- VIDAS -->
+
         <div class="stat-card">
 
             <div class="stat-topo">
+
                 <div>
-                    <div class="stat-titulo">Vidas</div>
-                    <div class="stat-valor" id="vidas">-</div>
+
+                    <div class="stat-titulo">
+                        Vidas
+                    </div>
+
+                    <div
+                        class="stat-valor"
+                        id="vidas"
+                    >
+                        -
+                    </div>
+
                 </div>
 
-                <div class="stat-icon">❤️</div>
+                <div class="stat-icon">
+                    ❤️
+                </div>
+
             </div>
 
         </div>
 
 
+        <!-- MOEDAS -->
+
         <div class="stat-card">
 
             <div class="stat-topo">
+
                 <div>
-                    <div class="stat-titulo">Moedas</div>
-                    <div class="stat-valor" id="moedas">-</div>
+
+                    <div class="stat-titulo">
+                        Moedas
+                    </div>
+
+                    <div
+                        class="stat-valor"
+                        id="moedas"
+                    >
+                        -
+                    </div>
+
                 </div>
 
-                <div class="stat-icon">🪙</div>
+                <div class="stat-icon">
+                    🪙
+                </div>
+
             </div>
 
         </div>
 
 
+        <!-- XP -->
+
         <div class="stat-card">
 
             <div class="stat-topo">
+
                 <div>
-                    <div class="stat-titulo">XP</div>
-                    <div class="stat-valor" id="xp">-</div>
+
+                    <div class="stat-titulo">
+                        XP
+                    </div>
+
+                    <div
+                        class="stat-valor"
+                        id="xp"
+                    >
+                        -
+                    </div>
+
                 </div>
 
-                <div class="stat-icon">⭐</div>
+                <div class="stat-icon">
+                    ⭐
+                </div>
+
             </div>
 
         </div>
 
 
+        <!-- SEQUÊNCIA -->
+
         <div class="stat-card">
 
             <div class="stat-topo">
+
                 <div>
-                    <div class="stat-titulo">Sequência</div>
-                    <div class="stat-valor" id="sequencia">-</div>
+
+                    <div class="stat-titulo">
+                        Sequência
+                    </div>
+
+                    <div
+                        class="stat-valor"
+                        id="sequencia"
+                    >
+                        -
+                    </div>
+
                 </div>
 
-                <div class="stat-icon">🔥</div>
+                <div class="stat-icon">
+                    🔥
+                </div>
+
             </div>
 
         </div>
+
 
     </section>
+
 
 
     <!-- =========================
@@ -448,7 +553,9 @@ header{
 
         <div class="secao-titulo">
 
-            <h2>📊 Seu progresso</h2>
+            <h2>
+                📊 Seu progresso
+            </h2>
 
             <span id="resumoGeral">
                 Carregando...
@@ -459,13 +566,17 @@ header{
 
         <div class="estatisticas">
 
+
             <div class="stat-card">
 
                 <div class="stat-titulo">
                     Cursos disponíveis
                 </div>
 
-                <div class="stat-valor" id="totalCursos">
+                <div
+                    class="stat-valor"
+                    id="totalCursos"
+                >
                     0
                 </div>
 
@@ -478,7 +589,10 @@ header{
                     Lições concluídas
                 </div>
 
-                <div class="stat-valor" id="licoesConcluidas">
+                <div
+                    class="stat-valor"
+                    id="licoesConcluidas"
+                >
                     0
                 </div>
 
@@ -491,7 +605,10 @@ header{
                     Melhor aproveitamento
                 </div>
 
-                <div class="stat-valor" id="melhorAproveitamento">
+                <div
+                    class="stat-valor"
+                    id="melhorAproveitamento"
+                >
                     0%
                 </div>
 
@@ -504,15 +621,20 @@ header{
                     XP acumulado
                 </div>
 
-                <div class="stat-valor" id="xpResumo">
+                <div
+                    class="stat-valor"
+                    id="xpResumo"
+                >
                     0
                 </div>
 
             </div>
 
+
         </div>
 
     </section>
+
 
 
     <!-- =========================
@@ -521,9 +643,12 @@ header{
 
     <section>
 
+
         <div class="secao-titulo">
 
-            <h2>📚 Meus cursos</h2>
+            <h2>
+                📚 Meus cursos
+            </h2>
 
             <span>
                 Continue de onde parou
@@ -540,22 +665,32 @@ header{
 
         </div>
 
+
     </section>
+
 
 </main>
 
 
+
 <script type="module">
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
 
 import {
     getFirestore,
@@ -566,48 +701,90 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
-    authDomain: "dezenas-1ed47.firebaseapp.com",
-    projectId: "dezenas-1ed47",
-    storageBucket: "dezenas-1ed47.firebasestorage.app",
-    messagingSenderId: "372788277555",
-    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
-    measurementId: "G-NMPP8PKPK3"
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+
 };
 
-const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const app =
+    initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
 
 
 /* =====================================================
    ELEMENTOS
 ===================================================== */
 
-const nomeUsuario = document.getElementById("nomeUsuario");
+const nomeUsuario =
+    document.getElementById("nomeUsuario");
 
-const vidasEl = document.getElementById("vidas");
-const moedasEl = document.getElementById("moedas");
-const xpEl = document.getElementById("xp");
-const sequenciaEl = document.getElementById("sequencia");
+const vidasEl =
+    document.getElementById("vidas");
 
-const totalCursosEl = document.getElementById("totalCursos");
-const licoesConcluidasEl = document.getElementById("licoesConcluidas");
-const melhorAproveitamentoEl = document.getElementById("melhorAproveitamento");
-const xpResumoEl = document.getElementById("xpResumo");
+const moedasEl =
+    document.getElementById("moedas");
 
-const resumoGeralEl = document.getElementById("resumoGeral");
+const xpEl =
+    document.getElementById("xp");
 
-const listaCursosEl = document.getElementById("listaCursos");
+const sequenciaEl =
+    document.getElementById("sequencia");
 
-const mensagemEl = document.getElementById("mensagem");
+
+const totalCursosEl =
+    document.getElementById("totalCursos");
+
+const licoesConcluidasEl =
+    document.getElementById("licoesConcluidas");
+
+const melhorAproveitamentoEl =
+    document.getElementById("melhorAproveitamento");
+
+const xpResumoEl =
+    document.getElementById("xpResumo");
+
+
+const resumoGeralEl =
+    document.getElementById("resumoGeral");
+
+
+const listaCursosEl =
+    document.getElementById("listaCursos");
+
+
+const mensagemEl =
+    document.getElementById("mensagem");
+
 
 
 /* =====================================================
@@ -625,19 +802,25 @@ let licoes = [];
 let progresso = [];
 
 
+
 /* =====================================================
-   MENSAGEM
+   MENSAGEM DE ERRO
 ===================================================== */
 
 function mostrarErro(texto){
 
     mensagemEl.innerHTML = `
+
         <div class="erro">
+
             ${escapar(texto)}
+
         </div>
+
     `;
 
 }
+
 
 
 /* =====================================================
@@ -646,17 +829,45 @@ function mostrarErro(texto){
 
 function escapar(valor){
 
-    if(valor === null || valor === undefined){
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
         return "";
+
     }
 
+
     return String(valor)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
 }
+
 
 
 /* =====================================================
@@ -665,45 +876,140 @@ function escapar(valor){
 
 async function carregarUsuario(){
 
-    const ref = doc(
-        db,
-        "usuarios",
-        usuarioAtual.uid
-    );
+    const ref =
+        doc(
+            db,
+            "usuarios",
+            usuarioAtual.uid
+        );
 
-    const snap = await getDoc(ref);
+
+    const snap =
+        await getDoc(ref);
+
+
+    /*
+     * Caso o documento não exista
+     */
 
     if(!snap.exists()){
 
         dadosUsuario = {
+
             nome: "Aluno",
+
             vidas: 6,
+
+            vidasInfinitas: false,
+
             moedas: 0,
+
             xp: 0,
+
             sequencia: 0
+
         };
 
+
+        nomeUsuario.textContent =
+            "Olá, Aluno!";
+
+
+        vidasEl.textContent =
+            "6";
+
+
+        moedasEl.textContent =
+            "0";
+
+
+        xpEl.textContent =
+            "0";
+
+
+        sequenciaEl.textContent =
+            "0";
+
+
         return;
+
     }
 
-    dadosUsuario = snap.data();
+
+    /*
+     * Dados reais do usuário
+     */
+
+    dadosUsuario =
+        snap.data();
+
+
+    /*
+     * Nome
+     */
 
     nomeUsuario.textContent =
         `Olá, ${dadosUsuario.nome || "Aluno"}!`;
 
-    vidasEl.textContent =
-        dadosUsuario.vidas ?? 6;
+
+    /*
+     * =================================================
+     * VIDAS
+     *
+     * Se vidasInfinitas estiver ativo,
+     * ignoramos o número armazenado em "vidas".
+     *
+     * Exemplo:
+     *
+     * vidas: 2
+     * vidasInfinitas: true
+     *
+     * O painel mostrará:
+     *
+     * ♾️ Infinitas
+     * =================================================
+     */
+
+    if(
+        dadosUsuario.vidasInfinitas === true
+    ){
+
+        vidasEl.textContent =
+            "♾️ Infinitas";
+
+    }else{
+
+        vidasEl.textContent =
+            dadosUsuario.vidas ?? 6;
+
+    }
+
+
+    /*
+     * Moedas
+     */
 
     moedasEl.textContent =
         dadosUsuario.moedas ?? 0;
 
+
+    /*
+     * XP
+     */
+
     xpEl.textContent =
         dadosUsuario.xp ?? 0;
+
+
+    /*
+     * Sequência
+     */
 
     sequenciaEl.textContent =
         dadosUsuario.sequencia ?? 0;
 
 }
+
 
 
 /* =====================================================
@@ -712,34 +1018,56 @@ async function carregarUsuario(){
 
 async function carregarCursos(){
 
-    const snap = await getDocs(
-        collection(db,"cursos")
-    );
+    const snap =
+        await getDocs(
+            collection(
+                db,
+                "cursos"
+            )
+        );
+
 
     cursos = [];
+
 
     snap.forEach(item => {
 
         const curso = {
-            id:item.id,
+
+            id: item.id,
+
             ...item.data()
+
         };
 
-        if(curso.ativo === true){
+
+        if(
+            curso.ativo === true
+        ){
+
             cursos.push(curso);
+
         }
 
     });
 
-    cursos.sort((a,b) =>
-        String(a.titulo || "")
+
+    cursos.sort(
+        (a,b) =>
+
+            String(
+                a.titulo || ""
+            )
             .localeCompare(
-                String(b.titulo || ""),
+                String(
+                    b.titulo || ""
+                ),
                 "pt-BR"
             )
     );
 
 }
+
 
 
 /* =====================================================
@@ -748,31 +1076,46 @@ async function carregarCursos(){
 
 async function carregarLicoes(){
 
-    const snap = await getDocs(
-        collection(db,"licoes")
-    );
+    const snap =
+        await getDocs(
+            collection(
+                db,
+                "licoes"
+            )
+        );
+
 
     licoes = [];
+
 
     snap.forEach(item => {
 
         const licao = {
-            id:item.id,
+
+            id: item.id,
+
             ...item.data()
+
         };
+
 
         /*
          * Somente lições ativas entram
          * no cálculo do progresso.
          */
 
-        if(licao.ativo === true){
+        if(
+            licao.ativo === true
+        ){
+
             licoes.push(licao);
+
         }
 
     });
 
 }
+
 
 
 /* =====================================================
@@ -781,27 +1124,42 @@ async function carregarLicoes(){
 
 async function carregarProgresso(){
 
-    const snap = await getDocs(
-        collection(db,"progresso")
-    );
+    const snap =
+        await getDocs(
+            collection(
+                db,
+                "progresso"
+            )
+        );
+
 
     progresso = [];
 
+
     snap.forEach(item => {
 
-        const dados = item.data();
+        const dados =
+            item.data();
+
 
         /*
          * Segurança:
+         *
          * só usamos documentos pertencentes
          * ao usuário atualmente logado.
          */
 
-        if(dados.usuarioId === usuarioAtual.uid){
+        if(
+            dados.usuarioId ===
+            usuarioAtual.uid
+        ){
 
             progresso.push({
-                id:item.id,
+
+                id: item.id,
+
                 ...dados
+
             });
 
         }
@@ -811,17 +1169,23 @@ async function carregarProgresso(){
 }
 
 
+
 /* =====================================================
    ENCONTRAR PROGRESSO DA LIÇÃO
 ===================================================== */
 
-function progressoDaLicao(licaoId){
+function progressoDaLicao(
+    licaoId
+){
 
     return progresso.find(
-        item => item.licaoId === licaoId
+        item =>
+            item.licaoId ===
+            licaoId
     );
 
 }
+
 
 
 /* =====================================================
@@ -834,18 +1198,29 @@ function calcularEstatisticas(){
 
     let melhorAproveitamento = 0;
 
+
     progresso.forEach(item => {
 
-        if(item.aprovado === true){
+
+        if(
+            item.aprovado === true
+        ){
 
             totalConcluidas++;
 
         }
 
-        const aproveitamento =
-            Number(item.aproveitamento || 0);
 
-        if(aproveitamento > melhorAproveitamento){
+        const aproveitamento =
+            Number(
+                item.aproveitamento || 0
+            );
+
+
+        if(
+            aproveitamento >
+            melhorAproveitamento
+        ){
 
             melhorAproveitamento =
                 aproveitamento;
@@ -858,17 +1233,25 @@ function calcularEstatisticas(){
     totalCursosEl.textContent =
         cursos.length;
 
+
     licoesConcluidasEl.textContent =
         totalConcluidas;
 
+
     melhorAproveitamentoEl.textContent =
-        `${Math.round(melhorAproveitamento)}%`;
+        `${Math.round(
+            melhorAproveitamento
+        )}%`;
+
 
     xpResumoEl.textContent =
         dadosUsuario.xp ?? 0;
 
 
-    if(licoes.length > 0){
+
+    if(
+        licoes.length > 0
+    ){
 
         resumoGeralEl.textContent =
             `${totalConcluidas} de ${licoes.length} lições concluídas`;
@@ -883,11 +1266,14 @@ function calcularEstatisticas(){
 }
 
 
+
 /* =====================================================
    CALCULAR PROGRESSO DO CURSO
 ===================================================== */
 
-function calcularProgressoCurso(cursoId){
+function calcularProgressoCurso(
+    cursoId
+){
 
     /*
      * Todas as lições ativas pertencentes
@@ -897,7 +1283,8 @@ function calcularProgressoCurso(cursoId){
     const licoesDoCurso =
         licoes.filter(
             licao =>
-                licao.cursoId === cursoId
+                licao.cursoId ===
+                cursoId
         );
 
 
@@ -911,26 +1298,35 @@ function calcularProgressoCurso(cursoId){
 
     let concluidas = 0;
 
-    licoesDoCurso.forEach(licao => {
 
-        const prog =
-            progressoDaLicao(licao.id);
+    licoesDoCurso.forEach(
+        licao => {
 
-        if(
-            prog &&
-            prog.aprovado === true
-        ){
+            const prog =
+                progressoDaLicao(
+                    licao.id
+                );
 
-            concluidas++;
+
+            if(
+                prog &&
+                prog.aprovado === true
+            ){
+
+                concluidas++;
+
+            }
 
         }
-
-    });
+    );
 
 
     let percentual = 0;
 
-    if(total > 0){
+
+    if(
+        total > 0
+    ){
 
         percentual =
             Math.round(
@@ -941,12 +1337,17 @@ function calcularProgressoCurso(cursoId){
 
 
     return {
+
         total,
+
         concluidas,
+
         percentual
+
     };
 
 }
+
 
 
 /* =====================================================
@@ -955,12 +1356,17 @@ function calcularProgressoCurso(cursoId){
 
 function renderizarCursos(){
 
-    if(cursos.length === 0){
+    if(
+        cursos.length === 0
+    ){
 
         listaCursosEl.innerHTML = `
+
             <div class="vazio">
 
-                <h3>📚 Nenhum curso disponível</h3>
+                <h3>
+                    📚 Nenhum curso disponível
+                </h3>
 
                 <p>
                     Ainda não existem cursos ativos
@@ -975,28 +1381,37 @@ function renderizarCursos(){
                 </button>
 
             </div>
+
         `;
 
         return;
+
     }
 
 
     listaCursosEl.innerHTML = "";
 
+
     const container =
         document.createElement("div");
 
-    container.className = "cursos";
+
+    container.className =
+        "cursos";
 
 
     cursos.forEach(curso => {
 
+
         const progressoCurso =
-            calcularProgressoCurso(curso.id);
+            calcularProgressoCurso(
+                curso.id
+            );
 
 
         const card =
             document.createElement("div");
+
 
         card.className =
             "curso-card";
@@ -1042,6 +1457,7 @@ function renderizarCursos(){
                     </div>
 
                 </div>
+
 
                 <div class="nivel">
                     ${nivel}
@@ -1089,10 +1505,13 @@ function renderizarCursos(){
                     class="btn btn-curso"
                     data-curso="${curso.id}"
                 >
-                    ${percentual >= 100
+
+                    ${
+                        percentual >= 100
                         ? "Revisar curso"
                         : "Continuar curso"
                     }
+
                 </button>
 
             </div>
@@ -1110,32 +1529,44 @@ function renderizarCursos(){
             "click",
             () => {
 
-                abrirCurso(curso.id);
+                abrirCurso(
+                    curso.id
+                );
 
             }
         );
 
 
-        container.appendChild(card);
+        container.appendChild(
+            card
+        );
 
     });
 
 
-    listaCursosEl.appendChild(container);
+    listaCursosEl.appendChild(
+        container
+    );
 
 }
+
 
 
 /* =====================================================
    ABRIR CURSO
 ===================================================== */
 
-function abrirCurso(cursoId){
+function abrirCurso(
+    cursoId
+){
 
     window.location.href =
-        `curso.html?cursoId=${encodeURIComponent(cursoId)}`;
+        `curso.html?cursoId=${encodeURIComponent(
+            cursoId
+        )}`;
 
 }
+
 
 
 /* =====================================================
@@ -1150,6 +1581,7 @@ function abrirCursos(){
 }
 
 
+
 /* =====================================================
    ABRIR CARTEIRA
 ===================================================== */
@@ -1162,6 +1594,7 @@ function abrirCarteira(){
 }
 
 
+
 /* =====================================================
    SAIR
 ===================================================== */
@@ -1170,14 +1603,20 @@ async function sair(){
 
     try{
 
-        await signOut(auth);
+        await signOut(
+            auth
+        );
+
 
         window.location.href =
             "index.html";
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
+
 
         mostrarErro(
             "Não foi possível sair da conta."
@@ -1188,14 +1627,23 @@ async function sair(){
 }
 
 
+
 /* =====================================================
    EXPOR FUNÇÕES
 ===================================================== */
 
-window.abrirCurso = abrirCurso;
-window.abrirCursos = abrirCursos;
-window.abrirCarteira = abrirCarteira;
-window.sair = sair;
+window.abrirCurso =
+    abrirCurso;
+
+window.abrirCursos =
+    abrirCursos;
+
+window.abrirCarteira =
+    abrirCarteira;
+
+window.sair =
+    sair;
+
 
 
 /* =====================================================
@@ -1206,23 +1654,27 @@ onAuthStateChanged(
     auth,
     async (user) => {
 
+
         if(!user){
 
             window.location.href =
                 "index.html";
 
             return;
+
         }
 
 
-        usuarioAtual = user;
+        usuarioAtual =
+            user;
 
 
         try{
 
+
             /*
-             * Carregamos tudo antes de
-             * montar o painel.
+             * Carregamos tudo antes
+             * de montar o painel.
              */
 
             await carregarUsuario();
@@ -1257,6 +1709,7 @@ onAuthStateChanged(
                 error
             );
 
+
             mostrarErro(
                 "Não foi possível carregar seu painel. Verifique o console."
             );
@@ -1268,6 +1721,6 @@ onAuthStateChanged(
 
 </script>
 
+
 </body>
 </html>
-```
