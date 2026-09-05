@@ -1,1197 +1,1716 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Minha Carteira</title>
 
 <style>
+
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
+    margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:#f4f7fb;
-    color:#1f2937;
+    background:#f4f6f8;
+    color:#222;
 }
 
 header{
-    background:#4f46e5;
+    background:#111827;
     color:white;
-    padding:18px 20px;
+    padding:18px;
+}
+
+.topo{
+    max-width:1000px;
+    margin:auto;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
     gap:15px;
-    flex-wrap:wrap;
 }
 
 header h1{
-    font-size:22px;
-}
-
-.header-buttons{
-    display:flex;
-    gap:8px;
-}
-
-button{
-    border:0;
-    border-radius:10px;
-    padding:11px 16px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.btn-voltar{
-    background:white;
-    color:#4f46e5;
-}
-
-.btn-sair{
-    background:#ef4444;
-    color:white;
+    margin:0;
+    font-size:24px;
 }
 
 .container{
-    width:100%;
-    max-width:1100px;
-    margin:auto;
-    padding:25px 15px 50px;
-}
-
-.resumo{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:25px;
+    max-width:1000px;
+    margin:25px auto;
+    padding:0 15px;
 }
 
 .card{
     background:white;
-    border-radius:16px;
+    border-radius:14px;
     padding:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.07);
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
-.card h3{
-    font-size:14px;
-    color:#6b7280;
-    margin-bottom:10px;
-}
-
-.valor{
-    font-size:30px;
-    font-weight:bold;
-}
-
-.vida{
-    color:#ef4444;
-}
-
-.moeda{
-    color:#d97706;
-}
-
-.xp{
-    color:#7c3aed;
-}
-
-.fogo{
-    color:#ea580c;
-}
-
-.progresso-card{
-    margin-bottom:25px;
-}
-
-.barra{
-    width:100%;
-    height:15px;
-    background:#e5e7eb;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:12px;
-}
-
-.barra-interna{
-    height:100%;
-    width:0%;
-    background:#4f46e5;
-    transition:.3s;
-}
-
-.info{
-    margin-top:10px;
-    color:#6b7280;
-    font-size:14px;
-}
-
-.secao{
-    margin-top:25px;
-}
-
-.secao h2{
-    margin-bottom:15px;
-}
-
-.loja{
+.saldo-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
 }
 
-.item-loja{
-    background:white;
-    border-radius:16px;
+.saldo{
     padding:20px;
-    box-shadow:0 4px 15px rgba(0,0,0,.07);
+    border-radius:12px;
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    text-align:center;
 }
 
-.item-loja h3{
+.saldo .icone{
+    font-size:30px;
+}
+
+.saldo span{
+    display:block;
+    color:#6b7280;
+    margin-top:8px;
+}
+
+.saldo strong{
+    display:block;
+    font-size:28px;
+    margin-top:5px;
+}
+
+h2{
+    margin-top:0;
+}
+
+.produto{
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    background:#fff;
+}
+
+.produto-info{
+    flex:1;
+}
+
+.produto-titulo{
+    font-size:20px;
+    font-weight:bold;
     margin-bottom:8px;
 }
 
-.item-loja p{
+.produto-descricao{
     color:#6b7280;
-    margin-bottom:15px;
+    line-height:1.5;
 }
 
-.btn-troca{
-    width:100%;
-    background:#4f46e5;
-    color:white;
+.produto-preco{
+    font-size:22px;
+    font-weight:bold;
+    margin:10px 0;
 }
 
-.btn-troca:hover{
+button{
+    border:0;
+    border-radius:9px;
+    padding:11px 16px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+}
+
+button:hover{
     opacity:.9;
 }
 
-.btn-troca:disabled{
+.btn-voltar{
+    background:#374151;
+    color:white;
+}
+
+.btn-comprar{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-moedas{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-xp{
+    background:#7c3aed;
+    color:white;
+}
+
+.btn-vida{
+    background:#dc2626;
+    color:white;
+}
+
+.btn-disabled{
     background:#9ca3af;
+    color:white;
     cursor:not-allowed;
 }
 
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.stat{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,.06);
-}
-
-.stat strong{
-    display:block;
-    font-size:24px;
-    margin-top:6px;
-}
-
-.mensagem{
-    display:none;
-    padding:14px;
-    border-radius:10px;
-    margin-bottom:20px;
-    font-weight:bold;
+.info{
+    padding:15px;
+    border-radius:9px;
+    background:#dbeafe;
+    color:#1e40af;
+    margin-bottom:15px;
 }
 
 .sucesso{
+    padding:15px;
+    border-radius:9px;
     background:#dcfce7;
     color:#166534;
+    margin-bottom:15px;
 }
 
 .erro{
+    padding:15px;
+    border-radius:9px;
     background:#fee2e2;
     color:#991b1b;
+    margin-bottom:15px;
 }
 
-.aviso{
+.status-infinito{
+    padding:12px;
+    border-radius:9px;
     background:#fef3c7;
     color:#92400e;
+    font-weight:bold;
+    margin-bottom:15px;
 }
 
-.loading{
+.tabela{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+th,
+td{
+    padding:12px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+}
+
+th{
+    background:#f9fafb;
+}
+
+.vazio{
     text-align:center;
-    padding:30px;
+    padding:25px;
     color:#6b7280;
 }
 
-@media(max-width:800px){
-    .resumo{
+@media(max-width:750px){
+
+    .saldo-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .loja{
+    .produto{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .saldo-grid{
         grid-template-columns:1fr;
     }
 
-    .stats{
-        grid-template-columns:1fr;
-    }
 }
 
-@media(max-width:500px){
-    .resumo{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-    }
-
-    .card{
-        padding:15px;
-    }
-
-    .valor{
-        font-size:24px;
-    }
-}
 </style>
+
 </head>
 
 <body>
 
-<header>
-    <h1>💰 Minha Carteira</h1>
 
-    <div class="header-buttons">
-        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
-        <button class="btn-sair" onclick="sair()">Sair</button>
+<header>
+
+    <div class="topo">
+
+        <h1>💰 Minha Carteira</h1>
+
+        <button
+            class="btn-voltar"
+            onclick="window.location.href='painel.html'">
+
+            ← Voltar
+
+        </button>
+
     </div>
+
 </header>
+
+
 
 <div class="container">
 
-    <div id="mensagem" class="mensagem"></div>
 
-    <div id="loading" class="loading">
-        Carregando sua carteira...
-    </div>
+    <!-- MENSAGEM -->
 
-    <div id="conteudo" style="display:none;">
+    <div id="mensagem"></div>
 
-        <!-- RESUMO -->
-        <div class="resumo">
 
-            <div class="card">
-                <h3>❤️ Vidas</h3>
-                <div class="valor vida" id="vidas">0</div>
-            </div>
 
-            <div class="card">
-                <h3>🪙 Moedas</h3>
-                <div class="valor moeda" id="moedas">0</div>
-            </div>
+    <!-- SALDOS -->
 
-            <div class="card">
-                <h3>⭐ XP</h3>
-                <div class="valor xp" id="xp">0</div>
-            </div>
+    <div class="card">
 
-            <div class="card">
-                <h3>🔥 Sequência</h3>
-                <div class="valor fogo" id="sequencia">0</div>
-            </div>
+        <h2>📊 Meus saldos</h2>
 
-        </div>
+        <div class="saldo-grid">
 
-        <!-- VIDAS -->
-        <div class="card progresso-card">
 
-            <h2>❤️ Suas vidas</h2>
+            <div class="saldo">
 
-            <div class="info">
-                <span id="textoVidas">0 de 6 vidas</span>
-            </div>
-
-            <div class="barra">
-                <div id="barraVidas" class="barra-interna"></div>
-            </div>
-
-            <div class="info" id="recuperacao">
-                Calculando recuperação...
-            </div>
-
-        </div>
-
-        <!-- MOEDAS DIÁRIAS -->
-        <div class="card progresso-card">
-
-            <h2>🎁 Bônus diário</h2>
-
-            <p class="info" id="bonusDiario">
-                Verificando bônus...
-            </p>
-
-        </div>
-
-        <!-- TROCAS -->
-        <div class="secao">
-
-            <h2>🛒 Trocar moedas</h2>
-
-            <div class="loja">
-
-                <div class="item-loja">
-
-                    <h3>⭐ Trocar por XP</h3>
-
-                    <p>
-                        Cada moeda vale <strong>1 XP</strong>.
-                    </p>
-
-                    <button
-                        class="btn-troca"
-                        onclick="trocarXP(10)"
-                        id="btnXP10">
-                        🪙 10 moedas → ⭐ 10 XP
-                    </button>
-
+                <div class="icone">
+                    ❤️
                 </div>
 
-                <div class="item-loja">
+                <span>
+                    Vidas
+                </span>
 
-                    <h3>❤️ Comprar 1 vida</h3>
-
-                    <p>
-                        50 moedas = 1 vida.
-                        Máximo de 6 vidas.
-                    </p>
-
-                    <button
-                        class="btn-troca"
-                        onclick="trocarVida()"
-                        id="btnVida">
-                        🪙 50 moedas → ❤️ 1 vida
-                    </button>
-
-                </div>
+                <strong id="vidas">
+                    0
+                </strong>
 
             </div>
 
-        </div>
 
-        <!-- ESTATÍSTICAS -->
-        <div class="secao">
 
-            <h2>📊 Meu desempenho</h2>
+            <div class="saldo">
 
-            <div class="stats">
-
-                <div class="stat">
-                    Lições concluídas
-                    <strong id="licoesConcluidas">0</strong>
+                <div class="icone">
+                    🪙
                 </div>
 
-                <div class="stat">
-                    Lições aprovadas
-                    <strong id="licoesAprovadas">0</strong>
+                <span>
+                    Moedas
+                </span>
+
+                <strong id="moedas">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <div class="saldo">
+
+                <div class="icone">
+                    ⭐
                 </div>
 
-                <div class="stat">
-                    Aproveitamento médio
-                    <strong id="media">0%</strong>
+                <span>
+                    XP
+                </span>
+
+                <strong id="xp">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <div class="saldo">
+
+                <div class="icone">
+                    🔥
                 </div>
+
+                <span>
+                    Sequência
+                </span>
+
+                <strong id="sequencia">
+                    0
+                </strong>
 
             </div>
 
         </div>
 
     </div>
+
+
+
+    <!-- VIDAS INFINITAS -->
+
+    <div class="card">
+
+        <h2>❤️ Vidas Infinitas</h2>
+
+        <div id="statusVidasInfinitas"></div>
+
+
+        <div class="produto">
+
+            <div class="produto-info">
+
+                <div class="produto-titulo">
+                    ♾️ Vidas Infinitas
+                </div>
+
+                <div class="produto-descricao">
+
+                    Não se preocupe mais com o limite de vidas.
+                    Com este produto você terá vidas infinitas
+                    para continuar estudando e realizando suas lições.
+
+                    <br><br>
+
+                    A compra será enviada para análise.
+                    Depois que o administrador confirmar o pagamento,
+                    o benefício será liberado automaticamente.
+
+                </div>
+
+                <div class="produto-preco">
+                    R$ 9,90
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <button
+                    id="btnVidaInfinita"
+                    class="btn-vida">
+
+                    ❤️ Comprar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TROCAS -->
+
+    <div class="card">
+
+        <h2>🪙 Trocar moedas</h2>
+
+        <div class="produto">
+
+            <div class="produto-info">
+
+                <div class="produto-titulo">
+                    50 moedas → 1 vida
+                </div>
+
+                <div class="produto-descricao">
+                    Use suas moedas para recuperar uma vida.
+                </div>
+
+            </div>
+
+            <button
+                id="btnTrocarVida"
+                class="btn-moedas">
+
+                ❤️ Trocar
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <h2>⭐ Trocar moedas por XP</h2>
+
+        <div class="produto">
+
+            <div class="produto-info">
+
+                <div class="produto-titulo">
+                    1 moeda → 1 XP
+                </div>
+
+                <div class="produto-descricao">
+                    Troque suas moedas por XP.
+                </div>
+
+            </div>
+
+            <button
+                id="btnTrocarXP"
+                class="btn-xp">
+
+                ⭐ Trocar XP
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- COMPRAS -->
+
+    <div class="card">
+
+        <h2>🧾 Minhas compras</h2>
+
+        <div class="tabela">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Produto</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Data</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="listaCompras">
+
+                    <tr>
+
+                        <td
+                            colspan="4"
+                            class="vazio">
+
+                            Carregando compras...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 
 </div>
 
+
+
 <script type="module">
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
+
 import {
     getAuth,
-    onAuthStateChanged,
-    signOut
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
 
 import {
     getFirestore,
+    collection,
+    query,
+    where,
+    getDocs,
     doc,
     getDoc,
-    setDoc,
-    collection,
-    getDocs,
     runTransaction,
+    increment,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
+
 const firebaseConfig = {
-    apiKey: "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
-    authDomain: "dezenas-1ed47.firebaseapp.com",
-    projectId: "dezenas-1ed47",
-    storageBucket: "dezenas-1ed47.firebasestorage.app",
-    messagingSenderId: "372788277555",
-    appId: "1:372788277555:web:1c1a6a80adee1722b54e46",
-    measurementId: "G-NMPP8PKPK3"
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+
+const app =
+    initializeApp(firebaseConfig);
 
 
-const MAX_VIDAS = 6;
-const CUSTO_VIDA = 50;
-const MINUTOS_RECUPERACAO = 10;
-const MOEDAS_DIARIAS = 50;
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const vidas =
+    document.getElementById("vidas");
+
+const moedas =
+    document.getElementById("moedas");
+
+const xp =
+    document.getElementById("xp");
+
+const sequencia =
+    document.getElementById("sequencia");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+const statusVidasInfinitas =
+    document.getElementById(
+        "statusVidasInfinitas"
+    );
+
+const btnVidaInfinita =
+    document.getElementById(
+        "btnVidaInfinita"
+    );
+
+const btnTrocarVida =
+    document.getElementById(
+        "btnTrocarVida"
+    );
+
+const btnTrocarXP =
+    document.getElementById(
+        "btnTrocarXP"
+    );
+
+const listaCompras =
+    document.getElementById(
+        "listaCompras"
+    );
+
 
 
 let usuarioAtual = null;
-let dadosUsuario = null;
-let intervalo = null;
 
 
-function mostrarMensagem(texto, tipo="sucesso"){
 
-    const elemento = document.getElementById("mensagem");
+/* =========================================================
+   MENSAGEM
+========================================================= */
 
-    elemento.textContent = texto;
-    elemento.className = "mensagem " + tipo;
-    elemento.style.display = "block";
-
-    setTimeout(() => {
-        elemento.style.display = "none";
-    }, 3500);
-}
-
-
-function dataLocal(){
-
-    const agora = new Date();
-
-    const ano = agora.getFullYear();
-    const mes = String(agora.getMonth()+1).padStart(2,"0");
-    const dia = String(agora.getDate()).padStart(2,"0");
-
-    return `${ano}-${mes}-${dia}`;
-}
-
-
-function atualizarVidas(){
-
-    if(!dadosUsuario) return;
-
-    let vidas = Number(dadosUsuario.vidas ?? MAX_VIDAS);
-
-    const ultima =
-        dadosUsuario.vidasUltimaAtualizacao?.toDate
-        ? dadosUsuario.vidasUltimaAtualizacao.toDate()
-        : null;
-
-    if(vidas < MAX_VIDAS && ultima){
-
-        const agora = new Date();
-
-        const diferenca =
-            Math.floor((agora - ultima) / 60000);
-
-        const recuperadas =
-            Math.floor(diferenca / MINUTOS_RECUPERACAO);
-
-        if(recuperadas > 0){
-
-            vidas = Math.min(
-                MAX_VIDAS,
-                vidas + recuperadas
-            );
-
-            if(vidas >= MAX_VIDAS){
-
-                dadosUsuario.vidasUltimaAtualizacao =
-                    new Date();
-
-            }else{
-
-                const novaData =
-                    new Date(
-                        ultima.getTime() +
-                        recuperadas *
-                        MINUTOS_RECUPERACAO *
-                        60000
-                    );
-
-                dadosUsuario.vidasUltimaAtualizacao =
-                    novaData;
-            }
-
-            salvarRecuperacao(vidas);
-        }
-    }
-
-    dadosUsuario.vidas = vidas;
-
-    document.getElementById("vidas").textContent = vidas;
-
-    document.getElementById("textoVidas").textContent =
-        `${vidas} de ${MAX_VIDAS} vidas`;
-
-    const porcentagem =
-        (vidas / MAX_VIDAS) * 100;
-
-    document.getElementById("barraVidas").style.width =
-        porcentagem + "%";
-
-
-    const recuperacao =
-        document.getElementById("recuperacao");
-
-
-    if(vidas >= MAX_VIDAS){
-
-        recuperacao.textContent =
-            "❤️ Você está com todas as vidas!";
-
-    }else if(dadosUsuario.vidasUltimaAtualizacao){
-
-        const ultimaData =
-            dadosUsuario.vidasUltimaAtualizacao instanceof Date
-            ? dadosUsuario.vidasUltimaAtualizacao
-            : dadosUsuario.vidasUltimaAtualizacao.toDate();
-
-        const agora = new Date();
-
-        const decorrido =
-            Math.floor(
-                (agora - ultimaData) / 60000
-            );
-
-        let restante =
-            MINUTOS_RECUPERACAO -
-            (decorrido % MINUTOS_RECUPERACAO);
-
-        if(restante === MINUTOS_RECUPERACAO){
-            restante = 0;
-        }
-
-        recuperacao.textContent =
-            `⏱️ Próxima vida em aproximadamente ${restante} minuto(s).`;
-
-    }else{
-
-        recuperacao.textContent =
-            "⏱️ Recuperação automática ativada.";
-    }
-
-
-    atualizarBotoes();
-}
-
-
-async function salvarRecuperacao(vidas){
-
-    if(!usuarioAtual) return;
-
-    try{
-
-        await setDoc(
-            doc(db,"usuarios",usuarioAtual.uid),
-            {
-                vidas: vidas,
-                vidasUltimaAtualizacao:
-                    dadosUsuario.vidasUltimaAtualizacao instanceof Date
-                    ? dadosUsuario.vidasUltimaAtualizacao
-                    : serverTimestamp(),
-
-                atualizadoEm: serverTimestamp()
-            },
-            {merge:true}
-        );
-
-    }catch(erro){
-
-        console.error(
-            "Erro ao salvar recuperação:",
-            erro
-        );
-    }
-}
-
-
-function atualizarBotoes(){
-
-    const botaoVida =
-        document.getElementById("btnVida");
-
-    const botaoXP =
-        document.getElementById("btnXP10");
-
-
-    if(!dadosUsuario){
-
-        botaoVida.disabled = true;
-        botaoXP.disabled = true;
-
-        return;
-    }
-
-
-    const moedas =
-        Number(dadosUsuario.moedas ?? 0);
-
-    const vidas =
-        Number(dadosUsuario.vidas ?? 0);
-
-
-    botaoVida.disabled =
-        moedas < CUSTO_VIDA ||
-        vidas >= MAX_VIDAS;
-
-    botaoXP.disabled =
-        moedas < 10;
-}
-
-
-async function trocarXP(quantidade){
-
-    if(!usuarioAtual) return;
-
-    try{
-
-        await runTransaction(
-            db,
-            async transaction => {
-
-                const ref =
-                    doc(
-                        db,
-                        "usuarios",
-                        usuarioAtual.uid
-                    );
-
-                const snap =
-                    await transaction.get(ref);
-
-                if(!snap.exists()){
-
-                    throw new Error(
-                        "Perfil do usuário não encontrado."
-                    );
-                }
-
-                const dados = snap.data();
-
-                const moedas =
-                    Number(dados.moedas ?? 0);
-
-                if(moedas < quantidade){
-
-                    throw new Error(
-                        "Você não possui moedas suficientes."
-                    );
-                }
-
-                const xp =
-                    Number(dados.xp ?? 0);
-
-                transaction.update(
-                    ref,
-                    {
-                        moedas:
-                            moedas - quantidade,
-
-                        xp:
-                            xp + quantidade,
-
-                        atualizadoEm:
-                            serverTimestamp()
-                    }
-                );
-            }
-        );
-
-
-        await registrarTransacao(
-            "troca_moedas_xp",
-            quantidade,
-            `Troca de ${quantidade} moedas por ${quantidade} XP`
-        );
-
-
-        dadosUsuario.moedas =
-            Number(dadosUsuario.moedas ?? 0) -
-            quantidade;
-
-        dadosUsuario.xp =
-            Number(dadosUsuario.xp ?? 0) +
-            quantidade;
-
-
-        atualizarTela();
-
-        mostrarMensagem(
-            `⭐ ${quantidade} XP adicionados com sucesso!`
-        );
-
-
-    }catch(erro){
-
-        console.error(erro);
-
-        mostrarMensagem(
-            erro.message ||
-            "Não foi possível realizar a troca.",
-            "erro"
-        );
-    }
-}
-
-
-async function trocarVida(){
-
-    if(!usuarioAtual) return;
-
-
-    try{
-
-        await runTransaction(
-            db,
-            async transaction => {
-
-                const ref =
-                    doc(
-                        db,
-                        "usuarios",
-                        usuarioAtual.uid
-                    );
-
-                const snap =
-                    await transaction.get(ref);
-
-                if(!snap.exists()){
-
-                    throw new Error(
-                        "Perfil do usuário não encontrado."
-                    );
-                }
-
-                const dados =
-                    snap.data();
-
-                const moedas =
-                    Number(dados.moedas ?? 0);
-
-                const vidas =
-                    Number(dados.vidas ?? 0);
-
-
-                if(moedas < CUSTO_VIDA){
-
-                    throw new Error(
-                        "Você não possui 50 moedas."
-                    );
-                }
-
-
-                if(vidas >= MAX_VIDAS){
-
-                    throw new Error(
-                        "Você já possui 6 vidas."
-                    );
-                }
-
-
-                transaction.update(
-                    ref,
-                    {
-                        moedas:
-                            moedas - CUSTO_VIDA,
-
-                        vidas:
-                            vidas + 1,
-
-                        atualizadoEm:
-                            serverTimestamp()
-                    }
-                );
-
-            }
-        );
-
-
-        await registrarTransacao(
-            "compra_vida_moedas",
-            CUSTO_VIDA,
-            "Compra de 1 vida utilizando moedas"
-        );
-
-
-        dadosUsuario.moedas =
-            Number(dadosUsuario.moedas ?? 0) -
-            CUSTO_VIDA;
-
-        dadosUsuario.vidas =
-            Number(dadosUsuario.vidas ?? 0) +
-            1;
-
-
-        atualizarTela();
-
-        mostrarMensagem(
-            "❤️ Você ganhou 1 vida!"
-        );
-
-
-    }catch(erro){
-
-        console.error(erro);
-
-        mostrarMensagem(
-            erro.message ||
-            "Não foi possível comprar a vida.",
-            "erro"
-        );
-    }
-}
-
-
-async function registrarTransacao(
-    tipo,
-    quantidade,
-    descricao
+function mostrarMensagem(
+    texto,
+    tipo="info"
 ){
 
-    if(!usuarioAtual) return;
+    mensagem.innerHTML = `
 
-    try{
+        <div class="${tipo}">
 
-        await setDoc(
-            doc(
-                collection(db,"transacoes")
-            ),
+            ${texto}
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   FORMATAR VALOR
+========================================================= */
+
+function formatarValor(valor){
+
+    return Number(valor || 0)
+        .toLocaleString(
+            "pt-BR",
             {
-                usuarioId:
-                    usuarioAtual.uid,
-
-                tipo: tipo,
-
-                quantidade:
-                    quantidade,
-
-                descricao:
-                    descricao,
-
-                data:
-                    serverTimestamp()
+                style:"currency",
+                currency:"BRL"
             }
         );
 
-    }catch(erro){
-
-        console.error(
-            "Erro ao registrar transação:",
-            erro
-        );
-    }
 }
 
 
-async function carregarEstatisticas(){
 
-    if(!usuarioAtual) return;
+/* =========================================================
+   FORMATAR DATA
+========================================================= */
+
+function formatarData(timestamp){
+
+    if(!timestamp){
+        return "-";
+    }
 
     try{
 
-        const snapshot =
-            await getDocs(
-                collection(db,"progresso")
-            );
+        return timestamp
+            .toDate()
+            .toLocaleString("pt-BR");
 
+    }catch{
 
-        let concluidas = 0;
-        let aprovadas = 0;
-        let soma = 0;
+        return "-";
 
-
-        snapshot.forEach(item => {
-
-            const dados = item.data();
-
-            if(
-                dados.usuarioId ===
-                usuarioAtual.uid
-            ){
-
-                if(dados.concluida){
-
-                    concluidas++;
-
-                    soma +=
-                        Number(
-                            dados.aproveitamento ?? 0
-                        );
-                }
-
-                if(dados.aprovado){
-
-                    aprovadas++;
-                }
-            }
-        });
-
-
-        let media = 0;
-
-        if(concluidas > 0){
-
-            media =
-                Math.round(
-                    soma / concluidas
-                );
-        }
-
-
-        document.getElementById(
-            "licoesConcluidas"
-        ).textContent = concluidas;
-
-
-        document.getElementById(
-            "licoesAprovadas"
-        ).textContent = aprovadas;
-
-
-        document.getElementById(
-            "media"
-        ).textContent = media + "%";
-
-
-    }catch(erro){
-
-        console.error(
-            "Erro ao carregar estatísticas:",
-            erro
-        );
     }
+
 }
 
 
-function atualizarBonusDiario(){
 
-    const elemento =
-        document.getElementById(
-            "bonusDiario"
-        );
+/* =========================================================
+   ESCAPAR HTML
+========================================================= */
 
-    const hoje = dataLocal();
+function escapar(valor){
 
-    const dataBonus =
-        dadosUsuario.moedasDiariasData || "";
+    if(
+        valor === null ||
+        valor === undefined
+    ){
 
+        return "";
 
-    if(dataBonus === hoje){
-
-        elemento.textContent =
-            "✅ Você já recebeu suas 50 moedas de hoje.";
-
-    }else{
-
-        elemento.textContent =
-            "🎁 Seu bônus diário de 50 moedas será liberado no próximo acesso.";
     }
+
+    return String(valor)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
 }
 
 
-function atualizarTela(){
 
-    if(!dadosUsuario) return;
-
-
-    document.getElementById(
-        "moedas"
-    ).textContent =
-        Number(
-            dadosUsuario.moedas ?? 0
-        );
-
-
-    document.getElementById(
-        "xp"
-    ).textContent =
-        Number(
-            dadosUsuario.xp ?? 0
-        );
-
-
-    document.getElementById(
-        "sequencia"
-    ).textContent =
-        Number(
-            dadosUsuario.sequencia ?? 0
-        );
-
-
-    atualizarVidas();
-    atualizarBonusDiario();
-    atualizarBotoes();
-}
-
+/* =========================================================
+   CARREGAR USUÁRIO
+========================================================= */
 
 async function carregarUsuario(){
 
-    const referencia =
+    const ref =
         doc(
             db,
             "usuarios",
             usuarioAtual.uid
         );
 
-    const snapshot =
-        await getDoc(referencia);
+
+    const snap =
+        await getDoc(ref);
 
 
-    if(!snapshot.exists()){
+    if(!snap.exists()){
 
-        await setDoc(
-            referencia,
-            {
-                uid:
-                    usuarioAtual.uid,
-
-                nome:
-                    usuarioAtual.displayName || "",
-
-                email:
-                    usuarioAtual.email || "",
-
-                xp:0,
-                moedas:0,
-                vidas:MAX_VIDAS,
-                sequencia:0,
-
-                criadoEm:
-                    serverTimestamp(),
-
-                atualizadoEm:
-                    serverTimestamp()
-            },
-            {merge:true}
+        throw new Error(
+            "Perfil do usuário não encontrado."
         );
 
+    }
 
-        const novoSnapshot =
-            await getDoc(referencia);
 
-        dadosUsuario =
-            novoSnapshot.data();
+    const dados =
+        snap.data();
+
+
+    vidas.textContent =
+        dados.vidas ?? 0;
+
+    moedas.textContent =
+        dados.moedas ?? 0;
+
+    xp.textContent =
+        dados.xp ?? 0;
+
+    sequencia.textContent =
+        dados.sequencia ?? 0;
+
+
+
+    /* =====================================================
+       VIDAS INFINITAS
+    ===================================================== */
+
+    if(dados.vidasInfinitas === true){
+
+        statusVidasInfinitas.innerHTML = `
+
+            <div class="status-infinito">
+
+                ♾️ Você possui
+                <strong>VIDAS INFINITAS</strong>.
+
+                <br>
+
+                Você não precisa comprar novamente.
+
+            </div>
+
+        `;
+
+
+        btnVidaInfinita.textContent =
+            "♾️ Ativado";
+
+        btnVidaInfinita.disabled =
+            true;
+
+        btnVidaInfinita.className =
+            "btn-disabled";
 
     }else{
 
-        dadosUsuario =
-            snapshot.data();
+        statusVidasInfinitas.innerHTML = `
+
+            <div class="info">
+
+                Você ainda não possui Vidas Infinitas.
+
+            </div>
+
+        `;
+
+
+        btnVidaInfinita.disabled =
+            false;
+
+        btnVidaInfinita.textContent =
+            "❤️ Comprar";
+
+        btnVidaInfinita.className =
+            "btn-vida";
+
     }
 
-
-    document.getElementById(
-        "loading"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "conteudo"
-    ).style.display = "block";
-
-
-    atualizarTela();
-
-    await carregarEstatisticas();
-
-
-    if(intervalo){
-
-        clearInterval(intervalo);
-    }
-
-
-    intervalo =
-        setInterval(
-            atualizarVidas,
-            1000
-        );
 }
 
 
-onAuthStateChanged(
-    auth,
-    async usuario => {
 
-        if(!usuario){
+/* =========================================================
+   COMPRAR VIDAS INFINITAS
+========================================================= */
+
+async function comprarVidasInfinitas(){
+
+    if(!usuarioAtual){
+
+        return;
+
+    }
+
+
+    try{
+
+        btnVidaInfinita.disabled =
+            true;
+
+        btnVidaInfinita.textContent =
+            "⏳ Verificando...";
+
+
+        /*
+         * Verifica novamente se o benefício
+         * já foi liberado.
+         */
+
+        const usuarioRef =
+            doc(
+                db,
+                "usuarios",
+                usuarioAtual.uid
+            );
+
+
+        const usuarioSnap =
+            await getDoc(usuarioRef);
+
+
+        if(
+            usuarioSnap.exists() &&
+            usuarioSnap.data().vidasInfinitas === true
+        ){
+
+            alert(
+                "Você já possui Vidas Infinitas."
+            );
+
+            await carregarUsuario();
+
+            return;
+
+        }
+
+
+        /*
+         * Procura pedido pendente existente.
+         */
+
+        const comprasRef =
+            collection(db,"compras");
+
+
+        const q =
+            query(
+
+                comprasRef,
+
+                where(
+                    "usuarioId",
+                    "==",
+                    usuarioAtual.uid
+                ),
+
+                where(
+                    "tipo",
+                    "==",
+                    "vidas_infinitas"
+                ),
+
+                where(
+                    "status",
+                    "==",
+                    "pendente"
+                )
+
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        if(!snapshot.empty){
+
+            alert(
+                "Você já possui uma compra de Vidas Infinitas aguardando pagamento ou aprovação."
+            );
+
+            await carregarUsuario();
+
+            return;
+
+        }
+
+
+        /*
+         * Cria código do pedido.
+         */
+
+        const codigo =
+            "VIDA-" +
+            Date.now().toString(36).toUpperCase();
+
+
+        /*
+         * Cria pedido.
+         */
+
+        const compraRef =
+            doc(comprasRef);
+
+
+        await runTransaction(
+
+            db,
+
+            async transaction => {
+
+                const usuarioAtualSnap =
+                    await transaction.get(
+                        usuarioRef
+                    );
+
+
+                if(
+                    !usuarioAtualSnap.exists()
+                ){
+
+                    throw new Error(
+                        "Usuário não encontrado."
+                    );
+
+                }
+
+
+                const dados =
+                    usuarioAtualSnap.data();
+
+
+                if(
+                    dados.vidasInfinitas === true
+                ){
+
+                    throw new Error(
+                        "Você já possui Vidas Infinitas."
+                    );
+
+                }
+
+
+                transaction.set(
+
+                    compraRef,
+
+                    {
+
+                        usuarioId:
+                            usuarioAtual.uid,
+
+                        nomeUsuario:
+                            dados.nome ||
+                            usuarioAtual.displayName ||
+                            "Aluno",
+
+                        emailUsuario:
+                            dados.email ||
+                            usuarioAtual.email ||
+                            "",
+
+                        tipo:
+                            "vidas_infinitas",
+
+                        produtoId:
+                            "vidas_infinitas",
+
+                        produtoNome:
+                            "Vidas Infinitas",
+
+                        valor:
+                            9.90,
+
+                        codigo:
+                            codigo,
+
+                        status:
+                            "pendente",
+
+                        criadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+            }
+
+        );
+
+
+        /*
+         * Abre o WhatsApp com o pedido.
+         *
+         * Substitua pela sua chave/número,
+         * se ainda estiver usando o placeholder.
+         */
+
+        const WHATSAPP =
+            "5588999999999";
+
+
+        const texto =
+            `Olá! Fiz um pedido de Vidas Infinitas.\n\n` +
+
+            `Código: ${codigo}\n` +
+
+            `Produto: Vidas Infinitas\n` +
+
+            `Valor: R$ 9,90\n\n` +
+
+            `Aguardo as instruções para pagamento.`;
+
+
+        const url =
+            "https://wa.me/" +
+            WHATSAPP +
+            "?text=" +
+            encodeURIComponent(texto);
+
+
+        window.open(
+            url,
+            "_blank"
+        );
+
+
+        mostrarMensagem(
+
+            `Pedido criado com sucesso! Código: <strong>${codigo}</strong>.<br><br>
+             Faça o pagamento e envie o comprovante pelo WhatsApp.
+             Após a confirmação do administrador, suas Vidas Infinitas serão liberadas.`,
+
+            "sucesso"
+
+        );
+
+
+        await carregarCompras();
+
+
+    }catch(error){
+
+        console.error(
+            "Erro ao comprar Vidas Infinitas:",
+            error
+        );
+
+
+        mostrarMensagem(
+
+            "❌ Não foi possível criar o pedido.<br><br>" +
+            escapar(error.message),
+
+            "erro"
+
+        );
+
+    }finally{
+
+        await carregarUsuario();
+
+    }
+
+}
+
+
+
+/* =========================================================
+   TROCAR MOEDAS POR VIDA
+========================================================= */
+
+async function trocarMoedasPorVida(){
+
+    if(!usuarioAtual){
+        return;
+    }
+
+
+    try{
+
+        await runTransaction(
+
+            db,
+
+            async transaction => {
+
+
+                const usuarioRef =
+                    doc(
+                        db,
+                        "usuarios",
+                        usuarioAtual.uid
+                    );
+
+
+                const snap =
+                    await transaction.get(
+                        usuarioRef
+                    );
+
+
+                if(!snap.exists()){
+
+                    throw new Error(
+                        "Usuário não encontrado."
+                    );
+
+                }
+
+
+                const dados =
+                    snap.data();
+
+
+                const quantidadeMoedas =
+                    Number(
+                        dados.moedas || 0
+                    );
+
+
+                const quantidadeVidas =
+                    Number(
+                        dados.vidas || 0
+                    );
+
+
+                const possuiInfinitas =
+                    dados.vidasInfinitas === true;
+
+
+                if(possuiInfinitas){
+
+                    throw new Error(
+                        "Você já possui Vidas Infinitas."
+                    );
+
+                }
+
+
+                if(
+                    quantidadeMoedas < 50
+                ){
+
+                    throw new Error(
+                        "Você precisa de 50 moedas."
+                    );
+
+                }
+
+
+                if(
+                    quantidadeVidas >= 6
+                ){
+
+                    throw new Error(
+                        "Você já está com o máximo de 6 vidas."
+                    );
+
+                }
+
+
+                transaction.update(
+
+                    usuarioRef,
+
+                    {
+
+                        moedas:
+                            increment(-50),
+
+                        vidas:
+                            increment(1),
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+            }
+
+        );
+
+
+        mostrarMensagem(
+            "❤️ Uma vida foi adicionada. Foram utilizadas 50 moedas.",
+            "sucesso"
+        );
+
+
+        await carregarUsuario();
+
+
+    }catch(error){
+
+        mostrarMensagem(
+            "❌ " + escapar(error.message),
+            "erro"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   TROCAR MOEDAS POR XP
+========================================================= */
+
+async function trocarMoedasPorXP(){
+
+    if(!usuarioAtual){
+        return;
+    }
+
+
+    try{
+
+        await runTransaction(
+
+            db,
+
+            async transaction => {
+
+
+                const usuarioRef =
+                    doc(
+                        db,
+                        "usuarios",
+                        usuarioAtual.uid
+                    );
+
+
+                const snap =
+                    await transaction.get(
+                        usuarioRef
+                    );
+
+
+                if(!snap.exists()){
+
+                    throw new Error(
+                        "Usuário não encontrado."
+                    );
+
+                }
+
+
+                const dados =
+                    snap.data();
+
+
+                const quantidadeMoedas =
+                    Number(
+                        dados.moedas || 0
+                    );
+
+
+                if(
+                    quantidadeMoedas < 1
+                ){
+
+                    throw new Error(
+                        "Você não possui moedas suficientes."
+                    );
+
+                }
+
+
+                transaction.update(
+
+                    usuarioRef,
+
+                    {
+
+                        moedas:
+                            increment(-1),
+
+                        xp:
+                            increment(1),
+
+                        atualizadoEm:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+            }
+
+        );
+
+
+        mostrarMensagem(
+            "⭐ 1 moeda foi convertida em 1 XP.",
+            "sucesso"
+        );
+
+
+        await carregarUsuario();
+
+
+    }catch(error){
+
+        mostrarMensagem(
+            "❌ " + escapar(error.message),
+            "erro"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   CARREGAR COMPRAS
+========================================================= */
+
+async function carregarCompras(){
+
+    listaCompras.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="4"
+                class="vazio">
+
+                ⏳ Carregando...
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    try{
+
+        const comprasRef =
+            collection(
+                db,
+                "compras"
+            );
+
+
+        const q =
+            query(
+
+                comprasRef,
+
+                where(
+                    "usuarioId",
+                    "==",
+                    usuarioAtual.uid
+                )
+
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        const lista = [];
+
+
+        snapshot.forEach(item => {
+
+            lista.push({
+
+                id:item.id,
+
+                ...item.data()
+
+            });
+
+        });
+
+
+        lista.sort((a,b) => {
+
+            const dataA =
+                a.criadoEm?.toMillis?.() || 0;
+
+            const dataB =
+                b.criadoEm?.toMillis?.() || 0;
+
+            return dataB - dataA;
+
+        });
+
+
+        if(lista.length === 0){
+
+            listaCompras.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        class="vazio">
+
+                        Nenhuma compra realizada.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        listaCompras.innerHTML =
+            lista.map(compra => {
+
+
+                let statusTexto =
+                    compra.status || "pendente";
+
+
+                let classe = "";
+
+
+                if(
+                    statusTexto === "pago"
+                ){
+
+                    classe =
+                        "sucesso";
+
+                }
+
+
+                if(
+                    statusTexto === "cancelado"
+                ){
+
+                    classe =
+                        "erro";
+
+                }
+
+
+                return `
+
+                    <tr>
+
+                        <td>
+
+                            <strong>
+
+                                ${escapar(
+                                    compra.produtoNome ||
+                                    "-"
+                                )}
+
+                            </strong>
+
+                            <br>
+
+                            <small>
+
+                                Código:
+                                ${escapar(
+                                    compra.codigo ||
+                                    compra.id
+                                )}
+
+                            </small>
+
+                        </td>
+
+
+                        <td>
+
+                            ${formatarValor(
+                                compra.valor
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="${classe}"
+                                style="
+                                    display:inline-block;
+                                    padding:5px 8px;
+                                    margin:0;
+                                ">
+
+                                ${escapar(
+                                    statusTexto
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            ${formatarData(
+                                compra.criadoEm
+                            )}
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }).join("");
+
+
+    }catch(error){
+
+        console.error(
+            "Erro ao carregar compras:",
+            error
+        );
+
+
+        listaCompras.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    class="vazio">
+
+                    ❌ Erro ao carregar compras.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   EVENTOS
+========================================================= */
+
+btnVidaInfinita.addEventListener(
+    "click",
+    comprarVidasInfinitas
+);
+
+
+btnTrocarVida.addEventListener(
+    "click",
+    trocarMoedasPorVida
+);
+
+
+btnTrocarXP.addEventListener(
+    "click",
+    trocarMoedasPorXP
+);
+
+
+
+/* =========================================================
+   AUTENTICAÇÃO
+========================================================= */
+
+onAuthStateChanged(
+
+    auth,
+
+    async user => {
+
+        if(!user){
 
             window.location.href =
                 "index.html";
 
             return;
+
         }
 
 
-        usuarioAtual = usuario;
+        usuarioAtual = user;
 
 
         try{
 
             await carregarUsuario();
 
-        }catch(erro){
+            await carregarCompras();
 
-            console.error(erro);
+        }catch(error){
 
-            document.getElementById(
-                "loading"
-            ).textContent =
-                "Erro ao carregar sua carteira.";
+            console.error(
+                error
+            );
+
+
+            mostrarMensagem(
+
+                "❌ " +
+                escapar(error.message),
+
+                "erro"
+
+            );
+
         }
 
     }
+
 );
-
-
-window.trocarXP = trocarXP;
-window.trocarVida = trocarVida;
-
-
-window.voltar = function(){
-
-    window.history.back();
-};
-
-
-window.sair = async function(){
-
-    try{
-
-        await signOut(auth);
-
-        window.location.href =
-            "index.html";
-
-    }catch(erro){
-
-        console.error(erro);
-
-        mostrarMensagem(
-            "Não foi possível sair.",
-            "erro"
-        );
-    }
-};
 
 </script>
 
 </body>
-</html>
 
+</html>
+```
