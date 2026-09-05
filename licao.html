@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -288,9 +289,7 @@ textarea:focus{
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -324,9 +323,7 @@ textarea:focus{
 
 </header>
 
-
 <main class="container">
-
 
     <div id="areaPrincipal">
 
@@ -336,16 +333,9 @@ textarea:focus{
 
     </div>
 
-
 </main>
 
-
 <script type="module">
-
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 import {
     initializeApp
@@ -366,6 +356,10 @@ import {
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 const firebaseConfig = {
 
@@ -577,7 +571,9 @@ async function carregarUsuario(){
 
             xp:0,
 
-            sequencia:0
+            sequencia:0,
+
+            vidasInfinitas:false
 
         };
 
@@ -585,6 +581,21 @@ async function carregarUsuario(){
 
         dadosUsuario =
             snap.data();
+
+    }
+
+
+    /*
+     * Se o aluno possui vidas infinitas,
+     * não fazemos recuperação nem alteração
+     * da quantidade normal de vidas.
+     */
+
+    if(dadosUsuario.vidasInfinitas === true){
+
+        atualizarHeader();
+
+        return;
 
     }
 
@@ -706,9 +717,19 @@ async function carregarUsuario(){
 
 function atualizarHeader(){
 
-    vidasEl.textContent =
-        dadosUsuario.vidas ??
-        MAX_VIDAS;
+    if(dadosUsuario.vidasInfinitas === true){
+
+        vidasEl.textContent =
+            "♾️ Infinitas";
+
+    }else{
+
+        vidasEl.textContent =
+            dadosUsuario.vidas ??
+            MAX_VIDAS;
+
+    }
+
 
     moedasEl.textContent =
         dadosUsuario.moedas ??
@@ -732,9 +753,11 @@ function atualizarHeader(){
 async function carregarCurso(){
 
     if(!cursoId){
+
         throw new Error(
             "Curso não informado."
         );
+
     }
 
 
@@ -750,15 +773,20 @@ async function carregarCurso(){
 
 
     if(!snap.exists()){
+
         throw new Error(
             "Curso não encontrado."
         );
+
     }
 
 
     curso = {
+
         id:snap.id,
+
         ...snap.data()
+
     };
 
 
@@ -898,7 +926,6 @@ function mostrarLicao(){
     tituloHeader.textContent =
         `📚 ${licao.titulo || "Lição"}`;
 
-
     renderizarQuestao();
 
 }
@@ -912,18 +939,14 @@ function renderizarQuestao(){
 
     respondeu = false;
 
-
     const exercicio =
         exercicios[indiceAtual];
-
 
     const total =
         exercicios.length;
 
-
     const numero =
         indiceAtual + 1;
-
 
     const percentual =
         Math.round(
@@ -946,7 +969,6 @@ function renderizarQuestao(){
                 )}
             </p>
 
-
             <div class="progresso-container">
 
                 <div class="progresso-info">
@@ -960,7 +982,6 @@ function renderizarQuestao(){
                     </strong>
 
                 </div>
-
 
                 <div class="barra">
 
@@ -981,20 +1002,16 @@ function renderizarQuestao(){
                 QUESTÃO ${numero}
             </div>
 
-
             <div class="pergunta">
                 ${escapar(exercicio.pergunta)}
             </div>
 
-
             <div id="areaResposta"></div>
-
 
             <div
                 id="feedback"
                 class="feedback"
             ></div>
-
 
             <div class="acoes">
 
@@ -1030,7 +1047,6 @@ function renderizarQuestao(){
 
     }
 
-
     else if(
         exercicio.tipo ===
         "verdadeiro_falso"
@@ -1042,7 +1058,6 @@ function renderizarQuestao(){
         );
 
     }
-
 
     else if(
         exercicio.tipo ===
@@ -1087,6 +1102,7 @@ function renderizarMultiplaEscolha(
 
 
     area.innerHTML = `
+
         <div class="alternativas">
 
             ${alternativas.map(
@@ -1118,6 +1134,7 @@ function renderizarMultiplaEscolha(
             ).join("")}
 
         </div>
+
     `;
 
 
@@ -1178,7 +1195,6 @@ function renderizarVerdadeiroFalso(
             >
                 ✅ Verdadeiro
             </button>
-
 
             <button
                 type="button"
@@ -1284,8 +1300,11 @@ function obterResposta(){
 
 
         return {
+
             tipo:"multipla_escolha",
+
             index:index
+
         };
 
     }
@@ -1731,15 +1750,6 @@ function proximaQuestao(){
 
 function calcularNovaSequencia(){
 
-    /*
-     * A sequência só é alterada quando
-     * o aluno conclui uma lição aprovada.
-     *
-     * Uma segunda lição no mesmo dia
-     * não aumenta novamente.
-     */
-
-
     const hoje =
         dataLocal();
 
@@ -1764,10 +1774,6 @@ function calcularNovaSequencia(){
     else if(
         ultimaData === hoje
     ){
-
-        /*
-         * Já estudou hoje.
-         */
 
         return sequencia;
 
@@ -1853,14 +1859,6 @@ async function finalizarLicao(){
         );
 
 
-    /*
-     * Se aprovado:
-     *
-     * XP = pontuação
-     * moedas = 10
-     * sequência é atualizada
-     */
-
     if(aprovado){
 
         xpGanho =
@@ -1877,8 +1875,15 @@ async function finalizarLicao(){
 
 
     /*
-     * Se reprovado:
-     * perde 1 vida.
+     * =================================================
+     * VIDAS
+     * =================================================
+     *
+     * Usuário normal:
+     *     perde 1 vida ao reprovar.
+     *
+     * Usuário com vidasInfinitas:
+     *     NÃO perde vida.
      */
 
     let novasVidas =
@@ -1888,7 +1893,10 @@ async function finalizarLicao(){
         );
 
 
-    if(!aprovado){
+    if(
+        !aprovado &&
+        dadosUsuario.vidasInfinitas !== true
+    ){
 
         novasVidas =
             Math.max(
@@ -1898,10 +1906,6 @@ async function finalizarLicao(){
 
     }
 
-
-    /*
-     * Atualização das moedas e XP.
-     */
 
     const moedasAtuais =
         Number(
@@ -1926,14 +1930,11 @@ async function finalizarLicao(){
 
 
     /*
-     * Se aprovou, atualizamos a data
-     * da atividade.
+     * Montamos os dados que realmente
+     * precisam ser atualizados.
      */
 
     const dadosUsuarioAtualizar = {
-
-        vidas:
-            novasVidas,
 
         moedas:
             novoSaldoMoedas,
@@ -1947,6 +1948,25 @@ async function finalizarLicao(){
     };
 
 
+    /*
+     * Somente usuários normais recebem
+     * alteração no campo de vidas.
+     */
+
+    if(
+        dadosUsuario.vidasInfinitas !== true
+    ){
+
+        dadosUsuarioAtualizar.vidas =
+            novasVidas;
+
+        dadosUsuarioAtualizar
+            .vidasUltimaAtualizacao =
+                serverTimestamp();
+
+    }
+
+
     if(aprovado){
 
         dadosUsuarioAtualizar.sequencia =
@@ -1957,16 +1977,6 @@ async function finalizarLicao(){
                 dataLocal();
 
     }
-
-
-    /*
-     * Mantemos o momento usado
-     * para recuperação de vidas.
-     */
-
-    dadosUsuarioAtualizar
-        .vidasUltimaAtualizacao =
-            serverTimestamp();
 
 
     try{
@@ -1990,6 +2000,30 @@ async function finalizarLicao(){
             }
 
         );
+
+
+        /*
+         * Mantemos o estado local correto.
+         */
+
+        if(
+            dadosUsuario.vidasInfinitas !== true
+        ){
+
+            dadosUsuario.vidas =
+                novasVidas;
+
+        }
+
+
+        dadosUsuario.moedas =
+            novoSaldoMoedas;
+
+        dadosUsuario.xp =
+            novoXP;
+
+
+        atualizarHeader();
 
 
         /*
@@ -2269,6 +2303,5 @@ onAuthStateChanged(
 </script>
 
 </body>
-
 </html>
 ```
