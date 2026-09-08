@@ -1,27 +1,38 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
+
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0"
+
+>
+
 <title>Lição</title>
+
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
+
 body{
     font-family:Arial,Helvetica,sans-serif;
     background:#f4f7fb;
     color:#1f2937;
 }
+
 header{
     background:linear-gradient(135deg,#2563eb,#4f46e5);
     color:white;
     padding:18px 20px;
 }
+
 .header{
     max-width:1000px;
     margin:auto;
@@ -30,25 +41,30 @@ header{
     align-items:center;
     gap:15px;
 }
+
 .header h1{
     font-size:22px;
 }
+
 .header-info{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
 }
+
 .info{
     background:rgba(255,255,255,.15);
     padding:8px 12px;
     border-radius:20px;
     font-size:14px;
 }
+
 .container{
     max-width:850px;
     margin:30px auto;
     padding:0 20px;
 }
+
 .topo{
     background:white;
     border-radius:18px;
@@ -56,49 +72,59 @@ header{
     box-shadow:0 5px 20px rgba(0,0,0,.07);
     margin-bottom:20px;
 }
+
 .topo h2{
     font-size:26px;
     margin-bottom:8px;
 }
+
 .topo p{
     color:#6b7280;
 }
+
 .progresso-container{
     margin-top:20px;
 }
+
 .progresso-info{
     display:flex;
     justify-content:space-between;
     margin-bottom:7px;
     font-size:14px;
 }
+
 .barra{
     height:10px;
     background:#e5e7eb;
     border-radius:20px;
     overflow:hidden;
 }
+
 .barra div{
     height:100%;
     background:linear-gradient(90deg,#2563eb,#4f46e5);
     transition:.3s;
 }
+
 .questao{
     background:white;
     border-radius:18px;
     padding:28px;
     box-shadow:0 5px 20px rgba(0,0,0,.07);
 }
+
 .numero{
     color:#2563eb;
     font-weight:bold;
     margin-bottom:15px;
 }
+
 .pergunta{
     font-size:23px;
     line-height:1.4;
     margin-bottom:25px;
 }
+
 .alternativas{
     display:flex;
     flex-direction:column;
@@ -204,10 +230,6 @@ textarea:focus{
 .btn-secundario{
     background:#e5e7eb;
     color:#374151;
-}
-
-.btn-secundario:hover{
-    background:#d1d5db;
 }
 
 .btn:disabled{
@@ -442,10 +464,6 @@ textarea:focus{
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE
-===================================================== */
-
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
@@ -469,7 +487,7 @@ import {
 
 
 /* =====================================================
-   CONFIGURAÇÃO FIREBASE
+   FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -497,7 +515,6 @@ const firebaseConfig = {
 
 };
 
-
 const app =
     initializeApp(firebaseConfig);
 
@@ -513,13 +530,8 @@ const db =
 ===================================================== */
 
 const MAX_VIDAS = 6;
-
 const MINIMO_APROVACAO = 60;
-
-const MOEDAS_DIARIAS = 50;
-
 const MOEDAS_POR_LICAO = 10;
-
 const MINUTOS_RECUPERACAO = 10;
 
 
@@ -540,13 +552,6 @@ const moduloId =
 
 const licaoId =
     params.get("licaoId");
-
-
-console.log("🔗 Parâmetros da lição:", {
-    cursoId,
-    moduloId,
-    licaoId
-});
 
 
 /* =====================================================
@@ -679,7 +684,6 @@ async function carregarUsuario(){
     const snap =
         await getDoc(ref);
 
-
     if(!snap.exists()){
 
         dadosUsuario = {
@@ -706,7 +710,9 @@ async function carregarUsuario(){
     }
 
 
-    if(dadosUsuario.vidasInfinitas === true){
+    if(
+        dadosUsuario.vidasInfinitas === true
+    ){
 
         atualizarHeader();
 
@@ -717,12 +723,12 @@ async function carregarUsuario(){
 
     let vidas =
         Number(
-            dadosUsuario.vidas ?? MAX_VIDAS
+            dadosUsuario.vidas ??
+            MAX_VIDAS
         );
 
     const ultima =
-        dadosUsuario
-            .vidasUltimaAtualizacao;
+        dadosUsuario.vidasUltimaAtualizacao;
 
 
     if(
@@ -776,10 +782,8 @@ async function carregarUsuario(){
                     vidas + vidasRecuperadas
                 );
 
-
             dadosUsuario.vidas =
                 vidas;
-
 
             dadosUsuario
                 .vidasUltimaAtualizacao =
@@ -816,7 +820,6 @@ async function carregarUsuario(){
     dadosUsuario.vidas =
         vidas;
 
-
     atualizarHeader();
 
 }
@@ -828,7 +831,9 @@ async function carregarUsuario(){
 
 function atualizarHeader(){
 
-    if(dadosUsuario.vidasInfinitas === true){
+    if(
+        dadosUsuario.vidasInfinitas === true
+    ){
 
         vidasEl.textContent =
             "♾️ Infinitas";
@@ -956,9 +961,6 @@ async function carregarLicao(){
     };
 
 
-    console.log("📖 Lição carregada:", licao);
-
-
     if(licao.ativo !== true){
 
         throw new Error(
@@ -976,9 +978,7 @@ async function carregarLicao(){
 
 async function carregarConteudos(){
 
-    console.log(
-        "🔎 Iniciando carregamento dos conteúdos..."
-    );
+    conteudosLicao = [];
 
 
     if(!licaoId){
@@ -987,37 +987,31 @@ async function carregarConteudos(){
             "⚠️ licaoId não informado."
         );
 
-        conteudosLicao = [];
-
         return;
 
     }
 
 
     console.log(
-        "🔎 Procurando documentos em 'conteudos' para licaoId:",
+        "🔎 Carregando conteúdos da lição:",
         licaoId
     );
 
 
-    /*
-     * IMPORTANTE:
-     *
-     * query e where estão importados no início
-     * do módulo Firebase.
-     */
-
     const consulta =
         query(
+
             collection(
                 db,
                 "conteudos"
             ),
+
             where(
                 "licaoId",
                 "==",
                 licaoId
             )
+
         );
 
 
@@ -1028,19 +1022,15 @@ async function carregarConteudos(){
 
 
     console.log(
-        "📚 Quantidade de conteúdos encontrados:",
+        "📚 Conteúdos encontrados:",
         snap.size
     );
-
-
-    conteudosLicao = [];
 
 
     snap.forEach(item => {
 
         const dados =
             item.data();
-
 
         const conteudo = {
 
@@ -1052,7 +1042,7 @@ async function carregarConteudos(){
 
 
         console.log(
-            "📄 Conteúdo encontrado:",
+            "📄 Conteúdo:",
             conteudo
         );
 
@@ -1088,7 +1078,7 @@ async function carregarConteudos(){
 
 
     console.log(
-        "✅ Conteúdos prontos para exibição:",
+        "✅ Conteúdos prontos:",
         conteudosLicao
     );
 
@@ -1102,7 +1092,9 @@ async function carregarConteudos(){
 function obterYoutubeEmbed(url){
 
     if(!url){
+
         return null;
+
     }
 
 
@@ -1120,7 +1112,6 @@ function obterYoutubeEmbed(url){
             const id =
                 u.searchParams.get("v");
 
-
             return id
                 ? `https://www.youtube.com/embed/${id}`
                 : null;
@@ -1137,7 +1128,6 @@ function obterYoutubeEmbed(url){
                     "/",
                     ""
                 );
-
 
             return id
                 ? `https://www.youtube.com/embed/${id}`
@@ -1158,7 +1148,7 @@ function obterYoutubeEmbed(url){
     }catch(error){
 
         console.warn(
-            "⚠️ URL de vídeo inválida:",
+            "URL de vídeo inválida:",
             url
         );
 
@@ -1187,7 +1177,7 @@ function renderizarConteudos(){
     if(!area){
 
         console.warn(
-            "⚠️ #areaConteudo não existe."
+            "⚠️ areaConteudo não encontrada."
         );
 
         return;
@@ -1198,19 +1188,9 @@ function renderizarConteudos(){
     area.innerHTML = "";
 
 
-    console.log(
-        "🎨 Renderizando conteúdos:",
-        conteudosLicao
-    );
-
-
     if(
         conteudosLicao.length === 0
     ){
-
-        console.log(
-            "ℹ️ Nenhum conteúdo para renderizar."
-        );
 
         return;
 
@@ -1221,7 +1201,6 @@ function renderizarConteudos(){
         document.createElement(
             "div"
         );
-
 
     wrapper.className =
         "conteudos-licao";
@@ -1236,32 +1215,18 @@ function renderizarConteudos(){
                     "texto"
                 ).toLowerCase();
 
-
             const titulo =
                 item.titulo ||
                 "";
-
 
             const texto =
                 item.texto ||
                 item.conteudo ||
                 "";
 
-
             const url =
                 item.url ||
                 "";
-
-
-            console.log(
-                "🧩 Renderizando conteúdo:",
-                {
-                    tipo,
-                    titulo,
-                    texto,
-                    url
-                }
-            );
 
 
             if(
@@ -1273,15 +1238,10 @@ function renderizarConteudos(){
                         "hr"
                     );
 
-
                 hr.className =
                     "conteudo-separador";
 
-
-                wrapper.appendChild(
-                    hr
-                );
-
+                wrapper.appendChild(hr);
 
                 return;
 
@@ -1293,7 +1253,6 @@ function renderizarConteudos(){
                     "section"
                 );
 
-
             bloco.className =
                 "conteudo-bloco";
 
@@ -1303,27 +1262,24 @@ function renderizarConteudos(){
                 const h =
                     document.createElement(
                         tipo === "titulo"
-                            ? "h2"
-                            : "h3"
+                        ? "h2"
+                        : "h3"
                     );
-
 
                 h.className =
                     tipo === "titulo"
-                        ? "conteudo-titulo"
-                        : "conteudo-subtitulo";
-
+                    ? "conteudo-titulo"
+                    : "conteudo-subtitulo";
 
                 h.textContent =
                     titulo;
 
-
-                bloco.appendChild(
-                    h
-                );
+                bloco.appendChild(h);
 
             }
 
+
+            /* TEXTO */
 
             if(
                 tipo === "titulo" ||
@@ -1337,23 +1293,20 @@ function renderizarConteudos(){
                             "div"
                         );
 
-
                     el.className =
                         "conteudo-texto";
-
 
                     el.textContent =
                         texto;
 
-
-                    bloco.appendChild(
-                        el
-                    );
+                    bloco.appendChild(el);
 
                 }
 
             }
 
+
+            /* IMAGEM */
 
             else if(
                 tipo === "imagem"
@@ -1366,32 +1319,27 @@ function renderizarConteudos(){
                             "img"
                         );
 
-
                     img.className =
                         "conteudo-imagem";
 
-
                     img.src =
                         url;
-
 
                     img.alt =
                         titulo ||
                         "Imagem da lição";
 
-
                     img.loading =
                         "lazy";
 
-
-                    bloco.appendChild(
-                        img
-                    );
+                    bloco.appendChild(img);
 
                 }
 
             }
 
+
+            /* VÍDEO */
 
             else if(
                 tipo === "video"
@@ -1410,49 +1358,38 @@ function renderizarConteudos(){
                             "iframe"
                         );
 
-
                     iframe.className =
                         "conteudo-video";
 
-
                     iframe.src =
                         embed;
-
 
                     iframe.title =
                         titulo ||
                         "Vídeo da lição";
 
-
                     iframe.allow =
                         "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
 
-
                     iframe.allowFullscreen =
                         true;
-
 
                     bloco.appendChild(
                         iframe
                     );
 
-                }
-
-                else if(url){
+                }else if(url){
 
                     const video =
                         document.createElement(
                             "video"
                         );
 
-
                     video.className =
                         "conteudo-video";
 
-
                     video.controls =
                         true;
-
 
                     video.preload =
                         "metadata";
@@ -1463,15 +1400,12 @@ function renderizarConteudos(){
                             "source"
                         );
 
-
                     source.src =
                         url;
-
 
                     video.appendChild(
                         source
                     );
-
 
                     bloco.appendChild(
                         video
@@ -1481,6 +1415,8 @@ function renderizarConteudos(){
 
             }
 
+
+            /* LINK */
 
             else if(
                 tipo === "link"
@@ -1493,37 +1429,31 @@ function renderizarConteudos(){
                             "a"
                         );
 
-
                     a.className =
                         "conteudo-link";
-
 
                     a.href =
                         url;
 
-
                     a.target =
                         "_blank";
 
-
                     a.rel =
                         "noopener noreferrer";
-
 
                     a.textContent =
                         titulo ||
                         texto ||
                         url;
 
-
-                    bloco.appendChild(
-                        a
-                    );
+                    bloco.appendChild(a);
 
                 }
 
             }
 
+
+            /* PDF */
 
             else if(
                 tipo === "pdf"
@@ -1536,19 +1466,15 @@ function renderizarConteudos(){
                             "iframe"
                         );
 
-
                     iframe.className =
                         "conteudo-pdf";
-
 
                     iframe.src =
                         url;
 
-
                     iframe.title =
                         titulo ||
                         "PDF da lição";
-
 
                     bloco.appendChild(
                         iframe
@@ -1560,7 +1486,6 @@ function renderizarConteudos(){
                             "p"
                         );
 
-
                     p.style.marginTop =
                         "10px";
 
@@ -1570,40 +1495,31 @@ function renderizarConteudos(){
                             "a"
                         );
 
-
                     a.className =
                         "conteudo-link";
-
 
                     a.href =
                         url;
 
-
                     a.target =
                         "_blank";
-
 
                     a.rel =
                         "noopener noreferrer";
 
-
                     a.textContent =
                         "📄 Abrir PDF em nova aba";
 
+                    p.appendChild(a);
 
-                    p.appendChild(
-                        a
-                    );
-
-
-                    bloco.appendChild(
-                        p
-                    );
+                    bloco.appendChild(p);
 
                 }
 
             }
 
+
+            /* ARQUIVO */
 
             else if(
                 tipo === "arquivo"
@@ -1616,7 +1532,6 @@ function renderizarConteudos(){
                             "div"
                         );
 
-
                     div.className =
                         "conteudo-arquivo";
 
@@ -1625,7 +1540,6 @@ function renderizarConteudos(){
                         document.createElement(
                             "span"
                         );
-
 
                     span.textContent =
                         "📎 " +
@@ -1640,45 +1554,34 @@ function renderizarConteudos(){
                             "a"
                         );
 
-
                     a.href =
                         url;
-
 
                     a.target =
                         "_blank";
 
-
                     a.rel =
                         "noopener noreferrer";
 
-
                     a.download =
                         "";
-
 
                     a.textContent =
                         "Abrir / baixar";
 
 
-                    div.appendChild(
-                        span
-                    );
+                    div.appendChild(span);
 
+                    div.appendChild(a);
 
-                    div.appendChild(
-                        a
-                    );
-
-
-                    bloco.appendChild(
-                        div
-                    );
+                    bloco.appendChild(div);
 
                 }
 
             }
 
+
+            /* ÁUDIO */
 
             else if(
                 tipo === "audio"
@@ -1691,22 +1594,17 @@ function renderizarConteudos(){
                             "audio"
                         );
 
-
                     audio.className =
                         "conteudo-audio";
-
 
                     audio.controls =
                         true;
 
-
                     audio.preload =
                         "metadata";
 
-
                     audio.src =
                         url;
-
 
                     bloco.appendChild(
                         audio
@@ -1717,6 +1615,8 @@ function renderizarConteudos(){
             }
 
 
+            /* LISTA */
+
             else if(
                 tipo === "lista"
             ){
@@ -1725,7 +1625,6 @@ function renderizarConteudos(){
                     document.createElement(
                         "ul"
                     );
-
 
                 ul.className =
                     "conteudo-lista";
@@ -1746,10 +1645,8 @@ function renderizarConteudos(){
                                     "li"
                                 );
 
-
                             li.textContent =
                                 itemTexto;
-
 
                             ul.appendChild(
                                 li
@@ -1759,12 +1656,12 @@ function renderizarConteudos(){
                     );
 
 
-                bloco.appendChild(
-                    ul
-                );
+                bloco.appendChild(ul);
 
             }
 
+
+            /* CITAÇÃO */
 
             else if(
                 tipo === "citacao"
@@ -1775,14 +1672,11 @@ function renderizarConteudos(){
                         "blockquote"
                     );
 
-
                 quote.className =
                     "conteudo-citacao";
 
-
                 quote.textContent =
                     texto;
-
 
                 bloco.appendChild(
                     quote
@@ -1791,6 +1685,8 @@ function renderizarConteudos(){
             }
 
 
+            /* TIPO DESCONHECIDO */
+
             else{
 
                 const el =
@@ -1798,15 +1694,12 @@ function renderizarConteudos(){
                         "div"
                     );
 
-
                 el.className =
                     "conteudo-texto";
-
 
                 el.textContent =
                     texto ||
                     url;
-
 
                 bloco.appendChild(
                     el
@@ -1833,11 +1726,6 @@ function renderizarConteudos(){
         wrapper
     );
 
-
-    console.log(
-        "✅ Conteúdos inseridos na página."
-    );
-
 }
 
 
@@ -1849,39 +1737,46 @@ async function carregarExercicios(){
 
     const snap =
         await getDocs(
+
             collection(
                 db,
                 "exercicios"
             )
+
         );
 
 
     exercicios = [];
 
 
-    snap.forEach(item => {
+    snap.forEach(
+        item => {
 
-        const exercicio = {
+            const exercicio = {
 
-            id:item.id,
+                id:item.id,
 
-            ...item.data()
+                ...item.data()
 
-        };
+            };
 
 
-        if(
-            exercicio.ativo === true &&
-            exercicio.licaoId === licaoId
-        ){
+            if(
 
-            exercicios.push(
-                exercicio
-            );
+                exercicio.ativo === true &&
+
+                exercicio.licaoId === licaoId
+
+            ){
+
+                exercicios.push(
+                    exercicio
+                );
+
+            }
 
         }
-
-    });
+    );
 
 
     exercicios.sort(
@@ -1910,8 +1805,10 @@ async function carregarExercicios(){
 function mostrarLicao(){
 
     tituloHeader.textContent =
-        `📚 ${licao.titulo || "Lição"}`;
-
+        `📚 ${
+            licao.titulo ||
+            "Lição"
+        }`;
 
     renderizarQuestao();
 
@@ -1927,6 +1824,10 @@ function renderizarQuestao(){
     respondeu = false;
 
 
+    /*
+     * LIÇÃO SEM EXERCÍCIOS
+     */
+
     if(
         exercicios.length === 0
     ){
@@ -1936,7 +1837,9 @@ function renderizarQuestao(){
             <section class="topo">
 
                 <h2>
-                    ${escapar(licao.titulo)}
+                    ${escapar(
+                        licao.titulo
+                    )}
                 </h2>
 
                 <p>
@@ -1956,25 +1859,26 @@ function renderizarQuestao(){
         renderizarConteudos();
 
 
-        const semExercicios =
-            document.createElement(
-                "div"
+        if(
+            conteudosLicao.length === 0
+        ){
+
+            const semConteudo =
+                document.createElement(
+                    "div"
+                );
+
+            semConteudo.className =
+                "conteudo-vazio";
+
+            semConteudo.textContent =
+                "📚 Esta lição ainda não possui conteúdos.";
+
+            areaPrincipal.appendChild(
+                semConteudo
             );
 
-
-        semExercicios.className =
-            "conteudo-vazio";
-
-
-        semExercicios.textContent =
-            conteudosLicao.length > 0
-                ? "📚 Conteúdo da lição carregado."
-                : "📚 O conteúdo desta lição foi carregado. Ainda não há exercícios.";
-
-
-        areaPrincipal.appendChild(
-            semExercicios
-        );
+        }
 
 
         return;
@@ -1985,14 +1889,11 @@ function renderizarQuestao(){
     const exercicio =
         exercicios[indiceAtual];
 
-
     const total =
         exercicios.length;
 
-
     const numero =
         indiceAtual + 1;
-
 
     const percentual =
         Math.round(
@@ -2006,7 +1907,9 @@ function renderizarQuestao(){
         <section class="topo">
 
             <h2>
-                ${escapar(licao.titulo)}
+                ${escapar(
+                    licao.titulo
+                )}
             </h2>
 
             <p>
@@ -2021,7 +1924,8 @@ function renderizarQuestao(){
                 <div class="progresso-info">
 
                     <span>
-                        Questão ${numero} de ${total}
+                        Questão ${numero}
+                        de ${total}
                     </span>
 
                     <strong>
@@ -2051,7 +1955,9 @@ function renderizarQuestao(){
             </div>
 
             <div class="pergunta">
-                ${escapar(exercicio.pergunta)}
+                ${escapar(
+                    exercicio.pergunta
+                )}
             </div>
 
             <div id="areaResposta"></div>
@@ -2157,6 +2063,7 @@ function renderizarMultiplaEscolha(
         <div class="alternativas">
 
             ${alternativas.map(
+
                 (alt,index) => `
 
                     <button
@@ -2171,17 +2078,18 @@ function renderizarMultiplaEscolha(
                                 String.fromCharCode(
                                     65 + index
                                 )
-                            )}
-                            .
+                            )}.
                         </strong>
 
                         ${escapar(
-                            alt.texto || ""
+                            alt.texto ||
+                            ""
                         )}
 
                     </button>
 
                 `
+
             ).join("")}
 
         </div>
@@ -2195,33 +2103,35 @@ function renderizarMultiplaEscolha(
         );
 
 
-    botoes.forEach(botao => {
+    botoes.forEach(
+        botao => {
 
-        botao.addEventListener(
-            "click",
-            () => {
+            botao.addEventListener(
+                "click",
+                () => {
 
-                if(respondeu){
-                    return;
+                    if(respondeu){
+                        return;
+                    }
+
+
+                    botoes.forEach(
+                        item =>
+                            item.classList.remove(
+                                "selecionada"
+                            )
+                    );
+
+
+                    botao.classList.add(
+                        "selecionada"
+                    );
+
                 }
+            );
 
-
-                botoes.forEach(
-                    item =>
-                        item.classList.remove(
-                            "selecionada"
-                        )
-                );
-
-
-                botao.classList.add(
-                    "selecionada"
-                );
-
-            }
-        );
-
-    });
+        }
+    );
 
 }
 
@@ -2266,33 +2176,35 @@ function renderizarVerdadeiroFalso(
         );
 
 
-    botoes.forEach(botao => {
+    botoes.forEach(
+        botao => {
 
-        botao.addEventListener(
-            "click",
-            () => {
+            botao.addEventListener(
+                "click",
+                () => {
 
-                if(respondeu){
-                    return;
+                    if(respondeu){
+                        return;
+                    }
+
+
+                    botoes.forEach(
+                        item =>
+                            item.classList.remove(
+                                "selecionada"
+                            )
+                    );
+
+
+                    botao.classList.add(
+                        "selecionada"
+                    );
+
                 }
+            );
 
-
-                botoes.forEach(
-                    item =>
-                        item.classList.remove(
-                            "selecionada"
-                        )
-                );
-
-
-                botao.classList.add(
-                    "selecionada"
-                );
-
-            }
-        );
-
-    });
+        }
+    );
 
 }
 
@@ -2342,7 +2254,9 @@ if(
 
 
     if(!selecionada){
+
         return null;
+
     }
 
 
@@ -2375,7 +2289,9 @@ if(
 
 
     if(!selecionada){
+
         return null;
+
     }
 
 
@@ -2404,7 +2320,9 @@ if(
 
 
     if(!campo){
+
         return null;
+
     }
 
 
@@ -2413,7 +2331,9 @@ if(
 
 
     if(!texto){
+
         return null;
+
     }
 
 
@@ -2515,7 +2435,8 @@ if(
         .toLowerCase();
 
 
-    return enviada === correta;
+    return enviada ===
+        correta;
 
 }
 
@@ -2545,7 +2466,6 @@ if(correto){
 
     feedback.className =
         "feedback correto";
-
 
     feedback.innerHTML = `
 
@@ -2578,7 +2498,6 @@ if(correto){
     feedback.className =
         "feedback errado";
 
-
     feedback.innerHTML = `
 
         <strong>
@@ -2588,7 +2507,7 @@ if(correto){
         ${
             exercicio.explicacao
             ?
-            `<p>
+            `<p style="margin-top:8px">
                 ${escapar(
                     exercicio.explicacao
                 )}
@@ -2685,7 +2604,9 @@ function responder(){
 
 ```
 if(respondeu){
+
     return;
+
 }
 
 
@@ -2774,7 +2695,6 @@ if(
     botao.textContent =
         "Próxima questão";
 
-
     botao.onclick =
         proximaQuestao;
 
@@ -2782,7 +2702,6 @@ if(
 
     botao.textContent =
         "Finalizar lição";
-
 
     botao.onclick =
         finalizarLicao;
@@ -2849,7 +2768,6 @@ else{
             `${ultimaData}T00:00:00`
         );
 
-
     const atual =
         new Date(
             `${hoje}T00:00:00`
@@ -2858,11 +2776,14 @@ else{
 
     const diferenca =
         Math.round(
+
             (
                 atual.getTime() -
                 ultima.getTime()
-            ) /
+            )
+            /
             86400000
+
         );
 
 
@@ -2897,14 +2818,22 @@ const totalQuestoes =
 
 const aproveitamento =
     totalQuestoes > 0
+
     ?
+
     Math.round(
+
         (
             acertos /
             totalQuestoes
-        ) * 100
+        )
+        *
+        100
+
     )
+
     :
+
     0;
 
 
@@ -3004,7 +2933,7 @@ if(
 
     dadosUsuarioAtualizar
         .vidasUltimaAtualizacao =
-            serverTimestamp();
+        serverTimestamp();
 
 }
 
@@ -3016,7 +2945,7 @@ if(aprovado){
 
     dadosUsuarioAtualizar
         .ultimaAtividadeData =
-            dataLocal();
+        dataLocal();
 
 }
 
@@ -3053,7 +2982,6 @@ try{
     dadosUsuario.moedas =
         novoSaldoMoedas;
 
-
     dadosUsuario.xp =
         novoXP;
 
@@ -3088,7 +3016,8 @@ try{
 
         tentativas =
             Number(
-                progressoAnterior.data()
+                progressoAnterior
+                    .data()
                     .tentativas || 0
             );
 
@@ -3151,8 +3080,10 @@ try{
 
             concluidaEm:
                 aprovado
-                ? serverTimestamp()
-                : null,
+                ?
+                serverTimestamp()
+                :
+                null,
 
             atualizadoEm:
                 serverTimestamp()
@@ -3168,9 +3099,13 @@ try{
 
     const respostaRef =
         doc(
+
             db,
+
             "respostas",
+
             `${usuarioAtual.uid}_${licaoId}_${Date.now()}`
+
         );
 
 
@@ -3216,12 +3151,7 @@ try{
 
 
     window.location.href =
-    "resultado.html?cursoId=" +
-    encodeURIComponent(cursoId) +
-    "&moduloId=" +
-    encodeURIComponent(moduloId) +
-    "&licaoId=" +
-    encodeURIComponent(licaoId);
+        `resultado.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
 
 
 }catch(error){
@@ -3281,41 +3211,69 @@ async (user) => {
         areaPrincipal.innerHTML = `
 
             <div class="erro">
+
                 Não foi possível abrir esta lição.
+
                 Os dados da lição não foram informados.
 
             </div>
+
         `;
 
         return;
 
     }
+
+
     try{
+
         await carregarUsuario();
+
         await carregarCurso();
+
         await carregarLicao();
+
         await carregarConteudos();
+
         await carregarExercicios();
+
         mostrarLicao();
+
+
     }catch(error){
+
         console.error(
             "❌ Erro ao carregar lição:",
             error
         );
+
+
         areaPrincipal.innerHTML = `
+
             <div class="erro">
+
                 <strong>
                     Não foi possível carregar a lição.
                 </strong>
+
                 <br><br>
+
                 ${escapar(
                     error.message
                 )}
+
             </div>
+
         `;
+
     }
+
 }
+```
+
 );
+
 </script>
+
 </body>
 </html>
