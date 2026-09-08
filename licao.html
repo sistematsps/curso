@@ -3216,7 +3216,12 @@ try{
 
 
     window.location.href =
-        `resultado.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
+    "resultado.html?cursoId=" +
+    encodeURIComponent(cursoId) +
+    "&moduloId=" +
+    encodeURIComponent(moduloId) +
+    "&licaoId=" +
+    encodeURIComponent(licaoId);
 
 
 }catch(error){
