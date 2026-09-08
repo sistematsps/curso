@@ -1,14 +1,21 @@
  <!DOCTYPE html>                                                                          
  <html lang="pt-BR">                                                                      
+                                                                                       
  <head>                                                                                   
+                                                                                       
  <meta charset="UTF-8">                                                                   
+                                                                                       
  <meta name="viewport"                                                                    
        content="width=device-width, initial-scale=1.0">                                    
+                                                                                       
  <title>Lições - Administração</title>                                                   
+                                                                                       
  <style>                                                                                  
+                                                                                       
  * {                                                                                      
      box-sizing: border-box;                                                               
  }                                                                                         
+                                                                                       
  body {                                                                                    
      margin: 0;                                                                            
      font-family: Arial, sans-serif;                                                       
@@ -377,12 +384,6 @@
 .conteudo-editor h3 { margin: 0 0 6px; }
 .conteudo-editor .subtexto { color:#667085; margin:0 0 18px; font-size:.92rem; }
 
-.editor-aviso {
-    margin: 0 0 16px; padding: 12px 14px; border-radius: 10px;
-    background: #f5f8ff; border: 1px solid #cdd9ff; color: #344054;
-    font-size: .92rem;
-}
-
 .conteudo-toolbar {
     display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px;
 }
@@ -459,7 +460,7 @@
      <div class="header-buttons">                                                         
                                                                                        
          <a                                                                               
-             href="modulos.html" 
+             href="[modulos.html](https://sistematsps.github.io/curso/admin/modulos.html)" 
              class="btn-link btn-voltar"                                                   
          >                                                                                 
              ← Módulos                                                                     
@@ -807,7 +808,10 @@
 
  const storage =
      getStorage(app);
- window.ceFB = {
+
+ // Expor apenas os serviços necessários ao editor de conteúdos,
+ // que fica em um script clássico separado.
+ window.ceFirebase = {
      db,
      storage,
      collection,
@@ -820,8 +824,7 @@
      storageRef,
      uploadBytes,
      getDownloadURL
- };
-                                                                    
+ };                                                                    
                                                                                        
                                                                                        
  // ======================================================                                 
@@ -1507,15 +1510,6 @@
                          data-id="${licao.id}"                                             
                      >                                                                     
                          Editar                                                            
-                     </button>
-
-                     <button
-                         type="button"
-                         class="btn-editar"
-                         data-acao="conteudos"
-                         data-id="${licao.id}"
-                     >
-                         📚 Conteúdos
                      </button>                                                            
                                                                                        
                      <button                                                              
@@ -1739,43 +1733,69 @@
                                                                                        
              return;                                                                       
                                                                                        
-         }
-
-         try {
-             let idLicaoEditor = licaoEditando;
-
-             if (licaoEditando) {
-                 await updateDoc(
-                     doc(db, "licoes", licaoEditando),
-                     dados
-                 );
-
-                 mostrarMensagem("Lição atualizada com sucesso!");
-             } else {
-                 const novaLicaoRef = await addDoc(
-                     collection(db, "licoes"),
-                     {
-                         ...dados,
-                         ativo: true,
-                         criadoEm: serverTimestamp()
-                     }
-                 );
-
-                 idLicaoEditor = novaLicaoRef.id;
-                 licaoEditando = novaLicaoRef.id;
-
-                 mostrarMensagem("Lição criada com sucesso!");
-             }
-
-             // Abre o editor de conteúdos somente depois que a lição já possui ID.
-             if (idLicaoEditor && typeof window.ceAbrirEditorConteudos === "function") {
-                 await window.ceAbrirEditorConteudos(idLicaoEditor);
-             }
-
-             limparFormulario();
-
-             await carregarLicoes(moduloId);
-
+         }                                                                                 
+                                                                                       
+                                                                                       
+         try {                                                                             
+                                                                                       
+             if (licaoEditando) {                                                          
+                                                                                       
+                 await updateDoc(                                                          
+                                                                                       
+                     doc(                                                                  
+                         db,                                                               
+                         "licoes",                                                         
+                         licaoEditando                                                     
+                     ),                                                                    
+                                                                                       
+                     dados                                                                 
+                                                                                       
+                 );                                                                        
+                                                                                       
+                                                                                       
+                 mostrarMensagem(                                                          
+                     "Lição atualizada com sucesso!"                                       
+                 );                                                                        
+                                                                                       
+             } else {                                                                      
+                                                                                       
+                 await addDoc(                                                             
+                                                                                       
+                     collection(                                                           
+                         db,                                                               
+                         "licoes"                                                          
+                     ),                                                                    
+                                                                                       
+                     {                                                                     
+                                                                                       
+                         ...dados,                                                         
+                                                                                       
+                         ativo:                                                            
+                             true,                                                         
+                                                                                       
+                         criadoEm:                                                         
+                             serverTimestamp()                                             
+                                                                                       
+                     }                                                                     
+                                                                                       
+                 );                                                                        
+                                                                                       
+                                                                                       
+                 mostrarMensagem(                                                          
+                     "Lição criada com sucesso!"                                           
+                 );                                                                        
+                                                                                       
+             }                                                                             
+                                                                                       
+                                                                                       
+             limparFormulario();                                                           
+                                                                                       
+                                                                                       
+             await carregarLicoes(                                                         
+                 moduloId                                                                  
+             );                                                                            
+                                                                                       
+                                                                                       
          } catch (erro) {                                                                  
                                                                                        
              console.error(erro);                                                          
@@ -1841,8 +1861,8 @@
              licaoEditando =                                                               
                  id;
 
-             if (typeof window.ceAbrirEditorConteudos === "function") {
-                 window.ceAbrirEditorConteudos(id);
+             if (typeof ceCarregarConteudos === "function") {
+                 ceCarregarConteudos(id);
              }                                                                       
                                                                                        
                                                                                        
@@ -1889,14 +1909,6 @@
          // STATUS                                                                         
          // ==========================                                                     
                                                                                        
-         if (acao === "conteudos") {
-             if (typeof window.ceAbrirEditorConteudos === "function") {
-                 await window.ceAbrirEditorConteudos(id);
-             }
-             return;
-         }
-
-
          if (acao === "status") {                                                          
                                                                                        
              const novoStatus =                                                            
@@ -2081,11 +2093,6 @@
         Monte a aula em blocos na ordem em que o aluno deverá visualizar.
     </p>
 
-    <div class="editor-aviso">
-        <strong>Editor da aula:</strong> escolha um tipo abaixo para adicionar texto, links ou arquivos.
-        Para arquivos, escolha o arquivo e clique em <strong>Enviar arquivo</strong>. Depois clique em <strong>Salvar conteúdo</strong>.
-    </div>
-
     <div class="conteudo-toolbar">
         <button type="button" data-novo-conteudo="titulo">📌 Título</button>
         <button type="button" data-novo-conteudo="texto">📝 Texto</button>
@@ -2143,7 +2150,7 @@
 
         <div class="campo-conteudo" id="campoArquivoConteudo">
             <label for="arquivoConteudo">Anexar arquivo</label>
-            <input id="arquivoConteudo" type="file" accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.rar">
+            <input id="arquivoConteudo" type="file">
             <div class="linha-upload">
                 <button type="button" id="enviarArquivoConteudo">⬆️ Enviar arquivo</button>
                 <span id="statusUploadConteudo" class="status-upload"></span>
@@ -2296,7 +2303,7 @@ async function ceCarregarConteudos(licaoId) {
     ceLista.innerHTML = '<div class="conteudo-vazio">Carregando conteúdos...</div>';
 
     try {
-        const snap = await window.ceFB.getDocs(window.ceFB.collection(db, "conteudos"));
+        const snap = await ceFirebase.getDocs(ceFirebase.collection(ceFirebase.db, "conteudos"));
 
         ceConteudos = snap.docs
             .map(d => ({ id: d.id, ...d.data() }))
@@ -2471,18 +2478,18 @@ async function ceEnviarArquivoSelecionado() {
     try {
         const nomeSeguro = arquivo.name.replace(/[^a-zA-Z0-9._-]/g, "_");
         const caminho = `conteudos/${ceLicaoId}/${Date.now()}_${nomeSeguro}`;
-        const referencia = window.ceFB.storageRef(storage, caminho);
-        const resultado = await window.ceFB.uploadBytes(referencia, arquivo, {
+        const referencia = ceFirebase.storageRef(ceFirebase.storage, caminho);
+        const resultado = await ceFirebase.uploadBytes(referencia, arquivo, {
             contentType: arquivo.type || "application/octet-stream"
         });
-        const url = await window.ceFB.getDownloadURL(resultado.ref);
+        const url = await ceFirebase.getDownloadURL(resultado.ref);
         ceUrl.value = url;
         ceStatusUpload.textContent = "Arquivo enviado com sucesso.";
         return url;
     } catch (erro) {
         console.error("Erro no upload:", erro);
         ceStatusUpload.textContent = "Falha no upload.";
-        alert("Não foi possível enviar o arquivo. Código: " + (erro?.code || "desconhecido") + "\n\nVerifique se o Firebase Storage está habilitado e se as regras permitem upload para usuários autenticados.");
+        alert("Não foi possível enviar o arquivo. Verifique as regras do Firebase Storage.");
         return null;
     } finally {
         ceEnviarArquivo.disabled = false;
@@ -2535,19 +2542,19 @@ async function ceSalvarDados() {
         url,
         ordem,
         ativo: true,
-        atualizadoEm: window.ceFB.serverTimestamp()
+        atualizadoEm: ceFirebase.serverTimestamp()
     };
 
     try {
         if (ceConteudoEditando) {
-            await window.ceFB.updateDoc(
-                window.ceFB.doc(db, "conteudos", ceConteudoEditando),
+            await ceFirebase.updateDoc(
+                ceFirebase.doc(ceFirebase.db, "conteudos", ceConteudoEditando),
                 dados
             );
         } else {
-            await window.ceFB.addDoc(window.ceFB.collection(db, "conteudos"), {
+            await ceFirebase.addDoc(ceFirebase.collection(ceFirebase.db, "conteudos"), {
                 ...dados,
-                criadoEm: window.ceFB.serverTimestamp()
+                criadoEm: ceFirebase.serverTimestamp()
             });
         }
 
@@ -2561,9 +2568,9 @@ async function ceSalvarDados() {
 
 async function ceAlternarStatus(c) {
     try {
-        await window.ceFB.updateDoc(window.ceFB.doc(db, "conteudos", c.id), {
+        await ceFirebase.updateDoc(ceFirebase.doc(ceFirebase.db, "conteudos", c.id), {
             ativo: c.ativo === false,
-            atualizadoEm: window.ceFB.serverTimestamp()
+            atualizadoEm: ceFirebase.serverTimestamp()
         });
         await ceCarregarConteudos(ceLicaoId);
     } catch (erro) {
@@ -2576,7 +2583,7 @@ async function ceExcluir(c) {
     if (!confirm("Excluir este conteúdo da aula?")) return;
 
     try {
-        await window.ceFB.deleteDoc(window.ceFB.doc(db, "conteudos", c.id));
+        await ceFirebase.deleteDoc(ceFirebase.doc(ceFirebase.db, "conteudos", c.id));
         await ceCarregarConteudos(ceLicaoId);
     } catch (erro) {
         console.error(erro);
@@ -2592,14 +2599,14 @@ async function ceMover(indice, deslocamento) {
     const outro = ceConteudos[novoIndice];
 
     try {
-        await window.ceFB.updateDoc(window.ceFB.doc(db, "conteudos", atual.id), {
+        await ceFirebase.updateDoc(ceFirebase.doc(ceFirebase.db, "conteudos", atual.id), {
             ordem: Number(outro.ordem) || novoIndice + 1,
-            atualizadoEm: window.ceFB.serverTimestamp()
+            atualizadoEm: ceFirebase.serverTimestamp()
         });
 
-        await window.ceFB.updateDoc(window.ceFB.doc(db, "conteudos", outro.id), {
+        await ceFirebase.updateDoc(ceFirebase.doc(ceFirebase.db, "conteudos", outro.id), {
             ordem: Number(atual.ordem) || indice + 1,
-            atualizadoEm: window.ceFB.serverTimestamp()
+            atualizadoEm: ceFirebase.serverTimestamp()
         });
 
         await ceCarregarConteudos(ceLicaoId);
@@ -2662,7 +2669,6 @@ if (typeof btnNovo !== "undefined") {
         ceLicaoId = null;
         ceConteudos = [];
         ceEditor.style.display = "none";
-        ceLista.innerHTML = '<div class="conteudo-vazio">Salve a nova lição primeiro. Depois o editor de conteúdos será aberto automaticamente.</div>';
     });
 }
 </script>
