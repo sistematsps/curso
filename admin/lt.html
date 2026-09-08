@@ -1,21 +1,14 @@
  <!DOCTYPE html>                                                                          
  <html lang="pt-BR">                                                                      
-                                                                                       
  <head>                                                                                   
-                                                                                       
  <meta charset="UTF-8">                                                                   
-                                                                                       
  <meta name="viewport"                                                                    
        content="width=device-width, initial-scale=1.0">                                    
-                                                                                       
  <title>Lições - Administração</title>                                                   
-                                                                                       
  <style>                                                                                  
-                                                                                       
  * {                                                                                      
      box-sizing: border-box;                                                               
  }                                                                                         
-                                                                                       
  body {                                                                                    
      margin: 0;                                                                            
      font-family: Arial, sans-serif;                                                       
@@ -466,7 +459,7 @@
      <div class="header-buttons">                                                         
                                                                                        
          <a                                                                               
-             href="modulos.html)" 
+             href="modulos.html" 
              class="btn-link btn-voltar"                                                   
          >                                                                                 
              ← Módulos                                                                     
@@ -813,7 +806,22 @@
      getFirestore(app);
 
  const storage =
-     getStorage(app);                                                                    
+     getStorage(app);
+ window.ceFB = {
+     db,
+     storage,
+     collection,
+     addDoc,
+     getDocs,
+     doc,
+     updateDoc,
+     deleteDoc,
+     serverTimestamp,
+     storageRef,
+     uploadBytes,
+     getDownloadURL
+ };
+                                                                    
                                                                                        
                                                                                        
  // ======================================================                                 
@@ -2288,7 +2296,7 @@ async function ceCarregarConteudos(licaoId) {
     ceLista.innerHTML = '<div class="conteudo-vazio">Carregando conteúdos...</div>';
 
     try {
-        const snap = await getDocs(collection(db, "conteudos"));
+        const snap = await window.ceFB.getDocs(window.ceFB.collection(db, "conteudos"));
 
         ceConteudos = snap.docs
             .map(d => ({ id: d.id, ...d.data() }))
@@ -2463,11 +2471,11 @@ async function ceEnviarArquivoSelecionado() {
     try {
         const nomeSeguro = arquivo.name.replace(/[^a-zA-Z0-9._-]/g, "_");
         const caminho = `conteudos/${ceLicaoId}/${Date.now()}_${nomeSeguro}`;
-        const referencia = storageRef(storage, caminho);
-        const resultado = await uploadBytes(referencia, arquivo, {
+        const referencia = window.ceFB.storageRef(storage, caminho);
+        const resultado = await window.ceFB.uploadBytes(referencia, arquivo, {
             contentType: arquivo.type || "application/octet-stream"
         });
-        const url = await getDownloadURL(resultado.ref);
+        const url = await window.ceFB.getDownloadURL(resultado.ref);
         ceUrl.value = url;
         ceStatusUpload.textContent = "Arquivo enviado com sucesso.";
         return url;
@@ -2527,19 +2535,19 @@ async function ceSalvarDados() {
         url,
         ordem,
         ativo: true,
-        atualizadoEm: serverTimestamp()
+        atualizadoEm: window.ceFB.serverTimestamp()
     };
 
     try {
         if (ceConteudoEditando) {
-            await updateDoc(
-                doc(db, "conteudos", ceConteudoEditando),
+            await window.ceFB.updateDoc(
+                window.ceFB.doc(db, "conteudos", ceConteudoEditando),
                 dados
             );
         } else {
-            await addDoc(collection(db, "conteudos"), {
+            await window.ceFB.addDoc(window.ceFB.collection(db, "conteudos"), {
                 ...dados,
-                criadoEm: serverTimestamp()
+                criadoEm: window.ceFB.serverTimestamp()
             });
         }
 
@@ -2553,9 +2561,9 @@ async function ceSalvarDados() {
 
 async function ceAlternarStatus(c) {
     try {
-        await updateDoc(doc(db, "conteudos", c.id), {
+        await window.ceFB.updateDoc(window.ceFB.doc(db, "conteudos", c.id), {
             ativo: c.ativo === false,
-            atualizadoEm: serverTimestamp()
+            atualizadoEm: window.ceFB.serverTimestamp()
         });
         await ceCarregarConteudos(ceLicaoId);
     } catch (erro) {
@@ -2568,7 +2576,7 @@ async function ceExcluir(c) {
     if (!confirm("Excluir este conteúdo da aula?")) return;
 
     try {
-        await deleteDoc(doc(db, "conteudos", c.id));
+        await window.ceFB.deleteDoc(window.ceFB.doc(db, "conteudos", c.id));
         await ceCarregarConteudos(ceLicaoId);
     } catch (erro) {
         console.error(erro);
@@ -2584,14 +2592,14 @@ async function ceMover(indice, deslocamento) {
     const outro = ceConteudos[novoIndice];
 
     try {
-        await updateDoc(doc(db, "conteudos", atual.id), {
+        await window.ceFB.updateDoc(window.ceFB.doc(db, "conteudos", atual.id), {
             ordem: Number(outro.ordem) || novoIndice + 1,
-            atualizadoEm: serverTimestamp()
+            atualizadoEm: window.ceFB.serverTimestamp()
         });
 
-        await updateDoc(doc(db, "conteudos", outro.id), {
+        await window.ceFB.updateDoc(window.ceFB.doc(db, "conteudos", outro.id), {
             ordem: Number(atual.ordem) || indice + 1,
-            atualizadoEm: serverTimestamp()
+            atualizadoEm: window.ceFB.serverTimestamp()
         });
 
         await ceCarregarConteudos(ceLicaoId);
