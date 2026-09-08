@@ -7,8 +7,9 @@
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
 <title>Lição</title>
@@ -255,6 +256,125 @@ textarea:focus{
     border-radius:12px;
 }
 
+/* =====================================================
+   CONTEÚDO DA LIÇÃO
+===================================================== */
+
+.conteudos-licao{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    margin-bottom:20px;
+}
+
+.conteudo-bloco{
+    background:white;
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.conteudo-titulo{
+    font-size:24px;
+    margin-bottom:12px;
+    color:#111827;
+}
+
+.conteudo-subtitulo{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.conteudo-texto{
+    font-size:17px;
+    line-height:1.75;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.conteudo-imagem{
+    display:block;
+    width:100%;
+    max-height:650px;
+    object-fit:contain;
+    border-radius:12px;
+}
+
+.conteudo-video{
+    width:100%;
+    aspect-ratio:16/9;
+    border:0;
+    border-radius:12px;
+    background:#000;
+}
+
+.conteudo-audio{
+    width:100%;
+}
+
+.conteudo-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#2563eb;
+    font-weight:bold;
+    text-decoration:none;
+    overflow-wrap:anywhere;
+}
+
+.conteudo-link:hover{
+    text-decoration:underline;
+}
+
+.conteudo-pdf{
+    width:100%;
+    height:650px;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+}
+
+.conteudo-arquivo{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+}
+
+.conteudo-arquivo a{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.conteudo-citacao{
+    border-left:5px solid #2563eb;
+    padding:14px 18px;
+    background:#eff6ff;
+    color:#374151;
+    font-size:17px;
+    line-height:1.6;
+    white-space:pre-wrap;
+}
+
+.conteudo-lista{
+    margin-left:24px;
+    line-height:1.8;
+    font-size:17px;
+}
+
+.conteudo-vazio{
+    background:white;
+    border-radius:18px;
+    padding:24px;
+    color:#6b7280;
+    text-align:center;
+}
+
+.conteudo-separador{
+    border:0;
+    border-top:2px solid #e5e7eb;
+    margin:4px 0;
+}
+
 @media(max-width:600px){
 
     .container{
@@ -283,30 +403,15 @@ textarea:focus{
         width:100%;
     }
 
+    .conteudo-bloco{
+        padding:18px;
+    }
+
+    .conteudo-pdf{
+        height:480px;
+    }
+
 }
-
-
-/* =====================================================
-   CONTEÚDO DA LIÇÃO
-===================================================== */
-.conteudos-licao{display:flex;flex-direction:column;gap:18px;margin-bottom:20px;}
-.conteudo-bloco{background:white;border-radius:18px;padding:24px;box-shadow:0 5px 20px rgba(0,0,0,.07);}
-.conteudo-titulo{font-size:24px;margin-bottom:12px;color:#111827;}
-.conteudo-subtitulo{font-size:20px;margin-bottom:10px;}
-.conteudo-texto{font-size:17px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;}
-.conteudo-imagem{display:block;width:100%;max-height:650px;object-fit:contain;border-radius:12px;}
-.conteudo-video{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000;}
-.conteudo-audio{width:100%;}
-.conteudo-link{display:inline-flex;align-items:center;gap:8px;color:#2563eb;font-weight:bold;text-decoration:none;overflow-wrap:anywhere;}
-.conteudo-link:hover{text-decoration:underline;}
-.conteudo-pdf{width:100%;height:650px;border:1px solid #e5e7eb;border-radius:12px;}
-.conteudo-arquivo{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
-.conteudo-arquivo a{color:#2563eb;font-weight:bold;}
-.conteudo-citacao{border-left:5px solid #2563eb;padding:14px 18px;background:#eff6ff;color:#374151;font-size:17px;line-height:1.6;white-space:pre-wrap;}
-.conteudo-lista{margin-left:24px;line-height:1.8;font-size:17px;}
-.conteudo-vazio{background:white;border-radius:18px;padding:24px;color:#6b7280;text-align:center;}
-.conteudo-separador{border:0;border-top:2px solid #e5e7eb;margin:4px 0;}
-@media(max-width:600px){.conteudo-bloco{padding:18px;}.conteudo-pdf{height:480px;}}
 
 </style>
 
@@ -316,49 +421,57 @@ textarea:focus{
 
 <header>
 
-    <div class="header">
+```
+<div class="header">
 
-        <h1 id="tituloHeader">
-            📚 Lição
-        </h1>
+    <h1 id="tituloHeader">
+        📚 Lição
+    </h1>
 
-        <div class="header-info">
+    <div class="header-info">
 
-            <div class="info">
-                ❤️ <span id="vidas">-</span>
-            </div>
+        <div class="info">
+            ❤️ <span id="vidas">-</span>
+        </div>
 
-            <div class="info">
-                🪙 <span id="moedas">-</span>
-            </div>
+        <div class="info">
+            🪙 <span id="moedas">-</span>
+        </div>
 
-            <div class="info">
-                ⭐ <span id="xp">-</span>
-            </div>
+        <div class="info">
+            ⭐ <span id="xp">-</span>
+        </div>
 
-            <div class="info">
-                🔥 <span id="sequencia">-</span>
-            </div>
-
+        <div class="info">
+            🔥 <span id="sequencia">-</span>
         </div>
 
     </div>
+
+</div>
+```
 
 </header>
 
 <main class="container">
 
-    <div id="areaPrincipal">
+```
+<div id="areaPrincipal">
 
-        <div class="carregando">
-            Carregando lição...
-        </div>
-
+    <div class="carregando">
+        Carregando lição...
     </div>
+
+</div>
+```
 
 </main>
 
 <script type="module">
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
     initializeApp
@@ -375,13 +488,15 @@ import {
     getDoc,
     collection,
     getDocs,
+    query,
+    where,
     setDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
 /* =====================================================
-   FIREBASE
+   CONFIGURAÇÃO FIREBASE
 ===================================================== */
 
 const firebaseConfig = {
@@ -406,6 +521,7 @@ const firebaseConfig = {
 
     measurementId:
         "G-NMPP8PKPK3"
+
 };
 
 
@@ -451,6 +567,13 @@ const moduloId =
 
 const licaoId =
     params.get("licaoId");
+
+
+console.log("🔗 Parâmetros da lição:", {
+    cursoId,
+    moduloId,
+    licaoId
+});
 
 
 /* =====================================================
@@ -610,12 +733,6 @@ async function carregarUsuario(){
     }
 
 
-    /*
-     * Se o aluno possui vidas infinitas,
-     * não fazemos recuperação nem alteração
-     * da quantidade normal de vidas.
-     */
-
     if(dadosUsuario.vidasInfinitas === true){
 
         atualizarHeader();
@@ -624,10 +741,6 @@ async function carregarUsuario(){
 
     }
 
-
-    /*
-     * Recuperação automática das vidas.
-     */
 
     let vidas =
         Number(
@@ -870,6 +983,9 @@ async function carregarLicao(){
     };
 
 
+    console.log("📖 Lição carregada:", licao);
+
+
     if(licao.ativo !== true){
 
         throw new Error(
@@ -881,227 +997,876 @@ async function carregarLicao(){
 }
 
 
-
 /* =====================================================
    CARREGAR CONTEÚDOS DA LIÇÃO
 ===================================================== */
+
 async function carregarConteudos(){
+
+    console.log(
+        "🔎 Iniciando carregamento dos conteúdos..."
+    );
+
+
     if(!licaoId){
+
+        console.warn(
+            "⚠️ licaoId não informado."
+        );
+
         conteudosLicao = [];
+
         return;
+
     }
 
-    const q = query(
-        collection(db,"conteudos"),
-        where("licaoId","==",licaoId)
+
+    console.log(
+        "🔎 Procurando documentos em 'conteudos' para licaoId:",
+        licaoId
     );
 
-    const snap = await getDocs(q);
+
+    /*
+     * IMPORTANTE:
+     *
+     * query e where estão importados no início
+     * do módulo Firebase.
+     */
+
+    const consulta =
+        query(
+            collection(
+                db,
+                "conteudos"
+            ),
+            where(
+                "licaoId",
+                "==",
+                licaoId
+            )
+        );
+
+
+    const snap =
+        await getDocs(
+            consulta
+        );
+
+
+    console.log(
+        "📚 Quantidade de conteúdos encontrados:",
+        snap.size
+    );
+
+
     conteudosLicao = [];
 
-    snap.forEach(item => {
-        const conteudo = { id:item.id, ...item.data() };
 
-        if(conteudo.ativo !== false){
-            conteudosLicao.push(conteudo);
+    snap.forEach(item => {
+
+        const dados =
+            item.data();
+
+
+        const conteudo = {
+
+            id:item.id,
+
+            ...dados
+
+        };
+
+
+        console.log(
+            "📄 Conteúdo encontrado:",
+            conteudo
+        );
+
+
+        if(
+            conteudo.ativo !== false
+        ){
+
+            conteudosLicao.push(
+                conteudo
+            );
+
         }
+
     });
 
+
     conteudosLicao.sort(
-        (a,b) => Number(a.ordem || 0) - Number(b.ordem || 0)
+
+        (a,b) =>
+
+            Number(
+                a.ordem || 0
+            )
+
+            -
+
+            Number(
+                b.ordem || 0
+            )
+
     );
+
+
+    console.log(
+        "✅ Conteúdos prontos para exibição:",
+        conteudosLicao
+    );
+
 }
 
+
+/* =====================================================
+   YOUTUBE
+===================================================== */
+
 function obterYoutubeEmbed(url){
-    if(!url) return null;
 
-    try{
-        const u = new URL(url);
-
-        if(u.hostname.includes("youtube.com") && u.pathname === "/watch"){
-            const id = u.searchParams.get("v");
-            return id ? `https://www.youtube.com/embed/${id}` : null;
-        }
-
-        if(u.hostname === "youtu.be"){
-            const id = u.pathname.replace("/","");
-            return id ? `https://www.youtube.com/embed/${id}` : null;
-        }
-
-        if(u.hostname.includes("youtube.com") && u.pathname.startsWith("/embed/")){
-            return url;
-        }
-    }catch(error){
+    if(!url){
         return null;
     }
 
+
+    try{
+
+        const u =
+            new URL(url);
+
+
+        if(
+            u.hostname.includes("youtube.com") &&
+            u.pathname === "/watch"
+        ){
+
+            const id =
+                u.searchParams.get("v");
+
+
+            return id
+                ? `https://www.youtube.com/embed/${id}`
+                : null;
+
+        }
+
+
+        if(
+            u.hostname === "youtu.be"
+        ){
+
+            const id =
+                u.pathname.replace(
+                    "/",
+                    ""
+                );
+
+
+            return id
+                ? `https://www.youtube.com/embed/${id}`
+                : null;
+
+        }
+
+
+        if(
+            u.hostname.includes("youtube.com") &&
+            u.pathname.startsWith("/embed/")
+        ){
+
+            return url;
+
+        }
+
+    }catch(error){
+
+        console.warn(
+            "⚠️ URL de vídeo inválida:",
+            url
+        );
+
+        return null;
+
+    }
+
+
     return null;
+
 }
 
-function renderizarConteudos(){
-    const area = document.getElementById("areaConteudo");
 
-    if(!area) return;
+/* =====================================================
+   RENDERIZAR CONTEÚDOS
+===================================================== */
+
+function renderizarConteudos(){
+
+    const area =
+        document.getElementById(
+            "areaConteudo"
+        );
+
+
+    if(!area){
+
+        console.warn(
+            "⚠️ #areaConteudo não existe."
+        );
+
+        return;
+
+    }
+
 
     area.innerHTML = "";
 
-    if(conteudosLicao.length === 0) return;
 
-    const wrapper = document.createElement("div");
-    wrapper.className = "conteudos-licao";
+    console.log(
+        "🎨 Renderizando conteúdos:",
+        conteudosLicao
+    );
 
-    conteudosLicao.forEach(item => {
-        const tipo = String(item.tipo || "texto").toLowerCase();
-        const titulo = item.titulo || "";
-        const texto = item.texto || item.conteudo || "";
-        const url = item.url || "";
 
-        if(tipo === "separador"){
-            const hr = document.createElement("hr");
-            hr.className = "conteudo-separador";
-            wrapper.appendChild(hr);
-            return;
+    if(
+        conteudosLicao.length === 0
+    ){
+
+        console.log(
+            "ℹ️ Nenhum conteúdo para renderizar."
+        );
+
+        return;
+
+    }
+
+
+    const wrapper =
+        document.createElement(
+            "div"
+        );
+
+
+    wrapper.className =
+        "conteudos-licao";
+
+
+    conteudosLicao.forEach(
+        item => {
+
+            const tipo =
+                String(
+                    item.tipo ||
+                    "texto"
+                ).toLowerCase();
+
+
+            const titulo =
+                item.titulo ||
+                "";
+
+
+            const texto =
+                item.texto ||
+                item.conteudo ||
+                "";
+
+
+            const url =
+                item.url ||
+                "";
+
+
+            console.log(
+                "🧩 Renderizando conteúdo:",
+                {
+                    tipo,
+                    titulo,
+                    texto,
+                    url
+                }
+            );
+
+
+            if(
+                tipo === "separador"
+            ){
+
+                const hr =
+                    document.createElement(
+                        "hr"
+                    );
+
+
+                hr.className =
+                    "conteudo-separador";
+
+
+                wrapper.appendChild(
+                    hr
+                );
+
+
+                return;
+
+            }
+
+
+            const bloco =
+                document.createElement(
+                    "section"
+                );
+
+
+            bloco.className =
+                "conteudo-bloco";
+
+
+            if(titulo){
+
+                const h =
+                    document.createElement(
+                        tipo === "titulo"
+                            ? "h2"
+                            : "h3"
+                    );
+
+
+                h.className =
+                    tipo === "titulo"
+                        ? "conteudo-titulo"
+                        : "conteudo-subtitulo";
+
+
+                h.textContent =
+                    titulo;
+
+
+                bloco.appendChild(
+                    h
+                );
+
+            }
+
+
+            if(
+                tipo === "titulo" ||
+                tipo === "texto"
+            ){
+
+                if(texto){
+
+                    const el =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    el.className =
+                        "conteudo-texto";
+
+
+                    el.textContent =
+                        texto;
+
+
+                    bloco.appendChild(
+                        el
+                    );
+
+                }
+
+            }
+
+
+            else if(
+                tipo === "imagem"
+            ){
+
+                if(url){
+
+                    const img =
+                        document.createElement(
+                            "img"
+                        );
+
+
+                    img.className =
+                        "conteudo-imagem";
+
+
+                    img.src =
+                        url;
+
+
+                    img.alt =
+                        titulo ||
+                        "Imagem da lição";
+
+
+                    img.loading =
+                        "lazy";
+
+
+                    bloco.appendChild(
+                        img
+                    );
+
+                }
+
+            }
+
+
+            else if(
+                tipo === "video"
+            ){
+
+                const embed =
+                    obterYoutubeEmbed(
+                        url
+                    );
+
+
+                if(embed){
+
+                    const iframe =
+                        document.createElement(
+                            "iframe"
+                        );
+
+
+                    iframe.className =
+                        "conteudo-video";
+
+
+                    iframe.src =
+                        embed;
+
+
+                    iframe.title =
+                        titulo ||
+                        "Vídeo da lição";
+
+
+                    iframe.allow =
+                        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+
+                    iframe.allowFullscreen =
+                        true;
+
+
+                    bloco.appendChild(
+                        iframe
+                    );
+
+                }
+
+                else if(url){
+
+                    const video =
+                        document.createElement(
+                            "video"
+                        );
+
+
+                    video.className =
+                        "conteudo-video";
+
+
+                    video.controls =
+                        true;
+
+
+                    video.preload =
+                        "metadata";
+
+
+                    const source =
+                        document.createElement(
+                            "source"
+                        );
+
+
+                    source.src =
+                        url;
+
+
+                    video.appendChild(
+                        source
+                    );
+
+
+                    bloco.appendChild(
+                        video
+                    );
+
+                }
+
+            }
+
+
+            else if(
+                tipo === "link"
+            ){
+
+                if(url){
+
+                    const a =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    a.className =
+                        "conteudo-link";
+
+
+                    a.href =
+                        url;
+
+
+                    a.target =
+                        "_blank";
+
+
+                    a.rel =
+                        "noopener noreferrer";
+
+
+                    a.textContent =
+                        titulo ||
+                        texto ||
+                        url;
+
+
+                    bloco.appendChild(
+                        a
+                    );
+
+                }
+
+            }
+
+
+            else if(
+                tipo === "pdf"
+            ){
+
+                if(url){
+
+                    const iframe =
+                        document.createElement(
+                            "iframe"
+                        );
+
+
+                    iframe.className =
+                        "conteudo-pdf";
+
+
+                    iframe.src =
+                        url;
+
+
+                    iframe.title =
+                        titulo ||
+                        "PDF da lição";
+
+
+                    bloco.appendChild(
+                        iframe
+                    );
+
+
+                    const p =
+                        document.createElement(
+                            "p"
+                        );
+
+
+                    p.style.marginTop =
+                        "10px";
+
+
+                    const a =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    a.className =
+                        "conteudo-link";
+
+
+                    a.href =
+                        url;
+
+
+                    a.target =
+                        "_blank";
+
+
+                    a.rel =
+                        "noopener noreferrer";
+
+
+                    a.textContent =
+                        "📄 Abrir PDF em nova aba";
+
+
+                    p.appendChild(
+                        a
+                    );
+
+
+                    bloco.appendChild(
+                        p
+                    );
+
+                }
+
+            }
+
+
+            else if(
+                tipo === "arquivo"
+            ){
+
+                if(url){
+
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    div.className =
+                        "conteudo-arquivo";
+
+
+                    const span =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    span.textContent =
+                        "📎 " +
+                        (
+                            titulo ||
+                            "Arquivo"
+                        );
+
+
+                    const a =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    a.href =
+                        url;
+
+
+                    a.target =
+                        "_blank";
+
+
+                    a.rel =
+                        "noopener noreferrer";
+
+
+                    a.download =
+                        "";
+
+
+                    a.textContent =
+                        "Abrir / baixar";
+
+
+                    div.appendChild(
+                        span
+                    );
+
+
+                    div.appendChild(
+                        a
+                    );
+
+
+                    bloco.appendChild(
+                        div
+                    );
+
+                }
+
+            }
+
+
+            else if(
+                tipo === "audio"
+            ){
+
+                if(url){
+
+                    const audio =
+                        document.createElement(
+                            "audio"
+                        );
+
+
+                    audio.className =
+                        "conteudo-audio";
+
+
+                    audio.controls =
+                        true;
+
+
+                    audio.preload =
+                        "metadata";
+
+
+                    audio.src =
+                        url;
+
+
+                    bloco.appendChild(
+                        audio
+                    );
+
+                }
+
+            }
+
+
+            else if(
+                tipo === "lista"
+            ){
+
+                const ul =
+                    document.createElement(
+                        "ul"
+                    );
+
+
+                ul.className =
+                    "conteudo-lista";
+
+
+                String(texto)
+                    .split(/\r?\n/)
+                    .map(
+                        itemTexto =>
+                            itemTexto.trim()
+                    )
+                    .filter(Boolean)
+                    .forEach(
+                        itemTexto => {
+
+                            const li =
+                                document.createElement(
+                                    "li"
+                                );
+
+
+                            li.textContent =
+                                itemTexto;
+
+
+                            ul.appendChild(
+                                li
+                            );
+
+                        }
+                    );
+
+
+                bloco.appendChild(
+                    ul
+                );
+
+            }
+
+
+            else if(
+                tipo === "citacao"
+            ){
+
+                const quote =
+                    document.createElement(
+                        "blockquote"
+                    );
+
+
+                quote.className =
+                    "conteudo-citacao";
+
+
+                quote.textContent =
+                    texto;
+
+
+                bloco.appendChild(
+                    quote
+                );
+
+            }
+
+
+            else{
+
+                const el =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                el.className =
+                    "conteudo-texto";
+
+
+                el.textContent =
+                    texto ||
+                    url;
+
+
+                bloco.appendChild(
+                    el
+                );
+
+            }
+
+
+            if(
+                bloco.children.length > 0
+            ){
+
+                wrapper.appendChild(
+                    bloco
+                );
+
+            }
+
         }
+    );
 
-        const bloco = document.createElement("section");
-        bloco.className = "conteudo-bloco";
 
-        if(titulo){
-            const h = document.createElement(tipo === "titulo" ? "h2" : "h3");
-            h.className = tipo === "titulo" ? "conteudo-titulo" : "conteudo-subtitulo";
-            h.textContent = titulo;
-            bloco.appendChild(h);
-        }
+    area.appendChild(
+        wrapper
+    );
 
-        if(tipo === "titulo" || tipo === "texto"){
-            if(texto){
-                const el = document.createElement("div");
-                el.className = "conteudo-texto";
-                el.textContent = texto;
-                bloco.appendChild(el);
-            }
-        }else if(tipo === "imagem"){
-            if(url){
-                const img = document.createElement("img");
-                img.className = "conteudo-imagem";
-                img.src = url;
-                img.alt = titulo || "Imagem da lição";
-                img.loading = "lazy";
-                bloco.appendChild(img);
-            }
-        }else if(tipo === "video"){
-            const embed = obterYoutubeEmbed(url);
 
-            if(embed){
-                const iframe = document.createElement("iframe");
-                iframe.className = "conteudo-video";
-                iframe.src = embed;
-                iframe.title = titulo || "Vídeo da lição";
-                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-                iframe.allowFullscreen = true;
-                bloco.appendChild(iframe);
-            }else if(url){
-                const video = document.createElement("video");
-                video.className = "conteudo-video";
-                video.controls = true;
-                video.preload = "metadata";
+    console.log(
+        "✅ Conteúdos inseridos na página."
+    );
 
-                const source = document.createElement("source");
-                source.src = url;
-                video.appendChild(source);
-                bloco.appendChild(video);
-            }
-        }else if(tipo === "link"){
-            if(url){
-                const a = document.createElement("a");
-                a.className = "conteudo-link";
-                a.href = url;
-                a.target = "_blank";
-                a.rel = "noopener noreferrer";
-                a.textContent = titulo || texto || url;
-                bloco.appendChild(a);
-            }
-        }else if(tipo === "pdf"){
-            if(url){
-                const iframe = document.createElement("iframe");
-                iframe.className = "conteudo-pdf";
-                iframe.src = url;
-                iframe.title = titulo || "PDF da lição";
-                bloco.appendChild(iframe);
-
-                const p = document.createElement("p");
-                p.style.marginTop = "10px";
-
-                const a = document.createElement("a");
-                a.className = "conteudo-link";
-                a.href = url;
-                a.target = "_blank";
-                a.rel = "noopener noreferrer";
-                a.textContent = "📄 Abrir PDF em nova aba";
-                p.appendChild(a);
-                bloco.appendChild(p);
-            }
-        }else if(tipo === "arquivo"){
-            if(url){
-                const div = document.createElement("div");
-                div.className = "conteudo-arquivo";
-
-                const span = document.createElement("span");
-                span.textContent = "📎 " + (titulo || "Arquivo");
-
-                const a = document.createElement("a");
-                a.href = url;
-                a.target = "_blank";
-                a.rel = "noopener noreferrer";
-                a.download = "";
-                a.textContent = "Abrir / baixar";
-
-                div.appendChild(span);
-                div.appendChild(a);
-                bloco.appendChild(div);
-            }
-        }else if(tipo === "audio"){
-            if(url){
-                const audio = document.createElement("audio");
-                audio.className = "conteudo-audio";
-                audio.controls = true;
-                audio.preload = "metadata";
-                audio.src = url;
-                bloco.appendChild(audio);
-            }
-        }else if(tipo === "lista"){
-            const ul = document.createElement("ul");
-            ul.className = "conteudo-lista";
-
-            String(texto).split(/\r?\n/)
-                .map(itemTexto => itemTexto.trim())
-                .filter(Boolean)
-                .forEach(itemTexto => {
-                    const li = document.createElement("li");
-                    li.textContent = itemTexto;
-                    ul.appendChild(li);
-                });
-
-            bloco.appendChild(ul);
-        }else if(tipo === "citacao"){
-            const quote = document.createElement("blockquote");
-            quote.className = "conteudo-citacao";
-            quote.textContent = texto;
-            bloco.appendChild(quote);
-        }else{
-            const el = document.createElement("div");
-            el.className = "conteudo-texto";
-            el.textContent = texto || url;
-            bloco.appendChild(el);
-        }
-
-        if(bloco.children.length > 0){
-            wrapper.appendChild(bloco);
-        }
-    });
-
-    area.appendChild(wrapper);
 }
+
 
 /* =====================================================
    CARREGAR EXERCÍCIOS
@@ -1147,11 +1912,21 @@ async function carregarExercicios(){
 
 
     exercicios.sort(
+
         (a,b) =>
-            Number(a.ordem || 0) -
-            Number(b.ordem || 0)
+
+            Number(
+                a.ordem || 0
+            )
+
+            -
+
+            Number(
+                b.ordem || 0
+            )
+
     );
-    /* Exercícios são opcionais quando a lição possui conteúdo. */
+
 }
 
 
@@ -1164,6 +1939,7 @@ function mostrarLicao(){
     tituloHeader.textContent =
         `📚 ${licao.titulo || "Lição"}`;
 
+
     renderizarQuestao();
 
 }
@@ -1174,39 +1950,81 @@ function mostrarLicao(){
 ===================================================== */
 
 function renderizarQuestao(){
+
     respondeu = false;
 
-    if(exercicios.length === 0){
+
+    if(
+        exercicios.length === 0
+    ){
+
         areaPrincipal.innerHTML = `
+
             <section class="topo">
-                <h2>${escapar(licao.titulo)}</h2>
-                <p>${escapar(licao.descricao || "Estude o conteúdo desta lição.")}</p>
+
+                <h2>
+                    ${escapar(licao.titulo)}
+                </h2>
+
+                <p>
+                    ${escapar(
+                        licao.descricao ||
+                        "Estude o conteúdo desta lição."
+                    )}
+                </p>
+
             </section>
+
             <div id="areaConteudo"></div>
+
         `;
+
 
         renderizarConteudos();
 
-        const semExercicios = document.createElement("div");
-        semExercicios.className = "conteudo-vazio";
-        semExercicios.textContent =
-            "📚 O conteúdo desta lição foi carregado. Ainda não há exercícios.";
 
-        areaPrincipal.appendChild(semExercicios);
+        const semExercicios =
+            document.createElement(
+                "div"
+            );
+
+
+        semExercicios.className =
+            "conteudo-vazio";
+
+
+        semExercicios.textContent =
+            conteudosLicao.length > 0
+                ? "📚 Conteúdo da lição carregado."
+                : "📚 O conteúdo desta lição foi carregado. Ainda não há exercícios.";
+
+
+        areaPrincipal.appendChild(
+            semExercicios
+        );
+
+
         return;
+
     }
+
 
     const exercicio =
         exercicios[indiceAtual];
+
+
     const total =
         exercicios.length;
+
 
     const numero =
         indiceAtual + 1;
 
+
     const percentual =
         Math.round(
-            (indiceAtual / total) * 100
+            (indiceAtual / total) *
+            100
         );
 
 
@@ -1253,8 +2071,6 @@ function renderizarQuestao(){
 
         <div id="areaConteudo"></div>
 
-
-
         <section class="questao">
 
             <div class="numero">
@@ -1286,6 +2102,9 @@ function renderizarQuestao(){
         </section>
 
     `;
+
+
+    renderizarConteudos();
 
 
     const areaResposta =
@@ -1380,7 +2199,7 @@ function renderizarMultiplaEscolha(
                                     65 + index
                                 )
                             )}
-                        .
+                            .
                         </strong>
 
                         ${escapar(
@@ -1521,1048 +2340,1009 @@ function renderizarRespostaTexto(
             placeholder="Digite sua resposta..."
         ></textarea>
 
-    `;
+```
+`;
+```
 
 }
 
-
 /* =====================================================
-   OBTER RESPOSTA
+OBTER RESPOSTA
 ===================================================== */
 
 function obterResposta(){
 
-    const exercicio =
-        exercicios[indiceAtual];
+```
+const exercicio =
+    exercicios[indiceAtual];
 
 
-    if(
-        exercicio.tipo ===
-        "multipla_escolha"
-    ){
+if(
+    exercicio.tipo ===
+    "multipla_escolha"
+){
 
-        const selecionada =
-            document.querySelector(
-                ".alternativa.selecionada"
-            );
-
-
-        if(!selecionada){
-            return null;
-        }
+    const selecionada =
+        document.querySelector(
+            ".alternativa.selecionada"
+        );
 
 
-        const index =
-            Number(
-                selecionada.dataset.index
-            );
-
-
-        return {
-
-            tipo:"multipla_escolha",
-
-            index:index
-
-        };
-
+    if(!selecionada){
+        return null;
     }
 
 
-    if(
-        exercicio.tipo ===
-        "verdadeiro_falso"
-    ){
-
-        const selecionada =
-            document.querySelector(
-                ".alternativa.selecionada"
-            );
+    const index =
+        Number(
+            selecionada.dataset.index
+        );
 
 
-        if(!selecionada){
-            return null;
-        }
+    return {
 
+        tipo:"multipla_escolha",
 
-        return {
+        index:index
 
-            tipo:"verdadeiro_falso",
-
-            valor:
-                selecionada.dataset.valor ===
-                "true"
-
-        };
-
-    }
-
-
-    if(
-        exercicio.tipo ===
-        "resposta_texto"
-    ){
-
-        const campo =
-            document.getElementById(
-                "respostaTexto"
-            );
-
-
-        if(!campo){
-            return null;
-        }
-
-
-        const texto =
-            campo.value.trim();
-
-
-        if(!texto){
-            return null;
-        }
-
-
-        return {
-
-            tipo:"resposta_texto",
-
-            texto:texto
-
-        };
-
-    }
-
-
-    return null;
+    };
 
 }
 
 
+if(
+    exercicio.tipo ===
+    "verdadeiro_falso"
+){
+
+    const selecionada =
+        document.querySelector(
+            ".alternativa.selecionada"
+        );
+
+
+    if(!selecionada){
+        return null;
+    }
+
+
+    return {
+
+        tipo:"verdadeiro_falso",
+
+        valor:
+            selecionada.dataset.valor ===
+            "true"
+
+    };
+
+}
+
+
+if(
+    exercicio.tipo ===
+    "resposta_texto"
+){
+
+    const campo =
+        document.getElementById(
+            "respostaTexto"
+        );
+
+
+    if(!campo){
+        return null;
+    }
+
+
+    const texto =
+        campo.value.trim();
+
+
+    if(!texto){
+        return null;
+    }
+
+
+    return {
+
+        tipo:"resposta_texto",
+
+        texto:texto
+
+    };
+
+}
+
+
+return null;
+```
+
+}
+
 /* =====================================================
-   VERIFICAR RESPOSTA
+VERIFICAR RESPOSTA
 ===================================================== */
 
 function verificarResposta(
-    exercicio,
-    resposta
+exercicio,
+resposta
 ){
 
-    if(
-        exercicio.tipo ===
-        "multipla_escolha"
-    ){
+```
+if(
+    exercicio.tipo ===
+    "multipla_escolha"
+){
 
-        const alternativas =
-            Array.isArray(
-                exercicio.alternativas
-            )
-            ? exercicio.alternativas
-            : [];
-
-
-        const alternativa =
-            alternativas[
-                resposta.index
-            ];
+    const alternativas =
+        Array.isArray(
+            exercicio.alternativas
+        )
+        ? exercicio.alternativas
+        : [];
 
 
-        return alternativa &&
-            alternativa.correta === true;
-
-    }
-
-
-    if(
-        exercicio.tipo ===
-        "verdadeiro_falso"
-    ){
-
-        const correta =
-            String(
-                exercicio.respostaTexto
-            )
-            .toLowerCase()
-            .trim();
+    const alternativa =
+        alternativas[
+            resposta.index
+        ];
 
 
-        const valorCorreto =
-            correta === "true" ||
-            correta === "verdadeiro";
-
-
-        return resposta.valor ===
-            valorCorreto;
-
-    }
-
-
-    if(
-        exercicio.tipo ===
-        "resposta_texto"
-    ){
-
-        const correta =
-            String(
-                exercicio.respostaTexto ||
-                ""
-            )
-            .trim()
-            .toLowerCase();
-
-
-        const enviada =
-            String(
-                resposta.texto ||
-                ""
-            )
-            .trim()
-            .toLowerCase();
-
-
-        return enviada === correta;
-
-    }
-
-
-    return false;
+    return alternativa &&
+        alternativa.correta === true;
 
 }
 
 
+if(
+    exercicio.tipo ===
+    "verdadeiro_falso"
+){
+
+    const correta =
+        String(
+            exercicio.respostaTexto
+        )
+        .toLowerCase()
+        .trim();
+
+
+    const valorCorreto =
+        correta === "true" ||
+        correta === "verdadeiro";
+
+
+    return resposta.valor ===
+        valorCorreto;
+
+}
+
+
+if(
+    exercicio.tipo ===
+    "resposta_texto"
+){
+
+    const correta =
+        String(
+            exercicio.respostaTexto ||
+            ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const enviada =
+        String(
+            resposta.texto ||
+            ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    return enviada === correta;
+
+}
+
+
+return false;
+```
+
+}
+
 /* =====================================================
-   FEEDBACK
+FEEDBACK
 ===================================================== */
 
 function mostrarFeedback(
-    correto,
-    exercicio
+correto,
+exercicio
 ){
 
-    const feedback =
-        document.getElementById(
-            "feedback"
-        );
+```
+const feedback =
+    document.getElementById(
+        "feedback"
+    );
 
 
-    if(correto){
+if(correto){
 
-        feedback.className =
-            "feedback correto";
+    feedback.className =
+        "feedback correto";
 
-        feedback.innerHTML = `
 
-            <strong>
-                ✅ Resposta correta!
-            </strong>
+    feedback.innerHTML = `
 
-            <div>
-                +${Number(
-                    exercicio.pontos || 0
-                )} XP
-            </div>
+        <strong>
+            ✅ Resposta correta!
+        </strong>
 
-            ${
-                exercicio.explicacao
-                ?
-                `<p style="margin-top:8px">
-                    ${escapar(
-                        exercicio.explicacao
-                    )}
-                </p>`
-                :
-                ""
-            }
+        <div>
+            +${Number(
+                exercicio.pontos || 0
+            )} XP
+        </div>
 
-        `;
+        ${
+            exercicio.explicacao
+            ?
+            `<p style="margin-top:8px">
+                ${escapar(
+                    exercicio.explicacao
+                )}
+            </p>`
+            :
+            ""
+        }
 
-    }else{
+    `;
 
-        feedback.className =
-            "feedback errado";
+}else{
 
-        feedback.innerHTML = `
+    feedback.className =
+        "feedback errado";
 
-            <strong>
-                ❌ Resposta incorreta.
-            </strong>
 
-            ${
-                exercicio.explicacao
-                ?
-                `<p>
-                    ${escapar(
-                        exercicio.explicacao
-                    )}
-                </p>`
-                :
-                ""
-            }
+    feedback.innerHTML = `
 
-        `;
+        <strong>
+            ❌ Resposta incorreta.
+        </strong>
 
-    }
+        ${
+            exercicio.explicacao
+            ?
+            `<p>
+                ${escapar(
+                    exercicio.explicacao
+                )}
+            </p>`
+            :
+            ""
+        }
+
+    `;
+
+}
+```
 
 }
 
-
 /* =====================================================
-   DESTACAR ALTERNATIVAS
+DESTACAR ALTERNATIVAS
 ===================================================== */
 
 function destacarResposta(
-    exercicio,
-    correta
+exercicio,
+correta
 ){
 
-    if(
-        exercicio.tipo ===
-        "multipla_escolha"
-    ){
+```
+if(
+    exercicio.tipo ===
+    "multipla_escolha"
+){
 
-        const alternativas =
-            Array.isArray(
-                exercicio.alternativas
-            )
-            ? exercicio.alternativas
-            : [];
-
-
-        const botoes =
-            document.querySelectorAll(
-                ".alternativa"
-            );
+    const alternativas =
+        Array.isArray(
+            exercicio.alternativas
+        )
+        ? exercicio.alternativas
+        : [];
 
 
-        botoes.forEach(
-            (botao,index) => {
-
-                const alt =
-                    alternativas[index];
-
-
-                if(
-                    alt &&
-                    alt.correta === true
-                ){
-
-                    botao.classList.add(
-                        "correta"
-                    );
-
-                }
-
-
-                const selecionada =
-                    botao.classList.contains(
-                        "selecionada"
-                    );
-
-
-                if(
-                    selecionada &&
-                    !correta
-                ){
-
-                    botao.classList.add(
-                        "errada"
-                    );
-
-                }
-
-            }
+    const botoes =
+        document.querySelectorAll(
+            ".alternativa"
         );
 
-    }
+
+    botoes.forEach(
+        (botao,index) => {
+
+            const alt =
+                alternativas[index];
+
+
+            if(
+                alt &&
+                alt.correta === true
+            ){
+
+                botao.classList.add(
+                    "correta"
+                );
+
+            }
+
+
+            const selecionada =
+                botao.classList.contains(
+                    "selecionada"
+                );
+
+
+            if(
+                selecionada &&
+                !correta
+            ){
+
+                botao.classList.add(
+                    "errada"
+                );
+
+            }
+
+        }
+    );
+
+}
+```
 
 }
 
-
 /* =====================================================
-   RESPONDER
+RESPONDER
 ===================================================== */
 
 function responder(){
 
-    if(respondeu){
-        return;
-    }
+```
+if(respondeu){
+    return;
+}
 
 
-    const exercicio =
-        exercicios[indiceAtual];
+const exercicio =
+    exercicios[indiceAtual];
 
 
-    const resposta =
-        obterResposta();
+const resposta =
+    obterResposta();
 
 
-    if(!resposta){
+if(!resposta){
 
-        alert(
-            "Selecione ou informe uma resposta."
-        );
-
-        return;
-
-    }
-
-
-    respondeu = true;
-
-
-    const correto =
-        verificarResposta(
-            exercicio,
-            resposta
-        );
-
-
-    respostas.push({
-
-        exercicioId:
-            exercicio.id,
-
-        resposta:
-            resposta,
-
-        correto:
-            correto
-
-    });
-
-
-    if(correto){
-
-        acertos++;
-
-        pontuacao +=
-            Number(
-                exercicio.pontos || 0
-            );
-
-    }else{
-
-        erros++;
-
-    }
-
-
-    mostrarFeedback(
-        correto,
-        exercicio
+    alert(
+        "Selecione ou informe uma resposta."
     );
 
-
-    destacarResposta(
-        exercicio,
-        correto
-    );
-
-
-    const botao =
-        document.getElementById(
-            "btnResponder"
-        );
-
-
-    if(
-        indiceAtual <
-        exercicios.length - 1
-    ){
-
-        botao.textContent =
-            "Próxima questão";
-
-        botao.onclick =
-            proximaQuestao;
-
-    }else{
-
-        botao.textContent =
-            "Finalizar lição";
-
-        botao.onclick =
-            finalizarLicao;
-
-    }
+    return;
 
 }
 
 
+respondeu = true;
+
+
+const correto =
+    verificarResposta(
+        exercicio,
+        resposta
+    );
+
+
+respostas.push({
+
+    exercicioId:
+        exercicio.id,
+
+    resposta:
+        resposta,
+
+    correto:
+        correto
+
+});
+
+
+if(correto){
+
+    acertos++;
+
+    pontuacao +=
+        Number(
+            exercicio.pontos || 0
+        );
+
+}else{
+
+    erros++;
+
+}
+
+
+mostrarFeedback(
+    correto,
+    exercicio
+);
+
+
+destacarResposta(
+    exercicio,
+    correto
+);
+
+
+const botao =
+    document.getElementById(
+        "btnResponder"
+    );
+
+
+if(
+    indiceAtual <
+    exercicios.length - 1
+){
+
+    botao.textContent =
+        "Próxima questão";
+
+
+    botao.onclick =
+        proximaQuestao;
+
+}else{
+
+    botao.textContent =
+        "Finalizar lição";
+
+
+    botao.onclick =
+        finalizarLicao;
+
+}
+```
+
+}
+
 /* =====================================================
-   PRÓXIMA QUESTÃO
+PRÓXIMA QUESTÃO
 ===================================================== */
 
 function proximaQuestao(){
 
-    indiceAtual++;
+```
+indiceAtual++;
 
-    renderizarQuestao();
+renderizarQuestao();
+```
 
 }
 
-
 /* =====================================================
-   ATUALIZAR SEQUÊNCIA
+ATUALIZAR SEQUÊNCIA
 ===================================================== */
 
 function calcularNovaSequencia(){
 
-    const hoje =
-        dataLocal();
+```
+const hoje =
+    dataLocal();
 
 
-    const ultimaData =
-        dadosUsuario
-            .ultimaAtividadeData;
+const ultimaData =
+    dadosUsuario
+        .ultimaAtividadeData;
 
 
-    let sequencia =
-        Number(
-            dadosUsuario.sequencia || 0
-        );
+let sequencia =
+    Number(
+        dadosUsuario.sequencia || 0
+    );
 
 
-    if(!ultimaData){
+if(!ultimaData){
 
-        sequencia = 1;
+    sequencia = 1;
 
-    }
+}
 
-    else if(
-        ultimaData === hoje
-    ){
-
-        return sequencia;
-
-    }
-
-    else{
-
-        const ultima =
-            new Date(
-                `${ultimaData}T00:00:00`
-            );
-
-
-        const atual =
-            new Date(
-                `${hoje}T00:00:00`
-            );
-
-
-        const diferenca =
-            Math.round(
-                (
-                    atual.getTime() -
-                    ultima.getTime()
-                ) /
-                86400000
-            );
-
-
-        if(diferenca === 1){
-
-            sequencia++;
-
-        }else{
-
-            sequencia = 1;
-
-        }
-
-    }
-
+else if(
+    ultimaData === hoje
+){
 
     return sequencia;
 
 }
 
+else{
 
-/* =====================================================
-   FINALIZAR LIÇÃO
-===================================================== */
-
-async function finalizarLicao(){
-
-    const totalQuestoes =
-        exercicios.length;
+    const ultima =
+        new Date(
+            `${ultimaData}T00:00:00`
+        );
 
 
-    const aproveitamento =
-        totalQuestoes > 0
-        ?
+    const atual =
+        new Date(
+            `${hoje}T00:00:00`
+        );
+
+
+    const diferenca =
         Math.round(
             (
-                acertos /
-                totalQuestoes
-            ) * 100
-        )
-        :
-        0;
-
-
-    const aprovado =
-        aproveitamento >=
-        MINIMO_APROVACAO;
-
-
-    let xpGanho = 0;
-
-    let moedasGanhas = 0;
-
-    let novaSequencia =
-        Number(
-            dadosUsuario.sequencia || 0
+                atual.getTime() -
+                ultima.getTime()
+            ) /
+            86400000
         );
 
 
-    if(aprovado){
+    if(diferenca === 1){
 
-        xpGanho =
-            pontuacao;
+        sequencia++;
 
-        moedasGanhas =
-            MOEDAS_POR_LICAO;
+    }else{
 
-
-        novaSequencia =
-            calcularNovaSequencia();
-
-    }
-
-
-    /*
-     * =================================================
-     * VIDAS
-     * =================================================
-     *
-     * Usuário normal:
-     *     perde 1 vida ao reprovar.
-     *
-     * Usuário com vidasInfinitas:
-     *     NÃO perde vida.
-     */
-
-    let novasVidas =
-        Number(
-            dadosUsuario.vidas ??
-            MAX_VIDAS
-        );
-
-
-    if(
-        !aprovado &&
-        dadosUsuario.vidasInfinitas !== true
-    ){
-
-        novasVidas =
-            Math.max(
-                0,
-                novasVidas - 1
-            );
-
-    }
-
-
-    const moedasAtuais =
-        Number(
-            dadosUsuario.moedas || 0
-        );
-
-
-    const xpAtual =
-        Number(
-            dadosUsuario.xp || 0
-        );
-
-
-    const novoSaldoMoedas =
-        moedasAtuais +
-        moedasGanhas;
-
-
-    const novoXP =
-        xpAtual +
-        xpGanho;
-
-
-    /*
-     * Montamos os dados que realmente
-     * precisam ser atualizados.
-     */
-
-    const dadosUsuarioAtualizar = {
-
-        moedas:
-            novoSaldoMoedas,
-
-        xp:
-            novoXP,
-
-        atualizadoEm:
-            serverTimestamp()
-
-    };
-
-
-    /*
-     * Somente usuários normais recebem
-     * alteração no campo de vidas.
-     */
-
-    if(
-        dadosUsuario.vidasInfinitas !== true
-    ){
-
-        dadosUsuarioAtualizar.vidas =
-            novasVidas;
-
-        dadosUsuarioAtualizar
-            .vidasUltimaAtualizacao =
-                serverTimestamp();
-
-    }
-
-
-    if(aprovado){
-
-        dadosUsuarioAtualizar.sequencia =
-            novaSequencia;
-
-        dadosUsuarioAtualizar
-            .ultimaAtividadeData =
-                dataLocal();
-
-    }
-
-
-    try{
-
-        /*
-         * Atualiza usuário.
-         */
-
-        await setDoc(
-
-            doc(
-                db,
-                "usuarios",
-                usuarioAtual.uid
-            ),
-
-            dadosUsuarioAtualizar,
-
-            {
-                merge:true
-            }
-
-        );
-
-
-        /*
-         * Mantemos o estado local correto.
-         */
-
-        if(
-            dadosUsuario.vidasInfinitas !== true
-        ){
-
-            dadosUsuario.vidas =
-                novasVidas;
-
-        }
-
-
-        dadosUsuario.moedas =
-            novoSaldoMoedas;
-
-        dadosUsuario.xp =
-            novoXP;
-
-
-        atualizarHeader();
-
-
-        /*
-         * Salva progresso da lição.
-         */
-
-        const progressoId =
-            `${usuarioAtual.uid}_${licaoId}`;
-
-
-        const progressoRef =
-            doc(
-                db,
-                "progresso",
-                progressoId
-            );
-
-
-        const progressoAnterior =
-            await getDoc(
-                progressoRef
-            );
-
-
-        let tentativas = 0;
-
-
-        if(
-            progressoAnterior.exists()
-        ){
-
-            tentativas =
-                Number(
-                    progressoAnterior.data()
-                        .tentativas || 0
-                );
-
-        }
-
-
-        tentativas++;
-
-
-        await setDoc(
-
-            progressoRef,
-
-            {
-
-                usuarioId:
-                    usuarioAtual.uid,
-
-                cursoId:
-                    cursoId,
-
-                moduloId:
-                    moduloId,
-
-                licaoId:
-                    licaoId,
-
-                concluida:
-                    aprovado,
-
-                aprovado:
-                    aprovado,
-
-                aproveitamento:
-                    aproveitamento,
-
-                pontuacao:
-                    pontuacao,
-
-                acertos:
-                    acertos,
-
-                erros:
-                    erros,
-
-                totalQuestoes:
-                    totalQuestoes,
-
-                xpGanho:
-                    xpGanho,
-
-                moedasGanhas:
-                    moedasGanhas,
-
-                tentativas:
-                    tentativas,
-
-                ultimaTentativa:
-                    serverTimestamp(),
-
-                concluidaEm:
-                    aprovado
-                    ? serverTimestamp()
-                    : null,
-
-                atualizadoEm:
-                    serverTimestamp()
-
-            },
-
-            {
-                merge:true
-            }
-
-        );
-
-
-        /*
-         * Guarda as respostas desta tentativa.
-         */
-
-        const respostaRef =
-            doc(
-                db,
-                "respostas",
-                `${usuarioAtual.uid}_${licaoId}_${Date.now()}`
-            );
-
-
-        await setDoc(
-
-            respostaRef,
-
-            {
-
-                usuarioId:
-                    usuarioAtual.uid,
-
-                cursoId:
-                    cursoId,
-
-                moduloId:
-                    moduloId,
-
-                licaoId:
-                    licaoId,
-
-                respostas:
-                    respostas,
-
-                acertos:
-                    acertos,
-
-                erros:
-                    erros,
-
-                totalQuestoes:
-                    totalQuestoes,
-
-                aproveitamento:
-                    aproveitamento,
-
-                criadoEm:
-                    serverTimestamp()
-
-            }
-
-        );
-
-
-        /*
-         * Vai para a página de resultado.
-         */
-
-        window.location.href =
-            `resultado.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
-
-
-    }catch(error){
-
-        console.error(
-            "Erro ao finalizar lição:",
-            error
-        );
-
-
-        alert(
-            "Não foi possível salvar o resultado da lição. Verifique sua conexão e tente novamente."
-        );
+        sequencia = 1;
 
     }
 
 }
 
 
+return sequencia;
+```
+
+}
+
 /* =====================================================
-   INICIALIZAÇÃO
+FINALIZAR LIÇÃO
+===================================================== */
+
+async function finalizarLicao(){
+
+```
+const totalQuestoes =
+    exercicios.length;
+
+
+const aproveitamento =
+    totalQuestoes > 0
+    ?
+    Math.round(
+        (
+            acertos /
+            totalQuestoes
+        ) * 100
+    )
+    :
+    0;
+
+
+const aprovado =
+    aproveitamento >=
+    MINIMO_APROVACAO;
+
+
+let xpGanho = 0;
+
+let moedasGanhas = 0;
+
+
+let novaSequencia =
+    Number(
+        dadosUsuario.sequencia || 0
+    );
+
+
+if(aprovado){
+
+    xpGanho =
+        pontuacao;
+
+    moedasGanhas =
+        MOEDAS_POR_LICAO;
+
+    novaSequencia =
+        calcularNovaSequencia();
+
+}
+
+
+let novasVidas =
+    Number(
+        dadosUsuario.vidas ??
+        MAX_VIDAS
+    );
+
+
+if(
+    !aprovado &&
+    dadosUsuario.vidasInfinitas !== true
+){
+
+    novasVidas =
+        Math.max(
+            0,
+            novasVidas - 1
+        );
+
+}
+
+
+const moedasAtuais =
+    Number(
+        dadosUsuario.moedas || 0
+    );
+
+
+const xpAtual =
+    Number(
+        dadosUsuario.xp || 0
+    );
+
+
+const novoSaldoMoedas =
+    moedasAtuais +
+    moedasGanhas;
+
+
+const novoXP =
+    xpAtual +
+    xpGanho;
+
+
+const dadosUsuarioAtualizar = {
+
+    moedas:
+        novoSaldoMoedas,
+
+    xp:
+        novoXP,
+
+    atualizadoEm:
+        serverTimestamp()
+
+};
+
+
+if(
+    dadosUsuario.vidasInfinitas !== true
+){
+
+    dadosUsuarioAtualizar.vidas =
+        novasVidas;
+
+    dadosUsuarioAtualizar
+        .vidasUltimaAtualizacao =
+            serverTimestamp();
+
+}
+
+
+if(aprovado){
+
+    dadosUsuarioAtualizar.sequencia =
+        novaSequencia;
+
+    dadosUsuarioAtualizar
+        .ultimaAtividadeData =
+            dataLocal();
+
+}
+
+
+try{
+
+    await setDoc(
+
+        doc(
+            db,
+            "usuarios",
+            usuarioAtual.uid
+        ),
+
+        dadosUsuarioAtualizar,
+
+        {
+            merge:true
+        }
+
+    );
+
+
+    if(
+        dadosUsuario.vidasInfinitas !== true
+    ){
+
+        dadosUsuario.vidas =
+            novasVidas;
+
+    }
+
+
+    dadosUsuario.moedas =
+        novoSaldoMoedas;
+
+
+    dadosUsuario.xp =
+        novoXP;
+
+
+    atualizarHeader();
+
+
+    const progressoId =
+        `${usuarioAtual.uid}_${licaoId}`;
+
+
+    const progressoRef =
+        doc(
+            db,
+            "progresso",
+            progressoId
+        );
+
+
+    const progressoAnterior =
+        await getDoc(
+            progressoRef
+        );
+
+
+    let tentativas = 0;
+
+
+    if(
+        progressoAnterior.exists()
+    ){
+
+        tentativas =
+            Number(
+                progressoAnterior.data()
+                    .tentativas || 0
+            );
+
+    }
+
+
+    tentativas++;
+
+
+    await setDoc(
+
+        progressoRef,
+
+        {
+
+            usuarioId:
+                usuarioAtual.uid,
+
+            cursoId:
+                cursoId,
+
+            moduloId:
+                moduloId,
+
+            licaoId:
+                licaoId,
+
+            concluida:
+                aprovado,
+
+            aprovado:
+                aprovado,
+
+            aproveitamento:
+                aproveitamento,
+
+            pontuacao:
+                pontuacao,
+
+            acertos:
+                acertos,
+
+            erros:
+                erros,
+
+            totalQuestoes:
+                totalQuestoes,
+
+            xpGanho:
+                xpGanho,
+
+            moedasGanhas:
+                moedasGanhas,
+
+            tentativas:
+                tentativas,
+
+            ultimaTentativa:
+                serverTimestamp(),
+
+            concluidaEm:
+                aprovado
+                ? serverTimestamp()
+                : null,
+
+            atualizadoEm:
+                serverTimestamp()
+
+        },
+
+        {
+            merge:true
+        }
+
+    );
+
+
+    const respostaRef =
+        doc(
+            db,
+            "respostas",
+            `${usuarioAtual.uid}_${licaoId}_${Date.now()}`
+        );
+
+
+    await setDoc(
+
+        respostaRef,
+
+        {
+
+            usuarioId:
+                usuarioAtual.uid,
+
+            cursoId:
+                cursoId,
+
+            moduloId:
+                moduloId,
+
+            licaoId:
+                licaoId,
+
+            respostas:
+                respostas,
+
+            acertos:
+                acertos,
+
+            erros:
+                erros,
+
+            totalQuestoes:
+                totalQuestoes,
+
+            aproveitamento:
+                aproveitamento,
+
+            criadoEm:
+                serverTimestamp()
+
+        }
+
+    );
+
+
+    window.location.href =
+        `resultado.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
+
+
+}catch(error){
+
+    console.error(
+        "Erro ao finalizar lição:",
+        error
+    );
+
+
+    alert(
+        "Não foi possível salvar o resultado da lição. Verifique sua conexão e tente novamente."
+    );
+
+}
+```
+
+}
+
+/* =====================================================
+INICIALIZAÇÃO
 ===================================================== */
 
 onAuthStateChanged(
 
-    auth,
+```
+auth,
 
-    async (user) => {
+async (user) => {
 
-        if(!user){
+    if(!user){
 
-            window.location.href =
-                "index.html";
+        window.location.href =
+            "index.html";
 
-            return;
-
-        }
-
-
-        usuarioAtual =
-            user;
-
-
-        if(
-            !cursoId ||
-            !moduloId ||
-            !licaoId
-        ){
-
-            areaPrincipal.innerHTML = `
-
-                <div class="erro">
-
-                    Não foi possível abrir esta lição.
-                    Os dados da lição não foram informados.
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        try{
-
-            await carregarUsuario();
-
-            await carregarCurso();
-
-            await carregarLicao();
-
-            await carregarConteudos();
-
-            await carregarExercicios();
-
-            mostrarLicao();
-
-        }catch(error){
-
-            console.error(error);
-
-
-            areaPrincipal.innerHTML = `
-
-                <div class="erro">
-
-                    <strong>
-                        Não foi possível carregar a lição.
-                    </strong>
-
-                    <br><br>
-
-                    ${escapar(
-                        error.message
-                    )}
-
-                </div>
-
-            `;
-
-        }
+        return;
 
     }
 
+
+    usuarioAtual =
+        user;
+
+
+    console.log(
+        "👤 Usuário autenticado:",
+        usuarioAtual.uid
+    );
+
+
+    if(
+        !cursoId ||
+        !moduloId ||
+        !licaoId
+    ){
+
+        areaPrincipal.innerHTML = `
+
+            <div class="erro">
+
+                Não foi possível abrir esta lição.
+
+                Os dados da lição não foram informados.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    try{
+        await carregarUsuario();
+        await carregarCurso();
+        await carregarLicao();
+        await carregarConteudos();
+        await carregarExercicios();
+        mostrarLicao();
+    }catch(error){
+        console.error(
+            "❌ Erro ao carregar lição:",
+            error
+        );
+        areaPrincipal.innerHTML = `
+            <div class="erro">
+                <strong>
+                    Não foi possível carregar a lição.
+                </strong>
+                <br><br>
+                ${escapar(
+                    error.message
+                )}
+            </div>
+        `;
+    }
+}
 );
-
 </script>
-
 </body>
 </html>
-```
