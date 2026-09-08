@@ -1,0 +1,2568 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Lição</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+}
+
+header{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:18px 20px;
+}
+
+.header{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.header h1{
+    font-size:22px;
+}
+
+.header-info{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.info{
+    background:rgba(255,255,255,.15);
+    padding:8px 12px;
+    border-radius:20px;
+    font-size:14px;
+}
+
+.container{
+    max-width:850px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.topo{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+    margin-bottom:20px;
+}
+
+.topo h2{
+    font-size:26px;
+    margin-bottom:8px;
+}
+
+.topo p{
+    color:#6b7280;
+}
+
+.progresso-container{
+    margin-top:20px;
+}
+
+.progresso-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:14px;
+}
+
+.barra{
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.barra div{
+    height:100%;
+    background:linear-gradient(90deg,#2563eb,#4f46e5);
+    transition:.3s;
+}
+
+.questao{
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.numero{
+    color:#2563eb;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.pergunta{
+    font-size:23px;
+    line-height:1.4;
+    margin-bottom:25px;
+}
+
+.alternativas{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.alternativa{
+    width:100%;
+    padding:16px;
+    border:2px solid #e5e7eb;
+    background:white;
+    border-radius:12px;
+    text-align:left;
+    cursor:pointer;
+    font-size:16px;
+    transition:.2s;
+}
+
+.alternativa:hover{
+    border-color:#2563eb;
+    background:#eff6ff;
+}
+
+.alternativa.selecionada{
+    border-color:#2563eb;
+    background:#dbeafe;
+}
+
+.alternativa.correta{
+    border-color:#16a34a;
+    background:#dcfce7;
+}
+
+.alternativa.errada{
+    border-color:#dc2626;
+    background:#fee2e2;
+}
+
+textarea{
+    width:100%;
+    min-height:130px;
+    resize:vertical;
+    border:2px solid #e5e7eb;
+    border-radius:12px;
+    padding:15px;
+    font-size:16px;
+    outline:none;
+}
+
+textarea:focus{
+    border-color:#2563eb;
+}
+
+.feedback{
+    margin-top:20px;
+    padding:18px;
+    border-radius:12px;
+    display:none;
+}
+
+.feedback.correto{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.feedback.errado{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.feedback strong{
+    display:block;
+    margin-bottom:8px;
+}
+
+.acoes{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:25px;
+}
+
+.btn{
+    border:none;
+    border-radius:10px;
+    padding:13px 20px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.btn-principal{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-principal:hover{
+    background:#1d4ed8;
+}
+
+.btn-secundario{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.btn-secundario:hover{
+    background:#d1d5db;
+}
+
+.btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.carregando{
+    background:white;
+    padding:40px;
+    text-align:center;
+    border-radius:18px;
+}
+
+.erro{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:18px;
+    border-radius:12px;
+}
+
+@media(max-width:600px){
+
+    .container{
+        margin:20px auto;
+        padding:0 12px;
+    }
+
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .pergunta{
+        font-size:20px;
+    }
+
+    .questao{
+        padding:20px;
+    }
+
+    .acoes{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+}
+
+
+/* =====================================================
+   CONTEÚDO DA LIÇÃO
+===================================================== */
+.conteudos-licao{display:flex;flex-direction:column;gap:18px;margin-bottom:20px;}
+.conteudo-bloco{background:white;border-radius:18px;padding:24px;box-shadow:0 5px 20px rgba(0,0,0,.07);}
+.conteudo-titulo{font-size:24px;margin-bottom:12px;color:#111827;}
+.conteudo-subtitulo{font-size:20px;margin-bottom:10px;}
+.conteudo-texto{font-size:17px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;}
+.conteudo-imagem{display:block;width:100%;max-height:650px;object-fit:contain;border-radius:12px;}
+.conteudo-video{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000;}
+.conteudo-audio{width:100%;}
+.conteudo-link{display:inline-flex;align-items:center;gap:8px;color:#2563eb;font-weight:bold;text-decoration:none;overflow-wrap:anywhere;}
+.conteudo-link:hover{text-decoration:underline;}
+.conteudo-pdf{width:100%;height:650px;border:1px solid #e5e7eb;border-radius:12px;}
+.conteudo-arquivo{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.conteudo-arquivo a{color:#2563eb;font-weight:bold;}
+.conteudo-citacao{border-left:5px solid #2563eb;padding:14px 18px;background:#eff6ff;color:#374151;font-size:17px;line-height:1.6;white-space:pre-wrap;}
+.conteudo-lista{margin-left:24px;line-height:1.8;font-size:17px;}
+.conteudo-vazio{background:white;border-radius:18px;padding:24px;color:#6b7280;text-align:center;}
+.conteudo-separador{border:0;border-top:2px solid #e5e7eb;margin:4px 0;}
+@media(max-width:600px){.conteudo-bloco{padding:18px;}.conteudo-pdf{height:480px;}}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="header">
+
+        <h1 id="tituloHeader">
+            📚 Lição
+        </h1>
+
+        <div class="header-info">
+
+            <div class="info">
+                ❤️ <span id="vidas">-</span>
+            </div>
+
+            <div class="info">
+                🪙 <span id="moedas">-</span>
+            </div>
+
+            <div class="info">
+                ⭐ <span id="xp">-</span>
+            </div>
+
+            <div class="info">
+                🔥 <span id="sequencia">-</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<main class="container">
+
+    <div id="areaPrincipal">
+
+        <div class="carregando">
+            Carregando lição...
+        </div>
+
+    </div>
+
+</main>
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    collection,
+    getDocs,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
+
+    authDomain:
+        "dezenas-1ed47.firebaseapp.com",
+
+    projectId:
+        "dezenas-1ed47",
+
+    storageBucket:
+        "dezenas-1ed47.firebasestorage.app",
+
+    messagingSenderId:
+        "372788277555",
+
+    appId:
+        "1:372788277555:web:1c1a6a80adee1722b54e46",
+
+    measurementId:
+        "G-NMPP8PKPK3"
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* =====================================================
+   CONFIGURAÇÕES
+===================================================== */
+
+const MAX_VIDAS = 6;
+
+const MINIMO_APROVACAO = 60;
+
+const MOEDAS_DIARIAS = 50;
+
+const MOEDAS_POR_LICAO = 10;
+
+const MINUTOS_RECUPERACAO = 10;
+
+
+/* =====================================================
+   URL
+===================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const cursoId =
+    params.get("cursoId");
+
+const moduloId =
+    params.get("moduloId");
+
+const licaoId =
+    params.get("licaoId");
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const areaPrincipal =
+    document.getElementById(
+        "areaPrincipal"
+    );
+
+const vidasEl =
+    document.getElementById(
+        "vidas"
+    );
+
+const moedasEl =
+    document.getElementById(
+        "moedas"
+    );
+
+const xpEl =
+    document.getElementById(
+        "xp"
+    );
+
+const sequenciaEl =
+    document.getElementById(
+        "sequencia"
+    );
+
+const tituloHeader =
+    document.getElementById(
+        "tituloHeader"
+    );
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+let usuarioAtual = null;
+
+let dadosUsuario = {};
+
+let curso = null;
+
+let licao = null;
+
+let exercicios = [];
+
+let conteudosLicao = [];
+
+let indiceAtual = 0;
+
+let respostas = [];
+
+let respondeu = false;
+
+let acertos = 0;
+
+let erros = 0;
+
+let pontuacao = 0;
+
+
+/* =====================================================
+   DATA LOCAL
+===================================================== */
+
+function dataLocal(){
+
+    const agora =
+        new Date();
+
+    const ano =
+        agora.getFullYear();
+
+    const mes =
+        String(
+            agora.getMonth() + 1
+        ).padStart(2,"0");
+
+    const dia =
+        String(
+            agora.getDate()
+        ).padStart(2,"0");
+
+    return `${ano}-${mes}-${dia}`;
+
+}
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escapar(valor){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+        return "";
+    }
+
+    return String(valor)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   CARREGAR USUÁRIO
+===================================================== */
+
+async function carregarUsuario(){
+
+    const ref =
+        doc(
+            db,
+            "usuarios",
+            usuarioAtual.uid
+        );
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        dadosUsuario = {
+
+            nome:"Aluno",
+
+            vidas:MAX_VIDAS,
+
+            moedas:0,
+
+            xp:0,
+
+            sequencia:0,
+
+            vidasInfinitas:false
+
+        };
+
+    }else{
+
+        dadosUsuario =
+            snap.data();
+
+    }
+
+
+    /*
+     * Se o aluno possui vidas infinitas,
+     * não fazemos recuperação nem alteração
+     * da quantidade normal de vidas.
+     */
+
+    if(dadosUsuario.vidasInfinitas === true){
+
+        atualizarHeader();
+
+        return;
+
+    }
+
+
+    /*
+     * Recuperação automática das vidas.
+     */
+
+    let vidas =
+        Number(
+            dadosUsuario.vidas ?? MAX_VIDAS
+        );
+
+    const ultima =
+        dadosUsuario
+            .vidasUltimaAtualizacao;
+
+
+    if(
+        ultima &&
+        vidas < MAX_VIDAS
+    ){
+
+        let dataUltima;
+
+        if(
+            typeof ultima.toDate ===
+            "function"
+        ){
+
+            dataUltima =
+                ultima.toDate();
+
+        }else{
+
+            dataUltima =
+                new Date(ultima);
+
+        }
+
+
+        const agora =
+            new Date();
+
+        const diferenca =
+            agora.getTime() -
+            dataUltima.getTime();
+
+        const minutos =
+            Math.floor(
+                diferenca /
+                60000
+            );
+
+        const vidasRecuperadas =
+            Math.floor(
+                minutos /
+                MINUTOS_RECUPERACAO
+            );
+
+
+        if(vidasRecuperadas > 0){
+
+            vidas =
+                Math.min(
+                    MAX_VIDAS,
+                    vidas + vidasRecuperadas
+                );
+
+
+            dadosUsuario.vidas =
+                vidas;
+
+
+            dadosUsuario
+                .vidasUltimaAtualizacao =
+                serverTimestamp();
+
+
+            await setDoc(
+
+                ref,
+
+                {
+
+                    vidas:vidas,
+
+                    vidasUltimaAtualizacao:
+                        serverTimestamp(),
+
+                    atualizadoEm:
+                        serverTimestamp()
+
+                },
+
+                {
+                    merge:true
+                }
+
+            );
+
+        }
+
+    }
+
+
+    dadosUsuario.vidas =
+        vidas;
+
+
+    atualizarHeader();
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+function atualizarHeader(){
+
+    if(dadosUsuario.vidasInfinitas === true){
+
+        vidasEl.textContent =
+            "♾️ Infinitas";
+
+    }else{
+
+        vidasEl.textContent =
+            dadosUsuario.vidas ??
+            MAX_VIDAS;
+
+    }
+
+
+    moedasEl.textContent =
+        dadosUsuario.moedas ??
+        0;
+
+    xpEl.textContent =
+        dadosUsuario.xp ??
+        0;
+
+    sequenciaEl.textContent =
+        dadosUsuario.sequencia ??
+        0;
+
+}
+
+
+/* =====================================================
+   CARREGAR CURSO
+===================================================== */
+
+async function carregarCurso(){
+
+    if(!cursoId){
+
+        throw new Error(
+            "Curso não informado."
+        );
+
+    }
+
+
+    const ref =
+        doc(
+            db,
+            "cursos",
+            cursoId
+        );
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Curso não encontrado."
+        );
+
+    }
+
+
+    curso = {
+
+        id:snap.id,
+
+        ...snap.data()
+
+    };
+
+
+    if(curso.ativo !== true){
+
+        throw new Error(
+            "Este curso não está disponível."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CARREGAR LIÇÃO
+===================================================== */
+
+async function carregarLicao(){
+
+    if(!licaoId){
+
+        throw new Error(
+            "Lição não informada."
+        );
+
+    }
+
+
+    const ref =
+        doc(
+            db,
+            "licoes",
+            licaoId
+        );
+
+    const snap =
+        await getDoc(ref);
+
+
+    if(!snap.exists()){
+
+        throw new Error(
+            "Lição não encontrada."
+        );
+
+    }
+
+
+    licao = {
+
+        id:snap.id,
+
+        ...snap.data()
+
+    };
+
+
+    if(licao.ativo !== true){
+
+        throw new Error(
+            "Esta lição não está disponível."
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CARREGAR CONTEÚDOS DA LIÇÃO
+===================================================== */
+async function carregarConteudos(){
+    if(!licaoId){
+        conteudosLicao = [];
+        return;
+    }
+
+    const q = query(
+        collection(db,"conteudos"),
+        where("licaoId","==",licaoId)
+    );
+
+    const snap = await getDocs(q);
+    conteudosLicao = [];
+
+    snap.forEach(item => {
+        const conteudo = { id:item.id, ...item.data() };
+
+        if(conteudo.ativo !== false){
+            conteudosLicao.push(conteudo);
+        }
+    });
+
+    conteudosLicao.sort(
+        (a,b) => Number(a.ordem || 0) - Number(b.ordem || 0)
+    );
+}
+
+function obterYoutubeEmbed(url){
+    if(!url) return null;
+
+    try{
+        const u = new URL(url);
+
+        if(u.hostname.includes("youtube.com") && u.pathname === "/watch"){
+            const id = u.searchParams.get("v");
+            return id ? `https://www.youtube.com/embed/${id}` : null;
+        }
+
+        if(u.hostname === "youtu.be"){
+            const id = u.pathname.replace("/","");
+            return id ? `https://www.youtube.com/embed/${id}` : null;
+        }
+
+        if(u.hostname.includes("youtube.com") && u.pathname.startsWith("/embed/")){
+            return url;
+        }
+    }catch(error){
+        return null;
+    }
+
+    return null;
+}
+
+function renderizarConteudos(){
+    const area = document.getElementById("areaConteudo");
+
+    if(!area) return;
+
+    area.innerHTML = "";
+
+    if(conteudosLicao.length === 0) return;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "conteudos-licao";
+
+    conteudosLicao.forEach(item => {
+        const tipo = String(item.tipo || "texto").toLowerCase();
+        const titulo = item.titulo || "";
+        const texto = item.texto || item.conteudo || "";
+        const url = item.url || "";
+
+        if(tipo === "separador"){
+            const hr = document.createElement("hr");
+            hr.className = "conteudo-separador";
+            wrapper.appendChild(hr);
+            return;
+        }
+
+        const bloco = document.createElement("section");
+        bloco.className = "conteudo-bloco";
+
+        if(titulo){
+            const h = document.createElement(tipo === "titulo" ? "h2" : "h3");
+            h.className = tipo === "titulo" ? "conteudo-titulo" : "conteudo-subtitulo";
+            h.textContent = titulo;
+            bloco.appendChild(h);
+        }
+
+        if(tipo === "titulo" || tipo === "texto"){
+            if(texto){
+                const el = document.createElement("div");
+                el.className = "conteudo-texto";
+                el.textContent = texto;
+                bloco.appendChild(el);
+            }
+        }else if(tipo === "imagem"){
+            if(url){
+                const img = document.createElement("img");
+                img.className = "conteudo-imagem";
+                img.src = url;
+                img.alt = titulo || "Imagem da lição";
+                img.loading = "lazy";
+                bloco.appendChild(img);
+            }
+        }else if(tipo === "video"){
+            const embed = obterYoutubeEmbed(url);
+
+            if(embed){
+                const iframe = document.createElement("iframe");
+                iframe.className = "conteudo-video";
+                iframe.src = embed;
+                iframe.title = titulo || "Vídeo da lição";
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                iframe.allowFullscreen = true;
+                bloco.appendChild(iframe);
+            }else if(url){
+                const video = document.createElement("video");
+                video.className = "conteudo-video";
+                video.controls = true;
+                video.preload = "metadata";
+
+                const source = document.createElement("source");
+                source.src = url;
+                video.appendChild(source);
+                bloco.appendChild(video);
+            }
+        }else if(tipo === "link"){
+            if(url){
+                const a = document.createElement("a");
+                a.className = "conteudo-link";
+                a.href = url;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.textContent = titulo || texto || url;
+                bloco.appendChild(a);
+            }
+        }else if(tipo === "pdf"){
+            if(url){
+                const iframe = document.createElement("iframe");
+                iframe.className = "conteudo-pdf";
+                iframe.src = url;
+                iframe.title = titulo || "PDF da lição";
+                bloco.appendChild(iframe);
+
+                const p = document.createElement("p");
+                p.style.marginTop = "10px";
+
+                const a = document.createElement("a");
+                a.className = "conteudo-link";
+                a.href = url;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.textContent = "📄 Abrir PDF em nova aba";
+                p.appendChild(a);
+                bloco.appendChild(p);
+            }
+        }else if(tipo === "arquivo"){
+            if(url){
+                const div = document.createElement("div");
+                div.className = "conteudo-arquivo";
+
+                const span = document.createElement("span");
+                span.textContent = "📎 " + (titulo || "Arquivo");
+
+                const a = document.createElement("a");
+                a.href = url;
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.download = "";
+                a.textContent = "Abrir / baixar";
+
+                div.appendChild(span);
+                div.appendChild(a);
+                bloco.appendChild(div);
+            }
+        }else if(tipo === "audio"){
+            if(url){
+                const audio = document.createElement("audio");
+                audio.className = "conteudo-audio";
+                audio.controls = true;
+                audio.preload = "metadata";
+                audio.src = url;
+                bloco.appendChild(audio);
+            }
+        }else if(tipo === "lista"){
+            const ul = document.createElement("ul");
+            ul.className = "conteudo-lista";
+
+            String(texto).split(/\r?\n/)
+                .map(itemTexto => itemTexto.trim())
+                .filter(Boolean)
+                .forEach(itemTexto => {
+                    const li = document.createElement("li");
+                    li.textContent = itemTexto;
+                    ul.appendChild(li);
+                });
+
+            bloco.appendChild(ul);
+        }else if(tipo === "citacao"){
+            const quote = document.createElement("blockquote");
+            quote.className = "conteudo-citacao";
+            quote.textContent = texto;
+            bloco.appendChild(quote);
+        }else{
+            const el = document.createElement("div");
+            el.className = "conteudo-texto";
+            el.textContent = texto || url;
+            bloco.appendChild(el);
+        }
+
+        if(bloco.children.length > 0){
+            wrapper.appendChild(bloco);
+        }
+    });
+
+    area.appendChild(wrapper);
+}
+
+/* =====================================================
+   CARREGAR EXERCÍCIOS
+===================================================== */
+
+async function carregarExercicios(){
+
+    const snap =
+        await getDocs(
+            collection(
+                db,
+                "exercicios"
+            )
+        );
+
+
+    exercicios = [];
+
+
+    snap.forEach(item => {
+
+        const exercicio = {
+
+            id:item.id,
+
+            ...item.data()
+
+        };
+
+
+        if(
+            exercicio.ativo === true &&
+            exercicio.licaoId === licaoId
+        ){
+
+            exercicios.push(
+                exercicio
+            );
+
+        }
+
+    });
+
+
+    exercicios.sort(
+        (a,b) =>
+            Number(a.ordem || 0) -
+            Number(b.ordem || 0)
+    );
+    /* Exercícios são opcionais quando a lição possui conteúdo. */
+}
+
+
+/* =====================================================
+   MOSTRAR LIÇÃO
+===================================================== */
+
+function mostrarLicao(){
+
+    tituloHeader.textContent =
+        `📚 ${licao.titulo || "Lição"}`;
+
+    renderizarQuestao();
+
+}
+
+
+/* =====================================================
+   RENDERIZAR QUESTÃO
+===================================================== */
+
+function renderizarQuestao(){
+    respondeu = false;
+
+    if(exercicios.length === 0){
+        areaPrincipal.innerHTML = `
+            <section class="topo">
+                <h2>${escapar(licao.titulo)}</h2>
+                <p>${escapar(licao.descricao || "Estude o conteúdo desta lição.")}</p>
+            </section>
+            <div id="areaConteudo"></div>
+        `;
+
+        renderizarConteudos();
+
+        const semExercicios = document.createElement("div");
+        semExercicios.className = "conteudo-vazio";
+        semExercicios.textContent =
+            "📚 O conteúdo desta lição foi carregado. Ainda não há exercícios.";
+
+        areaPrincipal.appendChild(semExercicios);
+        return;
+    }
+
+    const exercicio =
+        exercicios[indiceAtual];
+    const total =
+        exercicios.length;
+
+    const numero =
+        indiceAtual + 1;
+
+    const percentual =
+        Math.round(
+            (indiceAtual / total) * 100
+        );
+
+
+    areaPrincipal.innerHTML = `
+
+        <section class="topo">
+
+            <h2>
+                ${escapar(licao.titulo)}
+            </h2>
+
+            <p>
+                ${escapar(
+                    licao.descricao ||
+                    "Responda às questões para concluir a lição."
+                )}
+            </p>
+
+            <div class="progresso-container">
+
+                <div class="progresso-info">
+
+                    <span>
+                        Questão ${numero} de ${total}
+                    </span>
+
+                    <strong>
+                        ${percentual}%
+                    </strong>
+
+                </div>
+
+                <div class="barra">
+
+                    <div
+                        style="width:${percentual}%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div id="areaConteudo"></div>
+
+
+
+        <section class="questao">
+
+            <div class="numero">
+                QUESTÃO ${numero}
+            </div>
+
+            <div class="pergunta">
+                ${escapar(exercicio.pergunta)}
+            </div>
+
+            <div id="areaResposta"></div>
+
+            <div
+                id="feedback"
+                class="feedback"
+            ></div>
+
+            <div class="acoes">
+
+                <button
+                    id="btnResponder"
+                    class="btn btn-principal"
+                >
+                    Responder
+                </button>
+
+            </div>
+
+        </section>
+
+    `;
+
+
+    const areaResposta =
+        document.getElementById(
+            "areaResposta"
+        );
+
+
+    if(
+        exercicio.tipo ===
+        "multipla_escolha"
+    ){
+
+        renderizarMultiplaEscolha(
+            areaResposta,
+            exercicio
+        );
+
+    }
+
+    else if(
+        exercicio.tipo ===
+        "verdadeiro_falso"
+    ){
+
+        renderizarVerdadeiroFalso(
+            areaResposta,
+            exercicio
+        );
+
+    }
+
+    else if(
+        exercicio.tipo ===
+        "resposta_texto"
+    ){
+
+        renderizarRespostaTexto(
+            areaResposta,
+            exercicio
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "btnResponder"
+        )
+        .addEventListener(
+            "click",
+            responder
+        );
+
+}
+
+
+/* =====================================================
+   MULTIPLA ESCOLHA
+===================================================== */
+
+function renderizarMultiplaEscolha(
+    area,
+    exercicio
+){
+
+    const alternativas =
+        Array.isArray(
+            exercicio.alternativas
+        )
+        ? exercicio.alternativas
+        : [];
+
+
+    area.innerHTML = `
+
+        <div class="alternativas">
+
+            ${alternativas.map(
+                (alt,index) => `
+
+                    <button
+                        type="button"
+                        class="alternativa"
+                        data-index="${index}"
+                    >
+
+                        <strong>
+                            ${escapar(
+                                alt.letra ||
+                                String.fromCharCode(
+                                    65 + index
+                                )
+                            )}
+                        .
+                        </strong>
+
+                        ${escapar(
+                            alt.texto || ""
+                        )}
+
+                    </button>
+
+                `
+            ).join("")}
+
+        </div>
+
+    `;
+
+
+    const botoes =
+        area.querySelectorAll(
+            ".alternativa"
+        );
+
+
+    botoes.forEach(botao => {
+
+        botao.addEventListener(
+            "click",
+            () => {
+
+                if(respondeu){
+                    return;
+                }
+
+
+                botoes.forEach(
+                    item =>
+                        item.classList.remove(
+                            "selecionada"
+                        )
+                );
+
+
+                botao.classList.add(
+                    "selecionada"
+                );
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   VERDADEIRO / FALSO
+===================================================== */
+
+function renderizarVerdadeiroFalso(
+    area,
+    exercicio
+){
+
+    area.innerHTML = `
+
+        <div class="alternativas">
+
+            <button
+                type="button"
+                class="alternativa"
+                data-valor="true"
+            >
+                ✅ Verdadeiro
+            </button>
+
+            <button
+                type="button"
+                class="alternativa"
+                data-valor="false"
+            >
+                ❌ Falso
+            </button>
+
+        </div>
+
+    `;
+
+
+    const botoes =
+        area.querySelectorAll(
+            ".alternativa"
+        );
+
+
+    botoes.forEach(botao => {
+
+        botao.addEventListener(
+            "click",
+            () => {
+
+                if(respondeu){
+                    return;
+                }
+
+
+                botoes.forEach(
+                    item =>
+                        item.classList.remove(
+                            "selecionada"
+                        )
+                );
+
+
+                botao.classList.add(
+                    "selecionada"
+                );
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   RESPOSTA TEXTO
+===================================================== */
+
+function renderizarRespostaTexto(
+    area,
+    exercicio
+){
+
+    area.innerHTML = `
+
+        <textarea
+            id="respostaTexto"
+            placeholder="Digite sua resposta..."
+        ></textarea>
+
+    `;
+
+}
+
+
+/* =====================================================
+   OBTER RESPOSTA
+===================================================== */
+
+function obterResposta(){
+
+    const exercicio =
+        exercicios[indiceAtual];
+
+
+    if(
+        exercicio.tipo ===
+        "multipla_escolha"
+    ){
+
+        const selecionada =
+            document.querySelector(
+                ".alternativa.selecionada"
+            );
+
+
+        if(!selecionada){
+            return null;
+        }
+
+
+        const index =
+            Number(
+                selecionada.dataset.index
+            );
+
+
+        return {
+
+            tipo:"multipla_escolha",
+
+            index:index
+
+        };
+
+    }
+
+
+    if(
+        exercicio.tipo ===
+        "verdadeiro_falso"
+    ){
+
+        const selecionada =
+            document.querySelector(
+                ".alternativa.selecionada"
+            );
+
+
+        if(!selecionada){
+            return null;
+        }
+
+
+        return {
+
+            tipo:"verdadeiro_falso",
+
+            valor:
+                selecionada.dataset.valor ===
+                "true"
+
+        };
+
+    }
+
+
+    if(
+        exercicio.tipo ===
+        "resposta_texto"
+    ){
+
+        const campo =
+            document.getElementById(
+                "respostaTexto"
+            );
+
+
+        if(!campo){
+            return null;
+        }
+
+
+        const texto =
+            campo.value.trim();
+
+
+        if(!texto){
+            return null;
+        }
+
+
+        return {
+
+            tipo:"resposta_texto",
+
+            texto:texto
+
+        };
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
+   VERIFICAR RESPOSTA
+===================================================== */
+
+function verificarResposta(
+    exercicio,
+    resposta
+){
+
+    if(
+        exercicio.tipo ===
+        "multipla_escolha"
+    ){
+
+        const alternativas =
+            Array.isArray(
+                exercicio.alternativas
+            )
+            ? exercicio.alternativas
+            : [];
+
+
+        const alternativa =
+            alternativas[
+                resposta.index
+            ];
+
+
+        return alternativa &&
+            alternativa.correta === true;
+
+    }
+
+
+    if(
+        exercicio.tipo ===
+        "verdadeiro_falso"
+    ){
+
+        const correta =
+            String(
+                exercicio.respostaTexto
+            )
+            .toLowerCase()
+            .trim();
+
+
+        const valorCorreto =
+            correta === "true" ||
+            correta === "verdadeiro";
+
+
+        return resposta.valor ===
+            valorCorreto;
+
+    }
+
+
+    if(
+        exercicio.tipo ===
+        "resposta_texto"
+    ){
+
+        const correta =
+            String(
+                exercicio.respostaTexto ||
+                ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        const enviada =
+            String(
+                resposta.texto ||
+                ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        return enviada === correta;
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+function mostrarFeedback(
+    correto,
+    exercicio
+){
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    if(correto){
+
+        feedback.className =
+            "feedback correto";
+
+        feedback.innerHTML = `
+
+            <strong>
+                ✅ Resposta correta!
+            </strong>
+
+            <div>
+                +${Number(
+                    exercicio.pontos || 0
+                )} XP
+            </div>
+
+            ${
+                exercicio.explicacao
+                ?
+                `<p style="margin-top:8px">
+                    ${escapar(
+                        exercicio.explicacao
+                    )}
+                </p>`
+                :
+                ""
+            }
+
+        `;
+
+    }else{
+
+        feedback.className =
+            "feedback errado";
+
+        feedback.innerHTML = `
+
+            <strong>
+                ❌ Resposta incorreta.
+            </strong>
+
+            ${
+                exercicio.explicacao
+                ?
+                `<p>
+                    ${escapar(
+                        exercicio.explicacao
+                    )}
+                </p>`
+                :
+                ""
+            }
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   DESTACAR ALTERNATIVAS
+===================================================== */
+
+function destacarResposta(
+    exercicio,
+    correta
+){
+
+    if(
+        exercicio.tipo ===
+        "multipla_escolha"
+    ){
+
+        const alternativas =
+            Array.isArray(
+                exercicio.alternativas
+            )
+            ? exercicio.alternativas
+            : [];
+
+
+        const botoes =
+            document.querySelectorAll(
+                ".alternativa"
+            );
+
+
+        botoes.forEach(
+            (botao,index) => {
+
+                const alt =
+                    alternativas[index];
+
+
+                if(
+                    alt &&
+                    alt.correta === true
+                ){
+
+                    botao.classList.add(
+                        "correta"
+                    );
+
+                }
+
+
+                const selecionada =
+                    botao.classList.contains(
+                        "selecionada"
+                    );
+
+
+                if(
+                    selecionada &&
+                    !correta
+                ){
+
+                    botao.classList.add(
+                        "errada"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONDER
+===================================================== */
+
+function responder(){
+
+    if(respondeu){
+        return;
+    }
+
+
+    const exercicio =
+        exercicios[indiceAtual];
+
+
+    const resposta =
+        obterResposta();
+
+
+    if(!resposta){
+
+        alert(
+            "Selecione ou informe uma resposta."
+        );
+
+        return;
+
+    }
+
+
+    respondeu = true;
+
+
+    const correto =
+        verificarResposta(
+            exercicio,
+            resposta
+        );
+
+
+    respostas.push({
+
+        exercicioId:
+            exercicio.id,
+
+        resposta:
+            resposta,
+
+        correto:
+            correto
+
+    });
+
+
+    if(correto){
+
+        acertos++;
+
+        pontuacao +=
+            Number(
+                exercicio.pontos || 0
+            );
+
+    }else{
+
+        erros++;
+
+    }
+
+
+    mostrarFeedback(
+        correto,
+        exercicio
+    );
+
+
+    destacarResposta(
+        exercicio,
+        correto
+    );
+
+
+    const botao =
+        document.getElementById(
+            "btnResponder"
+        );
+
+
+    if(
+        indiceAtual <
+        exercicios.length - 1
+    ){
+
+        botao.textContent =
+            "Próxima questão";
+
+        botao.onclick =
+            proximaQuestao;
+
+    }else{
+
+        botao.textContent =
+            "Finalizar lição";
+
+        botao.onclick =
+            finalizarLicao;
+
+    }
+
+}
+
+
+/* =====================================================
+   PRÓXIMA QUESTÃO
+===================================================== */
+
+function proximaQuestao(){
+
+    indiceAtual++;
+
+    renderizarQuestao();
+
+}
+
+
+/* =====================================================
+   ATUALIZAR SEQUÊNCIA
+===================================================== */
+
+function calcularNovaSequencia(){
+
+    const hoje =
+        dataLocal();
+
+
+    const ultimaData =
+        dadosUsuario
+            .ultimaAtividadeData;
+
+
+    let sequencia =
+        Number(
+            dadosUsuario.sequencia || 0
+        );
+
+
+    if(!ultimaData){
+
+        sequencia = 1;
+
+    }
+
+    else if(
+        ultimaData === hoje
+    ){
+
+        return sequencia;
+
+    }
+
+    else{
+
+        const ultima =
+            new Date(
+                `${ultimaData}T00:00:00`
+            );
+
+
+        const atual =
+            new Date(
+                `${hoje}T00:00:00`
+            );
+
+
+        const diferenca =
+            Math.round(
+                (
+                    atual.getTime() -
+                    ultima.getTime()
+                ) /
+                86400000
+            );
+
+
+        if(diferenca === 1){
+
+            sequencia++;
+
+        }else{
+
+            sequencia = 1;
+
+        }
+
+    }
+
+
+    return sequencia;
+
+}
+
+
+/* =====================================================
+   FINALIZAR LIÇÃO
+===================================================== */
+
+async function finalizarLicao(){
+
+    const totalQuestoes =
+        exercicios.length;
+
+
+    const aproveitamento =
+        totalQuestoes > 0
+        ?
+        Math.round(
+            (
+                acertos /
+                totalQuestoes
+            ) * 100
+        )
+        :
+        0;
+
+
+    const aprovado =
+        aproveitamento >=
+        MINIMO_APROVACAO;
+
+
+    let xpGanho = 0;
+
+    let moedasGanhas = 0;
+
+    let novaSequencia =
+        Number(
+            dadosUsuario.sequencia || 0
+        );
+
+
+    if(aprovado){
+
+        xpGanho =
+            pontuacao;
+
+        moedasGanhas =
+            MOEDAS_POR_LICAO;
+
+
+        novaSequencia =
+            calcularNovaSequencia();
+
+    }
+
+
+    /*
+     * =================================================
+     * VIDAS
+     * =================================================
+     *
+     * Usuário normal:
+     *     perde 1 vida ao reprovar.
+     *
+     * Usuário com vidasInfinitas:
+     *     NÃO perde vida.
+     */
+
+    let novasVidas =
+        Number(
+            dadosUsuario.vidas ??
+            MAX_VIDAS
+        );
+
+
+    if(
+        !aprovado &&
+        dadosUsuario.vidasInfinitas !== true
+    ){
+
+        novasVidas =
+            Math.max(
+                0,
+                novasVidas - 1
+            );
+
+    }
+
+
+    const moedasAtuais =
+        Number(
+            dadosUsuario.moedas || 0
+        );
+
+
+    const xpAtual =
+        Number(
+            dadosUsuario.xp || 0
+        );
+
+
+    const novoSaldoMoedas =
+        moedasAtuais +
+        moedasGanhas;
+
+
+    const novoXP =
+        xpAtual +
+        xpGanho;
+
+
+    /*
+     * Montamos os dados que realmente
+     * precisam ser atualizados.
+     */
+
+    const dadosUsuarioAtualizar = {
+
+        moedas:
+            novoSaldoMoedas,
+
+        xp:
+            novoXP,
+
+        atualizadoEm:
+            serverTimestamp()
+
+    };
+
+
+    /*
+     * Somente usuários normais recebem
+     * alteração no campo de vidas.
+     */
+
+    if(
+        dadosUsuario.vidasInfinitas !== true
+    ){
+
+        dadosUsuarioAtualizar.vidas =
+            novasVidas;
+
+        dadosUsuarioAtualizar
+            .vidasUltimaAtualizacao =
+                serverTimestamp();
+
+    }
+
+
+    if(aprovado){
+
+        dadosUsuarioAtualizar.sequencia =
+            novaSequencia;
+
+        dadosUsuarioAtualizar
+            .ultimaAtividadeData =
+                dataLocal();
+
+    }
+
+
+    try{
+
+        /*
+         * Atualiza usuário.
+         */
+
+        await setDoc(
+
+            doc(
+                db,
+                "usuarios",
+                usuarioAtual.uid
+            ),
+
+            dadosUsuarioAtualizar,
+
+            {
+                merge:true
+            }
+
+        );
+
+
+        /*
+         * Mantemos o estado local correto.
+         */
+
+        if(
+            dadosUsuario.vidasInfinitas !== true
+        ){
+
+            dadosUsuario.vidas =
+                novasVidas;
+
+        }
+
+
+        dadosUsuario.moedas =
+            novoSaldoMoedas;
+
+        dadosUsuario.xp =
+            novoXP;
+
+
+        atualizarHeader();
+
+
+        /*
+         * Salva progresso da lição.
+         */
+
+        const progressoId =
+            `${usuarioAtual.uid}_${licaoId}`;
+
+
+        const progressoRef =
+            doc(
+                db,
+                "progresso",
+                progressoId
+            );
+
+
+        const progressoAnterior =
+            await getDoc(
+                progressoRef
+            );
+
+
+        let tentativas = 0;
+
+
+        if(
+            progressoAnterior.exists()
+        ){
+
+            tentativas =
+                Number(
+                    progressoAnterior.data()
+                        .tentativas || 0
+                );
+
+        }
+
+
+        tentativas++;
+
+
+        await setDoc(
+
+            progressoRef,
+
+            {
+
+                usuarioId:
+                    usuarioAtual.uid,
+
+                cursoId:
+                    cursoId,
+
+                moduloId:
+                    moduloId,
+
+                licaoId:
+                    licaoId,
+
+                concluida:
+                    aprovado,
+
+                aprovado:
+                    aprovado,
+
+                aproveitamento:
+                    aproveitamento,
+
+                pontuacao:
+                    pontuacao,
+
+                acertos:
+                    acertos,
+
+                erros:
+                    erros,
+
+                totalQuestoes:
+                    totalQuestoes,
+
+                xpGanho:
+                    xpGanho,
+
+                moedasGanhas:
+                    moedasGanhas,
+
+                tentativas:
+                    tentativas,
+
+                ultimaTentativa:
+                    serverTimestamp(),
+
+                concluidaEm:
+                    aprovado
+                    ? serverTimestamp()
+                    : null,
+
+                atualizadoEm:
+                    serverTimestamp()
+
+            },
+
+            {
+                merge:true
+            }
+
+        );
+
+
+        /*
+         * Guarda as respostas desta tentativa.
+         */
+
+        const respostaRef =
+            doc(
+                db,
+                "respostas",
+                `${usuarioAtual.uid}_${licaoId}_${Date.now()}`
+            );
+
+
+        await setDoc(
+
+            respostaRef,
+
+            {
+
+                usuarioId:
+                    usuarioAtual.uid,
+
+                cursoId:
+                    cursoId,
+
+                moduloId:
+                    moduloId,
+
+                licaoId:
+                    licaoId,
+
+                respostas:
+                    respostas,
+
+                acertos:
+                    acertos,
+
+                erros:
+                    erros,
+
+                totalQuestoes:
+                    totalQuestoes,
+
+                aproveitamento:
+                    aproveitamento,
+
+                criadoEm:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        /*
+         * Vai para a página de resultado.
+         */
+
+        window.location.href =
+            `resultado.html?cursoId=${encodeURIComponent(cursoId)}&moduloId=${encodeURIComponent(moduloId)}&licaoId=${encodeURIComponent(licaoId)}`;
+
+
+    }catch(error){
+
+        console.error(
+            "Erro ao finalizar lição:",
+            error
+        );
+
+
+        alert(
+            "Não foi possível salvar o resultado da lição. Verifique sua conexão e tente novamente."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async (user) => {
+
+        if(!user){
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        usuarioAtual =
+            user;
+
+
+        if(
+            !cursoId ||
+            !moduloId ||
+            !licaoId
+        ){
+
+            areaPrincipal.innerHTML = `
+
+                <div class="erro">
+
+                    Não foi possível abrir esta lição.
+                    Os dados da lição não foram informados.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        try{
+
+            await carregarUsuario();
+
+            await carregarCurso();
+
+            await carregarLicao();
+
+            await carregarConteudos();
+
+            await carregarExercicios();
+
+            mostrarLicao();
+
+        }catch(error){
+
+            console.error(error);
+
+
+            areaPrincipal.innerHTML = `
+
+                <div class="erro">
+
+                    <strong>
+                        Não foi possível carregar a lição.
+                    </strong>
+
+                    <br><br>
+
+                    ${escapar(
+                        error.message
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>
+```
