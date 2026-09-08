@@ -366,7 +366,81 @@
                                                                                        
  </style>                                                                                 
                                                                                        
- </head>                                                                                  
+ 
+<style>
+/* ===== EDITOR DE CONTEÚDOS DA LIÇÃO ===== */
+.conteudo-editor {
+    margin-top: 28px;
+    border: 1px solid #d9dee7;
+    border-radius: 14px;
+    padding: 20px;
+    background: #fff;
+}
+.conteudo-editor h3 { margin: 0 0 6px; }
+.conteudo-editor .subtexto { color:#667085; margin:0 0 18px; font-size:.92rem; }
+
+.conteudo-toolbar {
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px;
+}
+.conteudo-toolbar button {
+    border:1px solid #d0d5dd; background:#f8fafc; border-radius:9px;
+    padding:9px 12px; cursor:pointer; font-weight:600;
+}
+.conteudo-toolbar button:hover { background:#eef2f7; }
+
+.conteudos-lista { display:flex; flex-direction:column; gap:12px; }
+.conteudo-card {
+    border:1px solid #e4e7ec; border-radius:12px; padding:14px;
+    background:#fcfcfd;
+}
+.conteudo-card.c-inativo { opacity:.58; }
+.conteudo-card-head {
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.conteudo-card-head strong { font-size:.98rem; }
+.conteudo-card-body { margin-top:10px; color:#475467; white-space:pre-wrap; }
+.conteudo-card-body img { max-width:100%; max-height:260px; border-radius:8px; display:block; }
+.conteudo-card-body iframe { width:100%; min-height:300px; border:0; border-radius:8px; }
+.conteudo-acoes { display:flex; flex-wrap:wrap; gap:6px; }
+.conteudo-acoes button {
+    border:1px solid #d0d5dd; background:white; border-radius:7px;
+    padding:6px 9px; cursor:pointer;
+}
+.conteudo-acoes .danger { color:#b42318; }
+.conteudo-vazio {
+    padding:22px; text-align:center; color:#667085;
+    border:1px dashed #d0d5dd; border-radius:10px;
+}
+.badge-tipo {
+    display:inline-block; padding:3px 8px; border-radius:999px;
+    background:#eef4ff; color:#3538cd; font-size:.76rem; margin-left:6px;
+}
+
+.modal-conteudo {
+    position:fixed; inset:0; background:rgba(16,24,40,.5);
+    display:none; align-items:center; justify-content:center;
+    z-index:9999; padding:20px;
+}
+.modal-conteudo.aberto { display:flex; }
+.modal-conteudo-box {
+    width:min(720px, 100%); max-height:90vh; overflow:auto;
+    background:#fff; border-radius:16px; padding:22px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+.modal-conteudo-box h3 { margin-top:0; }
+.campo-conteudo { margin-bottom:14px; }
+.campo-conteudo label { display:block; font-weight:600; margin-bottom:6px; }
+.campo-conteudo input, .campo-conteudo textarea, .campo-conteudo select {
+    width:100%; box-sizing:border-box; padding:10px 11px;
+    border:1px solid #d0d5dd; border-radius:8px; font:inherit;
+}
+.campo-conteudo textarea { min-height:150px; resize:vertical; }
+.modal-footer { display:flex; justify-content:flex-end; gap:8px; margin-top:18px; }
+.modal-footer button { padding:10px 15px; border-radius:8px; border:1px solid #d0d5dd; cursor:pointer; }
+.modal-footer .principal { background:#175cd3; color:#fff; border-color:#175cd3; }
+</style>
+
+</head>                                                                                  
                                                                                        
                                                                                        
  <body>                                                                                   
@@ -381,7 +455,7 @@
      <div class="header-buttons">                                                         
                                                                                        
          <a                                                                               
-             href="[modulos.html](https://sistematsps.github.io/curso/admin/modulos.html)" 
+             href="[modulos.html])" 
              class="btn-link btn-voltar"                                                   
          >                                                                                 
              ← Módulos                                                                     
@@ -1973,7 +2047,520 @@
                                                                                        
  </script>                                                                                
                                                                                        
- </body>                                                                                  
+ 
+<!-- ===== EDITOR DE CONTEÚDOS ===== -->
+<section id="editorConteudos" class="conteudo-editor" style="display:none;">
+    <h3>Conteúdo da aula</h3>
+    <p class="subtexto">
+        Monte a aula em blocos na ordem em que o aluno deverá visualizar.
+    </p>
+
+    <div class="conteudo-toolbar">
+        <button type="button" data-novo-conteudo="titulo">📌 Título</button>
+        <button type="button" data-novo-conteudo="texto">📝 Texto</button>
+        <button type="button" data-novo-conteudo="imagem">🖼️ Imagem</button>
+        <button type="button" data-novo-conteudo="video">🎥 Vídeo</button>
+        <button type="button" data-novo-conteudo="link">🔗 Link</button>
+        <button type="button" data-novo-conteudo="pdf">📄 PDF</button>
+        <button type="button" data-novo-conteudo="arquivo">📎 Arquivo</button>
+        <button type="button" data-novo-conteudo="audio">🎵 Áudio</button>
+        <button type="button" data-novo-conteudo="lista">☷ Lista</button>
+        <button type="button" data-novo-conteudo="citacao">❝ Citação</button>
+        <button type="button" data-novo-conteudo="separador">— Separador</button>
+    </div>
+
+    <div id="listaConteudos" class="conteudos-lista"></div>
+</section>
+
+<!-- Modal para criar/editar conteúdo -->
+<div id="modalConteudo" class="modal-conteudo" aria-hidden="true">
+    <div class="modal-conteudo-box">
+        <h3 id="tituloModalConteudo">Novo conteúdo</h3>
+
+        <div class="campo-conteudo">
+            <label for="tipoConteudo">Tipo</label>
+            <select id="tipoConteudo">
+                <option value="titulo">Título</option>
+                <option value="texto">Texto</option>
+                <option value="imagem">Imagem</option>
+                <option value="video">Vídeo</option>
+                <option value="link">Link</option>
+                <option value="pdf">PDF</option>
+                <option value="arquivo">Arquivo</option>
+                <option value="audio">Áudio</option>
+                <option value="lista">Lista</option>
+                <option value="citacao">Citação</option>
+                <option value="separador">Separador</option>
+            </select>
+        </div>
+
+        <div class="campo-conteudo" id="campoTituloConteudo">
+            <label for="tituloConteudo">Título / identificação</label>
+            <input id="tituloConteudo" type="text" placeholder="Ex.: Introdução ao assunto">
+        </div>
+
+        <div class="campo-conteudo" id="campoTextoConteudo">
+            <label for="textoConteudo">Texto</label>
+            <textarea id="textoConteudo" placeholder="Digite o conteúdo da aula..."></textarea>
+        </div>
+
+        <div class="campo-conteudo" id="campoUrlConteudo">
+            <label for="urlConteudo">URL</label>
+            <input id="urlConteudo" type="url" placeholder="https://...">
+        </div>
+
+        <div class="campo-conteudo" id="campoOrdemConteudo">
+            <label for="ordemConteudo">Ordem</label>
+            <input id="ordemConteudo" type="number" min="1" step="1" value="1">
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" id="cancelarConteudo">Cancelar</button>
+            <button type="button" id="salvarConteudo" class="principal">Salvar conteúdo</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+/* ==========================================================
+   EDITOR DE CONTEÚDOS DA LIÇÃO
+   Coleção Firestore: conteudos
+   Não altera os documentos existentes em "licoes" ou "exercicios".
+   ========================================================== */
+
+const ceEditor = document.getElementById("editorConteudos");
+const ceLista = document.getElementById("listaConteudos");
+const ceModal = document.getElementById("modalConteudo");
+const ceTipo = document.getElementById("tipoConteudo");
+const ceTitulo = document.getElementById("tituloConteudo");
+const ceTexto = document.getElementById("textoConteudo");
+const ceUrl = document.getElementById("urlConteudo");
+const ceOrdem = document.getElementById("ordemConteudo");
+const ceSalvar = document.getElementById("salvarConteudo");
+const ceCancelar = document.getElementById("cancelarConteudo");
+const ceTituloModal = document.getElementById("tituloModalConteudo");
+
+let ceLicaoId = null;
+let ceConteudoEditando = null;
+let ceConteudos = [];
+
+const ceTiposNomes = {
+    titulo: "Título",
+    texto: "Texto",
+    imagem: "Imagem",
+    video: "Vídeo",
+    link: "Link",
+    pdf: "PDF",
+    arquivo: "Arquivo",
+    audio: "Áudio",
+    lista: "Lista",
+    citacao: "Citação",
+    separador: "Separador"
+};
+
+function ceEscapar(valor) {
+    const div = document.createElement("div");
+    div.textContent = valor == null ? "" : String(valor);
+    return div.innerHTML;
+}
+
+function ceUrlValida(valor) {
+    try {
+        const u = new URL(valor);
+        return ["http:", "https:"].includes(u.protocol);
+    } catch {
+        return false;
+    }
+}
+
+function ceYouTubeEmbed(url) {
+    try {
+        const u = new URL(url);
+        let id = "";
+
+        if (u.hostname.includes("youtu.be")) {
+            id = u.pathname.replace("/", "").split("/")[0];
+        } else if (u.hostname.includes("youtube.com")) {
+            id = u.searchParams.get("v") || "";
+            if (!id && u.pathname.startsWith("/shorts/")) {
+                id = u.pathname.split("/")[2] || "";
+            }
+            if (!id && u.pathname.startsWith("/embed/")) {
+                id = u.pathname.split("/")[2] || "";
+            }
+        }
+
+        if (!id) return null;
+        return "https://www.youtube.com/embed/" + encodeURIComponent(id);
+    } catch {
+        return null;
+    }
+}
+
+function ceAbrirModal(tipo = "texto", dados = null) {
+    ceConteudoEditando = dados ? dados.id : null;
+
+    ceTituloModal.textContent = dados ? "Editar conteúdo" : "Novo conteúdo";
+    ceTipo.value = dados ? (dados.tipo || "texto") : tipo;
+    ceTitulo.value = dados ? (dados.titulo || "") : "";
+    ceTexto.value = dados ? (dados.texto || "") : "";
+    ceUrl.value = dados ? (dados.url || "") : "";
+    ceOrdem.value = dados ? (Number(dados.ordem) || 1) : (ceConteudos.length + 1);
+
+    ceAtualizarCampos();
+    ceModal.classList.add("aberto");
+    ceModal.setAttribute("aria-hidden", "false");
+}
+
+function ceFecharModal() {
+    ceConteudoEditando = null;
+    ceModal.classList.remove("aberto");
+    ceModal.setAttribute("aria-hidden", "true");
+}
+
+function ceAtualizarCampos() {
+    const tipo = ceTipo.value;
+
+    const precisaTexto = ["texto", "lista", "citacao"].includes(tipo);
+    const precisaUrl = ["imagem", "video", "link", "pdf", "arquivo", "audio"].includes(tipo);
+    const precisaTitulo = tipo !== "separador";
+
+    document.getElementById("campoTextoConteudo").style.display =
+        precisaTexto ? "block" : "none";
+
+    document.getElementById("campoUrlConteudo").style.display =
+        precisaUrl ? "block" : "none";
+
+    document.getElementById("campoTituloConteudo").style.display =
+        precisaTitulo ? "block" : "none";
+
+    document.getElementById("campoOrdemConteudo").style.display = "block";
+}
+
+async function ceCarregarConteudos(licaoId) {
+    ceLicaoId = licaoId;
+    ceEditor.style.display = "block";
+    ceLista.innerHTML = '<div class="conteudo-vazio">Carregando conteúdos...</div>';
+
+    try {
+        const snap = await getDocs(collection(db, "conteudos"));
+
+        ceConteudos = snap.docs
+            .map(d => ({ id: d.id, ...d.data() }))
+            .filter(c => c.licaoId === licaoId)
+            .sort((a, b) => (Number(a.ordem) || 0) - (Number(b.ordem) || 0));
+
+        ceRenderizar();
+    } catch (erro) {
+        console.error("Erro ao carregar conteúdos:", erro);
+        ceLista.innerHTML =
+            '<div class="conteudo-vazio">Não foi possível carregar os conteúdos.</div>';
+    }
+}
+
+function ceRenderizar() {
+    if (!ceConteudos.length) {
+        ceLista.innerHTML =
+            '<div class="conteudo-vazio">Esta aula ainda não possui conteúdos. Use os botões acima para adicionar.</div>';
+        return;
+    }
+
+    ceLista.innerHTML = "";
+
+    ceConteudos.forEach((c, indice) => {
+        const card = document.createElement("div");
+        card.className = "conteudo-card" + (c.ativo === false ? " c-inativo" : "");
+
+        const head = document.createElement("div");
+        head.className = "conteudo-card-head";
+
+        const titulo = document.createElement("strong");
+        titulo.innerHTML =
+            "#" + ceEscapar(indice + 1) + " " +
+            ceEscapar(c.titulo || ceTiposNomes[c.tipo] || "Conteúdo") +
+            ' <span class="badge-tipo">' + ceEscapar(ceTiposNomes[c.tipo] || c.tipo) + "</span>";
+
+        const acoes = document.createElement("div");
+        acoes.className = "conteudo-acoes";
+
+        const cima = document.createElement("button");
+        cima.type = "button";
+        cima.textContent = "↑";
+        cima.title = "Mover para cima";
+        cima.disabled = indice === 0;
+        cima.addEventListener("click", () => ceMover(indice, -1));
+
+        const baixo = document.createElement("button");
+        baixo.type = "button";
+        baixo.textContent = "↓";
+        baixo.title = "Mover para baixo";
+        baixo.disabled = indice === ceConteudos.length - 1;
+        baixo.addEventListener("click", () => ceMover(indice, 1));
+
+        const editar = document.createElement("button");
+        editar.type = "button";
+        editar.textContent = "Editar";
+        editar.addEventListener("click", () => ceAbrirModal(c.tipo, c));
+
+        const status = document.createElement("button");
+        status.type = "button";
+        status.textContent = c.ativo === false ? "Ativar" : "Desativar";
+        status.addEventListener("click", () => ceAlternarStatus(c));
+
+        const excluir = document.createElement("button");
+        excluir.type = "button";
+        excluir.textContent = "Excluir";
+        excluir.className = "danger";
+        excluir.addEventListener("click", () => ceExcluir(c));
+
+        acoes.append(cima, baixo, editar, status, excluir);
+        head.append(titulo, acoes);
+
+        const body = document.createElement("div");
+        body.className = "conteudo-card-body";
+
+        if (c.tipo === "titulo") {
+            const h = document.createElement("h3");
+            h.textContent = c.titulo || "Título";
+            body.appendChild(h);
+        } else if (c.tipo === "texto" || c.tipo === "citacao") {
+            body.textContent = c.texto || "";
+            if (c.tipo === "citacao") {
+                body.style.borderLeft = "4px solid #98a2b3";
+                body.style.paddingLeft = "12px";
+                body.style.fontStyle = "italic";
+            }
+        } else if (c.tipo === "lista") {
+            const ul = document.createElement("ul");
+            (c.texto || "").split("\n").filter(Boolean).forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item.replace(/^[-*•]\s*/, "");
+                ul.appendChild(li);
+            });
+            body.appendChild(ul);
+        } else if (c.tipo === "imagem") {
+            if (ceUrlValida(c.url || "")) {
+                const img = document.createElement("img");
+                img.src = c.url;
+                img.alt = c.titulo || "Imagem da aula";
+                img.loading = "lazy";
+                img.onerror = () => {
+                    body.textContent = "Não foi possível carregar a imagem.";
+                };
+                body.appendChild(img);
+            } else {
+                body.textContent = c.url || "URL da imagem não informada.";
+            }
+        } else if (c.tipo === "video") {
+            const embed = ceYouTubeEmbed(c.url || "");
+            if (embed) {
+                const iframe = document.createElement("iframe");
+                iframe.src = embed;
+                iframe.title = c.titulo || "Vídeo da aula";
+                iframe.loading = "lazy";
+                iframe.allow =
+                    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                iframe.allowFullscreen = true;
+                body.appendChild(iframe);
+            } else {
+                const a = document.createElement("a");
+                a.href = c.url || "#";
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
+                a.textContent = c.url || "Abrir vídeo";
+                body.appendChild(a);
+            }
+        } else if (["link", "pdf", "arquivo", "audio"].includes(c.tipo)) {
+            const a = document.createElement("a");
+            a.href = c.url || "#";
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.textContent =
+                c.tipo === "pdf" ? "📄 Abrir PDF" :
+                c.tipo === "audio" ? "🎵 Abrir áudio" :
+                c.tipo === "arquivo" ? "📎 Abrir arquivo" :
+                (c.titulo || "Abrir link");
+            body.appendChild(a);
+        } else if (c.tipo === "separador") {
+            body.innerHTML = "<hr>";
+        }
+
+        card.append(head, body);
+        ceLista.appendChild(card);
+    });
+}
+
+async function ceSalvarDados() {
+    if (!ceLicaoId) {
+        alert("Primeiro salve ou selecione uma lição.");
+        return;
+    }
+
+    const tipo = ceTipo.value;
+    const titulo = ceTitulo.value.trim();
+    const texto = ceTexto.value.trim();
+    const url = ceUrl.value.trim();
+    const ordem = Number(ceOrdem.value);
+
+    if (tipo !== "separador" && !titulo && !texto && !url) {
+        alert("Preencha pelo menos um conteúdo.");
+        return;
+    }
+
+    if (["imagem", "video", "link", "pdf", "arquivo", "audio"].includes(tipo)) {
+        if (!ceUrlValida(url)) {
+            alert("Informe uma URL válida iniciando com http:// ou https://.");
+            ceUrl.focus();
+            return;
+        }
+    }
+
+    if (!ordem || ordem < 1) {
+        alert("Informe uma ordem válida.");
+        ceOrdem.focus();
+        return;
+    }
+
+    const dados = {
+        licaoId: ceLicaoId,
+        tipo,
+        titulo,
+        texto,
+        url,
+        ordem,
+        ativo: true,
+        atualizadoEm: serverTimestamp()
+    };
+
+    try {
+        if (ceConteudoEditando) {
+            await updateDoc(
+                doc(db, "conteudos", ceConteudoEditando),
+                dados
+            );
+        } else {
+            await addDoc(collection(db, "conteudos"), {
+                ...dados,
+                criadoEm: serverTimestamp()
+            });
+        }
+
+        ceFecharModal();
+        await ceCarregarConteudos(ceLicaoId);
+    } catch (erro) {
+        console.error("Erro ao salvar conteúdo:", erro);
+        alert("Erro ao salvar conteúdo. Verifique o console e as regras do Firestore.");
+    }
+}
+
+async function ceAlternarStatus(c) {
+    try {
+        await updateDoc(doc(db, "conteudos", c.id), {
+            ativo: c.ativo === false,
+            atualizadoEm: serverTimestamp()
+        });
+        await ceCarregarConteudos(ceLicaoId);
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível alterar o status.");
+    }
+}
+
+async function ceExcluir(c) {
+    if (!confirm("Excluir este conteúdo da aula?")) return;
+
+    try {
+        await deleteDoc(doc(db, "conteudos", c.id));
+        await ceCarregarConteudos(ceLicaoId);
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível excluir o conteúdo.");
+    }
+}
+
+async function ceMover(indice, deslocamento) {
+    const novoIndice = indice + deslocamento;
+    if (novoIndice < 0 || novoIndice >= ceConteudos.length) return;
+
+    const atual = ceConteudos[indice];
+    const outro = ceConteudos[novoIndice];
+
+    try {
+        await updateDoc(doc(db, "conteudos", atual.id), {
+            ordem: Number(outro.ordem) || novoIndice + 1,
+            atualizadoEm: serverTimestamp()
+        });
+
+        await updateDoc(doc(db, "conteudos", outro.id), {
+            ordem: Number(atual.ordem) || indice + 1,
+            atualizadoEm: serverTimestamp()
+        });
+
+        await ceCarregarConteudos(ceLicaoId);
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível reordenar os conteúdos.");
+    }
+}
+
+document.querySelectorAll("[data-novo-conteudo]").forEach(botao => {
+    botao.addEventListener("click", () => {
+        ceAbrirModal(botao.dataset.novoConteudo);
+    });
+});
+
+ceTipo.addEventListener("change", ceAtualizarCampos);
+ceSalvar.addEventListener("click", ceSalvarDados);
+ceCancelar.addEventListener("click", ceFecharModal);
+
+ceModal.addEventListener("click", evento => {
+    if (evento.target === ceModal) ceFecharModal();
+});
+
+/*
+ * Integração com a função existente de edição.
+ * Quando o formulário existente abre uma lição para edição,
+ * chamamos o editor depois que licaoEditando recebe o ID.
+ */
+const ceOriginalCarregarLicoes = typeof carregarLicoes === "function"
+    ? carregarLicoes
+    : null;
+
+/*
+ * Função pública para usar também em outros pontos da página.
+ * Ex.: ceAbrirEditorConteudos("ID_DA_LICAO")
+ */
+window.ceAbrirEditorConteudos = async function(licaoId) {
+    if (!licaoId) return;
+    await ceCarregarConteudos(licaoId);
+};
+
+/*
+ * Observa alterações no formulário existente para descobrir
+ * quando uma lição está sendo editada sem substituir o CRUD original.
+ */
+if (typeof formLicao !== "undefined") {
+    formLicao.addEventListener("submit", async () => {
+        setTimeout(async () => {
+            if (typeof licaoEditando !== "undefined" && licaoEditando) {
+                await ceCarregarConteudos(licaoEditando);
+            }
+        }, 700);
+    });
+}
+
+/* Oculta o editor quando o formulário é limpo/fechado. */
+if (typeof btnNovo !== "undefined") {
+    btnNovo.addEventListener("click", () => {
+        ceLicaoId = null;
+        ceConteudos = [];
+        ceEditor.style.display = "none";
+    });
+}
+</script>
+
+</body>                                                                                  
  </html>                                                                                  
  ```                                                                                    
                                                                                            
