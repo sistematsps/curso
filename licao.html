@@ -443,7 +443,7 @@ textarea:focus{
 
 <main class="container">
 
-```
+
 <div id="areaPrincipal">
 
     <div class="carregando">
@@ -451,7 +451,7 @@ textarea:focus{
     </div>
 
 </div>
-```
+
 
 </main>
 
@@ -477,32 +477,22 @@ import {
     setDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-
 /* =====================================================
    FIREBASE
 ===================================================== */
-
 const firebaseConfig = {
-
     apiKey:
         "AIzaSyDb7TNycHN1zfWpHaSPYLoIBmI2vpLFXY8",
-
     authDomain:
         "dezenas-1ed47.firebaseapp.com",
-
     projectId:
         "dezenas-1ed47",
-
     storageBucket:
         "dezenas-1ed47.firebasestorage.app",
-
     messagingSenderId:
         "372788277555",
-
     appId:
         "1:372788277555:web:1c1a6a80adee1722b54e46",
-
     measurementId:
         "G-NMPP8PKPK3"
 
@@ -510,19 +500,16 @@ const firebaseConfig = {
 
 const app =
     initializeApp(firebaseConfig);
-
 const auth =
     getAuth(app);
-
 const db =
     getFirestore(app);
-
 
 /* =====================================================
    CONFIGURAÇÕES
 ===================================================== */
 
-const MAX_VIDAS = 6;
+const MAX_VIDAS = 60;
 const MINIMO_APROVACAO = 60;
 const MOEDAS_POR_LICAO = 10;
 const MINUTOS_RECUPERACAO = 10;
@@ -531,7 +518,6 @@ const MINUTOS_RECUPERACAO = 10;
 /* =====================================================
    URL
 ===================================================== */
-
 const params =
     new URLSearchParams(
         window.location.search
@@ -539,10 +525,8 @@ const params =
 
 const cursoId =
     params.get("cursoId");
-
 const moduloId =
     params.get("moduloId");
-
 const licaoId =
     params.get("licaoId");
 
@@ -585,32 +569,18 @@ const tituloHeader =
 /* =====================================================
    VARIÁVEIS
 ===================================================== */
-
 let usuarioAtual = null;
-
 let dadosUsuario = {};
-
 let curso = null;
-
 let licao = null;
-
 let exercicios = [];
-
 let conteudosLicao = [];
-
 let indiceAtual = 0;
-
 let respostas = [];
-
 let respondeu = false;
-
 let acertos = 0;
-
 let erros = 0;
-
 let pontuacao = 0;
-
-
 /* =====================================================
    DATA LOCAL
 ===================================================== */
@@ -894,7 +864,7 @@ async function carregarCurso(){
 
         id:snap.id,
 
-        ...snap.data()
+        snap.data()
 
     };
 
@@ -949,7 +919,7 @@ async function carregarLicao(){
 
         id:snap.id,
 
-        ...snap.data()
+        snap.data()
 
     };
 
@@ -1029,7 +999,7 @@ async function carregarConteudos(){
 
             id:item.id,
 
-            ...dados
+            dados
 
         };
 
@@ -1158,7 +1128,6 @@ function obterYoutubeEmbed(url){
 /* =====================================================
    RENDERIZAR CONTEÚDOS
 ===================================================== */
-
 function renderizarConteudos(){
 
     const area =
@@ -1458,13 +1427,10 @@ function renderizarConteudos(){
                         document.createElement(
                             "iframe"
                         );
-
                     iframe.className =
                         "conteudo-pdf";
-
                     iframe.src =
                         url;
-
                     iframe.title =
                         titulo ||
                         "PDF da lição";
@@ -1502,11 +1468,8 @@ function renderizarConteudos(){
 
                     a.textContent =
                         "📄 Abrir PDF em nova aba";
-
                     p.appendChild(a);
-
                     bloco.appendChild(p);
-
                 }
 
             }
@@ -2218,9 +2181,9 @@ function renderizarRespostaTexto(
             placeholder="Digite sua resposta..."
         ></textarea>
 
-```
+
 `;
-```
+
 
 }
 
@@ -2230,7 +2193,7 @@ OBTER RESPOSTA
 
 function obterResposta(){
 
-```
+
 const exercicio =
     exercicios[indiceAtual];
 
@@ -2342,7 +2305,7 @@ if(
 
 
 return null;
-```
+
 
 }
 
@@ -2355,7 +2318,7 @@ exercicio,
 resposta
 ){
 
-```
+
 if(
     exercicio.tipo ===
     "multipla_escolha"
@@ -2435,7 +2398,7 @@ if(
 
 
 return false;
-```
+
 
 }
 
@@ -2448,7 +2411,7 @@ correto,
 exercicio
 ){
 
-```
+
 const feedback =
     document.getElementById(
         "feedback"
@@ -2512,7 +2475,7 @@ if(correto){
     `;
 
 }
-```
+
 
 }
 
@@ -2525,7 +2488,7 @@ exercicio,
 correta
 ){
 
-```
+
 if(
     exercicio.tipo ===
     "multipla_escolha"
@@ -2585,7 +2548,7 @@ if(
     );
 
 }
-```
+
 
 }
 
@@ -2595,7 +2558,7 @@ RESPONDER
 
 function responder(){
 
-```
+
 if(respondeu){
 
     return;
@@ -2700,7 +2663,7 @@ if(
         finalizarLicao;
 
 }
-```
+
 
 }
 
@@ -2710,11 +2673,11 @@ PRÓXIMA QUESTÃO
 
 function proximaQuestao(){
 
-```
+
 indiceAtual++;
 
 renderizarQuestao();
-```
+
 
 }
 
@@ -2724,7 +2687,7 @@ ATUALIZAR SEQUÊNCIA
 
 function calcularNovaSequencia(){
 
-```
+
 const hoje =
     dataLocal();
 
@@ -2794,7 +2757,7 @@ else{
 
 
 return sequencia;
-```
+
 
 }
 
@@ -2804,7 +2767,7 @@ FINALIZAR LIÇÃO
 
 async function finalizarLicao(){
 
-```
+
 const totalQuestoes =
     exercicios.length;
 
@@ -3160,7 +3123,7 @@ try{
     );
 
 }
-```
+
 
 }
 
@@ -3262,7 +3225,7 @@ async (user) => {
     }
 
 }
-```
+
 
 );
 
