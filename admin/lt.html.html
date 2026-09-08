@@ -1,27 +1,37 @@
  <!DOCTYPE html>                                                                          
  <html lang="pt-BR">                                                                      
+                                                                                       
  <head>                                                                                   
+                                                                                       
  <meta charset="UTF-8">                                                                   
+                                                                                       
  <meta name="viewport"                                                                    
        content="width=device-width, initial-scale=1.0">                                    
+                                                                                       
  <title>Lições - Administração</title>                                                   
+                                                                                       
  <style>                                                                                  
+                                                                                       
  * {                                                                                      
      box-sizing: border-box;                                                               
  }                                                                                         
+                                                                                       
  body {                                                                                    
      margin: 0;                                                                            
      font-family: Arial, sans-serif;                                                       
      background: #f4f6f8;                                                                  
      color: #222;                                                                          
  }                                                                                         
+                                                                                       
  header {                                                                                  
      background: #1f2937;                                                                  
      color: white;                                                                         
      padding: 16px 22px;                                                                   
+                                                                                       
      display: flex;                                                                        
      justify-content: space-between;                                                       
      align-items: center;                                                                  
+                                                                                       
      flex-wrap: wrap;                                                                      
      gap: 10px;                                                                            
  }                                                                                         
@@ -41,9 +51,13 @@
      border: none;                                                                         
      border-radius: 7px;                                                                   
      padding: 10px 15px;                                                                   
+                                                                                       
      cursor: pointer;                                                                      
+                                                                                       
      font-size: 14px;                                                                      
+                                                                                       
      text-decoration: none;                                                                
+                                                                                       
      display: inline-block;                                                                
  }                                                                                         
                                                                                        
@@ -59,15 +73,21 @@
                                                                                        
  .container {                                                                              
      max-width: 1100px;                                                                    
+                                                                                       
      margin: 25px auto;                                                                    
+                                                                                       
      padding: 0 15px;                                                                      
  }                                                                                         
                                                                                        
  .card {                                                                                   
      background: white;                                                                    
+                                                                                       
      border-radius: 12px;                                                                  
+                                                                                       
      padding: 20px;                                                                        
+                                                                                       
      margin-bottom: 20px;                                                                  
+                                                                                       
      box-shadow:                                                                           
          0 2px 10px rgba(0,0,0,0.06);                                                      
  }                                                                                         
@@ -78,7 +98,9 @@
                                                                                        
  label {                                                                                   
      display: block;                                                                       
+                                                                                       
      font-weight: bold;                                                                    
+                                                                                       
      margin-bottom: 6px;                                                                   
  }                                                                                         
                                                                                        
@@ -87,20 +109,29 @@
  select {                                                                                  
                                                                                        
      width: 100%;                                                                          
+                                                                                       
      padding: 11px;                                                                        
+                                                                                       
      border: 1px solid #d1d5db;                                                            
+                                                                                       
      border-radius: 7px;                                                                   
+                                                                                       
      font-size: 15px;                                                                      
+                                                                                       
      outline: none;                                                                        
  }                                                                                         
                                                                                        
  input:focus,                                                                             
  textarea:focus,                                                                          
  select:focus {                                                                           
+                                                                                       
      border-color: #2563eb;                                                                
  }                                                                                         
+                                                                                       
  textarea {                                                                                
+                                                                                       
      min-height: 90px;                                                                     
+                                                                                       
      resize: vertical;                                                                     
  }                                                                                         
                                                                                        
@@ -111,32 +142,48 @@
  .botoes {                                                                                 
                                                                                        
      display: flex;                                                                        
+                                                                                       
      gap: 10px;                                                                            
+                                                                                       
      flex-wrap: wrap;                                                                      
  }                                                                                         
                                                                                        
  .btn-salvar {                                                                             
+                                                                                       
      background: #16a34a;                                                                  
+                                                                                       
      color: white;                                                                         
  }                                                                                         
                                                                                        
  .btn-cancelar {                                                                           
+                                                                                       
      background: #6b7280;                                                                  
+                                                                                       
      color: white;                                                                         
  }                                                                                         
+                                                                                       
  .btn-novo {                                                                               
+                                                                                       
      background: #2563eb;                                                                  
+                                                                                       
      color: white;                                                                         
  }                                                                                         
+                                                                                       
  .btn-novo :disabled {                                                                     
+                                                                                       
      background: #9ca3af;                                                                  
+                                                                                       
      cursor: not-allowed;                                                                  
  }                                                                                         
                                                                                        
  .mensagem {                                                                               
+                                                                                       
      padding: 12px;                                                                        
+                                                                                       
      border-radius: 7px;                                                                   
+                                                                                       
      margin-bottom: 15px;                                                                  
+                                                                                       
      display: none;                                                                        
  }                                                                                         
                                                                                        
@@ -317,7 +364,12 @@
                                                                                        
  }                                                                                         
                                                                                        
- </style>                                                                                 
+ 
+ .ajuda-conteudo { display:block; margin-top:6px; color:#667085; font-size:12px; line-height:1.4; }
+ .linha-upload { display:flex; align-items:center; gap:10px; margin-top:8px; flex-wrap:wrap; }
+ .status-upload { font-size:13px; color:#475467; }
+ #arquivoConteudo { padding:8px; background:#f8fafc; }
+</style>                                                                                 
                                                                                        
  
 <style>
@@ -331,6 +383,12 @@
 }
 .conteudo-editor h3 { margin: 0 0 6px; }
 .conteudo-editor .subtexto { color:#667085; margin:0 0 18px; font-size:.92rem; }
+
+.editor-aviso {
+    margin: 0 0 16px; padding: 12px 14px; border-radius: 10px;
+    background: #f5f8ff; border: 1px solid #cdd9ff; color: #344054;
+    font-size: .92rem;
+}
 
 .conteudo-toolbar {
     display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px;
@@ -408,7 +466,7 @@
      <div class="header-buttons">                                                         
                                                                                        
          <a                                                                               
-             href="modulos.html" 
+             href="modulos.html)" 
              class="btn-link btn-voltar"                                                   
          >                                                                                 
              ← Módulos                                                                     
@@ -706,7 +764,16 @@
      serverTimestamp                                                                       
  }                                                                                         
  from                                                                                      
- "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";                     
+ "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+ import {
+     getStorage,
+     ref as storageRef,
+     uploadBytes,
+     getDownloadURL
+ }
+ from
+ "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";                     
                                                                                        
                                                                                        
  const firebaseConfig = {                                                                  
@@ -743,7 +810,10 @@
                                                                                        
                                                                                        
  const db =                                                                                
-     getFirestore(app);                                                                    
+     getFirestore(app);
+
+ const storage =
+     getStorage(app);                                                                    
                                                                                        
                                                                                        
  // ======================================================                                 
@@ -1429,6 +1499,15 @@
                          data-id="${licao.id}"                                             
                      >                                                                     
                          Editar                                                            
+                     </button>
+
+                     <button
+                         type="button"
+                         class="btn-editar"
+                         data-acao="conteudos"
+                         data-id="${licao.id}"
+                     >
+                         📚 Conteúdos
                      </button>                                                            
                                                                                        
                      <button                                                              
@@ -1652,69 +1731,43 @@
                                                                                        
              return;                                                                       
                                                                                        
-         }                                                                                 
-                                                                                       
-                                                                                       
-         try {                                                                             
-                                                                                       
-             if (licaoEditando) {                                                          
-                                                                                       
-                 await updateDoc(                                                          
-                                                                                       
-                     doc(                                                                  
-                         db,                                                               
-                         "licoes",                                                         
-                         licaoEditando                                                     
-                     ),                                                                    
-                                                                                       
-                     dados                                                                 
-                                                                                       
-                 );                                                                        
-                                                                                       
-                                                                                       
-                 mostrarMensagem(                                                          
-                     "Lição atualizada com sucesso!"                                       
-                 );                                                                        
-                                                                                       
-             } else {                                                                      
-                                                                                       
-                 await addDoc(                                                             
-                                                                                       
-                     collection(                                                           
-                         db,                                                               
-                         "licoes"                                                          
-                     ),                                                                    
-                                                                                       
-                     {                                                                     
-                                                                                       
-                         ...dados,                                                         
-                                                                                       
-                         ativo:                                                            
-                             true,                                                         
-                                                                                       
-                         criadoEm:                                                         
-                             serverTimestamp()                                             
-                                                                                       
-                     }                                                                     
-                                                                                       
-                 );                                                                        
-                                                                                       
-                                                                                       
-                 mostrarMensagem(                                                          
-                     "Lição criada com sucesso!"                                           
-                 );                                                                        
-                                                                                       
-             }                                                                             
-                                                                                       
-                                                                                       
-             limparFormulario();                                                           
-                                                                                       
-                                                                                       
-             await carregarLicoes(                                                         
-                 moduloId                                                                  
-             );                                                                            
-                                                                                       
-                                                                                       
+         }
+
+         try {
+             let idLicaoEditor = licaoEditando;
+
+             if (licaoEditando) {
+                 await updateDoc(
+                     doc(db, "licoes", licaoEditando),
+                     dados
+                 );
+
+                 mostrarMensagem("Lição atualizada com sucesso!");
+             } else {
+                 const novaLicaoRef = await addDoc(
+                     collection(db, "licoes"),
+                     {
+                         ...dados,
+                         ativo: true,
+                         criadoEm: serverTimestamp()
+                     }
+                 );
+
+                 idLicaoEditor = novaLicaoRef.id;
+                 licaoEditando = novaLicaoRef.id;
+
+                 mostrarMensagem("Lição criada com sucesso!");
+             }
+
+             // Abre o editor de conteúdos somente depois que a lição já possui ID.
+             if (idLicaoEditor && typeof window.ceAbrirEditorConteudos === "function") {
+                 await window.ceAbrirEditorConteudos(idLicaoEditor);
+             }
+
+             limparFormulario();
+
+             await carregarLicoes(moduloId);
+
          } catch (erro) {                                                                  
                                                                                        
              console.error(erro);                                                          
@@ -1778,7 +1831,11 @@
          if (acao === "editar") {                                                          
                                                                                        
              licaoEditando =                                                               
-                 id;                                                                       
+                 id;
+
+             if (typeof window.ceAbrirEditorConteudos === "function") {
+                 window.ceAbrirEditorConteudos(id);
+             }                                                                       
                                                                                        
                                                                                        
              titulo.value =                                                                
@@ -1824,6 +1881,14 @@
          // STATUS                                                                         
          // ==========================                                                     
                                                                                        
+         if (acao === "conteudos") {
+             if (typeof window.ceAbrirEditorConteudos === "function") {
+                 await window.ceAbrirEditorConteudos(id);
+             }
+             return;
+         }
+
+
          if (acao === "status") {                                                          
                                                                                        
              const novoStatus =                                                            
@@ -2008,6 +2073,11 @@
         Monte a aula em blocos na ordem em que o aluno deverá visualizar.
     </p>
 
+    <div class="editor-aviso">
+        <strong>Editor da aula:</strong> escolha um tipo abaixo para adicionar texto, links ou arquivos.
+        Para arquivos, escolha o arquivo e clique em <strong>Enviar arquivo</strong>. Depois clique em <strong>Salvar conteúdo</strong>.
+    </div>
+
     <div class="conteudo-toolbar">
         <button type="button" data-novo-conteudo="titulo">📌 Título</button>
         <button type="button" data-novo-conteudo="texto">📝 Texto</button>
@@ -2058,8 +2128,19 @@
         </div>
 
         <div class="campo-conteudo" id="campoUrlConteudo">
-            <label for="urlConteudo">URL</label>
+            <label for="urlConteudo">Link / URL</label>
             <input id="urlConteudo" type="url" placeholder="https://...">
+            <small class="ajuda-conteudo">Cole aqui um link externo (site, YouTube, imagem, PDF etc.) ou use o campo de arquivo abaixo.</small>
+        </div>
+
+        <div class="campo-conteudo" id="campoArquivoConteudo">
+            <label for="arquivoConteudo">Anexar arquivo</label>
+            <input id="arquivoConteudo" type="file" accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.rar">
+            <div class="linha-upload">
+                <button type="button" id="enviarArquivoConteudo">⬆️ Enviar arquivo</button>
+                <span id="statusUploadConteudo" class="status-upload"></span>
+            </div>
+            <small class="ajuda-conteudo">PDF, imagens, vídeos, áudio, documentos e outros arquivos podem ser enviados para o Firebase Storage.</small>
         </div>
 
         <div class="campo-conteudo" id="campoOrdemConteudo">
@@ -2089,6 +2170,10 @@ const ceTipo = document.getElementById("tipoConteudo");
 const ceTitulo = document.getElementById("tituloConteudo");
 const ceTexto = document.getElementById("textoConteudo");
 const ceUrl = document.getElementById("urlConteudo");
+const ceArquivo = document.getElementById("arquivoConteudo");
+const ceEnviarArquivo = document.getElementById("enviarArquivoConteudo");
+const ceStatusUpload = document.getElementById("statusUploadConteudo");
+const ceCampoArquivo = document.getElementById("campoArquivoConteudo");
 const ceOrdem = document.getElementById("ordemConteudo");
 const ceSalvar = document.getElementById("salvarConteudo");
 const ceCancelar = document.getElementById("cancelarConteudo");
@@ -2159,6 +2244,8 @@ function ceAbrirModal(tipo = "texto", dados = null) {
     ceTitulo.value = dados ? (dados.titulo || "") : "";
     ceTexto.value = dados ? (dados.texto || "") : "";
     ceUrl.value = dados ? (dados.url || "") : "";
+    ceArquivo.value = "";
+    ceStatusUpload.textContent = "";
     ceOrdem.value = dados ? (Number(dados.ordem) || 1) : (ceConteudos.length + 1);
 
     ceAtualizarCampos();
@@ -2177,6 +2264,7 @@ function ceAtualizarCampos() {
 
     const precisaTexto = ["texto", "lista", "citacao"].includes(tipo);
     const precisaUrl = ["imagem", "video", "link", "pdf", "arquivo", "audio"].includes(tipo);
+    const precisaArquivo = ["imagem", "video", "pdf", "arquivo", "audio"].includes(tipo);
     const precisaTitulo = tipo !== "separador";
 
     document.getElementById("campoTextoConteudo").style.display =
@@ -2184,6 +2272,9 @@ function ceAtualizarCampos() {
 
     document.getElementById("campoUrlConteudo").style.display =
         precisaUrl ? "block" : "none";
+
+    ceCampoArquivo.style.display =
+        precisaArquivo ? "block" : "none";
 
     document.getElementById("campoTituloConteudo").style.display =
         precisaTitulo ? "block" : "none";
@@ -2324,13 +2415,26 @@ function ceRenderizar() {
                 a.textContent = c.url || "Abrir vídeo";
                 body.appendChild(a);
             }
-        } else if (["link", "pdf", "arquivo", "audio"].includes(c.tipo)) {
+        } else if (c.tipo === "pdf") {
+            if (ceUrlValida(c.url || "")) {
+                const iframe = document.createElement("iframe");
+                iframe.src = c.url;
+                iframe.title = c.titulo || "PDF da aula";
+                iframe.style.width = "100%";
+                iframe.style.minHeight = "520px";
+                iframe.style.border = "1px solid #ddd";
+                body.appendChild(iframe);
+                const a = document.createElement("a");
+                a.href = c.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+                a.textContent = "📄 Abrir PDF em nova aba";
+                body.appendChild(a);
+            }
+        } else if (["link", "arquivo", "audio"].includes(c.tipo)) {
             const a = document.createElement("a");
             a.href = c.url || "#";
             a.target = "_blank";
             a.rel = "noopener noreferrer";
             a.textContent =
-                c.tipo === "pdf" ? "📄 Abrir PDF" :
                 c.tipo === "audio" ? "🎵 Abrir áudio" :
                 c.tipo === "arquivo" ? "📎 Abrir arquivo" :
                 (c.titulo || "Abrir link");
@@ -2344,6 +2448,39 @@ function ceRenderizar() {
     });
 }
 
+async function ceEnviarArquivoSelecionado() {
+    if (!ceLicaoId) {
+        alert("Primeiro salve ou selecione uma lição.");
+        return null;
+    }
+    const arquivo = ceArquivo.files && ceArquivo.files[0];
+    if (!arquivo) {
+        alert("Selecione um arquivo primeiro.");
+        return null;
+    }
+    ceStatusUpload.textContent = "Enviando arquivo...";
+    ceEnviarArquivo.disabled = true;
+    try {
+        const nomeSeguro = arquivo.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const caminho = `conteudos/${ceLicaoId}/${Date.now()}_${nomeSeguro}`;
+        const referencia = storageRef(storage, caminho);
+        const resultado = await uploadBytes(referencia, arquivo, {
+            contentType: arquivo.type || "application/octet-stream"
+        });
+        const url = await getDownloadURL(resultado.ref);
+        ceUrl.value = url;
+        ceStatusUpload.textContent = "Arquivo enviado com sucesso.";
+        return url;
+    } catch (erro) {
+        console.error("Erro no upload:", erro);
+        ceStatusUpload.textContent = "Falha no upload.";
+        alert("Não foi possível enviar o arquivo. Código: " + (erro?.code || "desconhecido") + "\n\nVerifique se o Firebase Storage está habilitado e se as regras permitem upload para usuários autenticados.");
+        return null;
+    } finally {
+        ceEnviarArquivo.disabled = false;
+    }
+}
+
 async function ceSalvarDados() {
     if (!ceLicaoId) {
         alert("Primeiro salve ou selecione uma lição.");
@@ -2353,17 +2490,24 @@ async function ceSalvarDados() {
     const tipo = ceTipo.value;
     const titulo = ceTitulo.value.trim();
     const texto = ceTexto.value.trim();
-    const url = ceUrl.value.trim();
+    let url = ceUrl.value.trim();
     const ordem = Number(ceOrdem.value);
+    const temArquivo = ceArquivo.files && ceArquivo.files.length > 0;
+
+    if (temArquivo && ["imagem", "video", "pdf", "arquivo", "audio"].includes(tipo)) {
+        const urlEnviada = await ceEnviarArquivoSelecionado();
+        if (!urlEnviada) return;
+        url = urlEnviada;
+    }
 
     if (tipo !== "separador" && !titulo && !texto && !url) {
-        alert("Preencha pelo menos um conteúdo.");
+        alert("Preencha pelo menos um conteúdo, informe um link ou anexe um arquivo.");
         return;
     }
 
     if (["imagem", "video", "link", "pdf", "arquivo", "audio"].includes(tipo)) {
         if (!ceUrlValida(url)) {
-            alert("Informe uma URL válida iniciando com http:// ou https://.");
+            alert("Informe uma URL válida ou anexe um arquivo.");
             ceUrl.focus();
             return;
         }
@@ -2465,6 +2609,7 @@ document.querySelectorAll("[data-novo-conteudo]").forEach(botao => {
 
 ceTipo.addEventListener("change", ceAtualizarCampos);
 ceSalvar.addEventListener("click", ceSalvarDados);
+ceEnviarArquivo.addEventListener("click", ceEnviarArquivoSelecionado);
 ceCancelar.addEventListener("click", ceFecharModal);
 
 ceModal.addEventListener("click", evento => {
@@ -2509,6 +2654,7 @@ if (typeof btnNovo !== "undefined") {
         ceLicaoId = null;
         ceConteudos = [];
         ceEditor.style.display = "none";
+        ceLista.innerHTML = '<div class="conteudo-vazio">Salve a nova lição primeiro. Depois o editor de conteúdos será aberto automaticamente.</div>';
     });
 }
 </script>
