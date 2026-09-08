@@ -394,6 +394,7 @@ textarea:focus{
 
 <header>
 
+```
 <div class="header">
 
     <h1 id="tituloHeader">
@@ -421,10 +422,13 @@ textarea:focus{
     </div>
 
 </div>
+```
+
 </header>
 
 <main class="container">
 
+```
 <div id="areaPrincipal">
 
     <div class="carregando">
@@ -432,7 +436,7 @@ textarea:focus{
     </div>
 
 </div>
-
+```
 
 </main>
 
@@ -3277,41 +3281,39 @@ async (user) => {
         areaPrincipal.innerHTML = `
 
             <div class="erro">
-
                 Não foi possível abrir esta lição.
-
                 Os dados da lição não foram informados.
 
             </div>
-
         `;
 
         return;
 
     }
-
-
-    ```js
-try {
-    await carregarUsuario();
-    await carregarCurso();
-    await carregarLicao();
-    await carregarConteudos();
-    await carregarExercicios();
-    mostrarLicao();
-
-} catch (error) {
-    console.error(error);
-
-    areaPrincipal.innerHTML = `
-        <div class="erro">
-            <strong>Não foi possível carregar a lição.</strong>
-            <br><br>
-            ${escapar(error.message)}
-        </div>
-    `;
-}
-```
+    try{
+        await carregarUsuario();
+        await carregarCurso();
+        await carregarLicao();
+        await carregarConteudos();
+        await carregarExercicios();
+        mostrarLicao();
+    }catch(error){
+        console.error(
+            "❌ Erro ao carregar lição:",
+            error
+        );
+        areaPrincipal.innerHTML = `
+            <div class="erro">
+                <strong>
+                    Não foi possível carregar a lição.
+                </strong>
+                <br><br>
+                ${escapar(
+                    error.message
+                )}
+            </div>
+        `;
+    }
 }
 );
 </script>
