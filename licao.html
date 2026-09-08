@@ -3291,30 +3291,27 @@ async (user) => {
     }
 
 
-    try{
-        await carregarUsuario();
-        await carregarCurso();
-        await carregarLicao();
-        await carregarConteudos();
-        await carregarExercicios();
-        mostrarLicao();
-    }catch(error){
-        console.error(
-            "❌ Erro ao carregar lição:",
-            error
-        );
-        areaPrincipal.innerHTML = `
-            <div class="erro">
-                <strong>
-                    Não foi possível carregar a lição.
-                </strong>
-                <br><br>
-                ${escapar(
-                    error.message
-                )}
-            </div>
-        `;
-    }
+    ```js
+try {
+    await carregarUsuario();
+    await carregarCurso();
+    await carregarLicao();
+    await carregarConteudos();
+    await carregarExercicios();
+    mostrarLicao();
+
+} catch (error) {
+    console.error(error);
+
+    areaPrincipal.innerHTML = `
+        <div class="erro">
+            <strong>Não foi possível carregar a lição.</strong>
+            <br><br>
+            ${escapar(error.message)}
+        </div>
+    `;
+}
+```
 }
 );
 </script>
